@@ -79,6 +79,29 @@ public class ReservationSystem {
   }
 
   /**
+   * Prompts the user to select a hotel from a list of all hotels.
+   * 
+   * TODO: Make public if needed; otherwise I'm not sure if Javadoc is needed
+   * 
+   * @return the {@link Hotel} instance selected by the user
+   */
+  private Hotel getUserChoiceHotel() {
+    System.out.println("Please choose a hotel:");
+
+    /*
+     * TODO: I'm sorry this is a mess just rewrite lol, probably as a for loop
+     * so we won't have to explain what the heck streams are
+     */
+    ArrayList<String> hotelNames = new ArrayList<String>(
+        hotels.stream()
+            .map(Hotel::getName)
+            .toList());
+
+    int choice = getChoice(hotelNames.toArray(String[]::new));
+    return hotels.get(choice - 1);
+  }
+
+  /**
    * Prompts the user to create a new {@link Hotel} instance. The user inputs a
    * string which is then used as the hotel's name.
    */
@@ -95,19 +118,51 @@ public class ReservationSystem {
    * @see {@link #viewHotel}()
    */
   public void displayViewHotelScreen() {
-    System.out.println("Please choose a hotel:");
+    viewHotel(getUserChoiceHotel());
+  }
 
-    /*
-     * TODO: I'm sorry this is a mess just rewrite lol, probably as a for loop
-     * so we won't have to explain what the heck streams are
-     */
-    ArrayList<String> hotelNames = new ArrayList<String>(
-        hotels.stream()
-            .map(Hotel::getName)
-            .toList());
+  public void displayManageHotelScreen() {
+    Hotel hotel = getUserChoiceHotel();
+    System.out.println("Currently managing the following hotel:");
+    System.out.println(hotel.getName());
 
-    int choice = getChoice(hotelNames.toArray(String[]::new));
-    viewHotel(hotels.get(choice - 1));
+    int choice = getChoice("Rename hotel", "Add room(s)", "Remove room(s)",
+        "Update the base price for a room", "Remove reservation",
+        "Remove hotel");
+
+    switch (choice) {
+    case 1:
+      System.out.println("Please input a new name:");
+      System.out.print(" >> ");
+      hotel.setName(inputScanner.nextLine());
+      break;
+    case 2:
+      System.out.println("Please input the name of the new room:");
+      System.out.print(" >> ");
+      hotel.addRoom(inputScanner.nextLine());
+      break;
+    case 3:
+      System.out.println("Please input the name of the room to remove:");
+      System.out.print(" >> ");
+      break;
+    case 4:
+      if (hotel.getRoomCount() != 0) {
+        System.out.println("There should be zero rooms in the hotel. Please try again.");
+        break;
+      }
+      System.out.println("Please input the new base price:");
+      System.out.print(" >> ");
+      hotel.setBasePrice(Double.parseDouble(inputScanner.nextLine()));
+      break;
+    case 5:
+      /* TODO: Remove reservation */
+      break;
+    case 6:
+      hotels.remove(hotel);
+      System.out
+          .println("Removed hotel " + hotel.getName() + " from the list.");
+      break;
+    }
   }
 
   /**
@@ -129,6 +184,9 @@ public class ReservationSystem {
       return true;
     case 2:
       displayViewHotelScreen();
+      return true;
+    case 3:
+      displayManageHotelScreen();
       return true;
     default:
       return false;
