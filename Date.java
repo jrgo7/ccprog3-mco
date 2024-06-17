@@ -1,3 +1,9 @@
+/*
+ * Oops
+ * "assume that we’re working with a single month with 31 days"
+ * - specs
+ */
+
 public class Date {
     private int year;
     private int month;

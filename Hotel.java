@@ -9,6 +9,7 @@ public class Hotel {
     public Hotel(String name) {
         this.name = name;
         this.rooms = new ArrayList<Room>();
+        this.reservations = new ArrayList<Reservation>();
     }
 
     public String getName() {
@@ -28,27 +29,49 @@ public class Hotel {
     }
 
     // TODO: Add validation
-    // * set return type to boolean?
-    public void setBasePrice(double basePrice) {
+    // I think this is all the validation needed
+    public boolean setBasePrice(double basePrice) {
         this.basePrice = basePrice;
+        
+        if (basePrice < 0 || !rooms.isEmpty())
+            return false;
+
+        for (Room room : rooms)
+            room.setBasePrice(basePrice);
+        return true;
     }
 
     // TODO
     // * set return type to boolean?
-    public void addRoom(String name) {
+    // Done also add 50 room limit
+    public boolean addRoom(String name) {
+        if (rooms.size() >= 50)
+            return false;
 
+        rooms.add(new Room(name, basePrice));
+        return true;
     }
 
     // TODO
-    public void removeRoom(int index) {
+    public boolean removeRoom(int index) {
+        // validation
+        if (index < 0 || index >= rooms.size())
+            return false;
 
+        rooms.remove(index);
+        return true;
     }
 
     // TODO: Add validation
     // * set return type to boolean?
-    public void addReservation(String guestName, Date checkIn, Date checkOut, String roomName) {
-        Room room = new Room(roomName, this.basePrice);
-        Reservation reservation = new Reservation(guestName, checkIn, checkOut, room);
-        reservations.add(reservation);      
+    // room name has to exist first before you can make a reservation for it 
+    public boolean addReservation(String guestName, int checkIn, int checkOut, String roomName) {
+        for (Room room : rooms) 
+            if (room.getName().equals(roomName)) {
+                Reservation reservation = new Reservation(guestName, checkIn, checkOut, room);
+                reservations.add(reservation);
+                return true;
+            }
+        return false;
     }
 }

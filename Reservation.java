@@ -1,10 +1,10 @@
 public class Reservation {
     private String guestName;
-    private Date checkIn;
-    private Date checkOut;
+    private int checkIn;
+    private int checkOut;
     private Room room;
 
-    public Reservation(String guestName, Date checkIn, Date checkOut, Room room) {
+    public Reservation(String guestName, int checkIn, int checkOut, Room room) {
         this.guestName = guestName;
         this.checkIn = checkIn;
         this.checkOut = checkOut;
@@ -13,7 +13,12 @@ public class Reservation {
 
     // TODO
     public double getTotalPrice() {
-        return 0.0;
+        double basePrice = room.getBasePrice();
+        return (checkIn - checkOut /* no + 1 */) * basePrice;
+    }
+
+    public String getGuestName() {
+        return guestName;
     }
 
     public Room getRoom() {
