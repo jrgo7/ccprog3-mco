@@ -1,6 +1,9 @@
+import java.util.ArrayList;
+
 public class Room {
     private String name;
     private double basePrice;
+    private ArrayList<Reservation> reservations; // Necessary for isAvailableOn() - wafl
 
     public String getName() {
         return name;
@@ -19,24 +22,42 @@ public class Room {
         this.basePrice = basePrice;
     }
 
+    public boolean setName(String name) {
+        this.name = name;
+        return true;
+    }
+
+    public void addReservation(Reservation reservation) {
+        reservations.add(reservation);
+    }
+
     public boolean isAvailableOn(int date) {
-        return true; // TODO
+        for (Reservation reservation : reservations) {
+            if (reservation.getCheckIn() <= date && date < reservation.getCheckOut()) {
+                return false; // TODO: Crucify me if you must
+            }
+        }
+        return true;
     }
 
     public String getAvailability() {
-        // TODO: Probably a for loop spanning 1-31
-        // TODO: check if available on that date and add to a string 
-        return "TBA";
+        String availabilityString = "Available on the following dates: ";
+        for (int day = 1; day <= 31; day++) {
+            if (this.isAvailableOn(day)) {
+                availabilityString += String.valueOf(day) + " ";
+            }
+        }
+        return availabilityString;
     }
 
     public String getDataString() {
         return String.format("""
-            Room name: %s
-            Price per night: %lf
-            Availability: %s
-            """,
-            this.getName(),
-            this.getBasePrice(),
-            this.getAvailability()); // TODO
+                Room name: %s
+                Price per night: %f
+                Availability:\n\t%s
+                """,
+                this.getName(),
+                this.getBasePrice(),
+                this.getAvailability());
     }
 }

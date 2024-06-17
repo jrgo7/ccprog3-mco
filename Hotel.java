@@ -10,6 +10,7 @@ public class Hotel {
         this.name = name;
         this.rooms = new ArrayList<Room>();
         this.reservations = new ArrayList<Reservation>();
+        this.addRoom();
     }
 
     public String getName() {
@@ -41,12 +42,19 @@ public class Hotel {
         return true;
     }
 
+    // ? I wonder how we'd deal with removing rooms
+    private String getNextRoomName() {
+        int floorNumber = rooms.size() / 10 + 1;
+        int roomNumber = rooms.size() % 10 + 1;
+        return String.format("Room %3d", floorNumber * 100 + roomNumber);
+    }
+
     // TODO: We may also need to check if a room with `name` already exists
-    public boolean addRoom(String name) {
+    public boolean addRoom() {
         if (rooms.size() >= 50)
             return false;
 
-        rooms.add(new Room(name, basePrice));
+        rooms.add(new Room(getNextRoomName(), basePrice));
         return true;
     }
 
@@ -60,14 +68,15 @@ public class Hotel {
         return true;
     }
 
-    // TODO: Add validation
-    // * set return type to boolean?
-    // room name has to exist first before you can make a reservation for it
+    // TODO: Add validations
+    // * room name has to exist first before you can make a reservation for it
+    // TODO: time conflicts -- but you can checkIn on the same time as someone else's checkOut
     public boolean addReservation(String guestName, int checkIn, int checkOut, String roomName) {
         for (Room room : rooms)
             if (room.getName().equals(roomName)) {
                 Reservation reservation = new Reservation(guestName, checkIn, checkOut, room);
                 reservations.add(reservation);
+                room.addReservation(reservation);
                 return true;
             }
         return false;
@@ -75,9 +84,8 @@ public class Hotel {
 
     public ArrayList<String> getRoomsString() {
         ArrayList<String> roomsString = new ArrayList<String>();
-        int i = 0;
         for (Room room : rooms) {
-            roomsString.add(String.format("[%d] %s\n", 1 + i++, room.getName()));
+            roomsString.add(room.getName());
         }
         return roomsString;
     }
