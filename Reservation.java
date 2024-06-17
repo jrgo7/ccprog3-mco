@@ -11,14 +11,16 @@ public class Reservation {
         this.room = room;
     }
 
-    // TODO
     public double getTotalPrice() {
         double basePrice = room.getBasePrice();
-        return (checkIn - checkOut /* no + 1 */) * basePrice;
+        return this.getNightCount() * basePrice;
     }
 
     public String getPriceBreakdown() {
-        return "TBA"; // TODO
+        return String.format("%d nights x %lf price per night = %lf",
+                this.getNightCount(),
+                this.getRoom().getBasePrice(),
+                this.getTotalPrice());
     }
 
     public String getGuestName() {
@@ -37,20 +39,24 @@ public class Reservation {
         return this.checkOut;
     }
 
+    public int getNightCount() {
+        return this.checkOut - this.checkIn;
+    }
+
     public String getDataString() {
         return String.format("""
-                   Guest: %s
-                   Room Information: %s
-                   Check-in: %s
-                   Check-out: %s
-                   Total price: %s
-                   Price breakdown: %s
-                   """,
-                   this.getGuestName(),
-                   this.getRoom().getDataString(),
-                   this.getCheckIn(),
-                   this.getCheckOut(),
-                   this.getTotalPrice(),
-                   this.getPriceBreakdown());
+                Guest: %s
+                Room Information:\n%s
+                Check-in: %d
+                Check-out: %d
+                Total price: %lf
+                Price breakdown: %s
+                """,
+                this.getGuestName(),
+                this.getRoom().getDataString(),
+                this.getCheckIn(),
+                this.getCheckOut(),
+                this.getTotalPrice(),
+                this.getPriceBreakdown());
     }
 }

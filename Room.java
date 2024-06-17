@@ -23,7 +23,20 @@ public class Room {
         return true; // TODO
     }
 
+    public String getAvailability() {
+        // TODO: Probably a for loop spanning 1-31
+        // TODO: check if available on that date and add to a string 
+        return "TBA";
+    }
+
     public String getDataString() {
-        return "TBA"; // TODO
+        return String.format("""
+            Room name: %s
+            Price per night: %lf
+            Availability: %s
+            """,
+            this.getName(),
+            this.getBasePrice(),
+            this.getAvailability()); // TODO
     }
 }

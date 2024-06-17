@@ -41,10 +41,7 @@ public class Hotel {
         return true;
     }
 
-    // TODO
-    // * set return type to boolean?
-    // Done also add 50 room limit
-    // We may also need to check if a room with `name` already exists
+    // TODO: We may also need to check if a room with `name` already exists
     public boolean addRoom(String name) {
         if (rooms.size() >= 50)
             return false;
@@ -102,5 +99,16 @@ public class Hotel {
 
     public Reservation getReservation(int reservationIndex) {
         return this.reservations.get(reservationIndex);
+    }
+
+    public String getDataString() {
+        return String.format("""
+                Name: %s
+                Number of rooms: %d
+                Estimated earnings for the month: %f
+                """,
+                this.name,
+                this.getRoomCount(),
+                this.getEarnings());
     }
 }
