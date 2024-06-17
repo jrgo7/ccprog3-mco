@@ -85,8 +85,22 @@ public class Hotel {
         return roomsString;
     }
 
-    public String getRoomAvailability(int roomIndex) {
-        return "TBA";
+    public Room getRoom(int roomIndex) {
+        return this.rooms.get(roomIndex);
     }
 
+    public ArrayList<String> getReservationsString() {
+        ArrayList<String> reservationsString = new ArrayList<String>();
+        int i = 0;
+        // TODO: How to represent a single reservation?
+        for (Reservation reservation : reservations) {
+            reservationsString.add(String.format("[%d] %s booked by %s\n",
+                    1 + i++, reservation.getRoom(), reservation.getGuestName()));
+        }
+        return reservationsString;
+    }
+
+    public Reservation getReservation(int reservationIndex) {
+        return this.reservations.get(reservationIndex);
+    }
 }

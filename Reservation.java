@@ -17,11 +17,40 @@ public class Reservation {
         return (checkIn - checkOut /* no + 1 */) * basePrice;
     }
 
+    public String getPriceBreakdown() {
+        return "TBA"; // TODO
+    }
+
     public String getGuestName() {
         return guestName;
     }
 
     public Room getRoom() {
         return this.room;
+    }
+
+    public int getCheckIn() {
+        return this.checkIn;
+    }
+
+    public int getCheckOut() {
+        return this.checkOut;
+    }
+
+    public String getDataString() {
+        return String.format("""
+                   Guest: %s
+                   Room Information: %s
+                   Check-in: %s
+                   Check-out: %s
+                   Total price: %s
+                   Price breakdown: %s
+                   """,
+                   this.getGuestName(),
+                   this.getRoom().getDataString(),
+                   this.getCheckIn(),
+                   this.getCheckOut(),
+                   this.getTotalPrice(),
+                   this.getPriceBreakdown());
     }
 }

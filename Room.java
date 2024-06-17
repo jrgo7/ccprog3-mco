@@ -18,4 +18,12 @@ public class Room {
     public void setBasePrice(double basePrice) {
         this.basePrice = basePrice;
     }
+
+    public boolean isAvailableOn(int date) {
+        return true; // TODO
+    }
+
+    public String getDataString() {
+        return "TBA"; // TODO
+    }
 }

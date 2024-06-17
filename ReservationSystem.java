@@ -58,7 +58,9 @@ public class ReservationSystem {
     public void viewHotel(Scanner sc) {
         int hotelIndex;
         int roomIndex;
+        int reservationIndex;
         int infoIndex;
+        int date;
         Hotel chosenHotel;
         String options[] = {
             "Check hotel information",
@@ -80,14 +82,22 @@ public class ReservationSystem {
                 break;
             case 2: // Room availability on a date
                 roomIndex = this.menu(sc, "Pick a room", chosenHotel.getRoomsString());
-                String roomAvailability = chosenHotel.getRoomAvailability(roomIndex);
-                System.out.println(roomAvailability);
+                date = sc.nextInt(); // TODO: Validation -- must be within 1-31
+                if (chosenHotel.getRoom(roomIndex).isAvailableOn(date)) {
+                    System.out.println("The room is available on that date.");
+                } else {
+                    System.out.println("The room is not available on that date.");
+                }
                 break;
             case 3: // Room data
-                System.out.println("TBA");
+                roomIndex = this.menu(sc, "Pick a room", chosenHotel.getRoomsString());
+                String roomData = chosenHotel.getRoom(roomIndex).getDataString();
+                System.out.println(roomData);
                 break;
             case 4: // Reservation data
-                System.out.println("TBA");
+                reservationIndex = this.menu(sc, "Pick a reservation", chosenHotel.getReservationsString());
+                String reservationData = chosenHotel.getReservation(reservationIndex).getDataString();
+                System.out.println(reservationData);
                 break;
         }
     }
