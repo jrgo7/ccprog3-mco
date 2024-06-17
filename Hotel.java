@@ -32,7 +32,7 @@ public class Hotel {
     // I think this is all the validation needed
     public boolean setBasePrice(double basePrice) {
         this.basePrice = basePrice;
-        
+
         if (basePrice < 0 || !rooms.isEmpty())
             return false;
 
@@ -44,6 +44,7 @@ public class Hotel {
     // TODO
     // * set return type to boolean?
     // Done also add 50 room limit
+    // We may also need to check if a room with `name` already exists
     public boolean addRoom(String name) {
         if (rooms.size() >= 50)
             return false;
@@ -64,9 +65,9 @@ public class Hotel {
 
     // TODO: Add validation
     // * set return type to boolean?
-    // room name has to exist first before you can make a reservation for it 
+    // room name has to exist first before you can make a reservation for it
     public boolean addReservation(String guestName, int checkIn, int checkOut, String roomName) {
-        for (Room room : rooms) 
+        for (Room room : rooms)
             if (room.getName().equals(roomName)) {
                 Reservation reservation = new Reservation(guestName, checkIn, checkOut, room);
                 reservations.add(reservation);
@@ -74,4 +75,18 @@ public class Hotel {
             }
         return false;
     }
+
+    public ArrayList<String> getRoomsString() {
+        ArrayList<String> roomsString = new ArrayList<String>();
+        int i = 0;
+        for (Room room : rooms) {
+            roomsString.add(String.format("[%d] %s\n", 1 + i++, room.getName()));
+        }
+        return roomsString;
+    }
+
+    public String getRoomAvailability(int roomIndex) {
+        return "TBA";
+    }
+
 }

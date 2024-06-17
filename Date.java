@@ -1,7 +1,10 @@
 /*
- * Oops
- * "assume that we’re working with a single month with 31 days"
- * - specs
+ * "Oops
+ * 'assume that we’re working with a single month with 31 days'
+ * - specs"
+ * - lowy
+ * Thats a suspicious part though
+ * - wafl
  */
 
 public class Date {
