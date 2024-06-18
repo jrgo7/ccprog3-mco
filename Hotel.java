@@ -10,6 +10,7 @@ public class Hotel {
         this.name = name;
         this.rooms = new ArrayList<Room>();
         this.reservations = new ArrayList<Reservation>();
+        this.basePrice = 1299;
     }
 
     public String getName() {
