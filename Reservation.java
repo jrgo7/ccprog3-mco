@@ -27,10 +27,6 @@ public class Reservation {
         return guestName;
     }
 
-    public Room getRoom() {
-        return this.room;
-    }
-
     public int getCheckIn() {
         return this.checkIn;
     }
@@ -39,11 +35,15 @@ public class Reservation {
         return this.checkOut;
     }
 
+    public Room getRoom() {
+        return this.room;
+    }
+
     public int getNightCount() {
         return this.checkOut - this.checkIn;
     }
 
-    public String getDataString() {
+    public String toString() {
         return String.format("""
                 Guest: %s
                 Room Information:\n%s
@@ -53,7 +53,7 @@ public class Reservation {
                 Price breakdown: %s
                 """,
                 this.getGuestName(),
-                this.getRoom().getDataString(),
+                this.getRoom().toString(),
                 this.getCheckIn(),
                 this.getCheckOut(),
                 this.getTotalPrice(),

@@ -8,30 +8,17 @@
  */
 
 public class Date {
-    private int year;
-    private int month;
     private int day;
 
-    public Date(int year, int month, int day) {
-        this.year = year;
-        this.month = month;
+    public Date(int day) {
         this.day = day;
     }
 
-    int getYear() {
-        return this.year;
-    }
-
-    int getMonth() {
-        return this.month;
-    }
-
-    int getDay() {
+    public int getDay() {
         return this.day;
     }
 
-    // TODO: Check specs
-    String buildString() {
-        return String.format("%d-%d-%d", this.getYear(), this.getMonth(), this.getDay());
+    public String toString() {
+        return String.format("%d", this.getDay());
     }
 }

@@ -5,17 +5,38 @@ public class Room {
     private double basePrice;
     private ArrayList<Reservation> reservations; // Necessary for isAvailableOn() - wafl
 
-    public String getName() {
-        return name;
+    public Room(String name, double basePrice) {
+        this.name = name;
+        this.basePrice = basePrice;
     }
 
     public double getBasePrice() {
         return basePrice;
     }
 
-    public Room(String name, double basePrice) {
-        this.name = name;
-        this.basePrice = basePrice;
+    public String getName() {
+        return name;
+    }
+
+    public String getAvailability() {
+        String availabilityString = "Available on the following dates: ";
+        for (int day = 1; day <= 31; day++) {
+            if (this.isAvailableOn(day)) {
+                availabilityString += String.valueOf(day) + " ";
+            }
+        }
+        return availabilityString;
+    }
+
+    public String toString() {
+        return String.format("""
+                Room name: %s
+                Price per night: %f
+                Availability:\n\t%s
+                """,
+                this.getName(),
+                this.getBasePrice(),
+                this.getAvailability());
     }
 
     public void setBasePrice(double basePrice) {
@@ -38,26 +59,5 @@ public class Room {
             }
         }
         return true;
-    }
-
-    public String getAvailability() {
-        String availabilityString = "Available on the following dates: ";
-        for (int day = 1; day <= 31; day++) {
-            if (this.isAvailableOn(day)) {
-                availabilityString += String.valueOf(day) + " ";
-            }
-        }
-        return availabilityString;
-    }
-
-    public String getDataString() {
-        return String.format("""
-                Room name: %s
-                Price per night: %f
-                Availability:\n\t%s
-                """,
-                this.getName(),
-                this.getBasePrice(),
-                this.getAvailability());
     }
 }
