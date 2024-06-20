@@ -7,56 +7,86 @@ public class Hotel {
   private double basePrice;
 
   public Hotel(String name) {
+    /*
+     * Validation here is offloaded to the caller because Hotel should be
+     * independent of the contents of ReservationSystem... I think
+     */
     this.name = name;
     this.rooms = new ArrayList<Room>();
     this.reservations = new ArrayList<Reservation>();
     this.basePrice = 1299;
   }
 
-  public int countReservationsOnDay(int date) {
-    int retval = 0;
-    for (Reservation i : reservations)
-      if (date >= i.getCheckIn() && date <= i.getCheckOut())
-        retval++;
-    return retval;
-  }
-
+  /**
+   * {@return the name of the hotel}
+   */
   public String getName() {
     return this.name;
   }
 
-  public int getRoomCount() {
-    return this.rooms.size();
-  }
-
-  public double getEarnings() {
-    return this.basePrice * getRoomCount();
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  // TODO: Add validation
-  // I think this is all the validation needed
-  public boolean setBasePrice(double basePrice) {
-    this.basePrice = basePrice;
-
-    if (basePrice < 0 || !rooms.isEmpty())
-      return false;
-
-    for (Room room : rooms)
-      room.setBasePrice(basePrice);
-    return true;
-  }
-
+  /**
+   * Gets a room from the list of rooms given an index.
+   * 
+   * @param index The index of the room
+   * @return the {@link Room} instance at the index given
+   */
   public Room getRoom(int index) {
     return rooms.get(index);
   }
 
-  // TODO
-  // * set return type to boolean?
-  // Done also add 50 room limit
+  /**
+   * {@return the number of rooms in the hotel}
+   */
+  public int getRoomCount() {
+    return this.rooms.size();
+  }
+
+  /**
+   * Gets a reservation from the list of reservations given an index.
+   * 
+   * @param index The index of the reservation
+   * @return the {@link Reservation} instance at the index given
+   */
+  public Reservation getReservation(int index) {
+    return this.reservations.get(index);
+  }
+
+  /**
+   * {@return the estimated earnings calculated as the base price times the room
+   * count}
+   */
+  public double getEarnings() {
+    return this.basePrice * getRoomCount();
+  }
+
+  public int countReservationsOnDay(int date) {
+    int retval = 0;
+
+    for (Reservation i : reservations)
+      if (date >= i.getCheckIn() && date <= i.getCheckOut())
+        retval++;
+
+    return retval;
+  }
+
+  public void setName(String name) {
+    /* Again, no validation here; see above comment */
+    this.name = name;
+  }
+
+  public boolean setBasePrice(double basePrice) {
+    if (basePrice < 0 || !rooms.isEmpty())
+      return false;
+
+    this.basePrice = basePrice;
+
+    for (Room room : rooms)
+      room.setBasePrice(basePrice);
+
+    return true;
+  }
+
+  /* TODO: Double-check naming convention if this is what we wanna go with */
   public boolean addRooms(int count) {
     int start = 1;
     int initcount = rooms.size();
@@ -71,13 +101,16 @@ public class Hotel {
     return rooms.size() != initcount;
   }
 
-  // TODO
+  /* TODO: I don't think this is needed, see other method below */
   public boolean removeRoom(int index) {
     // validation
     if (index < 0 || index >= rooms.size())
       return false;
 
-    rooms.remove(index);
+    Room room = rooms.remove(index);
+    for (Reservation i : reservations)
+      if (i.getRoom() == room)
+        reservations.remove(i);
     return true;
   }
 
@@ -85,9 +118,7 @@ public class Hotel {
     return rooms.remove(room);
   }
 
-  // TODO: Add validation
-  // * set return type to boolean?
-  // room name has to exist first before you can make a reservation for it
+  /* TODO: I don't think this is needed, see other method below */
   public boolean addReservation(String guestName, int checkIn, int checkOut,
       String roomName) {
     for (Room room : rooms)
@@ -102,8 +133,10 @@ public class Hotel {
 
   public void addReservation(String guestName, int checkIn, int checkOut,
       Room room) {
-    reservations.add(new Reservation(guestName, checkIn, checkOut, room));
-
+    Reservation reservation = new Reservation(
+        guestName, checkIn, checkOut, room);
+    reservations.add(reservation);
+    room.addReservation(reservation);
   }
 
   public String[] getRoomNames() {
@@ -116,19 +149,17 @@ public class Hotel {
     return retval;
   }
 
-  public boolean roomIsAvailableOn(Room room, int date) {
-    for (Reservation reservation : reservations)
-      if (reservation.getRoom() == room && reservation.getCheckIn() <= date && date < reservation.getCheckOut())
-        return false;
-    return true;
-  }
+  public String[] getReservationNames() {
+    int i, count = reservations.size();
+    String[] retval = new String[count];
+    Reservation reservation;
 
-  public ArrayList<Integer> getRoomAvailability(Room room) {
-    int i;
-    ArrayList<Integer> availableDates = new ArrayList<>();
-    for (i = 1; i <= 31; i++)
-      if (roomIsAvailableOn(room, i))
-        availableDates.add(i);
-    return availableDates;
+    for (i = 0; i < count; i++) {
+      reservation = reservations.get(i);
+      retval[i] = "Reservation for " + reservation.getRoom().getName() + " by "
+          + reservation.getGuestName();
+    }
+
+    return retval;
   }
 }

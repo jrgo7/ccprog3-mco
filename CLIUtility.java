@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class CLIUtility {
@@ -12,6 +13,31 @@ public class CLIUtility {
     int i;
     for (i = 0; i < WINDOW_WIDTH; i++)
       System.out.print("-");
+    System.out.print("\n");
+  }
+
+  /**
+   * Prints a calendar consisting of 31 days. Date numbers will only be shown if
+   * included in the list of shown days.
+   * 
+   * @param message   The message to display before printing the calendar
+   * @param shownDays The list of dates to show. Dates not in this list will be
+   *                  replaced with a {@code [X]}.
+   */
+  public static void printCalendar(String message,
+      ArrayList<Integer> shownDays) {
+    int i;
+
+    System.out.print(message);
+    for (i = 1; i <= 31; i++) {
+      if (i % 7 == 1)
+        System.out.print("\n");
+      if (!shownDays.contains(i))
+        System.out.print("[X]  ");
+      else
+        System.out.printf("%-5d", i);
+    }
+
     System.out.print("\n");
   }
 

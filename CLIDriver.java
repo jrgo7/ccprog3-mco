@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class CLIDriver {
@@ -44,15 +43,32 @@ public class CLIDriver {
   }
 
   /**
-   * Prompts the user to create a new {@link Hotel} instance. The user inputs a
-   * string which is then used as the hotel's name. The new hotel is added to
-   * the reservation system's hotel list.
+   * Prompts the user to select a reservation within a given hotel.
+   * 
+   * @param hotel The {@link Hotel} instance to select a room from
+   * @return the {@link Reservation} instance selected by the user
    */
-  public void displayCreateHotelScreen() {
+  private Reservation promptChooseReservationFrom(Hotel hotel) {
+    String[] reservationNames = hotel.getReservationNames();
+
+    if (reservationNames.length != 0)
+      return hotel.getReservation(
+          CLIUtility.promptChoiceInput(sc, "Select a reservation:",
+              reservationNames));
+
+    System.out.println("There are currently no reservations in the hotel.");
+    return null;
+  }
+
+  /**
+   * Prompts the user to input a hotel name. Ensures that the inputted name does
+   * not yet exist in the system.
+   * 
+   * @return the valid name inputted by the user
+   */
+  private String promptHotelName() {
     String nameInput;
     boolean nameExists;
-
-    CLIUtility.printBorder();
 
     do {
       nameInput = CLIUtility.promptStringInput(sc,
@@ -62,10 +78,21 @@ public class CLIDriver {
       nameExists = reservationSystem.hotelNameExists(nameInput);
 
       if (nameExists)
-        System.out.println("Name already exists. Please try again:");
+        System.out
+            .println("Name already exists in the system. Please try again:");
     } while (nameExists);
 
-    reservationSystem.addHotel(new Hotel(nameInput));
+    return nameInput;
+  }
+
+  /**
+   * Prompts the user to create a new {@link Hotel} instance. The user inputs a
+   * string which is then used as the hotel's name. The new hotel is added to
+   * the reservation system's hotel list.
+   */
+  public void displayCreateHotelScreen() {
+    CLIUtility.printBorder();
+    reservationSystem.addHotel(new Hotel(promptHotelName()));
   }
 
   /**
@@ -76,52 +103,80 @@ public class CLIDriver {
    */
   public void displayViewHotelScreen() {
     CLIUtility.printBorder();
-
     Hotel hotel = promptChooseHotel();
 
+    CLIUtility.printBorder();
     System.out.println("Hotel information:");
     System.out.println("    Name: " + hotel.getName());
     System.out.println("    Rooms: " + hotel.getRoomCount());
     System.out.println("    Estimated earnings: " + hotel.getEarnings());
 
-    int input = CLIUtility.promptChoiceInput(sc, "Select an option",
+    CLIUtility.printBorder();
+    int input = CLIUtility.promptChoiceInput(sc, "Select an option:",
         "Check room availability",
         "Check room data",
         "Check reservation data",
         "Exit");
 
+    CLIUtility.printBorder();
     switch (input) {
     /* Total number of available and booked rooms for a selected date */
     case 0:
       /* TODO: Clean up or extract to a private method */
-      CLIUtility.printBorder();
       int date = CLIUtility.promptIntegerInput(sc, "Enter a date:", 1, 31);
       int booked = hotel.countReservationsOnDay(date);
-      System.out.println("Reservations on day " + date + ": "
-          + booked);
+      System.out.println(
+          "Reservations on day " + date + ": " + booked);
       System.out.println(
           "There are " + (hotel.getRoomCount() - booked) + " rooms available.");
       break;
     /* Show room data */
     case 1:
-      /* Wafl moment */
+      Room room = promptChooseRoomFrom(hotel);
+
+      /*
+       * I kept the printing stuff here instead of building a string from within
+       * Room to keep the CLI stuff as independent as possible from the system
+       */
+      CLIUtility.printBorder();
+      System.out.println("Room information:");
+      System.out.println("    Name: " + room.getName());
+      System.out.println("    Price/night: " + room.getBasePrice());
+
+      CLIUtility.printCalendar("Available days:", room.getAvailableDates());
       break;
     /* Show reservation data */
     case 2:
-      /* Wafl moment */
+      /* TODO: Yoink from wafl */
+      promptChooseReservationFrom(hotel);
       break;
     }
   }
 
+  /**
+   * Allows the user to book a reservation for a room in a hotel.
+   */
   public void displaySimulateBookingScreen() {
     CLIUtility.printBorder();
     Hotel hotel = promptChooseHotel();
 
+    /* If this is true, then there are no hotels in the system */
+    if (hotel == null)
+      return;
+
     CLIUtility.printBorder();
     Room room = promptChooseRoomFrom(hotel);
 
+    /* If this is true, then there are no (available) rooms in the hotel */
+    if (room == null || room.getAvailableDates().size() == 0)
+      return;
+
     CLIUtility.printBorder();
     String guestName = CLIUtility.promptStringInput(sc, "Enter your name:");
+
+    /* TODO: Availability conflicts */
+    CLIUtility.printBorder();
+    CLIUtility.printCalendar("Available dates:", room.getAvailableDates());
 
     CLIUtility.printBorder();
     int in = CLIUtility.promptIntegerInput(sc, "Enter a check-in date:", 1, 30);
@@ -133,6 +188,9 @@ public class CLIDriver {
     hotel.addReservation(guestName, in, out, room);
   }
 
+  /**
+   * Allows the user to modify a selected hotel.
+   */
   public void displayManageHotelScreen() {
     CLIUtility.printBorder();
     Hotel hotel = promptChooseHotel();
@@ -141,15 +199,15 @@ public class CLIDriver {
     System.out.println("Currently managing the following hotel:");
     System.out.println(hotel.getName());
 
+    CLIUtility.printBorder();
     int choice = CLIUtility.promptChoiceInput(sc, "Select an option:",
         "Rename hotel", "Add room(s)", "Remove room(s)",
         "Update base price", "Remove reservation", "Remove hotel");
-    CLIUtility.printBorder();
 
+    CLIUtility.printBorder();
     switch (choice) {
     case 0:
-      hotel.setName(CLIUtility.promptStringInput(sc,
-          "Please input the new name of the hotel:"));
+      hotel.setName(promptHotelName());
       break;
     case 1:
       /* TODO: Display a message if rooms have hit limit */
@@ -161,14 +219,12 @@ public class CLIDriver {
       hotel.removeRoom(promptChooseRoomFrom(hotel));
       break;
     case 3:
-      if (hotel.getRoomCount() != 0)
+      /* TODO: Clean up or extract to a private method */
+      double newBasePrice = Double.parseDouble(CLIUtility.promptStringInput(sc,
+          "Please input the new base price:"));
+      if (!hotel.setBasePrice(newBasePrice))
         System.out.println(
-            "There should be zero rooms in the hotel. Please try again.");
-      else
-        /* TODO: Catch the NumberFormatException thrown by parseDouble() */
-        hotel.setBasePrice(Double
-            .parseDouble(CLIUtility.promptStringInput(sc,
-                "Please input the new base price:")));
+            "Invalid input. Please try again with or ensure there are no rooms in the hotel.");
       break;
     case 4:
       /* TODO: Remove reservation */
@@ -218,6 +274,7 @@ public class CLIDriver {
   public static void main(String[] args) {
     CLIDriver cli = new CLIDriver();
 
+    /* Evil? Idk */
     while (cli.displayTitleScreen())
       ;
 

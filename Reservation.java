@@ -19,7 +19,6 @@ public class Reservation {
     return this.checkOut;
   }
 
-  // TODO
   public double getTotalPrice() {
     double basePrice = room.getBasePrice();
     return (checkIn - checkOut /* no + 1 */) * basePrice;
