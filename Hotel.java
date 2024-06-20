@@ -15,7 +15,7 @@ public class Hotel {
 
   public int countReservationsOnDay(int date) {
     int retval = 0;
-    for (Reservation i : reservations) 
+    for (Reservation i : reservations)
       if (date >= i.getCheckIn() && date <= i.getCheckOut())
         retval++;
     return retval;
@@ -62,11 +62,12 @@ public class Hotel {
     int initcount = rooms.size();
 
     if (rooms.size() != 0)
-      start = Integer.parseInt(rooms.get(rooms.size() - 1).getName().substring(2)) + 1;
-    
+      start = Integer
+          .parseInt(rooms.get(rooms.size() - 1).getName().substring(2)) + 1;
+
     for (int i = 0; i < count && rooms.size() < 50; i++)
       rooms.add(new Room("RM" + String.format("%03d", start++), basePrice));
-    
+
     return rooms.size() != initcount;
   }
 
@@ -78,6 +79,10 @@ public class Hotel {
 
     rooms.remove(index);
     return true;
+  }
+
+  public boolean removeRoom(Room room) {
+    return rooms.remove(room);
   }
 
   // TODO: Add validation
@@ -97,28 +102,33 @@ public class Hotel {
 
   public void addReservation(String guestName, int checkIn, int checkOut,
       Room room) {
-        reservations.add(new Reservation(guestName, checkIn, checkOut, room));
+    reservations.add(new Reservation(guestName, checkIn, checkOut, room));
 
   }
 
   public String[] getRoomNames() {
     int i, count = rooms.size();
     String[] retval = new String[count];
-    
+
     for (i = 0; i < count; i++)
       retval[i] = rooms.get(i).getName();
-    
+
     return retval;
   }
 
-  public String getDataString() {
-    return String.format("""
-        Name: %s
-        Number of rooms: %d
-        Estimated earnings for the month: %f
-        """,
-        this.name,
-        this.getRoomCount(),
-        this.getEarnings());
+  public boolean roomIsAvailableOn(Room room, int date) {
+    for (Reservation reservation : reservations)
+      if (reservation.getRoom() == room && reservation.getCheckIn() <= date && date < reservation.getCheckOut())
+        return false;
+    return true;
+  }
+
+  public ArrayList<Integer> getRoomAvailability(Room room) {
+    int i;
+    ArrayList<Integer> availableDates = new ArrayList<>();
+    for (i = 1; i <= 31; i++)
+      if (roomIsAvailableOn(room, i))
+        availableDates.add(i);
+    return availableDates;
   }
 }

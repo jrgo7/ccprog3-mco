@@ -69,12 +69,21 @@ public class ReservationSystem {
   public String[] getHotelNames() {
     int i, count = hotels.size();
     String[] retval = new String[count];
-    
+
     for (i = 0; i < count; i++)
       retval[i] = hotels.get(i).getName();
-    
+
     return retval;
   }
 
+  public boolean hotelNameExists(String name) {
+    String[] hotelNames = getHotelNames();
 
+    for (String i : hotelNames)
+      if (i.equals(name))
+        return true;
+    return false;
+  }
+
+  
 }

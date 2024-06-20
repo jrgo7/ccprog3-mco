@@ -2,44 +2,55 @@ import java.util.Scanner;
 
 public class CLIUtility {
   public static final int WINDOW_WIDTH = 80;
+  public static final int WINDOW_COLUMNS = 3;
 
+  /**
+   * Prints a border that covers the whole screen.
+   */
   public static void printBorder() {
-    /* TODO: ANSI screen clearing stuff */
-    // System.out.print("\033[H\033[2J");
-    System.out.println(
-        "--------------------------------------------------------------------------------");
+    /* TODO: ANSI screen clearing stuff with "\033[H\033[2J" */
+    int i;
+    for (i = 0; i < WINDOW_WIDTH; i++)
+      System.out.print("-");
+    System.out.print("\n");
   }
 
   /**
    * Prints a prompt of choices from which the user must select a number.
    * 
+   * @param sc      The open {@link Scanner} object to read input from
    * @param message The message displayed to prompt the user
    * @param choices The strings to print for each choice
    * @return the index of the option selected by the user
    */
-  public static int promptChoiceInput(Scanner sc, String message, String... choices) {
-    int i = 1, columns = 3;
-    String format = "%-" + WINDOW_WIDTH / columns + "s";
+  public static int promptChoiceInput(Scanner sc, String message,
+      String... choices) {
+    int i = 1;
+    /* Format string used in printing choices to split them into columns */
+    String formatter = "%-" + (WINDOW_WIDTH / WINDOW_COLUMNS - 1) + "s ";
 
     System.out.print(message);
 
     for (String choice : choices) {
-      if (i % columns == 1)
+      /* Print a newline once a row has been filled */
+      if (i % WINDOW_COLUMNS == 1)
         System.out.print("\n");
-      System.out.print(String.format(format, "[" + i++ + "] " + choice));
+      System.out.print(String.format(formatter, "[" + i++ + "] " + choice));
     }
 
     System.out.print("\n");
 
+    /* Prompt the user for an integer and subtract by 1 to get the index */
     return promptIntegerInput(sc, "Input (1-" + (i - 1) + "):", 1, i - 1) - 1;
   }
 
   /**
    * Prints a prompt for the user to input a string
    * 
+   * @param sc      The open {@link Scanner} object to read input from
    * @param message The message displayed to prompt the user
    * @return the string inputted by the user obtained through
-   *         {@link Scanner#nextsLine}()
+   *         {@link Scanner#nextLine}()
    */
   public static String promptStringInput(Scanner sc, String message) {
     System.out.println(message);
@@ -48,7 +59,17 @@ public class CLIUtility {
     return sc.nextLine();
   }
 
-  public static int promptIntegerInput(Scanner sc, String message, int min, int max) {
+  /***
+   * Prints a prompt for the user to input an integer within a specified range.
+   * 
+   * @param sc      The open {@link Scanner} object to read input from
+   * @param message The message displayed to prompt the user
+   * @param min     The minimum value that can be inputted by the user
+   * @param max     The maximum value that can be inputted by the user
+   * @return the value inputted by the user, validated to be in the range
+   */
+  public static int promptIntegerInput(Scanner sc, String message, int min,
+      int max) {
     int retval;
     boolean valid = false;
 
@@ -60,9 +81,11 @@ public class CLIUtility {
       try {
         retval = Integer.parseInt(sc.nextLine());
       } catch (NumberFormatException e) {
-        retval = -1;
+        /* Force retval to be invalid */
+        retval = min - 1;
       }
 
+      /* Validate that the input is between min and max, inclusive */
       valid = retval >= min & retval <= max;
 
       if (!valid)
@@ -72,5 +95,12 @@ public class CLIUtility {
     return retval;
   }
 
-  private CLIUtility() {}
+  private CLIUtility() {
+    /*
+     * A private no-argument constructor is added here to ensure CLIUtility
+     * cannot be instantiated. A similar effect can be achieved by using an
+     * interface instead, as Java 8 onward allows default implementations for
+     * static methods.
+     */
+  }
 }
