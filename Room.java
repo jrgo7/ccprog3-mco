@@ -23,8 +23,23 @@ public class Room {
     this.basePrice = basePrice;
   }
 
-  public void addReservation(Reservation reservation) {
+  /**
+   * Add a reservation to this room.
+   * 
+   * @param reservation
+   * @return true if room was added successfully, false otherwise (due to
+   *         availability conflicts)
+   */
+  public boolean addReservation(Reservation reservation) {
+    int checkIn = reservation.getCheckIn();
+    int checkOut = reservation.getCheckOut();
+    for (int day = checkIn; day <= checkOut; day++) {
+      if (!this.isAvailableOn(day)) {
+        return false;
+      }
+    }
     reservations.add(reservation);
+    return true;
   }
 
   public ArrayList<Integer> getAvailableDates() {
@@ -42,5 +57,37 @@ public class Room {
       if (i.getCheckIn() <= date && i.getCheckOut() > date)
         return false;
     return true;
+  }
+
+  /**
+   * Prints a calendar consisting of 31 days. Date numbers will only be shown if
+   * included in the list of available dates
+   */
+  public String getAvailableDatesAsCalendarString() {
+    int day;
+    String result = "Available dates:\n";
+    for (day = 1; day <= 31; day++) {
+      if (day % 7 == 1)
+        result += "\n";
+      if (isAvailableOn(day))
+        result += "[X]  ";
+      else
+        result += String.format("%-5d", day);
+    }
+
+    result += "\n";
+    return result;
+  }
+
+  public String toString() {
+    return String.format("""
+        Room information:
+            Name: %s
+            Price/night: %f
+        %s
+        """,
+        this.getName(),
+        this.getBasePrice(),
+        this.getAvailableDatesAsCalendarString());
   }
 }

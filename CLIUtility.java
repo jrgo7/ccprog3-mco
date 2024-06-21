@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class CLIUtility {
@@ -17,31 +16,6 @@ public class CLIUtility {
   }
 
   /**
-   * Prints a calendar consisting of 31 days. Date numbers will only be shown if
-   * included in the list of shown days.
-   * 
-   * @param message   The message to display before printing the calendar
-   * @param shownDays The list of dates to show. Dates not in this list will be
-   *                  replaced with a {@code [X]}.
-   */
-  public static void printCalendar(String message,
-      ArrayList<Integer> shownDays) {
-    int i;
-
-    System.out.print(message);
-    for (i = 1; i <= 31; i++) {
-      if (i % 7 == 1)
-        System.out.print("\n");
-      if (!shownDays.contains(i))
-        System.out.print("[X]  ");
-      else
-        System.out.printf("%-5d", i);
-    }
-
-    System.out.print("\n");
-  }
-
-  /**
    * Prints a prompt of choices from which the user must select a number.
    * 
    * @param sc      The open {@link Scanner} object to read input from
@@ -49,7 +23,7 @@ public class CLIUtility {
    * @param choices The strings to print for each choice
    * @return the index of the option selected by the user
    */
-  public static int promptChoiceInput(Scanner sc, String message,
+  public static int promptChoice(Scanner sc, String message,
       String... choices) {
     int i = 1;
     /* Format string used in printing choices to split them into columns */
@@ -61,13 +35,13 @@ public class CLIUtility {
       /* Print a newline once a row has been filled */
       if (i % WINDOW_COLUMNS == 1)
         System.out.print("\n");
-      System.out.print(String.format(formatter, "[" + i++ + "] " + choice));
+      System.out.print(String.format(formatter, "[" + (i++) + "] " + choice));
     }
 
     System.out.print("\n");
 
     /* Prompt the user for an integer and subtract by 1 to get the index */
-    return promptIntegerInput(sc, "Input (1-" + (i - 1) + "):", 1, i - 1) - 1;
+    return promptInt(sc, "Input (1-" + (i - 1) + "):", 1, i - 1) - 1;
   }
 
   /**
@@ -78,7 +52,7 @@ public class CLIUtility {
    * @return the string inputted by the user obtained through
    *         {@link Scanner#nextLine}()
    */
-  public static String promptStringInput(Scanner sc, String message) {
+  public static String promptString(Scanner sc, String message) {
     System.out.println(message);
     System.out.print(" >> ");
 
@@ -94,7 +68,7 @@ public class CLIUtility {
    * @param max     The maximum value that can be inputted by the user
    * @return the value inputted by the user, validated to be in the range
    */
-  public static int promptIntegerInput(Scanner sc, String message, int min,
+  public static int promptInt(Scanner sc, String message, int min,
       int max) {
     int retval;
     boolean valid = false;

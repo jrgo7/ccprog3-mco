@@ -5,16 +5,21 @@ public class Hotel {
   private ArrayList<Room> rooms;
   private ArrayList<Reservation> reservations;
   private double basePrice;
+  private int lastRoomNumber;
 
   public Hotel(String name) {
     /*
      * Validation here is offloaded to the caller because Hotel should be
      * independent of the contents of ReservationSystem... I think
+     * - lowy
+     * I suppose it's easier to do that than do error handling
+     * - wafl
      */
     this.name = name;
     this.rooms = new ArrayList<Room>();
     this.reservations = new ArrayList<Reservation>();
     this.basePrice = 1299;
+    this.lastRoomNumber = 0;
   }
 
   /**
@@ -59,7 +64,7 @@ public class Hotel {
     return this.basePrice * getRoomCount();
   }
 
-  public int countReservationsOnDay(int date) {
+  public int countReservations(int date) {
     int retval = 0;
 
     for (Reservation i : reservations)
@@ -86,57 +91,28 @@ public class Hotel {
     return true;
   }
 
-  /* TODO: Double-check naming convention if this is what we wanna go with */
-  public boolean addRooms(int count) {
-    int start = 1;
-    int initcount = rooms.size();
-
-    if (rooms.size() != 0)
-      start = Integer
-          .parseInt(rooms.get(rooms.size() - 1).getName().substring(2)) + 1;
-
-    for (int i = 0; i < count && rooms.size() < 50; i++)
-      rooms.add(new Room("RM" + String.format("%03d", start++), basePrice));
-
-    return rooms.size() != initcount;
+  public void addRooms(int count) {
+    for (int i = 0; i < count && rooms.size() < 50; i++) {
+      this.rooms.add(
+          new Room("RM" + String.format("%03d", this.lastRoomNumber++),
+              basePrice));
+    }
   }
 
-  /* TODO: I don't think this is needed, see other method below */
-  public boolean removeRoom(int index) {
-    // validation
-    if (index < 0 || index >= rooms.size())
-      return false;
-
-    Room room = rooms.remove(index);
-    for (Reservation i : reservations)
-      if (i.getRoom() == room)
-        reservations.remove(i);
-    return true;
+  public void removeRoom(Room room) {
+    this.rooms.remove(room);
   }
 
-  public boolean removeRoom(Room room) {
-    return rooms.remove(room);
-  }
-
-  /* TODO: I don't think this is needed, see other method below */
   public boolean addReservation(String guestName, int checkIn, int checkOut,
-      String roomName) {
-    for (Room room : rooms)
-      if (room.getName().equals(roomName)) {
-        Reservation reservation = new Reservation(guestName, checkIn, checkOut,
-            room);
-        reservations.add(reservation);
-        return true;
-      }
-    return false;
-  }
-
-  public void addReservation(String guestName, int checkIn, int checkOut,
       Room room) {
     Reservation reservation = new Reservation(
         guestName, checkIn, checkOut, room);
-    reservations.add(reservation);
-    room.addReservation(reservation);
+    this.reservations.add(reservation);
+    return room.addReservation(reservation);
+  }
+
+  public void removeReservation(int index) {
+    this.reservations.remove(index);
   }
 
   public String[] getRoomNames() {
@@ -161,5 +137,21 @@ public class Hotel {
     }
 
     return retval;
+  }
+
+  public int getAvailableRoomCount(int date) {
+    return this.getRoomCount() - this.countReservations(date);
+  }
+
+  public String toString() {
+    return String.format("""
+        Hotel information:
+          Name: %s
+          Rooms: %d
+          Estimated earnings: %f
+        """,
+        this.getName(),
+        this.getRoomCount(),
+        this.getEarnings());
   }
 }
