@@ -20,6 +20,7 @@ public class Hotel {
     this.reservations = new ArrayList<Reservation>();
     this.basePrice = 1299;
     this.lastRoomNumber = 0;
+    this.addRooms(1); // Every hotel starts with 1 room.
   }
 
   /**
@@ -61,14 +62,32 @@ public class Hotel {
    * count}
    */
   public double getEarnings() {
-    return this.basePrice * getRoomCount();
+    double earnings = 0.0;
+    for (Reservation r: reservations) {
+      earnings += r.getTotalPrice();
+    }
+    return earnings;
   }
 
-  public int countReservations(int date) {
+  public int getReservationCount() {
+    return reservations.size();
+  }
+
+  public int getReservationCountOnDate(int date) {
     int retval = 0;
 
     for (Reservation i : reservations)
       if (date >= i.getCheckIn() && date <= i.getCheckOut())
+        retval++;
+
+    return retval;
+  }
+
+  public int getNonCheckOutReservationCountOnDate(int date) {
+    int retval = 0;
+
+    for (Reservation i : reservations)
+      if (date >= i.getCheckIn() && date < i.getCheckOut())
         retval++;
 
     return retval;
@@ -80,7 +99,7 @@ public class Hotel {
   }
 
   public boolean setBasePrice(double basePrice) {
-    if (basePrice < 0 || !rooms.isEmpty())
+    if (basePrice < 100)
       return false;
 
     this.basePrice = basePrice;
@@ -94,13 +113,17 @@ public class Hotel {
   public void addRooms(int count) {
     for (int i = 0; i < count && rooms.size() < 50; i++) {
       this.rooms.add(
-          new Room("RM" + String.format("%03d", this.lastRoomNumber++),
+          new Room("RM" + String.format("%03d", 1+this.lastRoomNumber++),
               basePrice));
     }
   }
 
-  public void removeRoom(Room room) {
+  public boolean removeRoom(Room room) {
+    if (room.getReservationCount() > 0) {
+      return false;
+    }
     this.rooms.remove(room);
+    return true;
   }
 
   public boolean addReservation(String guestName, int checkIn, int checkOut,
@@ -112,6 +135,8 @@ public class Hotel {
   }
 
   public void removeReservation(int index) {
+    Reservation reservation = this.reservations.get(index);
+    reservation.getRoom().removeReservation(reservation);
     this.reservations.remove(index);
   }
 
@@ -140,7 +165,7 @@ public class Hotel {
   }
 
   public int getAvailableRoomCount(int date) {
-    return this.getRoomCount() - this.countReservations(date);
+    return this.getRoomCount() - this.getNonCheckOutReservationCountOnDate(date);
   }
 
   public String toString() {
@@ -148,7 +173,7 @@ public class Hotel {
         Hotel information:
           Name: %s
           Rooms: %d
-          Estimated earnings: %f
+          Estimated earnings: %.2f
         """,
         this.getName(),
         this.getRoomCount(),

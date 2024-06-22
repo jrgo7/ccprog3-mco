@@ -8,7 +8,6 @@ public class CLIUtility {
    * Prints a border that covers the whole screen.
    */
   public static void printBorder() {
-    /* TODO: ANSI screen clearing stuff with "\033[H\033[2J" */
     int i;
     for (i = 0; i < WINDOW_WIDTH; i++)
       System.out.print("-");

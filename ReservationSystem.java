@@ -3,8 +3,6 @@ import java.util.ArrayList;
 /**
  * Represents the reservation system managing a list of hotels.
  * 
- * TODO: We can separate the CLI stuff into its own class in charge of
- * printing/input
  */
 public class ReservationSystem {
   private ArrayList<Hotel> hotels;
@@ -24,14 +22,6 @@ public class ReservationSystem {
 
   public Hotel getHotel(int index) {
     return this.hotels.get(index);
-  }
-
-  /* TODO: I don't think this is needed, see method above */
-  public Hotel getHotel(String name) {
-    for (Hotel hotel : this.hotels)
-      if (hotel.getName().equals(name))
-        return hotel;
-    return null;
   }
 
   public Boolean removeHotel(Hotel hotel) {

@@ -42,6 +42,14 @@ public class Room {
     return true;
   }
 
+  public int getReservationCount() {
+    return reservations.size();
+  }
+
+  public void removeReservation(Reservation reservation) {
+    this.reservations.remove(reservation);
+  }
+
   public ArrayList<Integer> getAvailableDates() {
     ArrayList<Integer> retval = new ArrayList<>();
 
@@ -69,7 +77,7 @@ public class Room {
     for (day = 1; day <= 31; day++) {
       if (day % 7 == 1)
         result += "\n";
-      if (isAvailableOn(day))
+      if (!isAvailableOn(day))
         result += "[X]  ";
       else
         result += String.format("%-5d", day);
@@ -84,6 +92,7 @@ public class Room {
         Room information:
             Name: %s
             Price/night: %f
+            
         %s
         """,
         this.getName(),

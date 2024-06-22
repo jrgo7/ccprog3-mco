@@ -35,9 +35,8 @@ public class Reservation {
     return this.getNightCount() * room.getBasePrice();
   }
 
-  // TODO
   public String getPriceBreakdown() {
-    return String.format("%d nights x %lf price per night = %lf",
+    return String.format("%d nights x %.2f price per night = %.2f",
             this.getNightCount(),
             this.getRoom().getBasePrice(),
             this.getTotalPrice());
@@ -46,10 +45,10 @@ public class Reservation {
   public String toString() {
     return String.format("""
             Guest: %s
-            Room Information:\n%s
+            %s
             Check-in: %d
             Check-out: %d
-            Total price: %lf
+            Total price: %f
             Price breakdown: %s
             """,
             this.getGuestName(),
