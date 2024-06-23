@@ -12,7 +12,8 @@ public class CLIDriver {
   /**
    * Prompts the user to select a hotel from the list of hotels in the system.
    * 
-   * @return the {@link Hotel} instance selected by the user
+   * @return the {@link Hotel} instance selected by the user or {@code null} if
+   *         none exist
    */
   private Hotel promptChooseHotel() {
     String[] hotelNames = reservationSystem.getHotelNames();
@@ -29,11 +30,13 @@ public class CLIDriver {
    * Prompts the user to select a room within a given hotel.
    * 
    * @param hotel The {@link Hotel} instance to select a room from
-   * @return the {@link Room} instance selected by the user
+   * @return the {@link Room} instance selected by the user or {@code null} if
+   *         none exist
    */
   private Room promptChooseRoomFrom(Hotel hotel) {
     String[] roomNames = hotel.getRoomNames();
 
+    /* TODO: There is guaranteed to be at least one room */
     if (roomNames.length != 0)
       return hotel.getRoom(
           CLIUtility.promptChoice(sc, "Select a room:", roomNames));
@@ -46,7 +49,8 @@ public class CLIDriver {
    * Prompts the user to select a reservation within a given hotel.
    * 
    * @param hotel The {@link Hotel} instance to select a room from
-   * @return the {@link Reservation} instance selected by the user
+   * @return the {@link Reservation} instance selected by the user or
+   *         {@code null} if none exist
    */
   private Reservation promptChooseReservationFrom(Hotel hotel) {
     String[] reservationNames = hotel.getReservationNames();
@@ -98,15 +102,14 @@ public class CLIDriver {
   /**
    * Allows the user to select a hotel from a list of all hotels in the system,
    * then displays the info of the selected hotel.
-   * 
-   * @see {@link #viewHotel}()
    */
   public void displayViewHotelScreen() {
     CLIUtility.printBorder();
     Hotel hotel = promptChooseHotel();
-    if (hotel == null) {
+
+    /* Safeguard against cases where there are no hotels in the system */
+    if (hotel == null)
       return;
-    }
 
     CLIUtility.printBorder();
     System.out.println(hotel.toString());
@@ -120,30 +123,35 @@ public class CLIDriver {
 
     CLIUtility.printBorder();
     switch (input) {
-      case 0: // Available/booked rooms count on a date
-        int date = CLIUtility.promptInt(sc, "Enter a date (1-31):", 1, 31);
-        boolean isOneRoom = hotel.getAvailableRoomCount(date) == 1;
-        System.out.printf("""
-            Reservations on day %d: %d
-            There %s %d room%s available.
-            """,
-            date,
-            hotel.getReservationCountOnDate(date),
-            isOneRoom ? "is" : "are",
-            hotel.getAvailableRoomCount(date),
-            isOneRoom ? "" : "s");
-        break;
-      case 1: // Room data
-        Room room = promptChooseRoomFrom(hotel);
+    /* Number of available and booked rooms on a date */
+    case 0:
+      int date = CLIUtility.promptInt(sc, "Enter a date (1-31):", 1, 31);
+      boolean isOneRoom = hotel.getAvailableRoomCount(date) == 1;
+      System.out.printf("""
+          Reservations on day %d: %d
+          There %s %d room%s available.
+          """,
+          date,
+          hotel.getReservationCountOnDate(date),
+          isOneRoom ? "is" : "are",
+          hotel.getAvailableRoomCount(date),
+          isOneRoom ? "" : "s");
+      break;
+    /* Room data */
+    case 1:
+      Room room = promptChooseRoomFrom(hotel);
+      CLIUtility.printBorder();
+      System.out.println(room.toString());
+      break;
+    /* Reservation data */
+    case 2:
+      Reservation reservation = promptChooseReservationFrom(hotel);
+      /* Proceed only if a reservation exists */
+      if (reservation != null) {
         CLIUtility.printBorder();
-        System.out.println(room.toString());
-        break;
-      case 2: // Reservation data
-        Reservation reservation = promptChooseReservationFrom(hotel);
-        if (reservation != null) {
-          System.out.println(reservation.toString());
-        }
-        break;
+        System.out.println(reservation.toString());
+      }
+      break;
     }
   }
 
@@ -153,9 +161,10 @@ public class CLIDriver {
   public void displayManageHotelScreen() {
     CLIUtility.printBorder();
     Hotel hotel = promptChooseHotel();
-    if (hotel == null) {
+
+    /* Safeguard against cases where there are no hotels in the system */
+    if (hotel == null)
       return;
-    }
 
     CLIUtility.printBorder();
     System.out.println("Currently managing the following hotel:");
@@ -168,64 +177,84 @@ public class CLIDriver {
 
     CLIUtility.printBorder();
     switch (choice) {
-      case 0:
-        hotel.setName(promptHotelName());
+    /* Rename hotel */
+    case 0:
+      String name = promptHotelName();
+      CLIUtility.printBorder();
+      System.out.println("Renamed hotel " + hotel.getName() + " to " + name);
+      hotel.setName(name);
+      break;
+    /* Add room(s) */
+    case 1:
+      int roomCount = hotel.getRoomCount();
+      if (roomCount >= 50)
+        System.out.println("You cannot add anymore rooms.");
+      else {
+        int addableRooms = 50 - roomCount;
+        int count = CLIUtility.promptInt(sc,
+            String.format("Input the number of rooms to add (1-%d):",
+                addableRooms),
+            1, addableRooms);
+        hotel.addRooms(count);
+      }
+      break;
+    /* Remove room(s) */
+    case 2:
+      if (hotel.getRoomCount() <= 1) {
+        System.out.println("You cannot remove the only room in the hotel!");
         break;
-      case 1:
-        int roomCount = hotel.getRoomCount();
-        if (roomCount >= 50) {
-          System.out.println("You cannot add anymore rooms.");
-        } else {
-          int addableRooms = 50 - roomCount;
-          int count = CLIUtility.promptInt(sc,
-              String.format("Input the number of rooms to add (1-%d):", addableRooms),
-              1, addableRooms);
-          hotel.addRooms(count);
-        }
-        break;
-      case 2:
-        if (hotel.getRoomCount() <= 1) {
-          System.out.println("You cannot remove the only room in the hotel!");
-          break;
-        }
-        int continueChoice = 1;
-        while (continueChoice != 2 && hotel.getRoomCount() > 1) {
-          if (hotel.removeRoom(promptChooseRoomFrom(hotel))) {
-            System.out.println("Successfully removed room.");
-          } else {
-            System.out.println("Cannot remove this room because it still has at least one reservation.");
-          }
-          if (hotel.getRoomCount() > 1) {
-            continueChoice = CLIUtility.promptChoice(sc, "Continue?", "Yes", "No");
-          }
-        }
-        break;
-      case 3:
-        if (hotel.getReservationCount() > 0) {
+      }
+      int continueChoice = 0;
+      while (continueChoice != 1 && hotel.getRoomCount() > 1) {
+        Room room = promptChooseRoomFrom(hotel);
+        CLIUtility.printBorder();
+        if (hotel.removeRoom(room))
+          System.out
+              .println("Successfully removed room " + room.getName() + ".");
+        else
           System.out.println(
-              "You cannot change the base price while there are reservations present.");
-          break;
+              "Cannot remove this room because it still has at least one reservation.");
+        if (hotel.getRoomCount() > 1) {
+          continueChoice = CLIUtility.promptChoice(sc, "Remove another room?",
+              "Yes",
+              "No");
+          if (continueChoice == 0)
+            CLIUtility.printBorder();
         }
-        double newBasePrice = Double.parseDouble(
-            CLIUtility.promptString(sc, "Please input the new base price:"));
-        if (!hotel.setBasePrice(newBasePrice)) {
-          System.out.println("You cannot set a base price lower than 100.00!");
-        };
+      }
+      break;
+    /* Update base price */
+    case 3:
+      if (hotel.getReservationCount() > 0) {
+        System.out.println(
+            "Cannot change the base price while there are reservations present.");
         break;
-      case 4:
-        if (hotel.getReservationCount() <= 0) {
-          System.out.println(
-              "There are no reservations to remove.");
-          break;
-        }
-        choice = CLIUtility.promptChoice(sc, "Remove which reservation?", hotel.getReservationNames());
-        hotel.removeReservation(choice);
+      }
+      double newBasePrice = Double.parseDouble(
+          CLIUtility.promptString(sc, "Please input the new base price:"));
+      CLIUtility.printBorder();
+      if (hotel.setBasePrice(newBasePrice))
+        System.out.println("Set the base price to " + newBasePrice + ".");
+      else
+        System.out.println("You cannot set a base price lower than 100.00!");
+      break;
+    /* Remove reservation */
+    case 4:
+      if (hotel.getReservationCount() <= 0) {
+        System.out.println(
+            "There are no reservations to remove.");
         break;
-      case 5:
-        reservationSystem.removeHotel(hotel);
-        System.out
-            .println("Removed hotel " + hotel.getName() + " from the list.");
-        break;
+      }
+      choice = CLIUtility.promptChoice(sc, "Remove which reservation?",
+          hotel.getReservationNames());
+      hotel.removeReservation(choice);
+      break;
+    /* Remove hotel */
+    case 5:
+      reservationSystem.removeHotel(hotel);
+      System.out
+          .println("Removed hotel " + hotel.getName() + " from the list.");
+      break;
     }
   }
 
@@ -241,7 +270,9 @@ public class CLIDriver {
 
     CLIUtility.printBorder();
     Room room = promptChooseRoomFrom(hotel);
-    if (room.getAvailableDates().size() == 0) {
+    /* TODO: Does 31 count as an available date */
+    if (room.getAvailableDates().size() == 1 /* Not 0 to account for 31 */) {
+      CLIUtility.printBorder();
       System.out.println("This room has no available dates!");
       return;
     }
@@ -259,10 +290,13 @@ public class CLIDriver {
     int out = CLIUtility.promptInt(sc, "Enter a check-out date:",
         in + 1, 31);
 
+    CLIUtility.printBorder();
     if (hotel.addReservation(guestName, in, out, room)) {
       System.out.println("Reservation success!");
     } else {
-      System.out.println("Reservation not successful: room is unavailable at the specified time.");
+      /* TODO: I don't think this will ever happen */
+      System.out.println(
+          "Reservation not successful: room is unavailable at the specified time.");
     }
   }
 
@@ -277,22 +311,21 @@ public class CLIDriver {
     int choice = CLIUtility.promptChoice(sc, "Select an option:",
         "Create hotel", "View hotel", "Manage hotel", "Simulate booking",
         "Exit program");
-
     switch (choice) {
-      case 0:
-        displayCreateHotelScreen();
-        return true;
-      case 1:
-        displayViewHotelScreen();
-        return true;
-      case 2:
-        displayManageHotelScreen();
-        return true;
-      case 3:
-        displaySimulateBookingScreen();
-        return true;
-      default:
-        return false;
+    case 0:
+      displayCreateHotelScreen();
+      return true;
+    case 1:
+      displayViewHotelScreen();
+      return true;
+    case 2:
+      displayManageHotelScreen();
+      return true;
+    case 3:
+      displaySimulateBookingScreen();
+      return true;
+    default:
+      return false;
     }
   }
 

@@ -10,10 +10,8 @@ public class Hotel {
   public Hotel(String name) {
     /*
      * Validation here is offloaded to the caller because Hotel should be
-     * independent of the contents of ReservationSystem... I think
-     * - lowy
-     * I suppose it's easier to do that than do error handling
-     * - wafl
+     * independent of the contents of ReservationSystem... I think - lowy I
+     * suppose it's easier to do that than do error handling - wafl
      */
     this.name = name;
     this.rooms = new ArrayList<Room>();
@@ -63,16 +61,24 @@ public class Hotel {
    */
   public double getEarnings() {
     double earnings = 0.0;
-    for (Reservation r: reservations) {
+    for (Reservation r : reservations) {
       earnings += r.getTotalPrice();
     }
     return earnings;
   }
 
+  /**
+   * {@return the number of reservations in the hotel}
+   */
   public int getReservationCount() {
     return reservations.size();
   }
 
+  /**
+   * {@return the number of reservations on a given date}
+   * 
+   * @param date The date to check for reservations
+   */
   public int getReservationCountOnDate(int date) {
     int retval = 0;
 
@@ -113,7 +119,7 @@ public class Hotel {
   public void addRooms(int count) {
     for (int i = 0; i < count && rooms.size() < 50; i++) {
       this.rooms.add(
-          new Room("RM" + String.format("%03d", 1+this.lastRoomNumber++),
+          new Room("RM" + String.format("%03d", 1 + this.lastRoomNumber++),
               basePrice));
     }
   }
@@ -165,7 +171,8 @@ public class Hotel {
   }
 
   public int getAvailableRoomCount(int date) {
-    return this.getRoomCount() - this.getNonCheckOutReservationCountOnDate(date);
+    return this.getRoomCount()
+        - this.getNonCheckOutReservationCountOnDate(date);
   }
 
   public String toString() {
@@ -173,8 +180,7 @@ public class Hotel {
         Hotel information:
           Name: %s
           Rooms: %d
-          Estimated earnings: %.2f
-        """,
+          Estimated earnings: %.2f""",
         this.getName(),
         this.getRoomCount(),
         this.getEarnings());

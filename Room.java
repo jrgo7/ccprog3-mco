@@ -73,17 +73,15 @@ public class Room {
    */
   public String getAvailableDatesAsCalendarString() {
     int day;
-    String result = "Available dates:\n";
+    String result = "Room is available on:";
     for (day = 1; day <= 31; day++) {
       if (day % 7 == 1)
         result += "\n";
       if (!isAvailableOn(day))
-        result += "[X]  ";
+        result += "--   ";
       else
         result += String.format("%-5d", day);
     }
-
-    result += "\n";
     return result;
   }
 
@@ -92,9 +90,7 @@ public class Room {
         Room information:
             Name: %s
             Price/night: %f
-            
-        %s
-        """,
+        %s""",
         this.getName(),
         this.getBasePrice(),
         this.getAvailableDatesAsCalendarString());

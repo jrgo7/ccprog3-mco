@@ -1,7 +1,10 @@
 import java.util.Scanner;
 
 public class CLIUtility {
+  /** The width of the window in characters. Set to 80. */
   public static final int WINDOW_WIDTH = 80;
+
+  /** The number of columns to print menu options in. Set to 3. */
   public static final int WINDOW_COLUMNS = 3;
 
   /**
@@ -72,8 +75,8 @@ public class CLIUtility {
     int retval;
     boolean valid = false;
 
+    System.out.println(message);
     do {
-      System.out.println(message);
       System.out.print(" >> ");
 
       /* Catch the NumberFormatException thrown by parseInt() */
