@@ -282,11 +282,7 @@ public class CLIDriver {
 
     CLIUtility.printBorder();
     System.out.println(room.getAvailableDatesAsCalendarString());
-
-    CLIUtility.printBorder();
     int in = CLIUtility.promptInt(sc, "Enter a check-in date:", 1, 30);
-
-    CLIUtility.printBorder();
     int out = CLIUtility.promptInt(sc, "Enter a check-out date:",
         in + 1, 31);
 
@@ -294,7 +290,6 @@ public class CLIDriver {
     if (hotel.addReservation(guestName, in, out, room)) {
       System.out.println("Reservation success!");
     } else {
-      /* TODO: I don't think this will ever happen */
       System.out.println(
           "Reservation not successful: room is unavailable at the specified time.");
     }
@@ -329,7 +324,7 @@ public class CLIDriver {
     }
   }
 
-  public void closesc() {
+  public void closeScanner() {
     sc.close();
   }
 
@@ -339,6 +334,6 @@ public class CLIDriver {
     while (cli.doMenu())
       ;
 
-    cli.closesc();
+    cli.closeScanner();
   }
 }
