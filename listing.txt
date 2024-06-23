@@ -1,0 +1,77 @@
+Compiled from "CLIDriver.java"
+public class CLIDriver {
+  CLIDriver();
+  public void displayCreateHotelScreen();
+  public void displayViewHotelScreen();
+  public void displayManageHotelScreen();
+  public void displaySimulateBookingScreen();
+  public boolean doMenu();
+  public void closesc();
+  public static void main(java.lang.String[]);
+}
+Compiled from "CLIUtility.java"
+public class CLIUtility {
+  public static final int WINDOW_WIDTH;
+  public static final int WINDOW_COLUMNS;
+  public static void printBorder();
+  public static int promptChoice(java.util.Scanner, java.lang.String, java.lang.String...);
+  public static java.lang.String promptString(java.util.Scanner, java.lang.String);
+  public static int promptInt(java.util.Scanner, java.lang.String, int, int);
+}
+Compiled from "Hotel.java"
+public class Hotel {
+  public Hotel(java.lang.String);
+  public java.lang.String getName();
+  public Room getRoom(int);
+  public int getRoomCount();
+  public Reservation getReservation(int);
+  public double getEarnings();
+  public int getReservationCount();
+  public int getReservationCountOnDate(int);
+  public int getNonCheckOutReservationCountOnDate(int);
+  public void setName(java.lang.String);
+  public boolean setBasePrice(double);
+  public void addRooms(int);
+  public boolean removeRoom(Room);
+  public boolean addReservation(java.lang.String, int, int, Room);
+  public void removeReservation(int);
+  public java.lang.String[] getRoomNames();
+  public java.lang.String[] getReservationNames();
+  public int getAvailableRoomCount(int);
+  public java.lang.String toString();
+}
+Compiled from "Reservation.java"
+public class Reservation {
+  public Reservation(java.lang.String, int, int, Room);
+  public java.lang.String getGuestName();
+  public int getCheckIn();
+  public int getCheckOut();
+  public Room getRoom();
+  public int getNightCount();
+  public double getTotalPrice();
+  public java.lang.String getPriceBreakdown();
+  public java.lang.String toString();
+}
+Compiled from "ReservationSystem.java"
+public class ReservationSystem {
+  public ReservationSystem();
+  public void addHotel(Hotel);
+  public Hotel getHotel(int);
+  public java.lang.Boolean removeHotel(Hotel);
+  public boolean hotelNameExists(java.lang.String);
+  public java.lang.String[] getHotelNames();
+}
+Compiled from "Room.java"
+public class Room {
+  public Room(java.lang.String, double);
+  public java.lang.String getName();
+  public double getBasePrice();
+  public void setBasePrice(double);
+  public boolean addReservation(Reservation);
+  public int getReservationCount();
+  public void removeReservation(Reservation);
+  public java.util.ArrayList<java.lang.Integer> getAvailableDates();
+  public boolean isAvailableOn(int);
+  public java.lang.String getAvailableDatesAsCalendarString();
+  public java.lang.String toString();
+}
