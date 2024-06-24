@@ -45,8 +45,12 @@ public class ReservationSystem {
    * 
    * @param index The index of the hotel to be removed from the system
    */
-  public void removeHotel(int index) {
+  public boolean removeHotel(int index) {
+    if (index < 0 || index >= hotels.size()) {
+      return false;
+    }
     hotels.remove(index);
+    return true;
   }
 
   /**

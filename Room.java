@@ -19,15 +19,19 @@ public class Room {
     return basePrice;
   }
 
-  public void setBasePrice(double basePrice) {
+  public boolean setBasePrice(double basePrice) {
+    if (basePrice < 100) {
+      return false;
+    }
     this.basePrice = basePrice;
+    return true;
   }
 
   /**
    * Add a reservation to this room.
    * 
    * @param reservation
-   * @return true if room was added successfully, false otherwise (due to
+   * @return true if reservation was added successfully, false otherwise (due to
    *         availability conflicts)
    */
   public boolean addReservation(Reservation reservation) {
@@ -46,8 +50,8 @@ public class Room {
     return reservations.size();
   }
 
-  public void removeReservation(Reservation reservation) {
-    this.reservations.remove(reservation);
+  public boolean removeReservation(Reservation reservation) {
+    return this.reservations.remove(reservation);
   }
 
   public ArrayList<Integer> getAvailableDates() {
@@ -89,7 +93,7 @@ public class Room {
     return String.format("""
         Room information:
             Name: %s
-            Price/night: %f
+            Price/night: %.2f
         %s""",
         this.getName(),
         this.getBasePrice(),
