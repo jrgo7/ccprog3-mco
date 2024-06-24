@@ -4,6 +4,7 @@ import java.util.ArrayList;
  * Represents the reservation system managing a list of hotels.
  */
 public class ReservationSystem {
+  /** The list of all hotels in the system. */
   private ArrayList<Hotel> hotels;
 
   /**
@@ -13,6 +14,16 @@ public class ReservationSystem {
    */
   public ReservationSystem() {
     hotels = new ArrayList<Hotel>();
+  }
+
+  /**
+   * Checks if the system contains at least one hotel.
+   * 
+   * @return {@code true} if at least one hotel exists in the system,
+   *         {@code false} otherwise
+   */
+  public boolean hasHotels() {
+    return hotels.size() > 0;
   }
 
   /**

@@ -74,30 +74,28 @@ public class Hotel {
     return reservations.size();
   }
 
+  public boolean hasReservations() {
+    return reservations.size() > 0;
+  }
+
   /**
    * {@return the number of reservations on a given date}
    * 
    * @param date The date to check for reservations
    */
-  public int getReservationCountOnDate(int date) {
+  public int getReservationCountOnDate(int date, boolean excludeCheckOut) {
     int retval = 0;
 
     for (Reservation i : reservations)
-      if (date >= i.getCheckIn() && date <= i.getCheckOut())
+      if (date >= i.getCheckIn() && (
+        excludeCheckOut ?
+        date < i.getCheckOut() : date <= i.getCheckOut() 
+      ))
         retval++;
 
     return retval;
   }
 
-  public int getNonCheckOutReservationCountOnDate(int date) {
-    int retval = 0;
-
-    for (Reservation i : reservations)
-      if (date >= i.getCheckIn() && date < i.getCheckOut())
-        retval++;
-
-    return retval;
-  }
 
   public void setName(String name) {
     /* Again, no validation here; see above comment */
@@ -124,11 +122,11 @@ public class Hotel {
     }
   }
 
-  public boolean removeRoom(Room room) {
-    if (room.getReservationCount() > 0) {
+  public boolean removeRoom(int roomIndex) {
+    if (rooms.get(roomIndex).getReservationCount() > 0) {
       return false;
     }
-    this.rooms.remove(room);
+    this.rooms.remove(roomIndex);
     return true;
   }
 
@@ -172,7 +170,7 @@ public class Hotel {
 
   public int getAvailableRoomCount(int date) {
     return this.getRoomCount()
-        - this.getNonCheckOutReservationCountOnDate(date);
+        - this.getReservationCountOnDate(date, true);
   }
 
   public String toString() {
