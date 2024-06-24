@@ -9,21 +9,15 @@ public class CLIDriver {
     sc = new Scanner(System.in);
   }
 
-  /**
-   * Prompts the user to select a hotel from the list of hotels in the system.
-   * 
-   * @return the {@link Hotel} instance selected by the user or {@code null} if
-   *         none exist
-   */
-  private Hotel promptChooseHotel() {
+  private int promptChooseHotel() {
     String[] hotelNames = reservationSystem.getHotelNames();
 
     if (hotelNames.length != 0)
-      return reservationSystem.getHotel(
-          CLIUtility.promptChoice(sc, "Select a hotel:", hotelNames));
+      return 
+          CLIUtility.promptChoice(sc, "Select a hotel:", hotelNames);
 
     System.out.println("There are currently no hotels in the system.");
-    return null;
+    return -1;
   }
 
   /**
@@ -82,7 +76,8 @@ public class CLIDriver {
    */
   public void displayViewHotelScreen() {
     CLIUtility.printBorder();
-    Hotel hotel = promptChooseHotel();
+    int hotelIndex = promptChooseHotel();
+    Hotel hotel = reservationSystem.getHotel(hotelIndex);
 
     /* Safeguard against cases where there are no hotels in the system */
     if (hotel == null)
@@ -137,7 +132,8 @@ public class CLIDriver {
    */
   public void displayManageHotelScreen() {
     CLIUtility.printBorder();
-    Hotel hotel = promptChooseHotel();
+    int hotelIndex = promptChooseHotel();
+    Hotel hotel = reservationSystem.getHotel(hotelIndex);
 
     /* Safeguard against cases where there are no hotels in the system */
     if (hotel == null)
@@ -161,7 +157,7 @@ public class CLIDriver {
       do {
         name = CLIUtility.promptString(sc,
             "Input a name for the hotel:");
-        valid = reservationSystem.renameHotel(hotel, name);
+        valid = reservationSystem.renameHotel(hotelIndex, name);
       } while (!valid);
       break;
     /* Add room(s) */
@@ -231,7 +227,8 @@ public class CLIDriver {
       break;
     /* Remove hotel */
     case 5:
-      reservationSystem.removeHotel(hotel);
+      /* TODO: I changed removeHotel to accept an index within the reservation system */
+      reservationSystem.removeHotel(hotelIndex);
       System.out
           .println("Removed hotel " + hotel.getName() + " from the list.");
       break;
@@ -243,7 +240,9 @@ public class CLIDriver {
    */
   public void displaySimulateBookingScreen() {
     CLIUtility.printBorder();
-    Hotel hotel = promptChooseHotel();
+    int hotelIndex = promptChooseHotel();
+    Hotel hotel = reservationSystem.getHotel(hotelIndex);
+
     if (hotel == null) {
       return;
     }
