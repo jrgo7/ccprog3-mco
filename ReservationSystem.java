@@ -16,12 +16,24 @@ public class ReservationSystem {
     hotels = new ArrayList<Hotel>();
   }
 
-  public void addHotel(Hotel hotel) {
-    this.hotels.add(hotel);
-  }
-
   public Hotel getHotel(int index) {
     return this.hotels.get(index);
+  }
+
+  public boolean addHotel(String name) {
+    if (hotelNameExists(name))
+      return false;
+
+    this.hotels.add(new Hotel(name));
+    return true;
+  }
+
+  public boolean renameHotel(Hotel hotel, String name) {
+    if (hotelNameExists(name))
+      return false;
+
+    hotel.setName(name);
+    return true;
   }
 
   public Boolean removeHotel(Hotel hotel) {

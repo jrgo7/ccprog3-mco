@@ -35,14 +35,8 @@ public class CLIDriver {
    */
   private Room promptChooseRoomFrom(Hotel hotel) {
     String[] roomNames = hotel.getRoomNames();
-
-    /* TODO: There is guaranteed to be at least one room */
-    if (roomNames.length != 0)
-      return hotel.getRoom(
-          CLIUtility.promptChoice(sc, "Select a room:", roomNames));
-
-    System.out.println("There are currently no rooms in the hotel.");
-    return null;
+    return hotel.getRoom(
+        CLIUtility.promptChoice(sc, "Select a room:", roomNames));
   }
 
   /**
@@ -65,38 +59,21 @@ public class CLIDriver {
   }
 
   /**
-   * Prompts the user to input a hotel name. Ensures that the inputted name does
-   * not yet exist in the system.
-   * 
-   * @return the valid name inputted by the user
-   */
-  private String promptHotelName() {
-    String nameInput;
-    boolean nameExists;
-
-    do {
-      nameInput = CLIUtility.promptString(sc,
-          "Input a name for the hotel:");
-
-      /* Search through existing hotels if name is taken */
-      nameExists = reservationSystem.hotelNameExists(nameInput);
-
-      if (nameExists)
-        System.out
-            .println("Name already exists in the system. Please try again:");
-    } while (nameExists);
-
-    return nameInput;
-  }
-
-  /**
    * Prompts the user to create a new {@link Hotel} instance. The user inputs a
    * string which is then used as the hotel's name. The new hotel is added to
    * the reservation system's hotel list.
    */
   public void displayCreateHotelScreen() {
+    String name, message = "Input a name for the hotel:";
+    boolean valid;
+
     CLIUtility.printBorder();
-    reservationSystem.addHotel(new Hotel(promptHotelName()));
+    do {
+      name = CLIUtility.promptString(sc, message);
+      valid = reservationSystem.addHotel(name);
+      if (!valid)
+        message = "Name already exists in the system. Please try again:";
+    } while (!valid);
   }
 
   /**
@@ -179,10 +156,13 @@ public class CLIDriver {
     switch (choice) {
     /* Rename hotel */
     case 0:
-      String name = promptHotelName();
-      CLIUtility.printBorder();
-      System.out.println("Renamed hotel " + hotel.getName() + " to " + name);
-      hotel.setName(name);
+      String name;
+      boolean valid;
+      do {
+        name = CLIUtility.promptString(sc,
+            "Input a name for the hotel:");
+        valid = reservationSystem.renameHotel(hotel, name);
+      } while (!valid);
       break;
     /* Add room(s) */
     case 1:
