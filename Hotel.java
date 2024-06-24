@@ -82,6 +82,7 @@ public class Hotel {
    * {@return the number of reservations on a given date}
    * 
    * @param date The date to check for reservations
+   * @param excludeCheckOut Flag to exclude check out
    */
   public int getReservationCountOnDate(int date, boolean excludeCheckOut) {
     int retval = 0;

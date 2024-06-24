@@ -1,12 +1,12 @@
 Compiled from "CLIDriver.java"
 public class CLIDriver {
-  CLIDriver();
+  CLIDriver(ReservationSystem);
   public void displayCreateHotelScreen();
   public void displayViewHotelScreen();
   public void displayManageHotelScreen();
   public void displaySimulateBookingScreen();
   public boolean doMenu();
-  public void closesc();
+  public void closeScanner();
   public static void main(java.lang.String[]);
 }
 Compiled from "CLIUtility.java"
@@ -27,12 +27,12 @@ public class Hotel {
   public Reservation getReservation(int);
   public double getEarnings();
   public int getReservationCount();
-  public int getReservationCountOnDate(int);
-  public int getNonCheckOutReservationCountOnDate(int);
+  public boolean hasReservations();
+  public int getReservationCountOnDate(int, boolean);
   public void setName(java.lang.String);
   public boolean setBasePrice(double);
   public void addRooms(int);
-  public boolean removeRoom(Room);
+  public boolean removeRoom(int);
   public boolean addReservation(java.lang.String, int, int, Room);
   public void removeReservation(int);
   public java.lang.String[] getRoomNames();
@@ -55,10 +55,11 @@ public class Reservation {
 Compiled from "ReservationSystem.java"
 public class ReservationSystem {
   public ReservationSystem();
-  public void addHotel(Hotel);
+  public boolean hasHotels();
   public Hotel getHotel(int);
-  public java.lang.Boolean removeHotel(Hotel);
-  public boolean hotelNameExists(java.lang.String);
+  public boolean removeHotel(int);
+  public boolean addHotel(java.lang.String);
+  public boolean renameHotel(int, java.lang.String);
   public java.lang.String[] getHotelNames();
 }
 Compiled from "Room.java"
@@ -66,12 +67,21 @@ public class Room {
   public Room(java.lang.String, double);
   public java.lang.String getName();
   public double getBasePrice();
-  public void setBasePrice(double);
+  public boolean setBasePrice(double);
   public boolean addReservation(Reservation);
   public int getReservationCount();
-  public void removeReservation(Reservation);
+  public boolean removeReservation(Reservation);
   public java.util.ArrayList<java.lang.Integer> getAvailableDates();
   public boolean isAvailableOn(int);
   public java.lang.String getAvailableDatesAsCalendarString();
   public java.lang.String toString();
+}
+Compiled from "Test.java"
+public class Test {
+  public Test();
+  public static void testReservationSystem();
+  public static void testHotel();
+  public static void testRoom();
+  public static void testReservation();
+  public static void main(java.lang.String[]);
 }

@@ -9,5 +9,18 @@ with open("listing.txt", "r") as file:
             print(f"Class: {line.split()[2]}")
             method_count = 1
         elif ");" in line: # print method
-            print(line.split("(")[0].split()[-1])
+            access = line.split()[0]
+            name = line.split("(")[0].split()[-1]
+            if access == "public":
+                print("+ ", end="")
+            print(name + "(): ", end="")
+            if len(line.split()) > 1:
+                return_type = line.split()[1]
+                if return_type == "static":
+                    return_type = line.split()[2]
+                print(return_type)
+            else:
+                print()
             method_count = method_count + 1
+# Yes I messed up the code because of the UML
+# - wafl
