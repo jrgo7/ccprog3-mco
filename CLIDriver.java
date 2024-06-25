@@ -480,6 +480,7 @@ public class CLIDriver {
     this.sc.close();
   }
 
+  /** Main function. */
   public static void main(String[] args) {
     ReservationSystem system = new ReservationSystem();
     CLIDriver cli = new CLIDriver(system);
