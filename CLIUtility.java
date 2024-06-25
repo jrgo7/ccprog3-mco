@@ -19,7 +19,9 @@ public final class CLIUtility {
   }
 
   /**
-   * Prints a prompt of choices from which the user must select a number.
+   * Prints a prompt of choices from which the user must select a number. The
+   * choices are printed in columns; if an choice is too long, it will be
+   * truncated with an ellipsis.
    * 
    * @param sc      The open {@link Scanner} object to read input from
    * @param message The message displayed to prompt the user
