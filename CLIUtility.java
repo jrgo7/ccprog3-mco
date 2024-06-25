@@ -19,7 +19,9 @@ public final class CLIUtility {
   }
 
   /**
-   * Prints a prompt of choices from which the user must select a number.
+   * Prints a prompt of choices from which the user must select a number. The
+   * choices are printed in columns; if an choice is too long, it will be
+   * truncated with an ellipsis.
    * 
    * @param sc      The open {@link Scanner} object to read input from
    * @param message The message displayed to prompt the user
@@ -28,17 +30,27 @@ public final class CLIUtility {
    */
   public static int promptChoice(Scanner sc, String message,
       String... choices) {
-    int i = 1;
+    /* Subtract 1 to account for rounding */
+    int i = 1, width = WINDOW_WIDTH / WINDOW_COLUMNS - 1;
     /* Format string used in printing choices to split them into columns */
-    String formatter = "%-" + (WINDOW_WIDTH / WINDOW_COLUMNS - 1) + "s ";
+    String formatter = "%-" + width + "s ";
 
     System.out.print(message);
 
+    String option;
     for (String choice : choices) {
       /* Print a newline once a row has been filled */
       if (i % WINDOW_COLUMNS == 1)
         System.out.print("\n");
-      System.out.print(String.format(formatter, "[" + (i++) + "] " + choice));
+
+      /* Prepend a choice number to the option */
+      option = "[" + (i++) + "] " + choice;
+
+      /* Trim if the option string exceeds the maximum width */
+      if (option.length() > width)
+        option = option.substring(0, width - 3) + "...";
+
+      System.out.print(String.format(formatter, option));
     }
 
     System.out.print("\n");

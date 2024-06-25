@@ -11,7 +11,7 @@ public class ReservationSystem {
    * zero or multiple at any given time.
    */
   public ReservationSystem() {
-    hotels = new ArrayList<Hotel>();
+    this.hotels = new ArrayList<Hotel>();
   }
 
   /**
@@ -21,7 +21,7 @@ public class ReservationSystem {
    *         {@code false} otherwise
    */
   public boolean hasHotels() {
-    return hotels.size() > 0;
+    return this.hotels.size() > 0;
   }
 
   /**
@@ -32,9 +32,9 @@ public class ReservationSystem {
    *         is out of range
    */
   public Hotel getHotel(int index) {
-    if (index < 0 || index >= hotels.size())
+    if (index < 0 || index >= this.hotels.size())
       return null;
-    return hotels.get(index);
+    return this.hotels.get(index);
   }
 
   /**
@@ -44,10 +44,10 @@ public class ReservationSystem {
    * @param index The index of the hotel to be removed from the system
    */
   public boolean removeHotel(int index) {
-    if (index < 0 || index >= hotels.size()) {
+    if (index < 0 || index >= this.hotels.size()) {
       return false;
     }
-    hotels.remove(index);
+    this.hotels.remove(index);
     return true;
   }
 
@@ -61,7 +61,7 @@ public class ReservationSystem {
    *         {@code false} otherwise
    */
   private boolean hotelNameExists(String name) {
-    for (Hotel i : hotels)
+    for (Hotel i : this.hotels)
       if (i.getName().equals(name))
         return true;
 
@@ -80,7 +80,7 @@ public class ReservationSystem {
     if (hotelNameExists(hotel.getName()))
       return false;
 
-    hotels.add(hotel);
+    this.hotels.add(hotel);
     return true;
   }
 
@@ -110,12 +110,12 @@ public class ReservationSystem {
    * @see Hotel#getName()
    */
   public String[] getHotelNames() {
-    int count = hotels.size();
+    int count = this.hotels.size();
     /* Returned array must be of the same length as the list of hotels */
     String[] names = new String[count];
 
     for (int i = 0; i < count; i++)
-      names[i] = hotels.get(i).getName();
+      names[i] = this.hotels.get(i).getName();
 
     return names;
   }

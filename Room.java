@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 
+/** Represents a room within a {@link Hotel}. */
 public class Room {
   /** The name of the room. */
   private String name;
@@ -24,12 +25,12 @@ public class Room {
 
   /** {@return the name of the room} */
   public String getName() {
-    return name;
+    return this.name;
   }
 
   /** {@return the base price of the room} */
   public double getBasePrice() {
-    return basePrice;
+    return this.basePrice;
   }
 
   /**
@@ -55,12 +56,12 @@ public class Room {
    * @see Hotel#addReservation(String, int, int, int)
    */
   public void addReservation(Reservation reservation) {
-    reservations.add(reservation);
+    this.reservations.add(reservation);
   }
 
   /** {@return the number of reservations tied to the room} */
   public int getReservationCount() {
-    return reservations.size();
+    return this.reservations.size();
   }
 
   /**
@@ -99,7 +100,7 @@ public class Room {
    *         {@code false} otherwise
    */
   public boolean isAvailableOn(int day) {
-    for (Reservation i : reservations)
+    for (Reservation i : this.reservations)
       /* Exclude reservations that check out on the given day */
       if (i.getCheckIn() <= day && i.getCheckOut() > day)
         return false;
@@ -117,7 +118,7 @@ public class Room {
     for (day = 1; day <= 31; day++) {
       if (day % 7 == 1)
         result += "\n";
-      if (!isAvailableOn(day))
+      if (!this.isAvailableOn(day))
         result += "--   ";
       else
         result += String.format("%-5d", day);
@@ -127,7 +128,7 @@ public class Room {
   }
 
   /**
-   * {@inheritDoc} This includes its name, base price, and a calendar containing
+   * {@inheritDoc} Includes its name, base price, and a calendar containing
    * the days on which the room is available.
    * 
    * @see #getAvailableDatesAsCalendarString()

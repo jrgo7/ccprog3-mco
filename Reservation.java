@@ -67,7 +67,7 @@ public class Reservation {
    * @see #getNightCount()
    */
   public double getTotalPrice() {
-    return this.getNightCount() * room.getBasePrice();
+    return this.getNightCount() * this.room.getBasePrice();
   }
 
   /**
@@ -81,12 +81,12 @@ public class Reservation {
   public String getPriceBreakdown() {
     return String.format("%d nights x %.2f price per night = %.2f",
         this.getNightCount(),
-        this.getRoom().getBasePrice(),
+        this.room.getBasePrice(),
         this.getTotalPrice());
   }
 
   /**
-   * {@inheritDoc} This includes the guest name, the room, check-in and
+   * {@inheritDoc} Includes the guest name, the room, check-in and
    * check-out days, total price, and a price breakdown.
    * 
    * @see Room#toString()
@@ -99,7 +99,7 @@ public class Reservation {
         %s
         Check-in: %d
         Check-out: %d
-        Total price: %f
+        Total price: %.2f
         Price breakdown: %s""",
         this.getGuestName(),
         this.getRoom().toString(),

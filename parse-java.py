@@ -1,7 +1,7 @@
 # List all classes and methods in this folder.
 import os
 
-os.system("javap *.class > listing.txt")
+os.system("javap -private *.class > listing.txt")
 with open("listing.txt", "r") as file:
     lines = file.readlines()
     for line in lines:
@@ -13,6 +13,8 @@ with open("listing.txt", "r") as file:
             name = line.split("(")[0].split()[-1]
             if access == "public":
                 print("+ ", end="")
+            elif access == "private":
+                print("- ", end="")
             print(name + "(): ", end="")
             if len(line.split()) > 1:
                 return_type = line.split()[1]
