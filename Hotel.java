@@ -47,7 +47,7 @@ public class Hotel {
 
   /** {@return the base price of the hotel} */
   public double getBasePrice() {
-    return this.getBasePrice();
+    return this.basePrice;
   }
 
   /**

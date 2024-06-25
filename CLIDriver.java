@@ -23,21 +23,27 @@ public class CLIDriver {
   /**
    * Prompts the user to create a new {@link Hotel}. The user inputs a string
    * which is then used as the hotel's name. The new hotel is added to the
-   * {@link ReservationSystem} tied to the driver.
+   * {@link ReservationSystem} tied to the driver. Fails if the user aborts.
    */
   public void displayCreateHotelScreen() {
     String name, message = "Input a name for the hotel:";
     boolean valid;
     Hotel hotel;
 
-    CLIUtility.printBorder();
     do {
+      CLIUtility.printBorder();
       name = CLIUtility.promptString(this.sc, message);
+
+      /* Exit if the user aborts */
+      if (!CLIUtility.confirm(this.sc,
+          "Creating a new hotel named " + name + ". Proceed?"))
+        return;
+
       hotel = new Hotel(name);
       valid = this.system.addHotel(hotel);
       /* Ensure that the new hotel's name does not yet exist in the system */
       if (!valid)
-        message = "Name already exists in the system. Please try again:";
+        message = "Name already exists in the system. Please input a new name:";
     } while (!valid);
   }
 
@@ -130,7 +136,8 @@ public class CLIDriver {
     int input = CLIUtility.promptChoice(this.sc, "Select an option:",
         "Check availability",
         "Check a room",
-        "Check a reservation");
+        "Check a reservation",
+        "Back");
 
     CLIUtility.printBorder();
     switch (input) {
@@ -146,12 +153,16 @@ public class CLIDriver {
     case 2:
       viewReservationData(hotel);
       break;
+    /* Back */
+    case 3:
+      System.out.println("Returning to the main menu.");
+      break;
     }
   }
 
   /**
    * Allows the user to rename the {@link Hotel} at a given index within the
-   * {@link ReservationSystem}.
+   * {@link ReservationSystem}. Fails if the user aborts.
    * 
    * @param hotelIndex The index of the hotel too rename
    * @see ReservationSystem#renameHotel(int, String)
@@ -160,16 +171,29 @@ public class CLIDriver {
   private void renameHotel(int hotelIndex) {
     String name, message = "Input a new name for the hotel:";
     boolean valid;
+
+    /* Get the original name of the hotel */
+    String oldName = this.system.getHotel(hotelIndex).getName();
     do {
       name = CLIUtility.promptString(this.sc, message);
+
+      /* Exit if the user aborts */
+      if (!CLIUtility.confirm(this.sc,
+          "Renaming hotel " + oldName + " to " + name + ". Proceed?"))
+        return;
+
       valid = this.system.renameHotel(hotelIndex, name);
-      if (!valid)
+      if (!valid) {
         message = "The name already exists in the system. Try again:";
+        /* Print the border again when retrying */
+        CLIUtility.printBorder();
+      }
     } while (!valid);
   }
 
   /**
-   * Allows the user to add rooms to a given {@link Hotel}.
+   * Allows the user to add rooms to a given {@link Hotel}. Fails if the user
+   * aborts, or if there are already 50 rooms in the hotel.
    * 
    * @param hotel The hotel to add rooms to
    * @see Hotel#addRooms(int)
@@ -189,7 +213,11 @@ public class CLIDriver {
             addableRooms),
         1, addableRooms);
 
-    hotel.addRooms(count);
+    /* Only proceed if the user does not abort */
+    if (CLIUtility.confirm(this.sc,
+        "Adding " + count + " rooms to hotel " + hotel.getName()
+            + ". Proceed?"))
+      hotel.addRooms(count);
   }
 
   /**
@@ -207,8 +235,15 @@ public class CLIDriver {
       return false;
     }
 
+    String[] roomNames = hotel.getRoomNames();
     int roomIndex = CLIUtility.promptChoice(this.sc,
-        "Select a room to remove:", hotel.getRoomNames());
+        "Select a room to remove:", roomNames);
+
+    /* Exit if the user aborts */
+    if (!CLIUtility.confirm(this.sc,
+        "Removing the room " + roomNames[roomIndex] + ". Proceed?"))
+      return false;
+
     if (hotel.removeRoom(roomIndex)) {
       System.out.println("Successfully removed room.");
     } else {
@@ -240,8 +275,16 @@ public class CLIDriver {
       return;
     }
 
+    double oldBasePrice = hotel.getBasePrice();
     double newBasePrice = Double.parseDouble(
         CLIUtility.promptString(this.sc, "Please input the new base price:"));
+
+    /* Exit if the user aborts */
+    if (!CLIUtility.confirm(this.sc,
+        String.format(
+            "Updating the base price of hotel %s from %.2f to %.2f. Proceed?",
+            hotel.getName(), oldBasePrice, newBasePrice)))
+      return;
 
     CLIUtility.printBorder();
     if (hotel.setBasePrice(newBasePrice))
@@ -265,9 +308,15 @@ public class CLIDriver {
       return;
     }
 
+    String[] reservationNames = hotel.getReservationNames();
     int reservationIndex = CLIUtility.promptChoice(this.sc,
-        "Remove which reservation?", hotel.getReservationNames());
-    hotel.removeReservation(reservationIndex);
+        "Remove which reservation?", reservationNames);
+
+    /* Only proceed if the user does not abort */
+    if (CLIUtility.confirm(this.sc,
+        "Removing the reservation " + reservationNames[reservationIndex]
+            + ". Proceed?"))
+      hotel.removeReservation(reservationIndex);
   }
 
   /**
@@ -295,7 +344,7 @@ public class CLIDriver {
     CLIUtility.printBorder();
     int choice = CLIUtility.promptChoice(this.sc, "Select an option:",
         "Rename hotel", "Add room(s)", "Remove room(s)",
-        "Update base price", "Remove reservation", "Remove hotel");
+        "Update base price", "Remove reservation", "Remove hotel", "Back");
 
     CLIUtility.printBorder();
     switch (choice) {
@@ -322,9 +371,16 @@ public class CLIDriver {
       break;
     /* Remove hotel */
     case 5:
-      this.system.removeHotel(hotelIndex);
-      System.out
-          .println("Removed hotel " + hotel.getName() + " from the list.");
+      if (CLIUtility.confirm(this.sc,
+          "Removing the hotel " + hotel.getName() + ". Proceed?")) {
+        this.system.removeHotel(hotelIndex);
+        System.out
+            .println("Removed hotel " + hotel.getName() + " from the list.");
+      }
+      break;
+    /* Back */
+    case 6:
+      System.out.println("Returning to the main menu.");
       break;
     }
   }
@@ -348,13 +404,15 @@ public class CLIDriver {
 
     /* Room selection */
     CLIUtility.printBorder();
+    String[] roomNames = hotel.getRoomNames();
     int roomIndex = CLIUtility.promptChoice(this.sc, "Select a room:",
-        hotel.getRoomNames());
+        roomNames);
 
-    if (hotel.getAvailableDatesForRoom(roomIndex).size() <= 1 /*
-                                                               * Not 0 to
-                                                               * account for 31
-                                                               */) {
+    /*
+     * Check if 1 instead of 0 to account for 31, which is marked as available
+     * but for this program specifically is unselectable.
+     */
+    if (hotel.getAvailableDatesForRoom(roomIndex).size() <= 1) {
       CLIUtility.printBorder();
       System.out.println("This room has no available dates!");
       return;
@@ -366,9 +424,18 @@ public class CLIDriver {
 
     CLIUtility.printBorder();
     System.out.println(hotel.getCalendarStringForRoom(roomIndex));
-    int in = CLIUtility.promptInt(this.sc, "Enter a check-in day:", 1, 30);
-    int out = CLIUtility.promptInt(this.sc, "Enter a check-out day:",
+    int in = CLIUtility.promptInt(this.sc,
+        "Enter a check-in day (you cannot select 31):", 1, 30);
+    int out = CLIUtility.promptInt(this.sc,
+        "Enter a check-out day (you cannot check out on the same day):",
         in + 1, 31);
+
+    /* Exit if the user aborts */
+    if (!CLIUtility.confirm(this.sc,
+        String.format(
+            "Booking room %s of hotel %s for guest %s.\nCheck-in: %d / Check-out: %d\nProceed?",
+            roomNames[roomIndex], hotel.getName(), guestName, in, out)))
+      return;
 
     CLIUtility.printBorder();
     if (hotel.addReservation(guestName, in, out, roomIndex)) {
