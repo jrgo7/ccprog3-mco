@@ -99,7 +99,7 @@ public class Reservation {
         %s
         Check-in: %d
         Check-out: %d
-        Total price: %f
+        Total price: %.2f
         Price breakdown: %s""",
         this.getGuestName(),
         this.getRoom().toString(),
