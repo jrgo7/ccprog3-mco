@@ -67,7 +67,7 @@ public class Hotel {
    */
   public double getEarnings() {
     double earnings = 0.0;
-    for (Reservation r : reservations)
+    for (Reservation r : this.reservations)
       earnings += r.getTotalPrice();
 
     return earnings;
@@ -79,7 +79,7 @@ public class Hotel {
    * @return the number of reservations tied to the hotel.
    */
   public int getReservationCount() {
-    return reservations.size();
+    return this.reservations.size();
   }
 
   /**
@@ -96,7 +96,7 @@ public class Hotel {
   public int getReservationCountOnDate(int day, boolean excludeCheckOut) {
     int retval = 0;
 
-    for (Reservation i : reservations)
+    for (Reservation i : this.reservations)
       if (day >= i.getCheckIn() &&
           (excludeCheckOut
               /*
@@ -119,7 +119,7 @@ public class Hotel {
    * @see Room#getAvailableDates()
    */
   public ArrayList<Integer> getAvailableDatesForRoom(int roomIndex) {
-    return rooms.get(roomIndex).getAvailableDates();
+    return this.rooms.get(roomIndex).getAvailableDates();
   }
 
   /**
@@ -131,7 +131,7 @@ public class Hotel {
    *         available
    */
   public String getCalendarStringForRoom(int roomIndex) {
-    return rooms.get(roomIndex).getAvailableDatesAsCalendarString();
+    return this.rooms.get(roomIndex).getAvailableDatesAsCalendarString();
   }
 
   /**
@@ -142,7 +142,7 @@ public class Hotel {
    * @see Room#toString()
    */
   public String getRoomString(int roomIndex) {
-    return rooms.get(roomIndex).toString();
+    return this.rooms.get(roomIndex).toString();
   }
 
   /**
@@ -153,7 +153,7 @@ public class Hotel {
    * @see Reservation#toString()
    */
   public String getReservationString(int reservationIndex) {
-    return reservations.get(reservationIndex).toString();
+    return this.reservations.get(reservationIndex).toString();
   }
 
   /**
@@ -177,12 +177,12 @@ public class Hotel {
    * @see Room#setBasePrice(double)
    */
   public boolean setBasePrice(double basePrice) {
-    if (basePrice < 100 || !reservations.isEmpty())
+    if (basePrice < 100 || !this.reservations.isEmpty())
       return false;
 
     this.basePrice = basePrice;
 
-    for (Room room : rooms)
+    for (Room room : this.rooms)
       room.setBasePrice(basePrice);
 
     return true;
@@ -199,10 +199,10 @@ public class Hotel {
    * @param count The number of rooms to add
    */
   public void addRooms(int count) {
-    for (int i = 0; i < count && rooms.size() < 50; i++)
+    for (int i = 0; i < count && this.rooms.size() < 50; i++)
       this.rooms.add(
           new Room("RM" + String.format("%03d", 1 + this.lastRoomNumber++),
-              basePrice));
+              this.basePrice));
   }
 
   /**
@@ -214,9 +214,9 @@ public class Hotel {
    *         otherwise
    */
   public boolean removeRoom(int roomIndex) {
-    if (rooms.get(roomIndex).getReservationCount() > 0
+    if (this.rooms.get(roomIndex).getReservationCount() > 0
         || roomIndex < 0
-        || roomIndex >= rooms.size())
+        || roomIndex >= this.rooms.size())
       return false;
 
     this.rooms.remove(roomIndex);
@@ -247,10 +247,10 @@ public class Hotel {
   public boolean addReservation(String guestName, int checkIn, int checkOut,
       int roomIndex) {
     if (checkIn > 30 || checkIn < 1 || checkOut <= checkIn
-        || roomIndex >= rooms.size() || roomIndex < 0)
+        || roomIndex >= this.rooms.size() || roomIndex < 0)
       return false;
 
-    Room room = rooms.get(roomIndex);
+    Room room = this.rooms.get(roomIndex);
     /* No need to check validity on check-out day */
     for (int day = checkIn; day < checkOut; day++)
       if (!room.isAvailableOn(day))
@@ -271,7 +271,7 @@ public class Hotel {
    * @param index The index of the reservation to remove
    */
   public boolean removeReservation(int index) {
-    if (index < 0 || index >= reservations.size())
+    if (index < 0 || index >= this.reservations.size())
       return false;
 
     Reservation reservation = this.reservations.get(index);
@@ -289,11 +289,11 @@ public class Hotel {
    * @return An array containing the names of all rooms in the hotel
    */
   public String[] getRoomNames() {
-    int i, count = rooms.size();
+    int i, count = this.rooms.size();
     String[] retval = new String[count];
 
     for (i = 0; i < count; i++)
-      retval[i] = rooms.get(i).getName();
+      retval[i] = this.rooms.get(i).getName();
 
     return retval;
   }
@@ -307,12 +307,12 @@ public class Hotel {
    * @return An array containing the names of all reservations in the hotel
    */
   public String[] getReservationNames() {
-    int i, count = reservations.size();
+    int i, count = this.reservations.size();
     String[] retval = new String[count];
     Reservation reservation;
 
     for (i = 0; i < count; i++) {
-      reservation = reservations.get(i);
+      reservation = this.reservations.get(i);
       retval[i] = "Reservation for " + reservation.getRoom().getName() + " by "
           + reservation.getGuestName();
     }

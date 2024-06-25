@@ -67,7 +67,7 @@ public class Reservation {
    * @see #getNightCount()
    */
   public double getTotalPrice() {
-    return this.getNightCount() * room.getBasePrice();
+    return this.getNightCount() * this.room.getBasePrice();
   }
 
   /**
@@ -81,7 +81,7 @@ public class Reservation {
   public String getPriceBreakdown() {
     return String.format("%d nights x %.2f price per night = %.2f",
         this.getNightCount(),
-        this.getRoom().getBasePrice(),
+        this.room.getBasePrice(),
         this.getTotalPrice());
   }
 
