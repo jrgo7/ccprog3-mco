@@ -36,7 +36,60 @@ public class Test {
     }
 
     public static void testHotel() {
-
+        Hotel hotel = new Hotel("Hotel Mario");
+        System.out.println(hotel); 
+        System.out.println(hotel.getName()); 
+        System.out.println(hotel.getRoomCount()); 
+        hotel.addRooms(4);
+        System.out.println(hotel.getRoomCount());
+        for (int i = 0; i < 4; i++) {
+            hotel.removeRoom(1);
+        }
+        System.out.println(hotel.getEarnings());
+        hotel.addReservation("Misaki", 1, 7, 0);
+        System.out.println(hotel.getEarnings());
+        hotel.addReservation("Misaki 2", 7, 10, 0);
+        hotel.addReservation("Misaki 3", 10, 31, 0);
+        System.out.println(hotel.getEarnings());
+        for (int i = 0; i < 3; i++) {
+            hotel.removeReservation(0);
+        }
+        System.out.println(hotel.setBasePrice(100));
+        System.out.println(hotel.getEarnings());
+        System.out.println(hotel.setBasePrice(99));
+        hotel.addReservation("Misaki", 1, 5, 0);
+        System.out.println(hotel.setBasePrice(100));
+        hotel.removeReservation(0);
+        System.out.println(hotel.setBasePrice(100));
+        hotel.addReservation("Misaki", 1, 7, 0);
+        hotel.addReservation("Misaki 2", 7, 10, 0);
+        hotel.addReservation("Misaki 3", 10, 31, 0);
+        System.out.println(hotel.getEarnings());
+        for (int i = 0; i < 3; i++) {
+            hotel.removeReservation(0);
+        }
+        System.out.println(hotel.getReservationCount());
+        hotel.addReservation("Misaki", 1, 7, 0);
+        hotel.addReservation("Misaki 2", 7, 10, 0);
+        hotel.addReservation("Misaki 3", 10, 31, 0);
+        System.out.println(hotel.getReservationCount());
+        hotel.addRooms(3);
+        hotel.addReservation("Misaki 4", 1, 5, 1);
+        hotel.addReservation("Misaki 5", 1, 5, 2);
+        hotel.addReservation("Misaki 6", 1, 5, 3);
+        System.out.println(hotel.getReservationCountOnDate(31, false));
+        System.out.println(hotel.getReservationCountOnDate(1, false));
+        hotel.addRooms(1);
+        for (int i: hotel.getAvailableDatesForRoom(hotel.getRoomCount()-1)) {
+            System.out.print(i + ",");
+        }
+        System.out.println();
+        for (int i: hotel.getAvailableDatesForRoom(0)) {
+            System.out.print(i + ",");
+        }
+        System.out.println();
+        System.out.println(hotel.getCalendarStringForRoom(hotel.getRoomCount()-1));
+        System.out.println(hotel.getCalendarStringForRoom(0));
     }
 
     public static void testRoom() {
@@ -89,11 +142,23 @@ public class Test {
     }
 
     public static void testReservation() {
-
+        Room room = new Room("Test Room", 1299);
+        Reservation reservation = new Reservation("Misaki", 1, 5, room);
+        room.addReservation(reservation);
+        System.out.println(reservation.getGuestName());
+        System.out.println(reservation.getCheckIn());
+        System.out.println(reservation.getCheckOut());
+        System.out.println(reservation.getRoom());
+        System.out.println(reservation.getNightCount());
+        System.out.println(reservation.getTotalPrice());
+        System.out.println(reservation.getPriceBreakdown());
+        System.out.println(reservation.toString());
     }
 
     public static void main(String[] args) {
-        testReservationSystem();
-        testRoom();
+        // testReservationSystem();
+        // testRoom();
+        // testReservation();
+        testHotel();
     }
 }
