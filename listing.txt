@@ -3,18 +3,18 @@ public class CLIDriver {
   private ReservationSystem system;
   private java.util.Scanner sc;
   CLIDriver(ReservationSystem);
-  public void displayCreateHotelScreen();
+  private void displayCreateHotelScreen();
   private void viewAvailabilityCount(Hotel);
   private void viewRoomData(Hotel);
   private void viewReservationData(Hotel);
-  public void displayViewHotelScreen();
+  private void displayViewHotelScreen();
   private void renameHotel(int);
   private void addRooms(Hotel);
   private boolean removeRooms(Hotel);
   private void updateBasePrice(Hotel);
   private void removeReservation(Hotel);
-  public void displayManageHotelScreen();
-  public void displaySimulateBookingScreen();
+  private void displayManageHotelScreen();
+  private void displaySimulateBookingScreen();
   public boolean doMenu();
   public void closeScanner();
   public static void main(java.lang.String[]);
@@ -27,6 +27,7 @@ public final class CLIUtility {
   public static int promptChoice(java.util.Scanner, java.lang.String, java.lang.String...);
   public static java.lang.String promptString(java.util.Scanner, java.lang.String);
   public static int promptInt(java.util.Scanner, java.lang.String, int, int);
+  public static boolean confirm(java.util.Scanner, java.lang.String);
   private CLIUtility();
 }
 Compiled from "Hotel.java"
@@ -52,7 +53,7 @@ public class Hotel {
   public void addRooms(int);
   public boolean removeRoom(int);
   public boolean addReservation(java.lang.String, int, int, int);
-  public void removeReservation(int);
+  public boolean removeReservation(int);
   public java.lang.String[] getRoomNames();
   public java.lang.String[] getReservationNames();
   public int getAvailableRoomCount(int);
@@ -68,10 +69,11 @@ public class Reservation {
   public java.lang.String getGuestName();
   public int getCheckIn();
   public int getCheckOut();
-  public Room getRoom();
   public int getNightCount();
   public double getTotalPrice();
   public java.lang.String getPriceBreakdown();
+  public java.lang.String getRoomName();
+  public void removeFromRoom();
   public java.lang.String toString();
 }
 Compiled from "ReservationSystem.java"

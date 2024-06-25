@@ -25,7 +25,7 @@ public class CLIDriver {
    * which is then used as the hotel's name. The new hotel is added to the
    * {@link ReservationSystem} tied to the driver. Fails if the user aborts.
    */
-  public void displayCreateHotelScreen() {
+  private void displayCreateHotelScreen() {
     String name, message = "Input a name for the hotel:";
     boolean valid;
     Hotel hotel;
@@ -116,7 +116,7 @@ public class CLIDriver {
    * {@link ReservationSystem}, then displays information relevant to the
    * selected hotel.
    */
-  public void displayViewHotelScreen() {
+  private void displayViewHotelScreen() {
     CLIUtility.printBorder();
 
     /* Exit if there are no hotels in the system */
@@ -324,7 +324,7 @@ public class CLIDriver {
    * {@link ReservationSystem}, then allows them to modify properties of the
    * hotel.
    */
-  public void displayManageHotelScreen() {
+  private void displayManageHotelScreen() {
     CLIUtility.printBorder();
 
     /* Exit if there are no hotels in the system */
@@ -389,7 +389,7 @@ public class CLIDriver {
    * Allows the user to create a new {@link Reservation} by providing booking
    * information, then binds it to a selected {@link Hotel}.
    */
-  public void displaySimulateBookingScreen() {
+  private void displaySimulateBookingScreen() {
     /* Exit if there are no hotels in the system */
     if (!this.system.hasHotels()) {
       System.out.println("There are currently no hotels in the system.");

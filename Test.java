@@ -105,7 +105,7 @@ public class Test {
         System.out.println(reservation.getGuestName());
         System.out.println(reservation.getCheckIn());
         System.out.println(reservation.getCheckOut());
-        System.out.println(reservation.getRoom());
+       // System.out.println(reservation.getRoom());
         System.out.println(reservation.getNightCount());
         System.out.println(reservation.getTotalPrice());
         System.out.println(reservation.getPriceBreakdown());

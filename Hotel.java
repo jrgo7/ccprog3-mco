@@ -277,7 +277,7 @@ public class Hotel {
 
     Reservation reservation = this.reservations.get(index);
     /* Also remove the reservation from the room it is tied to */
-    reservation.getRoom().removeReservation(reservation);
+    reservation.removeFromRoom();
     this.reservations.remove(index);
 
     return true;
@@ -314,7 +314,7 @@ public class Hotel {
 
     for (i = 0; i < count; i++) {
       reservation = this.reservations.get(i);
-      retval[i] = reservation.getRoom().getName() + ": "
+      retval[i] = reservation.getRoomName() + ": "
           + reservation.getGuestName();
     }
 

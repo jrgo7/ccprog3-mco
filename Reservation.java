@@ -44,15 +44,6 @@ public class Reservation {
   }
 
   /**
-   * Returns the {@link Room} tied to the reservation.
-   * 
-   * @return the room tied to the reservation
-   */
-  public Room getRoom() {
-    return this.room;
-  }
-
-  /**
    * {@return the number of nights the reservation is good for} Calculated as
    * {@code check-out day - check-in day}
    */
@@ -86,8 +77,29 @@ public class Reservation {
   }
 
   /**
-   * {@inheritDoc} Includes the guest name, the room, check-in and
-   * check-out days, total price, and a price breakdown.
+   * Returns the name of the {@link Room} tied to this reservation.
+   * 
+   * @return the name of the room tied to this reservation
+   */
+  public String getRoomName() {
+    return room.getName();
+  }
+
+  /**
+   * Removes this reservation from the list of reservations in its associated
+   * {@link Room}.
+   * 
+   * @return {@code true} if the reservation was successfully removed,
+   *         {@code false} otherwise
+   * @see Room#removeReservation(Reservation)
+   */
+  public boolean removeFromRoom() {
+    return room.removeReservation(this);
+  }
+
+  /**
+   * {@inheritDoc} Includes the guest name, the room, check-in and check-out
+   * days, total price, and a price breakdown.
    * 
    * @see Room#toString()
    * @see #getPriceBreakdown()
@@ -102,7 +114,7 @@ public class Reservation {
         Total price: %.2f
         Price breakdown: %s""",
         this.getGuestName(),
-        this.getRoom().toString(),
+        this.room.toString(),
         this.getCheckIn(),
         this.getCheckOut(),
         this.getTotalPrice(),
