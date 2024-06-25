@@ -36,31 +36,17 @@ public class Test {
     System.out.println("\t\tfalse should be printed");
     System.out.println(rs.renameHotel(0, "Tobisawa"));
   }
-
+  
   public static void testHotel() {
-    Scanner sc = new Scanner(System.in);
-    Hotel hotel = new Hotel("Kunashima");
-    hotel.addRooms(49);
-    
-    System.out.println(hotel.addReservation("Kotone Fujita", 1, 4, 39));
-    System.out.println(hotel.addReservation("Saki Hanami", 4, 10, 39));
-    
-    System.out.println(hotel.getReservationCountOnDate(4, false));
+    Hotel hotel = new Hotel("Misaker");
+    // hotel.addRooms(49);
+    hotel.addReservation("Misaki", 1, 5, 0);
+    for (String s: hotel.getReservationNames()) {
+        System.out.print(s + ',');
+    }
+    System.out.println();
+    System.out.println(hotel.getRoomString(0));
     System.out.println(hotel.getReservationString(0));
-
-    System.out.println(hotel.getReservationCount());
-    System.out.println(hotel.getRoomString(39));
-
-    hotel.removeReservation(0);
-    System.out.println(hotel.getRoomString(39));
-    hotel.removeReservation(0);
-    System.out.println(hotel.getRoomString(39));
-    hotel.removeReservation(0);
-    System.out.println(hotel.getReservationCount());
-
-    Hotel hotel2 = new Hotel("Takafuji");
-    hotel2.addRooms(99);
-    CLIUtility.promptChoice(sc, "", hotel2.getRoomNames());
   }
 
   public static void testRoom() {
@@ -113,10 +99,22 @@ public class Test {
   }
 
   public static void testReservation() {
-
+        Room room = new Room("Test Room", 1299);
+        Reservation reservation = new Reservation("Misaki", 1, 5, room);
+        room.addReservation(reservation);
+        System.out.println(reservation.getGuestName());
+        System.out.println(reservation.getCheckIn());
+        System.out.println(reservation.getCheckOut());
+        System.out.println(reservation.getRoom());
+        System.out.println(reservation.getNightCount());
+        System.out.println(reservation.getTotalPrice());
+        System.out.println(reservation.getPriceBreakdown());
+        System.out.println(reservation.toString());
   }
 
-  public static void main(String[] args) {
-    testHotel();
-  }
+    public static void main(String[] args) {
+        // testReservationSystem();
+        // testRoom();
+        testHotel();
+    }
 }
