@@ -209,10 +209,11 @@ public class CLIDriver {
 
     int roomIndex = CLIUtility.promptChoice(sc,
         "Select a room to remove:", hotel.getRoomNames());
-
-    if (!hotel.removeRoom(roomIndex))
-      System.out.println(
-          "You cannot remove a room that has reservations tied to it.");
+    if (hotel.removeRoom(roomIndex)) {
+      System.out.println("Successfully removed room.");
+    } else {
+      System.out.println("Couldn't remove room: room has at least one reservation.");
+    }
 
     CLIUtility.printBorder();
     int continueChoice = CLIUtility.promptChoice(sc, "Remove another room?",
