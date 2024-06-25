@@ -110,6 +110,19 @@ public final class CLIUtility {
     return retval;
   }
 
+  /**
+   * Abstracts a call to {@link #promptChoice(Scanner, String, String...)} to
+   * simplify prompting the user to confirm an action with {@code "Yes"} or
+   * to abort with {@code "No"}.
+   * 
+   * @param sc      The open {@link Scanner} object to read input from
+   * @param message The message displayed to prompt the user
+   * @return {@code true} if the user confirms, {@code false} if the user aborts
+   */
+  public static boolean confirm(Scanner sc, String message) {
+    return promptChoice(sc, message, "Yes", "No") == 0;
+  }
+
   private CLIUtility() {
     /*
      * A private no-argument constructor is added here to ensure CLIUtility
