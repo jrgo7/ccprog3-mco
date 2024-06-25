@@ -302,7 +302,7 @@ public class Hotel {
    * Returns a primitive string array containing the names of all
    * {@link Reservation}s in the hotel in the same order they appear in the
    * hotel's list. This name is formatted as
-   * {@code Reservation for RMXXX by Guest}.
+   * {@code RMXXX: Guest}.
    * 
    * @return An array containing the names of all reservations in the hotel
    */
@@ -313,7 +313,7 @@ public class Hotel {
 
     for (i = 0; i < count; i++) {
       reservation = this.reservations.get(i);
-      retval[i] = "Reservation for " + reservation.getRoom().getName() + " by "
+      retval[i] = reservation.getRoom().getName() + ": "
           + reservation.getGuestName();
     }
 
