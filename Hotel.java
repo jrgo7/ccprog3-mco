@@ -228,8 +228,8 @@ public class Hotel {
    * of the {@link Room} for which a reservation will be made. The reservation
    * will then be tied to both the hotel and the selected room. Fails if the
    * check-in day is outside the valid range ({@code 1} to {@code 30}), the
-   * check-out day is before the check-in day, or if there are availability
-   * conflicts with the room.
+   * check-out day is before the check-in day, if there are availability
+   * conflicts with the room, or if the room index is out of range.
    * <p>
    * Note that a reservation can be made with a check-out day that overlaps with
    * the check-in day of another reservation. This is because a room is marked
@@ -246,7 +246,8 @@ public class Hotel {
    */
   public boolean addReservation(String guestName, int checkIn, int checkOut,
       int roomIndex) {
-    if (checkIn > 30 || checkIn < 1 || checkOut <= checkIn)
+    if (checkIn > 30 || checkIn < 1 || checkOut <= checkIn
+        || roomIndex >= rooms.size() || roomIndex < 0)
       return false;
 
     Room room = rooms.get(roomIndex);
@@ -269,11 +270,16 @@ public class Hotel {
    * 
    * @param index The index of the reservation to remove
    */
-  public void removeReservation(int index) {
+  public boolean removeReservation(int index) {
+    if (index < 0 || index >= reservations.size())
+      return false;
+
     Reservation reservation = this.reservations.get(index);
     /* Also remove the reservation from the room it is tied to */
     reservation.getRoom().removeReservation(reservation);
     this.reservations.remove(index);
+
+    return true;
   }
 
   /**
