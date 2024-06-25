@@ -226,7 +226,7 @@ public class CLIDriver {
    * @param hotel The hotel to remove rooms from
    * @return {@code true} if the user opts to remove more rooms, {@code false}
    *         if the user aborts
-   * @see Hotel#removeRoom(Room)
+   * @see Hotel#removeRoom(int)
    * @see #displayManageHotelScreen()
    */
   private boolean removeRooms(Hotel hotel) {
@@ -480,7 +480,11 @@ public class CLIDriver {
     this.sc.close();
   }
 
-  /** Main function. */
+  /**
+   * Main function.
+   * 
+   * @param args Command line arguments
+   */
   public static void main(String[] args) {
     ReservationSystem system = new ReservationSystem();
     CLIDriver cli = new CLIDriver(system);

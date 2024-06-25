@@ -42,6 +42,8 @@ public class ReservationSystem {
    * system.
    * 
    * @param index The index of the hotel to be removed from the system
+   * @return {@code true} if a hotel was removed successfully, {@code false} if
+   *         the index given is out of range
    */
   public boolean removeHotel(int index) {
     if (index < 0 || index >= this.hotels.size()) {
@@ -53,8 +55,8 @@ public class ReservationSystem {
 
   /**
    * Checks if a given name is already assigned to a {@link Hotel} in the
-   * system. Used when creating a new hotel with {@link #addHotel(String)} or
-   * when renaming an existing hotel with {@link #renameHotel(Hotel, String)}
+   * system. Used when creating a new hotel with {@link #addHotel(Hotel)} or
+   * when renaming an existing hotel with {@link #renameHotel(int, String)}
    * 
    * @param name The name to validate
    * @return {@code true} if a hotel with the given name exists in the system,
@@ -72,7 +74,7 @@ public class ReservationSystem {
    * Adds a given {@link Hotel} to the list of hotels in the system. Fails if a
    * hotel with the same name already exists in the system.
    * 
-   * @param name The name of the hotel to create
+   * @param hotel The hotel instance to add to the system
    * @return {@code true} if the hotel was created successfully, {@code false}
    *         otherwise
    */

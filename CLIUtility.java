@@ -123,6 +123,7 @@ public final class CLIUtility {
     return promptChoice(sc, message, "Yes", "No") == 0;
   }
 
+  /** Ensures ClIUtility cannot be instantiated. */
   private CLIUtility() {
     /*
      * A private no-argument constructor is added here to ensure CLIUtility

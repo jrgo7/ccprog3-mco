@@ -68,6 +68,7 @@ public class Room {
    * Removes a {@link Reservation} from the room. Fails if the list does not
    * contain the specified reservation.
    * 
+   * @param reservation The reservation instance to remove
    * @return {@code true} if a reservation was successfully removed,
    *         {@code false} otherwise
    */
@@ -128,8 +129,8 @@ public class Room {
   }
 
   /**
-   * {@inheritDoc} Includes its name, base price, and a calendar containing
-   * the days on which the room is available.
+   * {@inheritDoc} Includes its name, base price, and a calendar containing the
+   * days on which the room is available.
    * 
    * @see #getAvailableDatesAsCalendarString()
    */
