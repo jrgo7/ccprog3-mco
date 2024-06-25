@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
-public class CLIUtility {
+/** Contains methods used to abstract the process of getting user inputs. */
+public final class CLIUtility {
   /** The width of the window in characters. Set to 80. */
   public static final int WINDOW_WIDTH = 80;
 

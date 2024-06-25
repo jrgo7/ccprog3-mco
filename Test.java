@@ -3,8 +3,8 @@ public class Test {
         System.out.println("Testing ReservationSystem...");
         ReservationSystem rs = new ReservationSystem();
         System.out.println("\tTesting addHotel...");
-        System.out.println(rs.addHotel("Test"));
-        System.out.println(rs.addHotel("Test"));
+        System.out.println(rs.addHotel(new Hotel("Test")));
+        System.out.println(rs.addHotel(new Hotel("Test")));
         System.out.println("\tTesting getHotel...");
         System.out.println(rs.getHotel(0));
         System.out.println(rs.getHotel(1));
@@ -12,8 +12,8 @@ public class Test {
         System.out.println(rs.removeHotel(0));
         System.out.println(rs.removeHotel(0));
         System.out.println("\tTesting hotelNameExists...");
-        rs.addHotel("Misaki");
-        rs.addHotel("Misaki"); // hotelNameExists("Misaki") returns true
+        rs.addHotel(new Hotel("Misaki"));
+        rs.addHotel(new Hotel("Misaki")); // hotelNameExists("Misaki") returns true
         rs.renameHotel(0, "Tobisawa"); // hotelNameExists("Tobisawa") returns false
         System.out.println("\tTesting getHotelNames...");
         System.out.println("\t\tTobisawa should be printed");
@@ -26,11 +26,11 @@ public class Test {
             System.out.println(s);
         }
         System.out.println("\tTesting renameHotel...");
-        rs.addHotel("Misaki");
+        rs.addHotel(new Hotel("Misaki"));
         System.out.println("\t\ttrue should be printed");
         System.out.println(rs.renameHotel(0, "Tobisawa"));
         rs.renameHotel(0, "Misaki");
-        rs.addHotel("Tobisawa");
+        rs.addHotel(new Hotel("Tobisawa"));
         System.out.println("\t\tfalse should be printed");
         System.out.println(rs.renameHotel(0, "Tobisawa"));
     }
@@ -54,10 +54,6 @@ public class Test {
         System.out.println(room.setBasePrice(500));
         System.out.println(room.setBasePrice(100));
         System.out.println(room.setBasePrice(99));
-
-        System.out.println(room.addReservation(reservation));
-        System.out.println(room.addReservation(reservation));
-        System.out.println(room.addReservation(reservation2));
         
         System.out.println(room.getReservationCount());
 
@@ -97,7 +93,7 @@ public class Test {
     }
 
     public static void main(String[] args) {
-        // testReservationSystem();
+        testReservationSystem();
         testRoom();
     }
 }

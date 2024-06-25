@@ -1,8 +1,6 @@
 import java.util.ArrayList;
 
-/**
- * Represents the reservation system managing a list of hotels.
- */
+/** Represents the reservation system managing a list of hotels. */
 public class ReservationSystem {
   /** The list of all hotels in the system. */
   private ArrayList<Hotel> hotels;
@@ -27,7 +25,7 @@ public class ReservationSystem {
   }
 
   /**
-   * Returns the {@link Hotel} instance at a given index.
+   * Returns the {@link Hotel} at a given index.
    * 
    * @param index The index of the hotel to be retrieved from the system
    * @return the hotel instance at the given index, or {@code null} if the index
@@ -40,8 +38,8 @@ public class ReservationSystem {
   }
 
   /**
-   * Removes a {@link Hotel} instance at a given index from the list of hotels
-   * in the system.
+   * Removes a {@link Hotel} at a given index from the list of hotels in the
+   * system.
    * 
    * @param index The index of the hotel to be removed from the system
    */
@@ -71,26 +69,25 @@ public class ReservationSystem {
   }
 
   /**
-   * Creates a new {@link Hotel} instance based on a given name and adds it to
-   * the list of hotels in the system. Fails if a hotel with the same name
-   * already exists in the system.
+   * Adds a given {@link Hotel} to the list of hotels in the system. Fails if a
+   * hotel with the same name already exists in the system.
    * 
    * @param name The name of the hotel to create
    * @return {@code true} if the hotel was created successfully, {@code false}
    *         otherwise
    */
-  public boolean addHotel(String name) {
-    if (hotelNameExists(name))
+  public boolean addHotel(Hotel hotel) {
+    if (hotelNameExists(hotel.getName()))
       return false;
 
-    hotels.add(new Hotel(name));
+    hotels.add(hotel);
     return true;
   }
 
   /**
-   * Renames a given {@link Hotel} instance at a given index within the list of
-   * hotels in the system. Fails if a hotel with the same name as the inputted
-   * name already exists in the system.
+   * Renames a given {@link Hotel} at a given index within the list of hotels in
+   * the system. Fails if a hotel with the same name as the inputted name
+   * already exists in the system.
    * 
    * @param index The index of the hotel to be renamed
    * @param name  The new name of the hotel
@@ -107,9 +104,7 @@ public class ReservationSystem {
 
   /**
    * Returns a primitive string array containing the names of all {@link Hotel}
-   * instances in the system in the same order they appear in the system list
-   * (i.e., the name of the hotel at index 3 in the system would be at index 3
-   * in the returned array).
+   * instances in the system in the same order they appear in the system's list.
    * 
    * @return An array containing the names of all hotels in the system
    * @see Hotel#getName()
