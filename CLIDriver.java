@@ -408,6 +408,7 @@ public class CLIDriver {
     }
   }
 
+  /** Closes the {@link Scanner} tied to the driver. */
   public void closeScanner() {
     this.sc.close();
   }
