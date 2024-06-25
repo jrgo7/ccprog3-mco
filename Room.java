@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 
+/** Represents a room within a {@link Hotel}. */
 public class Room {
   /** The name of the room. */
   private String name;
@@ -127,7 +128,7 @@ public class Room {
   }
 
   /**
-   * {@inheritDoc} This includes its name, base price, and a calendar containing
+   * {@inheritDoc} Includes its name, base price, and a calendar containing
    * the days on which the room is available.
    * 
    * @see #getAvailableDatesAsCalendarString()

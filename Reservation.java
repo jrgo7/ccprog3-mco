@@ -86,7 +86,7 @@ public class Reservation {
   }
 
   /**
-   * {@inheritDoc} This includes the guest name, the room, check-in and
+   * {@inheritDoc} Includes the guest name, the room, check-in and
    * check-out days, total price, and a price breakdown.
    * 
    * @see Room#toString()

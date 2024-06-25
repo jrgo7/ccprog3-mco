@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 
+/** Represents a hotel that may be added to a {@link ReservationSystem}. */
 public class Hotel {
   /** The name of the hotel. */
   private String name;
@@ -335,7 +336,7 @@ public class Hotel {
   }
 
   /**
-   * {@inheritDoc} This includes its name, room count, and estimated earnings.
+   * {@inheritDoc} Includes its name, room count, and estimated earnings.
    * 
    * @see #getEarnings()
    */
