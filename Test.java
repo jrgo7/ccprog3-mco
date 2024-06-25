@@ -36,10 +36,18 @@ public class Test {
     System.out.println("\t\tfalse should be printed");
     System.out.println(rs.renameHotel(0, "Tobisawa"));
   }
-
-    public static void testHotel() {
-
+  
+  public static void testHotel() {
+    Hotel hotel = new Hotel("Misaker");
+    // hotel.addRooms(49);
+    hotel.addReservation("Misaki", 1, 5, 0);
+    for (String s: hotel.getReservationNames()) {
+        System.out.print(s + ',');
     }
+    System.out.println();
+    System.out.println(hotel.getRoomString(0));
+    System.out.println(hotel.getReservationString(0));
+  }
 
   public static void testRoom() {
     Room room = new Room("RM001", 1299.00);
@@ -105,7 +113,8 @@ public class Test {
   }
 
     public static void main(String[] args) {
-        testReservationSystem();
-        testRoom();
+        // testReservationSystem();
+        // testRoom();
+        testHotel();
     }
 }
