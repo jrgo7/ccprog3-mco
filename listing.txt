@@ -73,7 +73,7 @@ public class Reservation {
   public double getTotalPrice();
   public java.lang.String getPriceBreakdown();
   public java.lang.String getRoomName();
-  public void removeFromRoom();
+  public boolean removeFromRoom();
   public java.lang.String toString();
 }
 Compiled from "ReservationSystem.java"
@@ -104,13 +104,4 @@ public class Room {
   public boolean isAvailableOn(int);
   public java.lang.String getAvailableDatesAsCalendarString();
   public java.lang.String toString();
-}
-Compiled from "Test.java"
-public class Test {
-  public Test();
-  public static void testReservationSystem();
-  public static void testHotel();
-  public static void testRoom();
-  public static void testReservation();
-  public static void main(java.lang.String[]);
 }

@@ -112,8 +112,8 @@ public final class CLIUtility {
 
   /**
    * Abstracts a call to {@link #promptChoice(Scanner, String, String...)} to
-   * simplify prompting the user to confirm an action with {@code "Yes"} or
-   * to abort with {@code "No"}.
+   * simplify prompting the user to confirm an action with {@code "Yes"} or to
+   * abort with {@code "No"}.
    * 
    * @param sc      The open {@link Scanner} object to read input from
    * @param message The message displayed to prompt the user

@@ -358,8 +358,7 @@ public class CLIDriver {
       break;
     /* Remove room(s) */
     case 2:
-      while (removeRooms(hotel))
-        ;
+      while (removeRooms(hotel));
       break;
     /* Update base price */
     case 3:
@@ -489,8 +488,7 @@ public class CLIDriver {
     ReservationSystem system = new ReservationSystem();
     CLIDriver cli = new CLIDriver(system);
 
-    while (cli.doMenu())
-      ;
+    while (cli.doMenu());
 
     cli.closeScanner();
   }
