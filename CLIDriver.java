@@ -1,150 +1,495 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
+/** Handles business logic and user interaction on the command line. */
 public class CLIDriver {
-    /**
-     * Choose among an array of strings, and return the corresponding index.
-     * TODO: Move this to UI?
-     * 
-     * @param sc
-     * @param message
-     * @param options
-     * @return
+  /** The {@link ReservationSystem} tied to the driver. */
+  private ReservationSystem system;
+
+  /** The input scanner tied to the driver. */
+  private Scanner sc;
+
+  /**
+   * Initializes a new driver instance used to interact with a
+   * {@link ReservationSystem}. The input scanner is initialized to read input
+   * from the terminal window.
+   * 
+   * @param system The reservation system to tie to the driver
+   */
+  CLIDriver(ReservationSystem system) {
+    this.system = system;
+    this.sc = new Scanner(System.in);
+  }
+
+  /**
+   * Prompts the user to create a new {@link Hotel}. The user inputs a string
+   * which is then used as the hotel's name. The new hotel is added to the
+   * {@link ReservationSystem} tied to the driver. Fails if the user aborts.
+   */
+  private void displayCreateHotelScreen() {
+    String name, message = "Input a name for the hotel:";
+    boolean valid;
+    Hotel hotel;
+
+    do {
+      CLIUtility.printBorder();
+      name = CLIUtility.promptString(this.sc, message);
+
+      /* Exit if the user aborts */
+      if (!CLIUtility.confirm(this.sc,
+          "Creating a new hotel named " + name + ". Proceed?"))
+        return;
+
+      hotel = new Hotel(name);
+      valid = this.system.addHotel(hotel);
+      /* Ensure that the new hotel's name does not yet exist in the system */
+      if (!valid)
+        message = "Name already exists in the system. Please input a new name:";
+    } while (!valid);
+  }
+
+  /**
+   * Displays the number of reservations and available rooms for a given
+   * {@link Hotel} on a given day.
+   * 
+   * @param hotel The hotel instance to inspect
+   * @see #displayViewHotelScreen()
+   */
+  private void viewAvailabilityCount(Hotel hotel) {
+    int day = CLIUtility.promptInt(this.sc,
+        "Enter a day (1-31):", 1, 31);
+    boolean isOneRoom = hotel.getAvailableRoomCount(day) == 1;
+
+    CLIUtility.printBorder();
+    System.out.printf("""
+        Reservations on day %d: %d
+        There %s %d room%s available.
+        """,
+        day,
+        hotel.getReservationCountOnDate(day, false),
+        isOneRoom ? "is" : "are",
+        hotel.getAvailableRoomCount(day),
+        isOneRoom ? "" : "s");
+  }
+
+  /**
+   * Prompts the user to select a {@link Room} from within a given
+   * {@link Hotel}, then displays the data for that room through
+   * {@link Room#toString()}.
+   * 
+   * @param hotel The hotel instance containing the room to inspect
+   * @see #displayViewHotelScreen()
+   */
+  private void viewRoomData(Hotel hotel) {
+    /* Note that there is guaranteed to always be at least one room */
+    int roomIndex = CLIUtility.promptChoice(this.sc,
+        "Select a room:", hotel.getRoomNames());
+
+    CLIUtility.printBorder();
+    System.out.println(hotel.getRoomString(roomIndex));
+  }
+
+  /**
+   * Prompts the user to select a {@link Reservation} from within a given
+   * {@link Hotel}, then displays the data for that reservation through
+   * {@link Reservation#toString()}.
+   * 
+   * @param hotel The hotel instance containing the reservation to inspect
+   * @see #displayViewHotelScreen()
+   */
+  private void viewReservationData(Hotel hotel) {
+    /* Exit if there are no reservations in the hotel */
+    if (hotel.getReservationCount() == 0) {
+      System.out.println(
+          "No reservations have been booked for the hotel. Please try again.");
+      return;
+    }
+
+    int reservationIndex = CLIUtility.promptChoice(this.sc,
+        "Select a reservation:", hotel.getReservationNames());
+
+    CLIUtility.printBorder();
+    System.out.println(hotel.getReservationString(reservationIndex));
+  }
+
+  /**
+   * Allows the user to select a {@link Hotel} from a list of all hotels in the
+   * {@link ReservationSystem}, then displays information relevant to the
+   * selected hotel.
+   */
+  private void displayViewHotelScreen() {
+    CLIUtility.printBorder();
+
+    /* Exit if there are no hotels in the system */
+    if (!this.system.hasHotels()) {
+      System.out.println("No hotels exist in the system. Please try again.");
+      return;
+    }
+
+    int hotelIndex = CLIUtility.promptChoice(this.sc,
+        "Select a hotel:", this.system.getHotelNames());
+    Hotel hotel = this.system.getHotel(hotelIndex);
+
+    CLIUtility.printBorder();
+    System.out.println(hotel.toString());
+
+    CLIUtility.printBorder();
+    int input = CLIUtility.promptChoice(this.sc, "Select an option:",
+        "Check availability",
+        "Check a room",
+        "Check a reservation",
+        "Back");
+
+    CLIUtility.printBorder();
+    switch (input) {
+    /* Number of available and booked rooms on a day */
+    case 0:
+      viewAvailabilityCount(hotel);
+      break;
+    /* Room data */
+    case 1:
+      viewRoomData(hotel);
+      break;
+    /* Reservation data */
+    case 2:
+      viewReservationData(hotel);
+      break;
+    /* Back */
+    case 3:
+      System.out.println("Returning to the main menu.");
+      break;
+    }
+  }
+
+  /**
+   * Allows the user to rename the {@link Hotel} at a given index within the
+   * {@link ReservationSystem}. Fails if the user aborts.
+   * 
+   * @param hotelIndex The index of the hotel too rename
+   * @see ReservationSystem#renameHotel(int, String)
+   * @see #displayManageHotelScreen()
+   */
+  private void renameHotel(int hotelIndex) {
+    String name, message = "Input a new name for the hotel:";
+    boolean valid;
+
+    /* Get the original name of the hotel */
+    String oldName = this.system.getHotel(hotelIndex).getName();
+    do {
+      name = CLIUtility.promptString(this.sc, message);
+
+      /* Exit if the user aborts */
+      if (!CLIUtility.confirm(this.sc,
+          "Renaming hotel " + oldName + " to " + name + ". Proceed?"))
+        return;
+
+      valid = this.system.renameHotel(hotelIndex, name);
+      if (!valid) {
+        message = "The name already exists in the system. Try again:";
+        /* Print the border again when retrying */
+        CLIUtility.printBorder();
+      }
+    } while (!valid);
+  }
+
+  /**
+   * Allows the user to add rooms to a given {@link Hotel}. Fails if the user
+   * aborts, or if there are already 50 rooms in the hotel.
+   * 
+   * @param hotel The hotel to add rooms to
+   * @see Hotel#addRooms(int)
+   * @see #displayManageHotelScreen()
+   */
+  private void addRooms(Hotel hotel) {
+    int roomCount = hotel.getRoomCount();
+    if (roomCount >= 50) {
+      System.out.println("You cannot add anymore rooms.");
+      return;
+    }
+
+    /* Ensure the user can only input up to a total of 50 rooms in a hotel */
+    int addableRooms = 50 - roomCount;
+    int count = CLIUtility.promptInt(this.sc,
+        String.format("Input the number of rooms to add (1-%d):",
+            addableRooms),
+        1, addableRooms);
+
+    /* Only proceed if the user does not abort */
+    if (CLIUtility.confirm(this.sc,
+        "Adding " + count + " rooms to hotel " + hotel.getName()
+            + ". Proceed?"))
+      hotel.addRooms(count);
+  }
+
+  /**
+   * Allows the user to remove rooms from a given {@link Hotel}.
+   * 
+   * @param hotel The hotel to remove rooms from
+   * @return {@code true} if the user opts to remove more rooms, {@code false}
+   *         if the user aborts
+   * @see Hotel#removeRoom(int)
+   * @see #displayManageHotelScreen()
+   */
+  private boolean removeRooms(Hotel hotel) {
+    if (hotel.getRoomCount() <= 1) {
+      System.out.println("You cannot remove the only room in a hotel.");
+      return false;
+    }
+
+    String[] roomNames = hotel.getRoomNames();
+    int roomIndex = CLIUtility.promptChoice(this.sc,
+        "Select a room to remove:", roomNames);
+
+    /* Exit if the user aborts */
+    if (!CLIUtility.confirm(this.sc,
+        "Removing the room " + roomNames[roomIndex] + ". Proceed?"))
+      return false;
+
+    if (hotel.removeRoom(roomIndex)) {
+      System.out.println("Successfully removed room.");
+    } else {
+      System.out
+          .println("Couldn't remove room: room has at least one reservation.");
+    }
+
+    CLIUtility.printBorder();
+    int continueChoice = CLIUtility.promptChoice(this.sc,
+        "Remove another room?",
+        "Yes", "No");
+
+    return continueChoice == 0;
+  }
+
+  /**
+   * Allows the user to update the base price for a hotel. The new price must be
+   * at least 100.00.
+   * 
+   * @param hotel The hotel to update the base price of
+   * @see Hotel#setBasePrice(double)
+   * @see #displayManageHotelScreen()
+   */
+  private void updateBasePrice(Hotel hotel) {
+    /* Exit if there are reservations in the hotel */
+    if (hotel.getReservationCount() > 0) {
+      System.out.println(
+          "Cannot change the base price while there are reservations present.");
+      return;
+    }
+
+    double oldBasePrice = hotel.getBasePrice();
+    double newBasePrice = Double.parseDouble(
+        CLIUtility.promptString(this.sc, "Please input the new base price:"));
+
+    /* Exit if the user aborts */
+    if (!CLIUtility.confirm(this.sc,
+        String.format(
+            "Updating the base price of hotel %s from %.2f to %.2f. Proceed?",
+            hotel.getName(), oldBasePrice, newBasePrice)))
+      return;
+
+    CLIUtility.printBorder();
+    if (hotel.setBasePrice(newBasePrice))
+      System.out.println("Set the base price to " + newBasePrice + ".");
+    else
+      System.out.println("You cannot set a base price lower than 100.00!");
+  }
+
+  /**
+   * Allows the user to remove a {@link Reservation} from a given {@link Hotel}.
+   * 
+   * @param hotel The hotel containing the reservation to remove
+   * @see Hotel#removeReservation(int)
+   * @see #displayManageHotelScreen()
+   */
+  private void removeReservation(Hotel hotel) {
+    /* Exit if there are no reservations in the hotel */
+    if (hotel.getReservationCount() <= 0) {
+      System.out.println(
+          "There are no reservations to remove.");
+      return;
+    }
+
+    String[] reservationNames = hotel.getReservationNames();
+    int reservationIndex = CLIUtility.promptChoice(this.sc,
+        "Remove which reservation?", reservationNames);
+
+    /* Only proceed if the user does not abort */
+    if (CLIUtility.confirm(this.sc,
+        "Removing the reservation " + reservationNames[reservationIndex]
+            + ". Proceed?"))
+      hotel.removeReservation(reservationIndex);
+  }
+
+  /**
+   * Allows the user to select a {@link Hotel} from a list of all hotels in the
+   * {@link ReservationSystem}, then allows them to modify properties of the
+   * hotel.
+   */
+  private void displayManageHotelScreen() {
+    CLIUtility.printBorder();
+
+    /* Exit if there are no hotels in the system */
+    if (!this.system.hasHotels()) {
+      System.out.println("No hotels exist in the system. Please try again.");
+      return;
+    }
+
+    int hotelIndex = CLIUtility.promptChoice(this.sc,
+        "Select a hotel:", this.system.getHotelNames());
+    Hotel hotel = this.system.getHotel(hotelIndex);
+
+    CLIUtility.printBorder();
+    System.out.println("Currently managing the following hotel:");
+    System.out.println(hotel.getName());
+
+    CLIUtility.printBorder();
+    int choice = CLIUtility.promptChoice(this.sc, "Select an option:",
+        "Rename hotel", "Add room(s)", "Remove room(s)",
+        "Update base price", "Remove reservation", "Remove hotel", "Back");
+
+    CLIUtility.printBorder();
+    switch (choice) {
+    /* Rename hotel */
+    case 0:
+      renameHotel(hotelIndex);
+      break;
+    /* Add room(s) */
+    case 1:
+      addRooms(hotel);
+      break;
+    /* Remove room(s) */
+    case 2:
+      while (removeRooms(hotel));
+      break;
+    /* Update base price */
+    case 3:
+      updateBasePrice(hotel);
+      break;
+    /* Remove reservation */
+    case 4:
+      removeReservation(hotel);
+      break;
+    /* Remove hotel */
+    case 5:
+      if (CLIUtility.confirm(this.sc,
+          "Removing the hotel " + hotel.getName() + ". Proceed?")) {
+        this.system.removeHotel(hotelIndex);
+        System.out
+            .println("Removed hotel " + hotel.getName() + " from the list.");
+      }
+      break;
+    /* Back */
+    case 6:
+      System.out.println("Returning to the main menu.");
+      break;
+    }
+  }
+
+  /**
+   * Allows the user to create a new {@link Reservation} by providing booking
+   * information, then binds it to a selected {@link Hotel}.
+   */
+  private void displaySimulateBookingScreen() {
+    /* Exit if there are no hotels in the system */
+    if (!this.system.hasHotels()) {
+      System.out.println("There are currently no hotels in the system.");
+      return;
+    }
+
+    /* Hotel selection */
+    CLIUtility.printBorder();
+    Hotel hotel = this.system.getHotel(
+        CLIUtility.promptChoice(this.sc, "Select a hotel:",
+            this.system.getHotelNames()));
+
+    /* Room selection */
+    CLIUtility.printBorder();
+    String[] roomNames = hotel.getRoomNames();
+    int roomIndex = CLIUtility.promptChoice(this.sc, "Select a room:",
+        roomNames);
+
+    /*
+     * Check if 1 instead of 0 to account for 31, which is marked as available
+     * but for this program specifically is unselectable.
      */
-    public static int menu(Scanner sc, String message, String[] options) {
-        int choice;
-        do {
-            System.out.println(message);
-            for (int i = 0, size = options.length; i < size; i++) {
-                System.out.printf("[%d] %s\n", i + 1, options[i]);
-            }
-            choice = sc.nextInt();
-        } while (0 > choice || choice > options.length);
-        return choice - 1;
+    if (hotel.getAvailableDatesForRoom(roomIndex).size() <= 1) {
+      CLIUtility.printBorder();
+      System.out.println("This room has no available dates!");
+      return;
     }
 
-    /**
-     * Choose among an arraylist of strings, and return the corresponding index.
-     * TODO: Move this to UI?
-     * 
-     * @param sc
-     * @param message
-     * @param options
-     * @return
-     */
-    public static int menu(Scanner sc, String message, ArrayList<String> options) {
-        int choice;
-        int size = options.size();
-        do {
-            System.out.println(message);
-            for (int i = 0; i < size; i++) {
-                System.out.printf("[%d] %s\n", i + 1, options.get(i));
-            }
-            choice = sc.nextInt();
-        } while (0 > choice || choice > size);
-        return choice - 1;
-    }
+    /* Guest data input */
+    CLIUtility.printBorder();
+    String guestName = CLIUtility.promptString(this.sc, "Enter your name:");
 
-    private static void displayCreateHotelScreen(Scanner sc, ReservationSystem rs) {
-        System.out.print("Please enter a name for the hotel.\n>");
-        String name = sc.nextLine();
-        System.out.println("You inputted " + name);
-        rs.createHotel(name);
-    }
+    CLIUtility.printBorder();
+    System.out.println(hotel.getCalendarStringForRoom(roomIndex));
+    int in = CLIUtility.promptInt(this.sc,
+        "Enter a check-in day (you cannot select 31):", 1, 30);
+    int out = CLIUtility.promptInt(this.sc,
+        "Enter a check-out day (you cannot check out on the same day):",
+        in + 1, 31);
 
-    private static int inputDate(Scanner sc) {
-        int date;
-        do {
-            date = sc.nextInt();
-        } while (date < 0 || date > 31);
-        return date;
-    }
+    /* Exit if the user aborts */
+    if (!CLIUtility.confirm(this.sc,
+        String.format(
+            "Booking room %s of hotel %s for guest %s.\nCheck-in: %d / Check-out: %d\nProceed?",
+            roomNames[roomIndex], hotel.getName(), guestName, in, out)))
+      return;
 
-    private static void displayViewHotelScreen(Scanner sc, ReservationSystem rs) {
-        int hotelIndex;
-        int roomIndex;
-        int reservationIndex;
-        int date;
-        int choice;
-        Hotel hotel;
-        Room room;
-        Reservation reservation;
-        String options[] = {
-                "Check hotel information",
-                "Check room availability on a date",
-                "Check a room",
-                "Check a reservation"
-        };
-        hotelIndex = menu(sc, "Choose a hotel", rs.getHotelsString());
-        hotel = rs.getHotel(hotelIndex);
-        choice = menu(sc, "View which information?", options);
-        sc.nextLine();
-        switch (choice) {
-            case 0: // Hotel information
-                System.out.println(hotel.getDataString());
-                break;
-            case 1: // Room availability
-                roomIndex = menu(sc, "Choose a room", hotel.getRoomsString());
-                room = hotel.getRoom(roomIndex);
-                date = inputDate(sc);
-                if (room.isAvailableOn(date)) {
-                    System.out.println("The room is available on this date.");
-                } else {
-                    System.out.println("The room is not available on this date.");
-                }
-                break;
-            case 2: // Room data
-                roomIndex = menu(sc, "Choose a room", hotel.getRoomsString());
-                room = hotel.getRoom(roomIndex);
-                System.out.println(room.toString());
-                break;
-            case 3: // Reservation data
-                reservationIndex = menu(sc, "Pick a reservation", hotel.getReservationsString());
-                reservation = hotel.getReservation(reservationIndex);
-                System.out.println(reservation.toString());
-                break;
-        }
+    CLIUtility.printBorder();
+    if (hotel.addReservation(guestName, in, out, roomIndex)) {
+      System.out.println("Reservation success!");
+    } else {
+      System.out.println(
+          "The selected room is unavailable at the specified time.");
     }
+  }
 
-    // TODO: Lowy Moment
-    private static void displayManageHotelScreen(Scanner sc, ReservationSystem rs) {
-        // rs.manageHotel(sc);
+  /**
+   * Displays the main menu from which the user can use the system's features.
+   * 
+   * @return {@code true} if the user selects an option, {@code false} if the
+   *         user exits
+   */
+  public boolean doMenu() {
+    CLIUtility.printBorder();
+    int choice = CLIUtility.promptChoice(this.sc, "Select an option:",
+        "Create hotel", "View hotel", "Manage hotel", "Simulate booking",
+        "Exit program");
+    switch (choice) {
+    case 0:
+      displayCreateHotelScreen();
+      return true;
+    case 1:
+      displayViewHotelScreen();
+      return true;
+    case 2:
+      displayManageHotelScreen();
+      return true;
+    case 3:
+      displaySimulateBookingScreen();
+      return true;
+    default:
+      return false;
     }
+  }
 
-    // TODO
-    private static void displaySimulateBookingScreen(Scanner sc, ReservationSystem rs) {
-        // rs.simulateBooking(sc);
-    }
+  /** Closes the {@link Scanner} tied to the driver. */
+  public void closeScanner() {
+    this.sc.close();
+  }
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        ReservationSystem rs = new ReservationSystem();
-        int input;
-        String[] options = {
-                "Create hotel",
-                "View hotel",
-                "Manage hotel",
-                "Simulate booking",
-                "Exit"
-        };
-        do {
-            input = rs.menu(sc, "Hotel Reservation System", options);
-            sc.nextLine();
-            switch (input) {
-                case 0:
-                    displayCreateHotelScreen(sc, rs);
-                    break;
-                case 1:
-                    displayViewHotelScreen(sc, rs);
-                    break;
-                case 2:
-                    displayManageHotelScreen(sc, rs);
-                    break;
-                case 3:
-                    displaySimulateBookingScreen(sc, rs);
-                    break;
-            }
-        } while (input != 4);
-        sc.close();
-    }
+  /**
+   * Main function.
+   * 
+   * @param args Command line arguments
+   */
+  public static void main(String[] args) {
+    ReservationSystem system = new ReservationSystem();
+    CLIDriver cli = new CLIDriver(system);
+
+    while (cli.doMenu());
+
+    cli.closeScanner();
+  }
 }

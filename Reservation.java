@@ -1,62 +1,123 @@
+/** Represents a reservation tied to a {@link Hotel} and a {@link Room}. */
 public class Reservation {
-    private String guestName;
-    private int checkIn;
-    private int checkOut;
-    private Room room;
+  /** The name of the guest tied to the reservation. */
+  private String guestName;
 
-    public Reservation(String guestName, int checkIn, int checkOut, Room room) {
-        this.guestName = guestName;
-        this.checkIn = checkIn;
-        this.checkOut = checkOut;
-        this.room = room;
-    }
+  /** The check-in date of the reservation. */
+  private int checkIn;
 
-    public double getTotalPrice() {
-        double basePrice = room.getBasePrice();
-        return this.getNightCount() * basePrice;
-    }
+  /** The check-out date of the reservation. */
+  private int checkOut;
 
-    public String getPriceBreakdown() {
-        return String.format("%d nights x %lf price per night = %lf",
-                this.getNightCount(),
-                this.getRoom().getBasePrice(),
-                this.getTotalPrice());
-    }
+  /** The {@link Room} tied to the reservation. */
+  private Room room;
 
-    public String getGuestName() {
-        return guestName;
-    }
+  /**
+   * Initializes a new reservation instance given booking information.
+   * 
+   * @param guestName The name of the guest
+   * @param checkIn   The check-in day
+   * @param checkOut  The check-out day
+   * @param room      The room instance to book a reservation for
+   * @see Hotel#addReservation(String, int, int, int)
+   */
+  public Reservation(String guestName, int checkIn, int checkOut, Room room) {
+    this.guestName = guestName;
+    this.checkIn = checkIn;
+    this.checkOut = checkOut;
+    this.room = room;
+  }
 
-    public int getCheckIn() {
-        return this.checkIn;
-    }
+  /** {@return the guest name tied to the reservation} */
+  public String getGuestName() {
+    return this.guestName;
+  }
 
-    public int getCheckOut() {
-        return this.checkOut;
-    }
+  /** {@return the check-in day of the reservation} */
+  public int getCheckIn() {
+    return this.checkIn;
+  }
 
-    public Room getRoom() {
-        return this.room;
-    }
+  /** {@return the check-out day of the reservation} */
+  public int getCheckOut() {
+    return this.checkOut;
+  }
 
-    public int getNightCount() {
-        return this.checkOut - this.checkIn;
-    }
+  /**
+   * {@return the number of nights the reservation is good for} Calculated as
+   * {@code check-out day - check-in day}
+   */
+  public int getNightCount() {
+    return this.checkOut - this.checkIn;
+  }
 
-    public String toString() {
-        return String.format("""
-                Guest: %s
-                Room Information:\n%s
-                Check-in: %d
-                Check-out: %d
-                Total price: %lf
-                Price breakdown: %s
-                """,
-                this.getGuestName(),
-                this.getRoom().toString(),
-                this.getCheckIn(),
-                this.getCheckOut(),
-                this.getTotalPrice(),
-                this.getPriceBreakdown());
-    }
+  /**
+   * {@return the total price for the reservation} Calculated as
+   * {@code number of nights * room base price}
+   * 
+   * @see #getNightCount()
+   */
+  public double getTotalPrice() {
+    return this.getNightCount() * this.room.getBasePrice();
+  }
+
+  /**
+   * {@return a string listing the price breakdown of the reservation} This
+   * includes the number of nights, the base price, and the total price of the
+   * reservation.
+   * 
+   * @see #getNightCount()
+   * @see #getTotalPrice()
+   */
+  public String getPriceBreakdown() {
+    return String.format("%d nights x %.2f price per night = %.2f",
+        this.getNightCount(),
+        this.room.getBasePrice(),
+        this.getTotalPrice());
+  }
+
+  /**
+   * Returns the name of the {@link Room} tied to this reservation.
+   * 
+   * @return the name of the room tied to this reservation
+   */
+  public String getRoomName() {
+    return room.getName();
+  }
+
+  /**
+   * Removes this reservation from the list of reservations in its associated
+   * {@link Room}.
+   * 
+   * @return {@code true} if the reservation was successfully removed,
+   *         {@code false} otherwise
+   * @see Room#removeReservation(Reservation)
+   */
+  public boolean removeFromRoom() {
+    return room.removeReservation(this);
+  }
+
+  /**
+   * {@inheritDoc} Includes the guest name, the room, check-in and check-out
+   * days, total price, and a price breakdown.
+   * 
+   * @see Room#toString()
+   * @see #getPriceBreakdown()
+   */
+  @Override
+  public String toString() {
+    return String.format("""
+        Guest: %s
+        %s
+        Check-in: %d
+        Check-out: %d
+        Total price: %.2f
+        Price breakdown: %s""",
+        this.getGuestName(),
+        this.room.toString(),
+        this.getCheckIn(),
+        this.getCheckOut(),
+        this.getTotalPrice(),
+        this.getPriceBreakdown());
+  }
 }

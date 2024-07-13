@@ -1,0 +1,107 @@
+Compiled from "CLIDriver.java"
+public class CLIDriver {
+  private ReservationSystem system;
+  private java.util.Scanner sc;
+  CLIDriver(ReservationSystem);
+  private void displayCreateHotelScreen();
+  private void viewAvailabilityCount(Hotel);
+  private void viewRoomData(Hotel);
+  private void viewReservationData(Hotel);
+  private void displayViewHotelScreen();
+  private void renameHotel(int);
+  private void addRooms(Hotel);
+  private boolean removeRooms(Hotel);
+  private void updateBasePrice(Hotel);
+  private void removeReservation(Hotel);
+  private void displayManageHotelScreen();
+  private void displaySimulateBookingScreen();
+  public boolean doMenu();
+  public void closeScanner();
+  public static void main(java.lang.String[]);
+}
+Compiled from "CLIUtility.java"
+public final class CLIUtility {
+  public static final int WINDOW_WIDTH;
+  public static final int WINDOW_COLUMNS;
+  public static void printBorder();
+  public static int promptChoice(java.util.Scanner, java.lang.String, java.lang.String...);
+  public static java.lang.String promptString(java.util.Scanner, java.lang.String);
+  public static int promptInt(java.util.Scanner, java.lang.String, int, int);
+  public static boolean confirm(java.util.Scanner, java.lang.String);
+  private CLIUtility();
+}
+Compiled from "Hotel.java"
+public class Hotel {
+  private java.lang.String name;
+  private java.util.ArrayList<Room> rooms;
+  private java.util.ArrayList<Reservation> reservations;
+  private double basePrice;
+  private int lastRoomNumber;
+  public Hotel(java.lang.String);
+  public java.lang.String getName();
+  public double getBasePrice();
+  public int getRoomCount();
+  public double getEarnings();
+  public int getReservationCount();
+  public int getReservationCountOnDate(int, boolean);
+  public java.util.ArrayList<java.lang.Integer> getAvailableDatesForRoom(int);
+  public java.lang.String getCalendarStringForRoom(int);
+  public java.lang.String getRoomString(int);
+  public java.lang.String getReservationString(int);
+  public void setName(java.lang.String);
+  public boolean setBasePrice(double);
+  public void addRooms(int);
+  public boolean removeRoom(int);
+  public boolean addReservation(java.lang.String, int, int, int);
+  public boolean removeReservation(int);
+  public java.lang.String[] getRoomNames();
+  public java.lang.String[] getReservationNames();
+  public int getAvailableRoomCount(int);
+  public java.lang.String toString();
+}
+Compiled from "Reservation.java"
+public class Reservation {
+  private java.lang.String guestName;
+  private int checkIn;
+  private int checkOut;
+  private Room room;
+  public Reservation(java.lang.String, int, int, Room);
+  public java.lang.String getGuestName();
+  public int getCheckIn();
+  public int getCheckOut();
+  public int getNightCount();
+  public double getTotalPrice();
+  public java.lang.String getPriceBreakdown();
+  public java.lang.String getRoomName();
+  public boolean removeFromRoom();
+  public java.lang.String toString();
+}
+Compiled from "ReservationSystem.java"
+public class ReservationSystem {
+  private java.util.ArrayList<Hotel> hotels;
+  public ReservationSystem();
+  public boolean hasHotels();
+  public Hotel getHotel(int);
+  public boolean removeHotel(int);
+  private boolean hotelNameExists(java.lang.String);
+  public boolean addHotel(Hotel);
+  public boolean renameHotel(int, java.lang.String);
+  public java.lang.String[] getHotelNames();
+}
+Compiled from "Room.java"
+public class Room {
+  private java.lang.String name;
+  private double basePrice;
+  private java.util.ArrayList<Reservation> reservations;
+  public Room(java.lang.String, double);
+  public java.lang.String getName();
+  public double getBasePrice();
+  public boolean setBasePrice(double);
+  public void addReservation(Reservation);
+  public int getReservationCount();
+  public boolean removeReservation(Reservation);
+  public java.util.ArrayList<java.lang.Integer> getAvailableDates();
+  public boolean isAvailableOn(int);
+  public java.lang.String getAvailableDatesAsCalendarString();
+  public java.lang.String toString();
+}
