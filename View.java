@@ -22,7 +22,7 @@ public class View extends JFrame {
 
     public void init() {
         this.initHotelList();
-        this.initPanelMenu();        
+        this.initPanelMenu();
     }
 
     public void initHotelList() {
@@ -32,9 +32,9 @@ public class View extends JFrame {
         listHotelNames.setLayoutOrientation(JList.VERTICAL);
         listHotelNames.setVisibleRowCount(-1); // Show all rows if possible
         JScrollPane scrollPaneListHotelNames = new JScrollPane(
-            listHotelNames,
-            JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-            JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+                listHotelNames,
+                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         this.add(scrollPaneListHotelNames, BorderLayout.CENTER);
     }
 
@@ -42,7 +42,7 @@ public class View extends JFrame {
         JPanel panelMenu = new JPanel();
         panelMenu.setLayout(new BoxLayout(panelMenu, BoxLayout.Y_AXIS));
         String[] options = {
-            "Add hotel", "View hotel", "Manage hotel", "Simulate booking"};
+                "Add hotel", "View hotel", "Manage hotel", "Simulate booking" };
         for (int i = 0; i < options.length; i++) {
             btnOptions.add(new JButton(options[i]));
             btnOptions.get(i).setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -54,7 +54,7 @@ public class View extends JFrame {
     }
 
     public void setActionListener(Controller controller) {
-        for (JButton b: btnOptions) {
+        for (JButton b : btnOptions) {
             b.addActionListener(controller);
         }
     }
@@ -63,10 +63,11 @@ public class View extends JFrame {
      * Set all buttons related to hotel configuration (everything but Add hotel)
      * to true or false. Add hotel will always be enabled as there is no limit
      * to the amount of hotels in the system
+     * 
      * @param bool
      */
     public void setHotelConfigButtonsEnabled(boolean bool) {
-        for (JButton button: btnOptions) {
+        for (JButton button : btnOptions) {
             button.setEnabled(bool);
             if (button.getText() == "Add hotel") {
                 button.setEnabled(true);
@@ -76,6 +77,7 @@ public class View extends JFrame {
 
     public String promptHotelName() {
         return JOptionPane.showInputDialog(
+            this,
             "Input a name for the hotel:");
     }
 
@@ -84,32 +86,67 @@ public class View extends JFrame {
             listHotelNames.setListData(hotelNames);
         } else {
             String[] addHotelText = {
-                "There are no hotels in the system.",
-                "Select 'Add hotel' to get started!"};
+                    "There are no hotels in the system.",
+                    "Select 'Add hotel' to get started!" };
             listHotelNames.setListData(addHotelText);
         }
     }
 
-    public int getCurrentHotelIndex(int hotelCount) {
-        if (hotelCount > 0) {
-            return listHotelNames.getSelectedIndex();
-        }
+    // Get the currently selected hotel in the GUI.
+    public int getSelectedHotelIndex() {
+        return listHotelNames.getSelectedIndex();
+    }
+
+    public void setSelectedHotelIndex(int index) {
+        listHotelNames.setSelectedIndex(index);
+    }
+
+    // Prompt the user to choose a room in a hotel.
+    public int chooseHotelRoom(Hotel hotel) {
+        // TODO
         return -1;
     }
 
-    public void showHotelInfo(Hotel hotel) {
-        if (hotel == null) {
-            JOptionPane.showMessageDialog(
-                this,
-                "Please select a hotel in the list first.",
-                "No hotel selected",
-                JOptionPane.ERROR_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(
+    // Prompt the user to choose a reservation in a hotel.
+    public int chooseReservation(Hotel hotel) {
+        // TODO
+        return -1;
+    }
+
+    // View hotel
+
+    public int showHotelInfo(Hotel hotel) {
+        int retval = -1;
+        String[] infoOptions = {
+                "Check availability",
+                "Check a room",
+                "Check a reservation",
+        };
+        retval = JOptionPane.showOptionDialog(
                 this,
                 hotel,
                 "Hotel information",
-                JOptionPane.INFORMATION_MESSAGE);
-        }
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                infoOptions,
+                infoOptions[2]);
+        return retval;
     }
+
+    public void showHotelAvailability(Hotel hotel) {
+        // TODO
+    }
+
+    public void checkRoomData(Room room) {
+        // TODO
+    }
+
+    public void checkReservationData(Reservation reservation) {
+        // TODO
+    }
+
+    // Manage hotel
+
+    // Simulate booking
 }
