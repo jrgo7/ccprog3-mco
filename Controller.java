@@ -14,6 +14,11 @@ public class Controller implements ActionListener {
 
     public void updateView() {
         view.setHotelList(reservationSystem.getHotelNames());
+        if (reservationSystem.getHotelCount() > 0) {
+            view.setHotelConfigButtonsEnabled(true);
+        } else {
+            view.setHotelConfigButtonsEnabled(false);
+        }
     }
 
     @Override
@@ -22,6 +27,15 @@ public class Controller implements ActionListener {
         if (e.getActionCommand().equals("Add hotel")) {
             reservationSystem.addHotel(new Hotel(view.promptHotelName()));
             updateView();
+        } else if (e.getActionCommand().equals("View hotel")) {
+            view.showHotelInfo(
+                reservationSystem.getHotel(
+                    view.getCurrentHotelIndex(
+                        reservationSystem.getHotelCount())));
+        } else if (e.getActionCommand().equals("Manage hotel")) {
+
+        } else if (e.getActionCommand().equals("Simulate booking")) {
+
         }
     }
 }

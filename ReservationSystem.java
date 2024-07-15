@@ -121,4 +121,13 @@ public class ReservationSystem {
 
     return names;
   }
+
+  /**
+   * Returns the number of {@link Hotel} instances currently stored.
+   * 
+   * @return An integer representing the number of hotels in the system.
+   */
+  public int getHotelCount() {
+    return this.hotels.size();
+  }
 }

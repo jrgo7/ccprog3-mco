@@ -59,6 +59,20 @@ public class View extends JFrame {
         }
     }
 
+    /**
+     * Set all buttons related to hotel configuration (everything but Add hotel)
+     * to true or false. Add hotel will always be enabled as there is no limit
+     * to the amount of hotels in the system
+     * @param bool
+     */
+    public void setHotelConfigButtonsEnabled(boolean bool) {
+        for (JButton button: btnOptions) {
+            button.setEnabled(bool);
+            if (button.getText() == "Add hotel") {
+                button.setEnabled(true);
+            }
+        }
+    }
 
     public String promptHotelName() {
         return JOptionPane.showInputDialog(
@@ -73,6 +87,29 @@ public class View extends JFrame {
                 "There are no hotels in the system.",
                 "Select 'Add hotel' to get started!"};
             listHotelNames.setListData(addHotelText);
+        }
+    }
+
+    public int getCurrentHotelIndex(int hotelCount) {
+        if (hotelCount > 0) {
+            return listHotelNames.getSelectedIndex();
+        }
+        return -1;
+    }
+
+    public void showHotelInfo(Hotel hotel) {
+        if (hotel == null) {
+            JOptionPane.showMessageDialog(
+                this,
+                "Please select a hotel in the list first.",
+                "No hotel selected",
+                JOptionPane.ERROR_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(
+                this,
+                hotel,
+                "Hotel information",
+                JOptionPane.INFORMATION_MESSAGE);
         }
     }
 }
