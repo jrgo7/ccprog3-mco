@@ -30,6 +30,22 @@ public final class CLIUtility {
   public static boolean confirm(java.util.Scanner, java.lang.String);
   private CLIUtility();
 }
+Compiled from "Controller.java"
+public class Controller implements java.awt.event.ActionListener {
+  private View view;
+  private ViewChooseRoom viewChooseRoom;
+  private ReservationSystem reservationSystem;
+  public Controller(View, ReservationSystem);
+  public void updateView();
+  private Hotel getSelectedHotel();
+  public void actionPerformed(java.awt.event.ActionEvent);
+  public void createViewChooseRoom(java.lang.String, java.lang.String);
+}
+Compiled from "GUIDriver.java"
+public class GUIDriver {
+  public GUIDriver();
+  public static void main(java.lang.String[]);
+}
 Compiled from "Hotel.java"
 public class Hotel {
   private java.lang.String name;
@@ -87,6 +103,7 @@ public class ReservationSystem {
   public boolean addHotel(Hotel);
   public boolean renameHotel(int, java.lang.String);
   public java.lang.String[] getHotelNames();
+  public int getHotelCount();
 }
 Compiled from "Room.java"
 public class Room {
@@ -104,4 +121,32 @@ public class Room {
   public boolean isAvailableOn(int);
   public java.lang.String getAvailableDatesAsCalendarString();
   public java.lang.String toString();
+}
+Compiled from "View.java"
+public class View extends javax.swing.JFrame {
+  private javax.swing.JList<java.lang.String> listHotelNames;
+  private java.util.ArrayList<javax.swing.JButton> btnOptions;
+  public View();
+  public void init();
+  public void initHotelList();
+  public void initPanelMenu();
+  public void setActionListener(Controller);
+  public void setHotelConfigButtonsEnabled(boolean);
+  public java.lang.String promptHotelName();
+  public void setHotelList(java.lang.String[]);
+  public int getSelectedHotelIndex();
+  public void setSelectedHotelIndex(int);
+  public int chooseReservation(Hotel);
+  public int showHotelInfo(Hotel);
+  public void showHotelAvailability(Hotel);
+  public void showInfo(java.lang.String);
+  public void checkReservationData(Reservation);
+}
+Compiled from "ViewChooseRoom.java"
+public class ViewChooseRoom extends javax.swing.JDialog {
+  javax.swing.JList<java.lang.String> listRoom;
+  javax.swing.JButton btnSelect;
+  public ViewChooseRoom(Controller, javax.swing.JFrame, java.lang.String, java.lang.String, Hotel);
+  public void setActionListener(Controller);
+  public int getSelectedRoomIndex();
 }

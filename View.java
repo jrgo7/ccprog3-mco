@@ -5,11 +5,12 @@ import java.util.ArrayList;
 public class View extends JFrame {
     private JList<String> listHotelNames;
     private ArrayList<JButton> btnOptions = new ArrayList<JButton>();
-
+    
     public View() {
         super("Hotel Reservation System");
         this.setLayout(new BorderLayout());
         this.setMinimumSize(new Dimension(400, 300));
+        this.setLocationByPlatform(true);
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception e) {
@@ -101,12 +102,6 @@ public class View extends JFrame {
         listHotelNames.setSelectedIndex(index);
     }
 
-    // Prompt the user to choose a room in a hotel.
-    public int chooseHotelRoom(Hotel hotel) {
-        // TODO
-        return -1;
-    }
-
     // Prompt the user to choose a reservation in a hotel.
     public int chooseReservation(Hotel hotel) {
         // TODO
@@ -138,8 +133,8 @@ public class View extends JFrame {
         // TODO
     }
 
-    public void checkRoomData(Room room) {
-        // TODO
+    public void showInfo(String string) {
+        JOptionPane.showMessageDialog(this, string);
     }
 
     public void checkReservationData(Reservation reservation) {
