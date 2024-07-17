@@ -433,6 +433,11 @@ public class CLIDriver {
         "Enter a check-out day (you cannot check out on the same day):",
         in + 1, 31);
 
+    /* Prompt the user to input a discount code */
+    String discountCode = null;
+    if (CLIUtility.confirm(sc, "Use a discount code?"))
+      discountCode = CLIUtility.promptString(sc, "Enter a code:");
+
     /* Exit if the user aborts */
     if (!CLIUtility.confirm(this.sc,
         String.format(
@@ -441,11 +446,11 @@ public class CLIDriver {
       return;
 
     CLIUtility.printBorder();
-    if (hotel.addReservation(guestName, in, out, roomIndex)) {
+    if (hotel.addReservation(guestName, in, out, roomIndex, discountCode)) {
       System.out.println("Reservation success!");
     } else {
       System.out.println(
-          "The selected room is unavailable at the specified time.");
+          "Reservation failed. The selected room is unavailable or the discount code used\nis invalid/unapplicable.");
     }
   }
 

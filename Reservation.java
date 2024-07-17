@@ -1,5 +1,12 @@
 /** Represents a reservation tied to a {@link Hotel} and a {@link Room}. */
 public class Reservation {
+  /*
+   * TODO: Think of a way to access date price modifiers without needing a
+   * reference to Hotel
+   */
+  /** The {@link Hotel} tied to the reservation */
+  private Hotel hotel;
+
   /** The name of the guest tied to the reservation. */
   private String guestName;
 
@@ -13,6 +20,12 @@ public class Reservation {
   private Room room;
 
   /**
+   * The discount code used for this reservation. Left {@code NULL} if no code is
+   * used.
+   */
+  private String discountCode;
+
+  /**
    * Initializes a new reservation instance given booking information.
    * 
    * @param guestName The name of the guest
@@ -21,7 +34,8 @@ public class Reservation {
    * @param room      The room instance to book a reservation for
    * @see Hotel#addReservation(String, int, int, int)
    */
-  public Reservation(String guestName, int checkIn, int checkOut, Room room) {
+  public Reservation(Hotel hotel, String guestName, int checkIn, int checkOut, Room room) {
+    this.hotel = hotel;
     this.guestName = guestName;
     this.checkIn = checkIn;
     this.checkOut = checkOut;
@@ -52,13 +66,100 @@ public class Reservation {
   }
 
   /**
-   * {@return the total price for the reservation} Calculated as
-   * {@code number of nights * room base price}
+   * {@return the discount code modifier for a given night}
    * 
-   * @see #getNightCount()
+   * @param night The night to apply the discount to
+   * @see #setDiscountCode(String)
+   */
+  private double getDiscountCodeModifier(int night) {
+    if (discountCode != null)
+      switch (discountCode) {
+        case "I_WORK_HERE":
+          /* Applies a 10% discount */
+          return 0.9;
+        case "STAY4_GET1":
+          /* This code only gives the check-in date for free */
+          if (night == this.checkIn)
+            return 0.0;
+          break;
+        case "PAYDAY":
+          /* Applies a 7% discount */
+          return 0.93;
+      }
+
+    return 1.0;
+  }
+
+  /**
+   * {@return the price for a given night} Calculated as
+   * {@code Room base price * Hotel night price modifier * Discount code modifier}
+   * 
+   * @param night The night to calculate the price for
+   * @see Room#getBasePrice()
+   * @see Hotel#getPriceModifierOnNight(int)
+   * @see #getDiscountCodeModifier(int)
+   */
+  private double getPriceForNight(int night) {
+    return this.room.getBasePrice() * this.hotel.getPriceModifierOnNight(night) * getDiscountCodeModifier(night);
+  }
+
+  /**
+   * {@return the total price for the reservation} Calculated as the sum of each
+   * night's individual prices.
+   * 
+   * @see #getPriceForNight(int)
    */
   public double getTotalPrice() {
-    return this.getNightCount() * this.room.getBasePrice();
+    double totalPrice = 0;
+
+    for (int i = this.checkIn; i < this.checkOut; i++)
+      totalPrice += getPriceForNight(i);
+
+    return totalPrice;
+  }
+
+  /**
+   * Sets the discount code used for the reservation. The following are valid
+   * discount codes given their conditions are fulfilled
+   * <ul>
+   * <li>{@code I_WORK_HERE} always succeeds with a 10% discount to the final
+   * price
+   * <li>{@code STAY4_GET1} gives the first day for free if the reservation is for
+   * at least 5 days
+   * <li>{@code PAYDAY} gives a 7% discount to the final price if the reservation
+   * covers day 15 or day 30 (but not as checkout)
+   * </ul>
+   * <p>
+   * Note that a reservation that does not use a reservation code will have it set
+   * to {@code null} by default.
+   * 
+   * @param discountCode The discount code string to use
+   * @return {@code true} if the discount code was set successfully, {@code false}
+   *         otherwise
+   */
+  public boolean setDiscountCode(String discountCode) {
+    if (discountCode != null)
+      switch (discountCode) {
+        case "I_WORK_HERE":
+          /* Code always succeeds */
+          break;
+        case "STAY4_GET1":
+          /* Code fails if staying for less than 5 nights */
+          if (getNightCount() < 5)
+            return false;
+          break;
+        case "PAYDAY":
+          /* Code fails if stay does not include 15 or 30 */
+          if (!(this.checkIn <= 15 && this.checkOut > 15) && !(this.checkIn <= 30 && this.checkOut > 30))
+            return false;
+          break;
+        default:
+          return false;
+      }
+
+    /* Update discount code */
+    this.discountCode = discountCode;
+    return true;
   }
 
   /**
@@ -70,10 +171,14 @@ public class Reservation {
    * @see #getTotalPrice()
    */
   public String getPriceBreakdown() {
-    return String.format("%d nights x %.2f price per night = %.2f",
-        this.getNightCount(),
-        this.room.getBasePrice(),
-        this.getTotalPrice());
+    /* TODO: Rework this method */
+    String breakdown = String.format("Reservation checking in on day %d and checking out on day %d:",
+        this.checkIn, this.checkOut);
+
+    for (int i = this.checkIn; i < this.checkOut; i++)
+      breakdown += String.format("\n%d-%d: %.2f", i, i + 1, this.getPriceForNight(i));
+
+    return breakdown;
   }
 
   /**
@@ -112,12 +217,14 @@ public class Reservation {
         Check-in: %d
         Check-out: %d
         Total price: %.2f
+        Discount code: %s
         Price breakdown: %s""",
         this.getGuestName(),
         this.room.toString(),
         this.getCheckIn(),
         this.getCheckOut(),
         this.getTotalPrice(),
+        this.discountCode == null ? "none" : this.discountCode,
         this.getPriceBreakdown());
   }
 }
