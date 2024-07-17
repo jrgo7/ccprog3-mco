@@ -37,7 +37,7 @@ public class Hotel {
     this.lastRoomNumber = 0;
 
     /* Add a single room */
-    this.addRooms(1);
+    this.addRooms(1, 1);
   }
 
   /** {@return the name of the hotel} */
@@ -198,12 +198,36 @@ public class Hotel {
    * {@code RM003}).
    * 
    * @param count The number of rooms to add
+   * @param type  The type of the room ({@code 1} for normal, {@code 2} for
+   *              deluxe, {@code 3} for executive).
    */
-  public void addRooms(int count) {
-    for (int i = 0; i < count && this.rooms.size() < 50; i++)
-      this.rooms.add(
-          new Room("RM" + String.format("%03d", 1 + this.lastRoomNumber++),
-              this.basePrice));
+  public void addRooms(int count, int type) {
+    String formatString = "RM%03d";
+
+    /* TODO: We can maybe do something with generic types and a factory design pattern */
+    switch (type) {
+      default:
+      case 1:
+        for (int i = 0; i < count && this.rooms.size() < 50; i++)
+          this.rooms.add(
+              new Room(String.format(formatString, 1 + this.lastRoomNumber++),
+                  this.basePrice));
+        break;
+      case 2:
+        formatString += "-DX";
+        for (int i = 0; i < count && this.rooms.size() < 50; i++)
+          this.rooms.add(
+              new DeluxeRoom(String.format(formatString, 1 + this.lastRoomNumber++),
+                  this.basePrice));
+        break;
+      case 3:
+        formatString += "-EX";
+        for (int i = 0; i < count && this.rooms.size() < 50; i++)
+          this.rooms.add(
+              new ExecutiveRoom(String.format(formatString, 1 + this.lastRoomNumber++),
+                  this.basePrice));
+        break;
+    }
   }
 
   /**

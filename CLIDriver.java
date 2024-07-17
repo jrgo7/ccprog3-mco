@@ -141,22 +141,22 @@ public class CLIDriver {
 
     CLIUtility.printBorder();
     switch (input) {
-    /* Number of available and booked rooms on a day */
-    case 0:
-      viewAvailabilityCount(hotel);
-      break;
-    /* Room data */
-    case 1:
-      viewRoomData(hotel);
-      break;
-    /* Reservation data */
-    case 2:
-      viewReservationData(hotel);
-      break;
-    /* Back */
-    case 3:
-      System.out.println("Returning to the main menu.");
-      break;
+      /* Number of available and booked rooms on a day */
+      case 0:
+        viewAvailabilityCount(hotel);
+        break;
+      /* Room data */
+      case 1:
+        viewRoomData(hotel);
+        break;
+      /* Reservation data */
+      case 2:
+        viewReservationData(hotel);
+        break;
+      /* Back */
+      case 3:
+        System.out.println("Returning to the main menu.");
+        break;
     }
   }
 
@@ -213,11 +213,14 @@ public class CLIDriver {
             addableRooms),
         1, addableRooms);
 
+    /* Prompt user to enter the room type */
+    int type = CLIUtility.promptChoice(sc, "Select a room type", "Regular", "Deluxe", "Executive") + 1;
+
     /* Only proceed if the user does not abort */
     if (CLIUtility.confirm(this.sc,
         "Adding " + count + " rooms to hotel " + hotel.getName()
             + ". Proceed?"))
-      hotel.addRooms(count);
+      hotel.addRooms(count, type);
   }
 
   /**
@@ -348,39 +351,40 @@ public class CLIDriver {
 
     CLIUtility.printBorder();
     switch (choice) {
-    /* Rename hotel */
-    case 0:
-      renameHotel(hotelIndex);
-      break;
-    /* Add room(s) */
-    case 1:
-      addRooms(hotel);
-      break;
-    /* Remove room(s) */
-    case 2:
-      while (removeRooms(hotel));
-      break;
-    /* Update base price */
-    case 3:
-      updateBasePrice(hotel);
-      break;
-    /* Remove reservation */
-    case 4:
-      removeReservation(hotel);
-      break;
-    /* Remove hotel */
-    case 5:
-      if (CLIUtility.confirm(this.sc,
-          "Removing the hotel " + hotel.getName() + ". Proceed?")) {
-        this.system.removeHotel(hotelIndex);
-        System.out
-            .println("Removed hotel " + hotel.getName() + " from the list.");
-      }
-      break;
-    /* Back */
-    case 6:
-      System.out.println("Returning to the main menu.");
-      break;
+      /* Rename hotel */
+      case 0:
+        renameHotel(hotelIndex);
+        break;
+      /* Add room(s) */
+      case 1:
+        addRooms(hotel);
+        break;
+      /* Remove room(s) */
+      case 2:
+        while (removeRooms(hotel))
+          ;
+        break;
+      /* Update base price */
+      case 3:
+        updateBasePrice(hotel);
+        break;
+      /* Remove reservation */
+      case 4:
+        removeReservation(hotel);
+        break;
+      /* Remove hotel */
+      case 5:
+        if (CLIUtility.confirm(this.sc,
+            "Removing the hotel " + hotel.getName() + ". Proceed?")) {
+          this.system.removeHotel(hotelIndex);
+          System.out
+              .println("Removed hotel " + hotel.getName() + " from the list.");
+        }
+        break;
+      /* Back */
+      case 6:
+        System.out.println("Returning to the main menu.");
+        break;
     }
   }
 
@@ -457,20 +461,20 @@ public class CLIDriver {
         "Create hotel", "View hotel", "Manage hotel", "Simulate booking",
         "Exit program");
     switch (choice) {
-    case 0:
-      displayCreateHotelScreen();
-      return true;
-    case 1:
-      displayViewHotelScreen();
-      return true;
-    case 2:
-      displayManageHotelScreen();
-      return true;
-    case 3:
-      displaySimulateBookingScreen();
-      return true;
-    default:
-      return false;
+      case 0:
+        displayCreateHotelScreen();
+        return true;
+      case 1:
+        displayViewHotelScreen();
+        return true;
+      case 2:
+        displayManageHotelScreen();
+        return true;
+      case 3:
+        displaySimulateBookingScreen();
+        return true;
+      default:
+        return false;
     }
   }
 
@@ -488,7 +492,8 @@ public class CLIDriver {
     ReservationSystem system = new ReservationSystem();
     CLIDriver cli = new CLIDriver(system);
 
-    while (cli.doMenu());
+    while (cli.doMenu())
+      ;
 
     cli.closeScanner();
   }
