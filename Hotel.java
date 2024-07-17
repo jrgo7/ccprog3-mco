@@ -43,7 +43,7 @@ public class Hotel {
     /* Add a single room */
     this.addRooms(1, 1);
 
-    priceModifiers = new double[30];
+    priceModifiers = new double[31];
     Arrays.fill(priceModifiers, 1.0);
   }
 
