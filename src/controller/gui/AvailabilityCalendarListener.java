@@ -26,7 +26,6 @@ public class AvailabilityCalendarListener implements ListSelectionListener, Mous
     }
 
     public void handleCheckAvailability(int row, int col) {
-        System.out.printf("Row %d and Col %d: \n", row, col);
         Hotel hotel = reservationSystem.getHotel(view.getHotelListSelectedIndex());
         if (hotel == null) {
             return;
@@ -35,7 +34,6 @@ public class AvailabilityCalendarListener implements ListSelectionListener, Mous
         if (day > 31) {
             return; // Block invalid input
         }
-        System.out.printf("Selected day %d\n", day);
 
         boolean isOneRoom = hotel.getAvailableRoomCount(day) == 1;
         view.setHotelAvailabilityDataText(
@@ -91,7 +89,6 @@ public class AvailabilityCalendarListener implements ListSelectionListener, Mous
     public void valueChanged(ListSelectionEvent e) {
         ListSelectionModel lsm = (ListSelectionModel) e.getSource();
         receivedIndex = lsm.getLeadSelectionIndex();
-        System.out.println("received index " + receivedIndex);
     }
 
     @Override
@@ -100,7 +97,6 @@ public class AvailabilityCalendarListener implements ListSelectionListener, Mous
 
     @Override
     public void keyPressed(KeyEvent e) {
-        System.out.println("key press event\n");
         switch (e.getKeyCode()) {
             case KeyEvent.VK_LEFT:
             case KeyEvent.VK_KP_LEFT:
