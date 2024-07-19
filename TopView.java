@@ -6,7 +6,7 @@ public class TopView extends JFrame {
     JList<String> hotelList;
     int hotelListPrevSelectedIndex = 0; // when cancelling add hotel
     JTabbedPane topMenuPane = new JTabbedPane();
-    
+
     static final int VIEW_HOTEL_SCREEN = 0;
     JTextArea hotelHighLevelData = new JTextArea();
     JTabbedPane viewHotelSubMenuPane = new JTabbedPane();
@@ -53,7 +53,7 @@ public class TopView extends JFrame {
         hotelListPanel.add(hotelList, BorderLayout.CENTER);
 
         this.add(hotelListPanel, BorderLayout.WEST);
-        
+
         // View Hotel
         JPanel viewHotelPanel = new JPanel();
         viewHotelPanel.setLayout(new BorderLayout());
@@ -70,11 +70,10 @@ public class TopView extends JFrame {
         // View Hotel - Submenu - Rooms
         JPanel checkRoomsPanel = new JPanel();
         viewHotelSubMenuPane.add("Rooms", checkRoomsPanel);
-        
+
         // View Hotel - Submenu - Reservations
         JPanel checkReservationsPanel = new JPanel();
         viewHotelSubMenuPane.add("Reservations", checkReservationsPanel);
-
 
         viewHotelPanel.add(viewHotelSubMenuPane, BorderLayout.CENTER);
 
@@ -99,9 +98,21 @@ public class TopView extends JFrame {
         return JOptionPane.showInputDialog("Hotel name");
     }
 
-    public void setListeners(Controller controller) {
-        hotelList.getSelectionModel().addListSelectionListener(controller);
-        availabilityCalendar.addMouseListener(controller);
+    public void setListeners(HotelListListener hotelListListener,
+            AvailabilityCalendarListener availabilityCalendarListener) {
+        hotelList.getSelectionModel()
+                .addListSelectionListener(hotelListListener);
+        availabilityCalendar
+                .addMouseListener(availabilityCalendarListener);
+        availabilityCalendar
+                .getSelectionModel()
+                .addListSelectionListener(availabilityCalendarListener);
+        availabilityCalendar
+                .getColumnModel()
+                .getSelectionModel()
+                .addListSelectionListener(availabilityCalendarListener);
+        availabilityCalendar
+                .addKeyListener(availabilityCalendarListener);
     }
 
     public void setTabIndex(int index) {
@@ -143,7 +154,7 @@ public class TopView extends JFrame {
     public void setHotelDataText(String text) {
         hotelHighLevelData.setText(text);
     }
-    
+
     public void setHotelAvailabilityDataText(String text) {
         hotelAvailabilityData.setText(text);
     }
@@ -161,7 +172,7 @@ public class TopView extends JFrame {
     }
 
     public int getSubcontext() {
-        int retval = (this.getContext()+1) * 100;
+        int retval = (this.getContext() + 1) * 100;
         switch (getContext()) {
             case TopView.VIEW_HOTEL_SCREEN:
                 return retval + viewHotelSubMenuPane.getSelectedIndex() + 1;
