@@ -79,11 +79,15 @@ public class ReservationSystem {
    *         otherwise
    */
   public boolean addHotel(Hotel hotel) {
-    if (hotelNameExists(hotel.getName()))
+    if (hotelNameExists(hotel.getName()) || hotel.getName() == null)
       return false;
 
     this.hotels.add(hotel);
     return true;
+  }
+
+  public boolean addHotel(String name) {
+    return addHotel(new Hotel(name));
   }
 
   /**
@@ -120,5 +124,17 @@ public class ReservationSystem {
       names[i] = this.hotels.get(i).getName();
 
     return names;
+  }
+
+  public ArrayList<String> getHotelNamesAsList() {
+    ArrayList<String> hotelNames = new ArrayList<String>();
+    for (Hotel h: hotels) {
+      hotelNames.add(h.getName());
+    }
+    return hotelNames;
+  }
+
+  public int getHotelCount() {
+    return hotels.size();
   }
 }

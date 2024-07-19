@@ -1,7 +1,7 @@
 public class GUIDriver {
     public static void main(String[] args) {
-        View view = new View();
-        ReservationSystem reservationSystem = new ReservationSystem();
-        Controller controller = new Controller(view, reservationSystem);
+        ReservationSystem rs = new ReservationSystem();
+        TopView view = new TopView();
+        Controller controller = new Controller(rs, view);
     }
 }
