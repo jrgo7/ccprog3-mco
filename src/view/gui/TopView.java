@@ -14,10 +14,10 @@ public class TopView extends JFrame {
     JTabbedPane topMenuPane = new JTabbedPane();
 
     static public final int VIEW_HOTEL_SCREEN = 0;
-    JTextArea hotelHighLevelData = new JTextArea();
+    JEditorPane hotelHighLevelData = new JEditorPane();
     JTabbedPane viewHotelSubMenuPane = new JTabbedPane();
     static public final int CHECK_AVAILABILITY_SCREEN = 101;
-    JTextArea hotelAvailabilityData = new JTextArea();
+    JEditorPane hotelAvailabilityData = new JEditorPane();
 
     static public final int MANAGE_HOTEL_SCREEN = 1;
     JLabel manageHotelNameLabel = new JLabel();
@@ -25,6 +25,8 @@ public class TopView extends JFrame {
     static public final int SIMULATE_BOOKING_SCREEN = 2;
 
     Calendar availabilityCalendar = new Calendar();
+
+    public static Font ARIAL_PLAIN = new Font("Arial", Font.PLAIN, 14);
 
     public TopView() {
         super("Hotel Reservation System");
@@ -49,13 +51,16 @@ public class TopView extends JFrame {
         JPanel hotelListPanel = new JPanel();
         hotelListPanel.setLayout(new BorderLayout());
 
-        JLabel hotelListPanelLabel = new JLabel("Hotels");
-        hotelListPanel.setFont(new Font("Arial", 0, 32));
+        JEditorPane hotelListPanelLabel = new JEditorPane();
+        hotelListPanelLabel.setEditable(false);
+        hotelListPanelLabel.setContentType("text/html");
+        hotelListPanelLabel.setText("<h1 style=\"font-family: sans-serif\">Visual Hotel Code</h1>");
         hotelListPanel.add(hotelListPanelLabel, BorderLayout.NORTH);
 
         hotelList = new JList<String>();
         hotelList.setFixedCellWidth(this.getWidth() / 3);
         hotelList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        hotelList.setFont(ARIAL_PLAIN);
         hotelListPanel.add(hotelList, BorderLayout.CENTER);
 
         this.add(hotelListPanel, BorderLayout.WEST);
@@ -64,12 +69,15 @@ public class TopView extends JFrame {
         JPanel viewHotelPanel = new JPanel();
         viewHotelPanel.setLayout(new BorderLayout());
         hotelHighLevelData.setEditable(false);
+        hotelHighLevelData.setContentType("text/html");
         viewHotelPanel.add(hotelHighLevelData, BorderLayout.NORTH);
 
         // View Hotel - Submenu - Availability
         JPanel checkAvailabilityPanel = new JPanel();
         checkAvailabilityPanel.setLayout(new BorderLayout());
         checkAvailabilityPanel.add(availabilityCalendar, BorderLayout.NORTH);
+        hotelAvailabilityData.setContentType("text/html");
+        hotelAvailabilityData.setEditable(false);
         checkAvailabilityPanel.add(hotelAvailabilityData, BorderLayout.CENTER);
         viewHotelSubMenuPane.add("Availability", checkAvailabilityPanel);
 
@@ -82,7 +90,8 @@ public class TopView extends JFrame {
         viewHotelSubMenuPane.add("Reservations", checkReservationsPanel);
 
         viewHotelPanel.add(viewHotelSubMenuPane, BorderLayout.CENTER);
-
+        
+        viewHotelSubMenuPane.setFont(ARIAL_PLAIN);
         topMenuPane.addTab("View", viewHotelPanel);
 
         // Manage hotel
@@ -97,6 +106,7 @@ public class TopView extends JFrame {
         bookHotelPanel.add(bookHotelPanelLabel);
         topMenuPane.addTab("Book", bookHotelPanel);
 
+        topMenuPane.setFont(ARIAL_PLAIN);
         this.add(topMenuPane, BorderLayout.CENTER);
     }
 
@@ -119,6 +129,8 @@ public class TopView extends JFrame {
                 .addListSelectionListener(availabilityCalendarListener);
         availabilityCalendar
                 .addKeyListener(availabilityCalendarListener);
+        availabilityCalendar
+                .addMouseMotionListener(availabilityCalendarListener);
     }
 
     public void setTabIndex(int index) {
@@ -184,5 +196,10 @@ public class TopView extends JFrame {
                 return retval + viewHotelSubMenuPane.getSelectedIndex() + 1;
         }
         return -1;
+    }
+
+    public void resetAvailabilityCalendarSelection() {
+        availabilityCalendar.removeRowSelectionInterval(Calendar.MAX_ROWS-1, 0);
+        availabilityCalendar.removeColumnSelectionInterval(Calendar.MAX_COLS-1, 0);
     }
 }
