@@ -1,0 +1,81 @@
+package src.view.gui;
+
+import java.awt.BorderLayout;
+import java.awt.Point;
+
+import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.JTextArea;
+
+import src.controller.gui.AvailabilityCalendarListener;
+
+/** Represents the View Availability subpanel under View Hotel. */
+public class ViewAvailabilityPanel extends JPanel {
+    /** The {@link Calendar} showing available dates. */
+    private Calendar calendarComponent;
+
+    /** The {@link JTextArea} containing availability information for the hotel. */
+    private JTextArea availabilityComponent;
+
+    /** Initializes the panel to contain availability information. */
+    public ViewAvailabilityPanel() {
+        this.setLayout(new BorderLayout());
+
+        calendarComponent = new Calendar();
+        availabilityComponent = new JTextArea();
+        availabilityComponent.setEditable(false);
+
+        this.add(calendarComponent, BorderLayout.NORTH);
+        this.add(availabilityComponent, BorderLayout.CENTER);
+    }
+
+    /**
+     * Sets the text contained in the availability data for the hotel.
+     * 
+     * @param text The availability data string to set
+     */
+    public void updateAvailability(String text) {
+        this.availabilityComponent.setText(text);
+    }
+
+    /**
+     * {@return the index of the row on where a given point lies on the availability
+     * calendar}
+     * 
+     * @param point The point to capture in the table
+     * @see JTable#rowAtPoint(Point)
+     */
+    public int getCalendarRowAtPoint(Point point) {
+        return this.calendarComponent.rowAtPoint(point);
+    }
+
+    /**
+     * {@return the index of the column on where a given point lies on the
+     * availability calendar}
+     * 
+     * @param point The point to capture in the table
+     * @see JTable#columnAtPoint(Point)
+     */
+    public int getCalendarColAtPoint(Point point) {
+        return this.calendarComponent.columnAtPoint(point);
+    }
+
+    /**
+     * Sets a listener for the calendar.
+     * 
+     * @param availabilityCalendarListener The listener to assign to the calendar
+     */
+    public void setListener(AvailabilityCalendarListener availabilityCalendarListener) {
+        this.calendarComponent
+                .addMouseListener(availabilityCalendarListener);
+        this.calendarComponent
+                .getSelectionModel()
+                .addListSelectionListener(availabilityCalendarListener);
+        this.calendarComponent
+                .getColumnModel()
+                .getSelectionModel()
+                .addListSelectionListener(availabilityCalendarListener);
+        this.calendarComponent
+                .addKeyListener(availabilityCalendarListener);
+    }
+}
