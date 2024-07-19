@@ -1,4 +1,11 @@
 
+Class: javax.swing.JTable
++ Calendar()
++ isCellEditable(int, int): boolean
++ setUnavailable(int): void
++ setAvailable(int): void
++ colorByAvailability(int[]): void
+
 Class: CLIDriver
 CLIDriver(ReservationSystem)
 - displayCreateHotelScreen(): void
@@ -25,12 +32,25 @@ Class: CLIUtility
 + confirm(Scanner, String): boolean
 - CLIUtility()
 
-Class: java.awt.event.ActionListener
-+ Controller(View, ReservationSystem)
-+ updateView(): void
-- getSelectedHotel(): Hotel
+Class: java.awt.event.ActionListener,javax.swing.event.ListSelectionListener,java.awt.event.MouseListener
++ Controller(ReservationSystem, TopView)
++ update(): void
 + actionPerformed(java.awt.event.ActionEvent): void
-+ createViewChooseRoom(String, String): void
++ valueChanged(javax.swing.event.ListSelectionEvent): void
++ mouseClicked(java.awt.event.MouseEvent): void
++ mousePressed(java.awt.event.MouseEvent): void
++ mouseReleased(java.awt.event.MouseEvent): void
++ mouseEntered(java.awt.event.MouseEvent): void
++ mouseExited(java.awt.event.MouseEvent): void
++ handleCheckAvailability(int): void
+
+Class: Room
++ DeluxeRoom(String, double)
++ getBasePrice(): double
+
+Class: Room
++ ExecutiveRoom(String, double)
++ getBasePrice(): double
 
 Class: GUIDriver
 + GUIDriver()
@@ -40,7 +60,10 @@ Class: Hotel
 + Hotel(String)
 + getName(): String
 + getBasePrice(): double
++ getPriceModifierOnNight(int): double
 + getRoomCount(): int
++ getDeluxeRoomCount(): int
++ getExecutiveRoomCount(): int
 + getEarnings(): double
 + getReservationCount(): int
 + getReservationCountOnDate(int, boolean): int
@@ -50,9 +73,10 @@ Class: Hotel
 + getReservationString(int): String
 + setName(String): void
 + setBasePrice(double): boolean
-+ addRooms(int): void
++ setPriceModifier(int, double): boolean
++ addRooms(int, int): void
 + removeRoom(int): boolean
-+ addReservation(String, int, int, int): boolean
++ addReservation(String, int, int, int, String): boolean
 + removeReservation(int): boolean
 + getRoomNames(): String[]
 + getReservationNames(): String[]
@@ -60,12 +84,15 @@ Class: Hotel
 + toString(): String
 
 Class: Reservation
-+ Reservation(String, int, int, Room)
++ Reservation(Hotel, String, int, int, Room)
 + getGuestName(): String
 + getCheckIn(): int
 + getCheckOut(): int
 + getNightCount(): int
+- getDiscountCodeModifier(int): double
+- getPriceForNight(int): double
 + getTotalPrice(): double
++ setDiscountCode(String): boolean
 + getPriceBreakdown(): String
 + getRoomName(): String
 + removeFromRoom(): boolean
@@ -78,8 +105,10 @@ Class: ReservationSystem
 + removeHotel(int): boolean
 - hotelNameExists(String): boolean
 + addHotel(Hotel): boolean
++ addHotel(String): boolean
 + renameHotel(int, String): boolean
 + getHotelNames(): String[]
++ getHotelNamesAsList(): ArrayList<String>
 + getHotelCount(): int
 
 Class: Room
@@ -96,23 +125,21 @@ Class: Room
 + toString(): String
 
 Class: javax.swing.JFrame
-+ View()
++ TopView()
 + init(): void
-+ initHotelList(): void
-+ initPanelMenu(): void
-+ setActionListener(Controller): void
-+ setHotelConfigButtonsEnabled(boolean): void
-+ promptHotelName(): String
-+ setHotelList(String[]): void
-+ getSelectedHotelIndex(): int
-+ setSelectedHotelIndex(int): void
-+ chooseReservation(Hotel): int
-+ showHotelInfo(Hotel): int
-+ showHotelAvailability(Hotel): void
-+ showInfo(String): void
-+ checkReservationData(Reservation): void
-
-Class: javax.swing.JDialog
-+ ViewChooseRoom(Controller, javax.swing.JFrame, String, String, Hotel)
-+ setActionListener(Controller): void
-+ getSelectedRoomIndex(): int
++ promptAddHotel(): String
++ setListeners(Controller): void
++ setTabIndex(int): void
++ setHotelListData(ArrayList<String>): void
++ getHotelListPrevSelectedIndex(): int
++ setHotelListPrevSelectedIndex(int): void
++ getHotelListSelectedIndex(): int
++ setHotelListSelectedIndex(int): void
++ removeHotelListSelection(): void
++ setHotelNameLabelText(String): void
++ setHotelDataText(String): void
++ setHotelAvailabilityDataText(String): void
++ getAvailabilityCalendarRowFromMouse(java.awt.Point): int
++ getAvailabilityCalendarColFromMouse(java.awt.Point): int
++ getContext(): int
++ getSubcontext(): int

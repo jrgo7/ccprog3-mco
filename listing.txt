@@ -1,3 +1,11 @@
+Compiled from "Calendar.java"
+public class Calendar extends javax.swing.JTable {
+  public Calendar();
+  public boolean isCellEditable(int, int);
+  public void setUnavailable(int);
+  public void setAvailable(int);
+  public void colorByAvailability(int[]);
+}
 Compiled from "CLIDriver.java"
 public class CLIDriver {
   private ReservationSystem system;
@@ -31,15 +39,29 @@ public final class CLIUtility {
   private CLIUtility();
 }
 Compiled from "Controller.java"
-public class Controller implements java.awt.event.ActionListener {
-  private View view;
-  private ViewChooseRoom viewChooseRoom;
-  private ReservationSystem reservationSystem;
-  public Controller(View, ReservationSystem);
-  public void updateView();
-  private Hotel getSelectedHotel();
+public class Controller implements java.awt.event.ActionListener,javax.swing.event.ListSelectionListener,java.awt.event.MouseListener {
+  ReservationSystem reservationSystem;
+  TopView view;
+  public Controller(ReservationSystem, TopView);
+  public void update();
   public void actionPerformed(java.awt.event.ActionEvent);
-  public void createViewChooseRoom(java.lang.String, java.lang.String);
+  public void valueChanged(javax.swing.event.ListSelectionEvent);
+  public void mouseClicked(java.awt.event.MouseEvent);
+  public void mousePressed(java.awt.event.MouseEvent);
+  public void mouseReleased(java.awt.event.MouseEvent);
+  public void mouseEntered(java.awt.event.MouseEvent);
+  public void mouseExited(java.awt.event.MouseEvent);
+  public void handleCheckAvailability(int);
+}
+Compiled from "DeluxeRoom.java"
+public class DeluxeRoom extends Room {
+  public DeluxeRoom(java.lang.String, double);
+  public double getBasePrice();
+}
+Compiled from "ExecutiveRoom.java"
+public class ExecutiveRoom extends Room {
+  public ExecutiveRoom(java.lang.String, double);
+  public double getBasePrice();
 }
 Compiled from "GUIDriver.java"
 public class GUIDriver {
@@ -53,10 +75,14 @@ public class Hotel {
   private java.util.ArrayList<Reservation> reservations;
   private double basePrice;
   private int lastRoomNumber;
+  private double[] priceModifiers;
   public Hotel(java.lang.String);
   public java.lang.String getName();
   public double getBasePrice();
+  public double getPriceModifierOnNight(int);
   public int getRoomCount();
+  public int getDeluxeRoomCount();
+  public int getExecutiveRoomCount();
   public double getEarnings();
   public int getReservationCount();
   public int getReservationCountOnDate(int, boolean);
@@ -66,9 +92,10 @@ public class Hotel {
   public java.lang.String getReservationString(int);
   public void setName(java.lang.String);
   public boolean setBasePrice(double);
-  public void addRooms(int);
+  public boolean setPriceModifier(int, double);
+  public void addRooms(int, int);
   public boolean removeRoom(int);
-  public boolean addReservation(java.lang.String, int, int, int);
+  public boolean addReservation(java.lang.String, int, int, int, java.lang.String);
   public boolean removeReservation(int);
   public java.lang.String[] getRoomNames();
   public java.lang.String[] getReservationNames();
@@ -77,16 +104,21 @@ public class Hotel {
 }
 Compiled from "Reservation.java"
 public class Reservation {
+  private Hotel hotel;
   private java.lang.String guestName;
   private int checkIn;
   private int checkOut;
   private Room room;
-  public Reservation(java.lang.String, int, int, Room);
+  private java.lang.String discountCode;
+  public Reservation(Hotel, java.lang.String, int, int, Room);
   public java.lang.String getGuestName();
   public int getCheckIn();
   public int getCheckOut();
   public int getNightCount();
+  private double getDiscountCodeModifier(int);
+  private double getPriceForNight(int);
   public double getTotalPrice();
+  public boolean setDiscountCode(java.lang.String);
   public java.lang.String getPriceBreakdown();
   public java.lang.String getRoomName();
   public boolean removeFromRoom();
@@ -101,8 +133,10 @@ public class ReservationSystem {
   public boolean removeHotel(int);
   private boolean hotelNameExists(java.lang.String);
   public boolean addHotel(Hotel);
+  public boolean addHotel(java.lang.String);
   public boolean renameHotel(int, java.lang.String);
   public java.lang.String[] getHotelNames();
+  public java.util.ArrayList<java.lang.String> getHotelNamesAsList();
   public int getHotelCount();
 }
 Compiled from "Room.java"
@@ -122,31 +156,36 @@ public class Room {
   public java.lang.String getAvailableDatesAsCalendarString();
   public java.lang.String toString();
 }
-Compiled from "View.java"
-public class View extends javax.swing.JFrame {
-  private javax.swing.JList<java.lang.String> listHotelNames;
-  private java.util.ArrayList<javax.swing.JButton> btnOptions;
-  public View();
+Compiled from "TopView.java"
+public class TopView extends javax.swing.JFrame {
+  javax.swing.JList<java.lang.String> hotelList;
+  int hotelListPrevSelectedIndex;
+  javax.swing.JTabbedPane topMenuPane;
+  static final int VIEW_HOTEL_SCREEN;
+  javax.swing.JTextArea hotelHighLevelData;
+  javax.swing.JTabbedPane viewHotelSubMenuPane;
+  static final int CHECK_AVAILABILITY_SCREEN;
+  javax.swing.JTextArea hotelAvailabilityData;
+  static final int MANAGE_HOTEL_SCREEN;
+  javax.swing.JLabel manageHotelNameLabel;
+  static final int SIMULATE_BOOKING_SCREEN;
+  Calendar availabilityCalendar;
+  public TopView();
   public void init();
-  public void initHotelList();
-  public void initPanelMenu();
-  public void setActionListener(Controller);
-  public void setHotelConfigButtonsEnabled(boolean);
-  public java.lang.String promptHotelName();
-  public void setHotelList(java.lang.String[]);
-  public int getSelectedHotelIndex();
-  public void setSelectedHotelIndex(int);
-  public int chooseReservation(Hotel);
-  public int showHotelInfo(Hotel);
-  public void showHotelAvailability(Hotel);
-  public void showInfo(java.lang.String);
-  public void checkReservationData(Reservation);
-}
-Compiled from "ViewChooseRoom.java"
-public class ViewChooseRoom extends javax.swing.JDialog {
-  javax.swing.JList<java.lang.String> listRoom;
-  javax.swing.JButton btnSelect;
-  public ViewChooseRoom(Controller, javax.swing.JFrame, java.lang.String, java.lang.String, Hotel);
-  public void setActionListener(Controller);
-  public int getSelectedRoomIndex();
+  public java.lang.String promptAddHotel();
+  public void setListeners(Controller);
+  public void setTabIndex(int);
+  public void setHotelListData(java.util.ArrayList<java.lang.String>);
+  public int getHotelListPrevSelectedIndex();
+  public void setHotelListPrevSelectedIndex(int);
+  public int getHotelListSelectedIndex();
+  public void setHotelListSelectedIndex(int);
+  public void removeHotelListSelection();
+  public void setHotelNameLabelText(java.lang.String);
+  public void setHotelDataText(java.lang.String);
+  public void setHotelAvailabilityDataText(java.lang.String);
+  public int getAvailabilityCalendarRowFromMouse(java.awt.Point);
+  public int getAvailabilityCalendarColFromMouse(java.awt.Point);
+  public int getContext();
+  public int getSubcontext();
 }

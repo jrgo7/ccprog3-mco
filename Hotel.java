@@ -72,6 +72,32 @@ public class Hotel {
   }
 
   /**
+   * Returns the number of {@link DeluxeRoom}s tied to the hotel.
+   * 
+   * @return the number of deluxe rooms tied to the hotel.
+   */
+  public int getDeluxeRoomCount() {
+    int ctr = 0;
+    for (Room r : rooms) {
+      ctr += (r instanceof DeluxeRoom) ? 1 : 0;
+    }
+    return ctr;
+  }
+
+  /**
+   * Returns the number of {@link ExecutiveRoom}s tied to the hotel.
+   * 
+   * @return the number of executive rooms tied to the hotel.
+   */
+  public int getExecutiveRoomCount() {
+    int ctr = 0;
+    for (Room r : rooms) {
+      ctr += (r instanceof ExecutiveRoom) ? 1 : 0;
+    }
+    return ctr;
+  }
+
+  /**
    * Returns the hotel's estimated earnings, calculated as the sum of the total
    * prices of each reservation.
    * 
@@ -410,9 +436,15 @@ public class Hotel {
         Hotel information:
           Name: %s
           Rooms: %d
+          - of which Normal Rooms: %d
+          - of which Deluxe Rooms: %d
+          - of which Executive Rooms: %d
           Estimated earnings: %.2f""",
         this.getName(),
         this.getRoomCount(),
+        this.getRoomCount() - this.getDeluxeRoomCount() - this.getExecutiveRoomCount(),
+        this.getDeluxeRoomCount(),
+        this.getExecutiveRoomCount(),
         this.getEarnings());
   }
 }
