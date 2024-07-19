@@ -1,6 +1,10 @@
 package src.view.gui;
 
 import javax.swing.*;
+
+import src.controller.gui.AvailabilityCalendarListener;
+import src.controller.gui.HotelListListener;
+
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -9,16 +13,16 @@ public class TopView extends JFrame {
     int hotelListPrevSelectedIndex = 0; // when cancelling add hotel
     JTabbedPane topMenuPane = new JTabbedPane();
 
-    static final int VIEW_HOTEL_SCREEN = 0;
+    static public final int VIEW_HOTEL_SCREEN = 0;
     JTextArea hotelHighLevelData = new JTextArea();
     JTabbedPane viewHotelSubMenuPane = new JTabbedPane();
-    static final int CHECK_AVAILABILITY_SCREEN = 101;
+    static public final int CHECK_AVAILABILITY_SCREEN = 101;
     JTextArea hotelAvailabilityData = new JTextArea();
 
-    static final int MANAGE_HOTEL_SCREEN = 1;
+    static public final int MANAGE_HOTEL_SCREEN = 1;
     JLabel manageHotelNameLabel = new JLabel();
 
-    static final int SIMULATE_BOOKING_SCREEN = 2;
+    static public final int SIMULATE_BOOKING_SCREEN = 2;
 
     Calendar availabilityCalendar = new Calendar();
 
@@ -100,9 +104,21 @@ public class TopView extends JFrame {
         return JOptionPane.showInputDialog("Hotel name");
     }
 
-    public void setListeners(Controller controller) {
-        hotelList.getSelectionModel().addListSelectionListener(controller);
-        availabilityCalendar.addMouseListener(controller);
+    public void setListeners(HotelListListener hotelListListener,
+            AvailabilityCalendarListener availabilityCalendarListener) {
+        hotelList.getSelectionModel()
+                .addListSelectionListener(hotelListListener);
+        availabilityCalendar
+                .addMouseListener(availabilityCalendarListener);
+        availabilityCalendar
+                .getSelectionModel()
+                .addListSelectionListener(availabilityCalendarListener);
+        availabilityCalendar
+                .getColumnModel()
+                .getSelectionModel()
+                .addListSelectionListener(availabilityCalendarListener);
+        availabilityCalendar
+                .addKeyListener(availabilityCalendarListener);
     }
 
     public void setTabIndex(int index) {

@@ -1,3 +1,22 @@
+Compiled from "AvailabilityCalendarListener.java"
+public class AvailabilityCalendarListener implements javax.swing.event.ListSelectionListener,java.awt.event.MouseListener,java.awt.event.KeyListener {
+  ReservationSystem reservationSystem;
+  TopView view;
+  int receivedIndex;
+  int row;
+  int col;
+  public AvailabilityCalendarListener(ReservationSystem, TopView);
+  public void handleCheckAvailability(int, int);
+  public void mouseClicked(java.awt.event.MouseEvent);
+  public void mousePressed(java.awt.event.MouseEvent);
+  public void mouseReleased(java.awt.event.MouseEvent);
+  public void mouseEntered(java.awt.event.MouseEvent);
+  public void mouseExited(java.awt.event.MouseEvent);
+  public void valueChanged(javax.swing.event.ListSelectionEvent);
+  public void keyTyped(java.awt.event.KeyEvent);
+  public void keyPressed(java.awt.event.KeyEvent);
+  public void keyReleased(java.awt.event.KeyEvent);
+}
 Compiled from "Calendar.java"
 public class Calendar extends javax.swing.JTable {
   public Calendar();
@@ -39,19 +58,12 @@ public final class CLIUtility {
   private CLIUtility();
 }
 Compiled from "Controller.java"
-public class Controller implements java.awt.event.ActionListener,javax.swing.event.ListSelectionListener,java.awt.event.MouseListener {
+public class Controller {
   ReservationSystem reservationSystem;
   TopView view;
+  AvailabilityCalendarListener availabilityCalendarListener;
+  HotelListListener hotelListListener;
   public Controller(ReservationSystem, TopView);
-  public void update();
-  public void actionPerformed(java.awt.event.ActionEvent);
-  public void valueChanged(javax.swing.event.ListSelectionEvent);
-  public void mouseClicked(java.awt.event.MouseEvent);
-  public void mousePressed(java.awt.event.MouseEvent);
-  public void mouseReleased(java.awt.event.MouseEvent);
-  public void mouseEntered(java.awt.event.MouseEvent);
-  public void mouseExited(java.awt.event.MouseEvent);
-  public void handleCheckAvailability(int);
 }
 Compiled from "DeluxeRoom.java"
 public class DeluxeRoom extends Room {
@@ -101,6 +113,14 @@ public class Hotel {
   public java.lang.String[] getReservationNames();
   public int getAvailableRoomCount(int);
   public java.lang.String toString();
+}
+Compiled from "HotelListListener.java"
+public class HotelListListener implements javax.swing.event.ListSelectionListener {
+  ReservationSystem reservationSystem;
+  TopView view;
+  public HotelListListener(ReservationSystem, TopView);
+  public void updateHotelList();
+  public void valueChanged(javax.swing.event.ListSelectionEvent);
 }
 Compiled from "Reservation.java"
 public class Reservation {
@@ -156,6 +176,10 @@ public class Room {
   public java.lang.String getAvailableDatesAsCalendarString();
   public java.lang.String toString();
 }
+Compiled from "RoomListListener.java"
+public class RoomListListener {
+  public RoomListListener();
+}
 Compiled from "TopView.java"
 public class TopView extends javax.swing.JFrame {
   javax.swing.JList<java.lang.String> hotelList;
@@ -173,7 +197,7 @@ public class TopView extends javax.swing.JFrame {
   public TopView();
   public void init();
   public java.lang.String promptAddHotel();
-  public void setListeners(Controller);
+  public void setListeners(HotelListListener, AvailabilityCalendarListener);
   public void setTabIndex(int);
   public void setHotelListData(java.util.ArrayList<java.lang.String>);
   public int getHotelListPrevSelectedIndex();

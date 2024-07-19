@@ -1,5 +1,6 @@
 package src.view.gui;
 
+import src.controller.gui.Controller;
 import src.model.ReservationSystem;
 
 public class GUIDriver {
