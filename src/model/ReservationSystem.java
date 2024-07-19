@@ -1,3 +1,5 @@
+package src.model;
+
 import java.util.ArrayList;
 
 /** Represents the reservation system managing a list of hotels. */
@@ -128,7 +130,7 @@ public class ReservationSystem {
 
   public ArrayList<String> getHotelNamesAsList() {
     ArrayList<String> hotelNames = new ArrayList<String>();
-    for (Hotel h: hotels) {
+    for (Hotel h : hotels) {
       hotelNames.add(h.getName());
     }
     return hotelNames;

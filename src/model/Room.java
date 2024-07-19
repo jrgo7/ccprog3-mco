@@ -1,3 +1,5 @@
+package src.model;
+
 import java.util.ArrayList;
 
 /** Represents a room within a {@link Hotel}. */

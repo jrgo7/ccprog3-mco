@@ -1,8 +1,13 @@
+package src.view.gui;
+
 import java.awt.event.*;
 
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+
+import src.model.Hotel;
+import src.model.ReservationSystem;
 
 public class Controller implements ActionListener, ListSelectionListener, MouseListener {
     ReservationSystem reservationSystem;

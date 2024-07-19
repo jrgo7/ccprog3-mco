@@ -1,3 +1,5 @@
+package src.model;
+
 /** Represents a reservation tied to a {@link Hotel} and a {@link Room}. */
 public class Reservation {
   /*

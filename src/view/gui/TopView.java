@@ -1,3 +1,5 @@
+package src.view.gui;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -6,7 +8,7 @@ public class TopView extends JFrame {
     JList<String> hotelList;
     int hotelListPrevSelectedIndex = 0; // when cancelling add hotel
     JTabbedPane topMenuPane = new JTabbedPane();
-    
+
     static final int VIEW_HOTEL_SCREEN = 0;
     JTextArea hotelHighLevelData = new JTextArea();
     JTabbedPane viewHotelSubMenuPane = new JTabbedPane();
@@ -53,7 +55,7 @@ public class TopView extends JFrame {
         hotelListPanel.add(hotelList, BorderLayout.CENTER);
 
         this.add(hotelListPanel, BorderLayout.WEST);
-        
+
         // View Hotel
         JPanel viewHotelPanel = new JPanel();
         viewHotelPanel.setLayout(new BorderLayout());
@@ -70,11 +72,10 @@ public class TopView extends JFrame {
         // View Hotel - Submenu - Rooms
         JPanel checkRoomsPanel = new JPanel();
         viewHotelSubMenuPane.add("Rooms", checkRoomsPanel);
-        
+
         // View Hotel - Submenu - Reservations
         JPanel checkReservationsPanel = new JPanel();
         viewHotelSubMenuPane.add("Reservations", checkReservationsPanel);
-
 
         viewHotelPanel.add(viewHotelSubMenuPane, BorderLayout.CENTER);
 
@@ -143,7 +144,7 @@ public class TopView extends JFrame {
     public void setHotelDataText(String text) {
         hotelHighLevelData.setText(text);
     }
-    
+
     public void setHotelAvailabilityDataText(String text) {
         hotelAvailabilityData.setText(text);
     }
@@ -161,7 +162,7 @@ public class TopView extends JFrame {
     }
 
     public int getSubcontext() {
-        int retval = (this.getContext()+1) * 100;
+        int retval = (this.getContext() + 1) * 100;
         switch (getContext()) {
             case TopView.VIEW_HOTEL_SCREEN:
                 return retval + viewHotelSubMenuPane.getSelectedIndex() + 1;

@@ -1,3 +1,5 @@
+package src.model;
+
 /**
  * Represents a deluxe room, whose base rate is 20% higher than that of
  * {@link Room}.

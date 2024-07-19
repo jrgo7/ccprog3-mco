@@ -1,3 +1,7 @@
+package src.view.gui;
+
+import src.model.ReservationSystem;
+
 public class GUIDriver {
     public static void main(String[] args) {
         ReservationSystem rs = new ReservationSystem();

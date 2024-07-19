@@ -1,3 +1,5 @@
+package src.view.cli;
+
 import java.util.Scanner;
 
 /** Contains methods used to abstract the process of getting user inputs. */

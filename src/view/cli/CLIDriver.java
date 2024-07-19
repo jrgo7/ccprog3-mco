@@ -1,4 +1,11 @@
+package src.view.cli;
+
 import java.util.Scanner;
+
+import src.model.Hotel;
+import src.model.Reservation;
+import src.model.ReservationSystem;
+import src.model.Room;
 
 /** Handles business logic and user interaction on the command line. */
 public class CLIDriver {

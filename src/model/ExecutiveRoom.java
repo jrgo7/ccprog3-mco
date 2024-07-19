@@ -1,3 +1,5 @@
+package src.model;
+
 /**
  * Represents an executive room, whose base rate is 35% higher than that of
  * {@link Room}.

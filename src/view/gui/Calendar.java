@@ -1,15 +1,17 @@
+package src.view.gui;
+
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.TableModel;
 
 public class Calendar extends JTable {
-    public Calendar() {        
+    public Calendar() {
         super(5, 7);
         this.setCellSelectionEnabled(true);
         this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         TableModel model = getModel();
         for (int i = 1; i <= 31; i++) {
-            model.setValueAt(i, (i-1) / 7, (i-1) % 7);
+            model.setValueAt(i, (i - 1) / 7, (i - 1) % 7);
         }
     }
 
