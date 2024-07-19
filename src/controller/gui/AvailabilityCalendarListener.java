@@ -32,6 +32,7 @@ public class AvailabilityCalendarListener implements ListSelectionListener, Mous
         }
         int day = row * 7 + col % 7 + 1;
         if (day > 31) {
+            view.setHotelAvailabilityDataText("");
             return; // Block invalid input
         }
 

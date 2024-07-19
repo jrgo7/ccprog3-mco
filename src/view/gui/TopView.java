@@ -28,11 +28,11 @@ public class TopView extends JFrame {
 
     public TopView() {
         super("Hotel Reservation System");
-        // try {
-        // UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        // } catch (Exception e) {
-        // System.err.println("Unable to configure look and feel.");
-        // }
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
+            System.err.println("Unable to configure look and feel.");
+        }
         this.setLocationByPlatform(true);
         this.setLayout(new BorderLayout());
         Dimension systemResolution = Toolkit.getDefaultToolkit().getScreenSize();
