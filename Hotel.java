@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /** Represents a hotel that may be added to a {@link ReservationSystem}. */
 public class Hotel {
@@ -20,6 +21,9 @@ public class Hotel {
   /** The "highest room number" currently in the hotel. */
   private int lastRoomNumber;
 
+  /** The price modifiers for each night. */
+  private double[] priceModifiers;
+
   /**
    * Initializes a new hotel instance given a name. The created hotel begins
    * with zero reservations, a base price of 1299.00, and one room.
@@ -37,7 +41,10 @@ public class Hotel {
     this.lastRoomNumber = 0;
 
     /* Add a single room */
-    this.addRooms(1);
+    this.addRooms(1, 1);
+
+    priceModifiers = new double[31];
+    Arrays.fill(priceModifiers, 1.0);
   }
 
   /** {@return the name of the hotel} */
@@ -48,6 +55,11 @@ public class Hotel {
   /** {@return the base price of the hotel} */
   public double getBasePrice() {
     return this.basePrice;
+  }
+
+  /** {@return the price modifier for a given night} */
+  public double getPriceModifierOnNight(int night) {
+    return this.priceModifiers[night - 1];
   }
 
   /**
@@ -190,6 +202,25 @@ public class Hotel {
   }
 
   /**
+   * Sets the price modifier for a given day. Fails if attempting to set a value
+   * greater than {@code 1.50} or lower than {@code 0.50}.
+   * 
+   * @param day      The day to set a price modifier for
+   * @param modifier The new price modifier to set
+   * @return {@code true} if the price modifier for the day was set successfully,
+   *         {@code false} otherwise.
+   */
+  public boolean setPriceModifier(int day, double modifier) {
+    if (modifier < 0.5 || modifier > 1.5)
+      return false;
+    else if (day < 1 || day > 31)
+      return false;
+
+    this.priceModifiers[day - 1] = modifier;
+    return true;
+  }
+
+  /**
    * Adds a given number of {@link Room}s to the hotel. Room names follow a
    * format starting with {@code RM001} for the first room. New rooms will
    * always increment the number by 1, so the next room would be {@code RM002}.
@@ -198,12 +229,39 @@ public class Hotel {
    * {@code RM003}).
    * 
    * @param count The number of rooms to add
+   * @param type  The type of the room ({@code 1} for normal, {@code 2} for
+   *              deluxe, {@code 3} for executive).
    */
-  public void addRooms(int count) {
-    for (int i = 0; i < count && this.rooms.size() < 50; i++)
-      this.rooms.add(
-          new Room("RM" + String.format("%03d", 1 + this.lastRoomNumber++),
-              this.basePrice));
+  public void addRooms(int count, int type) {
+    String formatString = "RM%03d";
+
+    /*
+     * TODO: We can maybe do something with generic types and a factory design
+     * pattern because this looks pretty bad
+     */
+    switch (type) {
+      default:
+      case 1:
+        for (int i = 0; i < count && this.rooms.size() < 50; i++)
+          this.rooms.add(
+              new Room(String.format(formatString, 1 + this.lastRoomNumber++),
+                  this.basePrice));
+        break;
+      case 2:
+        formatString += "-DX";
+        for (int i = 0; i < count && this.rooms.size() < 50; i++)
+          this.rooms.add(
+              new DeluxeRoom(String.format(formatString, 1 + this.lastRoomNumber++),
+                  this.basePrice));
+        break;
+      case 3:
+        formatString += "-EX";
+        for (int i = 0; i < count && this.rooms.size() < 50; i++)
+          this.rooms.add(
+              new ExecutiveRoom(String.format(formatString, 1 + this.lastRoomNumber++),
+                  this.basePrice));
+        break;
+    }
   }
 
   /**
@@ -230,7 +288,8 @@ public class Hotel {
    * will then be tied to both the hotel and the selected room. Fails if the
    * check-in day is outside the valid range ({@code 1} to {@code 30}), the
    * check-out day is before the check-in day, if there are availability
-   * conflicts with the room, or if the room index is out of range.
+   * conflicts with the room, if the room index is out of range, or if the
+   * discount code used is invalid for the reservation.
    * <p>
    * Note that a reservation can be made with a check-out day that overlaps with
    * the check-in day of another reservation. This is because a room is marked
@@ -246,7 +305,7 @@ public class Hotel {
    * @see Room#isAvailableOn(int)
    */
   public boolean addReservation(String guestName, int checkIn, int checkOut,
-      int roomIndex) {
+      int roomIndex, String discountCode) {
     if (checkIn > 30 || checkIn < 1 || checkOut <= checkIn
         || roomIndex >= this.rooms.size() || roomIndex < 0)
       return false;
@@ -258,7 +317,11 @@ public class Hotel {
         return false;
 
     Reservation reservation = new Reservation(
-        guestName, checkIn, checkOut, room);
+        this, guestName, checkIn, checkOut, room);
+
+    if (discountCode != null && !reservation.setDiscountCode(discountCode))
+      return false;
+
     this.reservations.add(reservation);
 
     /* Also add the reservation to the room */
