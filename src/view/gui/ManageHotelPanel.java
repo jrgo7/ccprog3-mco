@@ -1,5 +1,7 @@
 package src.view.gui;
 
+import java.util.ArrayList;
+
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 
@@ -8,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
+import src.controller.gui.ManagePricesListener;
 import src.controller.gui.RenameHotelListener;
 import src.controller.gui.UpdateBasePriceListener;
 
@@ -65,6 +68,8 @@ public class ManageHotelPanel extends JPanel {
         this.add(subpanels, BorderLayout.CENTER);
     }
 
+    // Info edit panel
+
     public String getRenameHotelText() {
         return this.renameHotelField.getText();
     }
@@ -93,4 +98,39 @@ public class ManageHotelPanel extends JPanel {
         this.updateBasePriceButton.addActionListener(listener);
         this.updateBasePriceButton.addKeyListener(listener);
     }
+    
+    // Manage rooms subpanel
+    public void updateRoomList(ArrayList<String> data) {
+        this.manageRoomsSubpanel.updateRoomList(data);
+    }
+
+    // Manage reservations subpanel
+
+
+    // Manage prices subpanel
+
+    public void setManagePricesCalendarText(int day, String text) {
+        this.managePricesSubpanel.setCalendarText(day, text);
+    }
+
+    public String getPriceModifierField() {
+        return this.managePricesSubpanel.getPriceModifierField();
+    }
+
+    public void setPriceModifierField(String text) {
+        this.managePricesSubpanel.setPriceModifierField(text);
+    }
+
+    public void setModifiedPriceText(String text) {
+        this.managePricesSubpanel.setModifiedPriceText(text);
+    }
+
+    public void setPriceModiferCalendarDay(int day) {
+        this.managePricesSubpanel.selectCalendarDay(day);
+    }
+
+    public void setManagePricesListener(ManagePricesListener listener) {
+        this.managePricesSubpanel.setListener(listener);
+    }
+
 }

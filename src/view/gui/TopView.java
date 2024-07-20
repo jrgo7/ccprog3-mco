@@ -18,6 +18,7 @@ import javax.swing.JTabbedPane;
 
 import src.controller.gui.AvailabilityCalendarListener;
 import src.controller.gui.HotelListListener;
+import src.controller.gui.ManagePricesListener;
 import src.controller.gui.RenameHotelListener;
 import src.controller.gui.RoomListListener;
 import src.controller.gui.UpdateBasePriceListener;
@@ -40,9 +41,9 @@ public class TopView extends JFrame {
     public TopView() {
         super("Hotel Reservation System");
         // try {
-        //     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        // UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         // } catch (Exception e) {
-        //     System.err.println("Unable to configure look and feel.");
+        // System.err.println("Unable to configure look and feel.");
         // }
         this.setLocationByPlatform(true);
         this.setLayout(new BorderLayout());
@@ -90,12 +91,14 @@ public class TopView extends JFrame {
             AvailabilityCalendarListener availabilityCalendarListener,
             RenameHotelListener renameHotelListener,
             UpdateBasePriceListener updateBasePriceListener,
-            RoomListListener viewRoomListListener) {
+            RoomListListener viewRoomListListener,
+            ManagePricesListener managePricesListener) {
         this.hotelListPanel.setListener(hotelListListener);
         this.viewHotelPanel.setCalendarListener(availabilityCalendarListener);
         this.manageHotelPanel.setRenameHotelListener(renameHotelListener);
         this.manageHotelPanel.setUpdateBasePriceListener(updateBasePriceListener);
         this.viewHotelPanel.setRoomListListener(viewRoomListListener);
+        this.manageHotelPanel.setManagePricesListener(managePricesListener);
     }
 
     public void setTabIndex(int index) {
@@ -143,7 +146,9 @@ public class TopView extends JFrame {
     }
 
     public void updateRoomList(String[] data) {
-       this.viewHotelPanel.updateRoomList(new ArrayList<>(Arrays.asList(data)));
+        ArrayList<String> dataAsList = new ArrayList<>(Arrays.asList(data));
+        this.viewHotelPanel.updateRoomList(dataAsList);
+        this.manageHotelPanel.updateRoomList(dataAsList);
     }
 
     public void updateRoomData(String data) {
@@ -163,6 +168,7 @@ public class TopView extends JFrame {
     }
 
     // Manage hotel delegations
+
     public String getRenameHotelText() {
         return this.manageHotelPanel.getRenameHotelText();
     }
@@ -177,6 +183,26 @@ public class TopView extends JFrame {
 
     public void setUpdateBasePriceText(String basePrice) {
         this.manageHotelPanel.setUpdateBasePriceText(basePrice);
+    }
+
+    public void setManagePricesCalendarText(int day, String text) {
+        this.manageHotelPanel.setManagePricesCalendarText(day, text);
+    }
+
+    public String getPriceModifierField() {
+        return this.manageHotelPanel.getPriceModifierField();
+    }
+
+    public void setPriceModifierField(String text) {
+        this.manageHotelPanel.setPriceModifierField(text);
+    }
+
+    public void setModifiedPriceText(String text) {
+        this.manageHotelPanel.setModifiedPriceText(text);
+    }
+
+    public void setPriceModiferCalendarDay(int day) {
+        this.manageHotelPanel.setPriceModiferCalendarDay(day);
     }
 
     // Error dialogs
@@ -202,6 +228,14 @@ public class TopView extends JFrame {
                 "The base price cannot be updated while reservations exist " +
                         "in the current hotel. The base price must also be at least 100.",
                 "Invalid base price update error",
+                JOptionPane.ERROR_MESSAGE);
+    }
+
+    public void showPriceModifierError() {
+        JOptionPane.showMessageDialog(
+                this,
+                "The price modifier must be within 0.50-1.50.",
+                "Invalid price modifier error",
                 JOptionPane.ERROR_MESSAGE);
     }
 

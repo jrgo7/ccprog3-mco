@@ -70,19 +70,9 @@ public class ViewAvailabilityPanel extends JPanel {
      * 
      * @param availabilityCalendarListener The listener to assign to the calendar
      */
-    public void setListener(AvailabilityCalendarListener availabilityCalendarListener) {
-        this.calendarComponent
-                .addMouseListener(availabilityCalendarListener);
-        this.calendarComponent
-                .getSelectionModel()
-                .addListSelectionListener(availabilityCalendarListener);
-        this.calendarComponent
-                .getColumnModel()
-                .getSelectionModel()
-                .addListSelectionListener(availabilityCalendarListener);
-        this.calendarComponent
-                .addKeyListener(availabilityCalendarListener);
-        this.calendarComponent
-                .addMouseMotionListener(availabilityCalendarListener);
+    public void setListener(AvailabilityCalendarListener listener) {
+        this.calendarComponent.addMouseListener(listener);
+        this.calendarComponent.addKeyListener(listener);
+        this.calendarComponent.addMouseMotionListener(listener);
     }
 }

@@ -12,7 +12,7 @@ public class Calendar extends JTable {
         super(MAX_ROWS, MAX_COLS);
         this.setCellSelectionEnabled(true);
         this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        TableModel model = getModel();
+        TableModel model = this.getModel();
         for (int i = 1; i <= 31; i++) {
             model.setValueAt(i, (i - 1) / MAX_COLS, (i - 1) % MAX_COLS);
         }
@@ -25,6 +25,19 @@ public class Calendar extends JTable {
             return -1;
         }
         return row * 7 + col % 7 + 1;
+    }
+
+    public int getRowFromDay(int day) {
+        return (day - 1) / MAX_COLS;
+    }
+
+    public int getColFromDay(int day) {
+        return (day - 1) % MAX_COLS;
+    }
+
+    public void setCalendarText(int day, String text) {
+        this.getModel().setValueAt(
+            text, getRowFromDay(day), getColFromDay(day));
     }
 
     // Prevents all cells from being edited
@@ -47,5 +60,13 @@ public class Calendar extends JTable {
 
     public void colorByAvailability(int[] availableDates) {
         // Set everything as unavailable then set the `availableDates`
+    }
+
+    public void selectDay(int day) {
+        int row = getRowFromDay(day);
+        int col = getColFromDay(day);
+        this.setRowSelectionInterval(row, row);
+        this.setColumnSelectionInterval(col, col);
+        this.requestFocus();
     }
 }
