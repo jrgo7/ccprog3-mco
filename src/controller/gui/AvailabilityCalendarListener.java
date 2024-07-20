@@ -47,6 +47,18 @@ public class AvailabilityCalendarListener extends CalendarListener {
     }
 
     @Override
+    public void mouseMoved(MouseEvent e) {
+        // So CalendarListener.mouseMoved does not overwrite row, col
+
+    }
+    
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        // So CalendarListener.mouseEntered does not overwrite row, col
+
+    }
+
+    @Override
     protected void handleMoved(int row, int col) {
 
     }
@@ -58,7 +70,7 @@ public class AvailabilityCalendarListener extends CalendarListener {
         }
         int day = Calendar.toDay(row, col);
         if (day > 31 || day < 1) {
-            view.setHotelAvailabilityDataText("");
+            view.setHotelAvailabilityDataText("<p></p>");
             return; // Block invalid input
         }
 
@@ -66,15 +78,15 @@ public class AvailabilityCalendarListener extends CalendarListener {
         view.setHotelAvailabilityDataText(
                 String.format("""
                         <div style="font-family: sans-serif">
-                        (%d, %d)
-                        Reservations on day %d: %d<br>
-                        There %s %d room%s available.
+                        <h2>Day %d</h1>
+                        <ul>
+                        <li>Reservations: %d</li>
+                        <li>Rooms available: %d room%s.</li>
+                        </ul>
                         </div>
-                            """,
-                        row, col,
+                        """,
                         day,
                         hotel.getReservationCountOnDate(day, false),
-                        isOneRoom ? "is" : "are",
                         hotel.getAvailableRoomCount(day),
                         isOneRoom ? "" : "s"));
     }

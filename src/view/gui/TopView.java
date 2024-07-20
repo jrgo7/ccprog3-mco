@@ -142,6 +142,14 @@ public class TopView extends JFrame {
 
     }
 
+    /**
+     * To be triggered when a hotel gets added
+     */
+    public void resetState() {
+        this.resetAvailabilityCalendarSelection();
+        this.setHotelAvailabilityDataText("<p></p>");
+    }
+
     public int getContext() {
         return topMenuPane.getSelectedIndex();
     }

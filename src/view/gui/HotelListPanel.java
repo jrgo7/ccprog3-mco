@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Font;
 import java.util.ArrayList;
 
+import javax.swing.JEditorPane;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -30,8 +31,8 @@ public class HotelListPanel extends JPanel {
         this.setLayout(new BorderLayout());
         this.fallbackIndex = 0;
 
-        JLabel hotelListPanelLabel = new JLabel("Hotels");
-        this.setFont(new Font("Arial", 0, 32));
+        JEditorPane hotelListPanelLabel = new JEditorPane("text/html", "<h1 style=\"font-family: sans-serif\">Hotels</h1>");
+        hotelListPanelLabel.setEditable(false);
 
         this.add(hotelListPanelLabel, BorderLayout.NORTH);
 

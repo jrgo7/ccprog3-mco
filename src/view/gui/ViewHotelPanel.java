@@ -26,7 +26,7 @@ public class ViewHotelPanel extends JPanel {
     public ViewHotelPanel() {
         this.setLayout(new BorderLayout());
 
-        this.hotelDataComponent = new JEditorPane();
+        this.hotelDataComponent = new JEditorPane("text/html", "");
         this.hotelDataComponent.setEditable(false);
         this.add(this.hotelDataComponent, BorderLayout.NORTH);
 

@@ -22,7 +22,7 @@ public class ViewAvailabilityPanel extends JPanel {
         this.setLayout(new BorderLayout());
 
         calendarComponent = new Calendar();
-        availabilityComponent = new JEditorPane();
+        availabilityComponent = new JEditorPane("text/html", "");
         availabilityComponent.setEditable(false);
 
         this.add(calendarComponent, BorderLayout.NORTH);
@@ -82,5 +82,7 @@ public class ViewAvailabilityPanel extends JPanel {
                 .addListSelectionListener(availabilityCalendarListener);
         this.calendarComponent
                 .addKeyListener(availabilityCalendarListener);
+        this.calendarComponent
+                .addMouseMotionListener(availabilityCalendarListener);
     }
 }

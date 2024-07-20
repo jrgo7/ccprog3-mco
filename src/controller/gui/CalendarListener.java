@@ -139,6 +139,7 @@ abstract class CalendarListener implements ListSelectionListener, MouseListener,
         row = view.getAvailabilityCalendarRowFromMouse(e.getPoint());
         col = view.getAvailabilityCalendarColFromMouse(e.getPoint());
         handleMoved(row, col);
+        System.out.println("Not overridden movin");
     }
 
     public void setRow(int row) {
@@ -147,5 +148,13 @@ abstract class CalendarListener implements ListSelectionListener, MouseListener,
 
     public void setCol(int col) {
         this.col = col;
+    }
+
+    public int getRow() {
+        return row;
+    }
+
+    public int getCol() {
+        return col;
     }
 }
