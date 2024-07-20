@@ -8,12 +8,21 @@ public class Controller {
     TopView view;
     AvailabilityCalendarListener availabilityCalendarListener;
     HotelListListener hotelListListener;
+    RenameHotelListener renameHotelListener;
+    UpdateBasePriceListener updateBasePriceListener;
 
     public Controller(ReservationSystem reservationSystem, TopView view) {
         this.reservationSystem = reservationSystem;
         this.view = view;
         availabilityCalendarListener = new AvailabilityCalendarListener(reservationSystem, view);
         hotelListListener = new HotelListListener(reservationSystem, view);
-        this.view.setListeners(hotelListListener, availabilityCalendarListener);
+        renameHotelListener = new RenameHotelListener(reservationSystem, view);
+        updateBasePriceListener = new UpdateBasePriceListener(reservationSystem, view);
+
+        this.view.setListeners(
+            hotelListListener,
+            availabilityCalendarListener,
+            renameHotelListener,
+            updateBasePriceListener);
     }
 }

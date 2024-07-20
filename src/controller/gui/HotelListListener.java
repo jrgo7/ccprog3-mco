@@ -4,6 +4,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import src.model.Hotel;
 import src.model.ReservationSystem;
 import src.view.gui.TopView;
 
@@ -19,6 +20,11 @@ public class HotelListListener implements ListSelectionListener {
 
     public void updateHotelList() {
         view.setHotelListData(reservationSystem.getHotelNamesAsList());
+        if (reservationSystem.getHotelCount() == 0) {
+            view.setTopMenuPaneVisible(false);
+        } else {
+            view.setTopMenuPaneVisible(true);
+        }
     }
 
     @Override
@@ -29,11 +35,11 @@ public class HotelListListener implements ListSelectionListener {
         ListSelectionModel lsm = (ListSelectionModel) e.getSource();
         int selectedIndex = lsm.getMinSelectionIndex();
         int hotelCount = reservationSystem.getHotelCount();
-        System.out.print(selectedIndex + " ");
         if (selectedIndex == hotelCount) {
             // Selected "Add hotel" button
-            if (reservationSystem.addHotel(view.promptAddHotel())) {
-                view.setTabIndex(TopView.VIEW_HOTEL_SCREEN);
+            String name = view.promptAddHotel();
+            if (reservationSystem.addHotel(name)) {
+                // view.setTabIndex(TopView.VIEW_HOTEL_SCREEN); // ? Not needed as we have a way of updating default GUI fields, see [1]
                 view.resetState();
                 this.updateHotelList();
                 view.setHotelListSelectedIndex(selectedIndex); // redundant but gives a nice blue selection
@@ -41,16 +47,24 @@ public class HotelListListener implements ListSelectionListener {
             } else if (reservationSystem.getHotelCount() > 0) {
                 view.setHotelListSelectedIndex(
                         view.getHotelListPrevSelectedIndex());
+                if (name != null) { // user did not cancel
+                    view.showHotelNameExistsError();
+                }
             } else {
                 view.removeHotelListSelection();
             }
         }
         if (selectedIndex >= 0 && selectedIndex < hotelCount) {
-            view.setHotelNameLabelText(
-                    reservationSystem.getHotelNames()[selectedIndex]);
-            view.setHotelDataText(
-                    reservationSystem.getHotel(selectedIndex).toString());
+            // * [1] Set default values in GUI after selecting a hotel
+            Hotel hotel = reservationSystem.getHotel(selectedIndex);
+            
+            // View hotel
+            view.setHotelDataText(hotel.toString());
             view.setHotelListPrevSelectedIndex(selectedIndex);
+
+            // Manage hotel
+            view.setRenameHotelText(hotel.getName());
+            view.setUpdateBasePriceText(String.valueOf(hotel.getBasePrice()));
         }
     }
 

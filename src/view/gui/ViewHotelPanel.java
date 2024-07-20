@@ -7,7 +7,7 @@ import javax.swing.JEditorPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
-import javax.swing.JEditorPane;
+
 
 import src.controller.gui.AvailabilityCalendarListener;
 import src.model.Hotel;

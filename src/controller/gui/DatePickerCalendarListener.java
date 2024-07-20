@@ -41,4 +41,10 @@ public class DatePickerCalendarListener extends CalendarListener {
     @Override
     protected void handleMoved(int row, int col) {
     }
+
+    @Override
+    protected void handleReleasedOutsideComponent() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'handleReleasedOutsideComponent'");
+    }
 }

@@ -39,6 +39,7 @@ public class HotelListPanel extends JPanel {
         this.hotelListComponent = new JList<String>();
         this.hotelListComponent.setFixedCellWidth(width);
         this.hotelListComponent.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        this.hotelListComponent.setFont(TopView.ARIAL_PLAIN_FONT);
 
         this.add(hotelListComponent);
     }
