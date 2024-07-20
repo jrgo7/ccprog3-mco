@@ -5,14 +5,26 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.TableModel;
 
 public class Calendar extends JTable {
+    public final static int MAX_COLS = 7;
+    public final static int MAX_ROWS = 5;
+    
     public Calendar() {
-        super(5, 7);
+        super(MAX_ROWS, MAX_COLS);
         this.setCellSelectionEnabled(true);
         this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         TableModel model = getModel();
         for (int i = 1; i <= 31; i++) {
-            model.setValueAt(i, (i - 1) / 7, (i - 1) % 7);
+            model.setValueAt(i, (i - 1) / MAX_COLS, (i - 1) % MAX_COLS);
         }
+        this.setFont(TopView.ARIAL_PLAIN_FONT);
+        this.setRowHeight(28);
+    }
+
+    public static int toDay(int row, int col) {
+        if (row == -1 || col == -1) {
+            return -1;
+        }
+        return row * 7 + col % 7 + 1;
     }
 
     // Prevents all cells from being edited

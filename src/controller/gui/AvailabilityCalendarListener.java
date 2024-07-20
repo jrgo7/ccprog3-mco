@@ -1,28 +1,66 @@
 package src.controller.gui;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-
-import javax.swing.ListSelectionModel;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 import src.model.Hotel;
 import src.model.ReservationSystem;
+import src.view.gui.Calendar;
 import src.view.gui.TopView;
 
-public class AvailabilityCalendarListener implements ListSelectionListener, MouseListener, KeyListener {
-    ReservationSystem reservationSystem;
-    TopView view;
-    int receivedIndex;
-    int row;
-    int col;
+public class AvailabilityCalendarListener extends CalendarListener {
 
     public AvailabilityCalendarListener(ReservationSystem reservationSystem, TopView view) {
-        this.reservationSystem = reservationSystem;
-        this.view = view;
+        super(reservationSystem, view);
+    }
+
+    @Override
+    protected void handleSelected(int row, int col) {
+        handleCheckAvailability(row, col);
+    }
+
+    @Override
+    protected void handleClicked(int row, int col) {
+        handleCheckAvailability(row, col);
+    }
+
+    @Override
+    protected void handleEntered(int row, int col) {
+
+    }
+
+    @Override
+    protected void handleExited(int row, int col) {
+
+    }
+
+    @Override
+    protected void handleReleased(int row, int col) {
+    }
+
+    protected void handleReleasedOutsideComponent() {
+        view.resetAvailabilityCalendarSelection();
+    }
+
+    @Override
+    protected void handleDragged(int row, int col) {
+        handleCheckAvailability(row, col);
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+        // So CalendarListener.mouseMoved does not overwrite row, col
+
+    }
+    
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        // So CalendarListener.mouseEntered does not overwrite row, col
+
+    }
+
+    @Override
+    protected void handleMoved(int row, int col) {
+
     }
 
     public void handleCheckAvailability(int row, int col) {
@@ -30,99 +68,27 @@ public class AvailabilityCalendarListener implements ListSelectionListener, Mous
         if (hotel == null) {
             return;
         }
-        int day = row * 7 + col % 7 + 1;
-        if (day > 31) {
+        int day = Calendar.toDay(row, col);
+        if (day > 31 || day < 1) {
+            view.setHotelAvailabilityDataText("<p></p>");
             return; // Block invalid input
         }
 
         boolean isOneRoom = hotel.getAvailableRoomCount(day) == 1;
         view.setHotelAvailabilityDataText(
                 String.format("""
-                        Reservations on day %d: %d
-                        There %s %d room%s available.
+                        <div style="font-family: sans-serif">
+                        <h2>Day %d</h1>
+                        <ul>
+                        <li>Reservations: %d</li>
+                        <li>Rooms available: %d room%s.</li>
+                        </ul>
+                        </div>
                         """,
                         day,
                         hotel.getReservationCountOnDate(day, false),
-                        isOneRoom ? "is" : "are",
                         hotel.getAvailableRoomCount(day),
                         isOneRoom ? "" : "s"));
     }
 
-    @Override
-    public void mouseClicked(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        row = view.getAvailabilityCalendarRowFromMouse(e.getPoint());
-        col = view.getAvailabilityCalendarColFromMouse(e.getPoint());
-
-        // Get the context of the event then do the appropriate action
-        switch (view.getContext()) {
-            case (TopView.VIEW_HOTEL_SCREEN):
-                switch (view.getSubcontext()) {
-                    case (TopView.CHECK_AVAILABILITY_SCREEN):
-                        handleCheckAvailability(row, col);
-                        break;
-                }
-                break;
-        }
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-
-    }
-
-    @Override
-    public void valueChanged(ListSelectionEvent e) {
-        ListSelectionModel lsm = (ListSelectionModel) e.getSource();
-        receivedIndex = lsm.getLeadSelectionIndex();
-    }
-
-    @Override
-    public void keyTyped(KeyEvent e) {
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-        switch (e.getKeyCode()) {
-            case KeyEvent.VK_LEFT:
-            case KeyEvent.VK_KP_LEFT:
-                col = Math.max(col - 1, 0);
-                handleCheckAvailability(row, col);
-                break;
-            case KeyEvent.VK_RIGHT:
-            case KeyEvent.VK_KP_RIGHT:
-                col = Math.min(col + 1, 6);
-                handleCheckAvailability(row, col);
-                break;
-            case KeyEvent.VK_UP:
-            case KeyEvent.VK_KP_UP:
-                row = Math.max(row - 1, 0);
-                handleCheckAvailability(row, col);
-                break;
-            case KeyEvent.VK_DOWN:
-            case KeyEvent.VK_KP_DOWN:
-                row = Math.min(row + 1, 4);
-                handleCheckAvailability(row, col);
-                break;
-        }
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-
-    }
 }

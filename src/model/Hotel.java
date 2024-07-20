@@ -272,21 +272,24 @@ public class Hotel {
       case 1:
         for (int i = 0; i < count && this.rooms.size() < 50; i++)
           this.rooms.add(
-              new Room(String.format(formatString, 1 + this.lastRoomNumber++),
+              new Room(
+                  String.format(formatString, 1 + this.lastRoomNumber++),
                   this.basePrice));
         break;
       case 2:
         formatString += "-DX";
         for (int i = 0; i < count && this.rooms.size() < 50; i++)
           this.rooms.add(
-              new DeluxeRoom(String.format(formatString, 1 + this.lastRoomNumber++),
+              new DeluxeRoom(
+                  String.format(formatString, 1 + this.lastRoomNumber++),
                   this.basePrice));
         break;
       case 3:
         formatString += "-EX";
         for (int i = 0; i < count && this.rooms.size() < 50; i++)
           this.rooms.add(
-              new ExecutiveRoom(String.format(formatString, 1 + this.lastRoomNumber++),
+              new ExecutiveRoom(
+                  String.format(formatString, 1 + this.lastRoomNumber++),
                   this.basePrice));
         break;
     }
@@ -435,13 +438,18 @@ public class Hotel {
   @Override
   public String toString() {
     return String.format("""
-        Hotel information:
-          Name: %s
-          Rooms: %d
-          - of which Normal Rooms: %d
-          - of which Deluxe Rooms: %d
-          - of which Executive Rooms: %d
-          Estimated earnings: %.2f""",
+        <div style="font-family: sans-serif">
+          <h1>%s</h1>
+          <ul>
+            <li>Rooms: %d<br></li>
+            <ul>
+            <li>of which Normal Rooms: %d</li>
+            <li>of which Deluxe Rooms: %d</li>
+            <li>of which Executive Rooms: %d</li>
+            </ul>
+            <li>Estimated earnings: %.2f</li>
+          </ul>
+          </div>""",
         this.getName(),
         this.getRoomCount(),
         this.getRoomCount() - this.getDeluxeRoomCount() - this.getExecutiveRoomCount(),

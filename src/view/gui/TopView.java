@@ -2,6 +2,7 @@ package src.view.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public class TopView extends JFrame {
     static public final int CHECK_AVAILABILITY_SCREEN = 101;
     static public final int MANAGE_HOTEL_SCREEN = 1;
     static public final int SIMULATE_BOOKING_SCREEN = 2;
-
+    static public final Font ARIAL_PLAIN_FONT = new Font("Arial", Font.PLAIN, 14);
     private HotelListPanel hotelListPanel;
     private ViewHotelPanel viewHotelPanel;
 
@@ -74,6 +75,7 @@ public class TopView extends JFrame {
         bookHotelPanel.add(bookHotelPanelLabel);
         topMenuPane.addTab("Book", bookHotelPanel);
 
+        topMenuPane.setFont(ARIAL_PLAIN_FONT);
         this.add(topMenuPane, BorderLayout.CENTER);
     }
 
@@ -138,6 +140,19 @@ public class TopView extends JFrame {
 
     public int getAvailabilityCalendarColFromMouse(Point point) {
         return this.viewHotelPanel.getCalendarColAtPoint(point);
+    }
+
+    public void resetAvailabilityCalendarSelection() {
+        this.viewHotelPanel.resetCalendarSelection();
+
+    }
+
+    /**
+     * To be triggered when a hotel gets added
+     */
+    public void resetState() {
+        this.resetAvailabilityCalendarSelection();
+        this.setHotelAvailabilityDataText("<p></p>");
     }
 
     public int getContext() {

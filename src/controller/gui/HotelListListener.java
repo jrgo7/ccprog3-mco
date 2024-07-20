@@ -34,6 +34,7 @@ public class HotelListListener implements ListSelectionListener {
             // Selected "Add hotel" button
             if (reservationSystem.addHotel(view.promptAddHotel())) {
                 view.setTabIndex(TopView.VIEW_HOTEL_SCREEN);
+                view.resetState();
                 this.updateHotelList();
                 view.setHotelListSelectedIndex(selectedIndex); // redundant but gives a nice blue selection
                                                                // highlight

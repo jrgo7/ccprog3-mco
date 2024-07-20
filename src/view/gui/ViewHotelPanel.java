@@ -4,18 +4,19 @@ import java.awt.BorderLayout;
 import java.awt.Point;
 import java.util.ArrayList;
 
+import javax.swing.JEditorPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
-import javax.swing.JTextArea;
+import javax.swing.JEditorPane;
 
 import src.controller.gui.AvailabilityCalendarListener;
 import src.model.Hotel;
 
 /** Represents the View Hotel panel. */
 public class ViewHotelPanel extends JPanel {
-    /** The {@link JTextArea} containing {@link Hotel} data. */
-    private JTextArea hotelDataComponent;
+    /** The {@link JEditorPane} containing {@link Hotel} data. */
+    private JEditorPane hotelDataComponent;
 
     /** A {@link JTabbedPane} containing subpanels. */
     private JTabbedPane subpanels;
@@ -28,7 +29,7 @@ public class ViewHotelPanel extends JPanel {
     public ViewHotelPanel() {
         this.setLayout(new BorderLayout());
 
-        this.hotelDataComponent = new JTextArea();
+        this.hotelDataComponent = new JEditorPane("text/html", "<h1 style=\"font-family: sans-serif\">Hotels</h1>");
         this.hotelDataComponent.setEditable(false);
         this.add(this.hotelDataComponent, BorderLayout.NORTH);
 
@@ -44,11 +45,12 @@ public class ViewHotelPanel extends JPanel {
 
         this.subpanels.add("Reservations", new JPanel());
 
+        subpanels.setFont(TopView.ARIAL_PLAIN_FONT);
         this.add(subpanels, BorderLayout.CENTER);
     }
 
     /**
-     * Updates the {@link JTextArea} containing the hotel data.
+     * Updates the {@link JEditorPane} containing the hotel data.
      * 
      * @param text The hotel data string to use
      */
@@ -90,6 +92,10 @@ public class ViewHotelPanel extends JPanel {
      */
     public int getCalendarColAtPoint(Point point) {
         return this.viewAvailabilitySubpanel.getCalendarColAtPoint(point);
+    }
+
+    public void resetCalendarSelection() {
+        this.viewAvailabilitySubpanel.resetCalendarSelection();
     }
 
     /**
