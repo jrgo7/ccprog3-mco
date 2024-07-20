@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -91,7 +92,7 @@ public class TopView extends JFrame {
     }
 
     public void setHotelListData(ArrayList<String> data) {
-        this.hotelListPanel.updateHotelList(data);
+        this.hotelListPanel.updateList(data);
     }
 
     public int getHotelListPrevSelectedIndex() {
@@ -125,6 +126,10 @@ public class TopView extends JFrame {
 
     public void setHotelAvailabilityDataText(String text) {
         this.viewHotelPanel.updateAvailability(text);
+    }
+
+    public void updateRoomList(String[] data) {
+       this.viewHotelPanel.updateRoomList(new ArrayList<>(Arrays.asList(data)));
     }
 
     public int getAvailabilityCalendarRowFromMouse(Point point) {

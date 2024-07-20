@@ -2,6 +2,7 @@ package src.view.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Point;
+import java.util.ArrayList;
 
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
@@ -22,6 +23,8 @@ public class ViewHotelPanel extends JPanel {
     /** The View Availability subpanel tied to this panel. */
     private ViewAvailabilityPanel viewAvailabilitySubpanel;
 
+    private ViewRoomPanel viewRoomSubPanel;
+
     public ViewHotelPanel() {
         this.setLayout(new BorderLayout());
 
@@ -35,7 +38,10 @@ public class ViewHotelPanel extends JPanel {
         this.subpanels.add("Availability", this.viewAvailabilitySubpanel);
 
         /* TODO: Subpanels for viewing rooms and reservations */
-        this.subpanels.add("Rooms", new JPanel());
+
+        this.viewRoomSubPanel = new ViewRoomPanel();
+        this.subpanels.add("Rooms", viewRoomSubPanel);
+
         this.subpanels.add("Reservations", new JPanel());
 
         this.add(subpanels, BorderLayout.CENTER);
@@ -99,5 +105,9 @@ public class ViewHotelPanel extends JPanel {
     /** {@return the index of the selected subpanel} */
     public int getSelectedSubpanelIndex() {
         return this.subpanels.getSelectedIndex();
+    }
+
+    public void updateRoomList(ArrayList<String> data) {
+        this.viewRoomSubPanel.updateRoomList(data);
     }
 }

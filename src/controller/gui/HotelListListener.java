@@ -50,6 +50,7 @@ public class HotelListListener implements ListSelectionListener {
             view.setHotelDataText(
                     reservationSystem.getHotel(selectedIndex).toString());
             view.setHotelListPrevSelectedIndex(selectedIndex);
+            view.updateRoomList(reservationSystem.getHotel(selectedIndex).getRoomNames());
         }
     }
 
