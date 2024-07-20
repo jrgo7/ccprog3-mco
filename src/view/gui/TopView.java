@@ -1,40 +1,43 @@
 package src.view.gui;
 
-import javax.swing.*;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Point;
+import java.awt.Toolkit;
+import java.util.ArrayList;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 
 import src.controller.gui.AvailabilityCalendarListener;
 import src.controller.gui.HotelListListener;
 
-import java.awt.*;
-import java.util.ArrayList;
-
+/** Represents the top menu in the application's GUI. */
+/* TODO: Maybe have a JFrame as a field in TopView instead of inheritance */
 public class TopView extends JFrame {
-    JList<String> hotelList;
-    int hotelListPrevSelectedIndex = 0; // when cancelling add hotel
-    JTabbedPane topMenuPane = new JTabbedPane();
-
     static public final int VIEW_HOTEL_SCREEN = 0;
-    JEditorPane hotelHighLevelData = new JEditorPane();
-    JTabbedPane viewHotelSubMenuPane = new JTabbedPane();
     static public final int CHECK_AVAILABILITY_SCREEN = 101;
-    JEditorPane hotelAvailabilityData = new JEditorPane();
-
     static public final int MANAGE_HOTEL_SCREEN = 1;
-    JLabel manageHotelNameLabel = new JLabel();
-
     static public final int SIMULATE_BOOKING_SCREEN = 2;
 
-    Calendar availabilityCalendar = new Calendar();
+    private HotelListPanel hotelListPanel;
+    private ViewHotelPanel viewHotelPanel;
 
-    public static Font ARIAL_PLAIN = new Font("Arial", Font.PLAIN, 14);
+    JList<String> hotelList;
+    JTabbedPane topMenuPane = new JTabbedPane();
+    JLabel manageHotelNameLabel = new JLabel();
 
     public TopView() {
         super("Hotel Reservation System");
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception e) {
-            System.err.println("Unable to configure look and feel.");
-        }
+        // try {
+        // UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        // } catch (Exception e) {
+        // System.err.println("Unable to configure look and feel.");
+        // }
         this.setLocationByPlatform(true);
         this.setLayout(new BorderLayout());
         Dimension systemResolution = Toolkit.getDefaultToolkit().getScreenSize();
@@ -48,56 +51,20 @@ public class TopView extends JFrame {
 
     public void init() {
         // Hotel list panel
-        JPanel hotelListPanel = new JPanel();
-        hotelListPanel.setLayout(new BorderLayout());
-
-        JEditorPane hotelListPanelLabel = new JEditorPane();
-        hotelListPanelLabel.setEditable(false);
-        hotelListPanelLabel.setContentType("text/html");
-        hotelListPanelLabel.setText("<h1 style=\"font-family: sans-serif\">Visual Hotel Code</h1>");
-        hotelListPanel.add(hotelListPanelLabel, BorderLayout.NORTH);
-
-        hotelList = new JList<String>();
-        hotelList.setFixedCellWidth(this.getWidth() / 3);
-        hotelList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        hotelList.setFont(ARIAL_PLAIN);
-        hotelListPanel.add(hotelList, BorderLayout.CENTER);
+        hotelListPanel = new HotelListPanel(this.getWidth() / 3);
 
         this.add(hotelListPanel, BorderLayout.WEST);
 
         // View Hotel
-        JPanel viewHotelPanel = new JPanel();
-        viewHotelPanel.setLayout(new BorderLayout());
-        hotelHighLevelData.setEditable(false);
-        hotelHighLevelData.setContentType("text/html");
-        viewHotelPanel.add(hotelHighLevelData, BorderLayout.NORTH);
+        viewHotelPanel = new ViewHotelPanel();
 
-        // View Hotel - Submenu - Availability
-        JPanel checkAvailabilityPanel = new JPanel();
-        checkAvailabilityPanel.setLayout(new BorderLayout());
-        checkAvailabilityPanel.add(availabilityCalendar, BorderLayout.NORTH);
-        hotelAvailabilityData.setContentType("text/html");
-        hotelAvailabilityData.setEditable(false);
-        checkAvailabilityPanel.add(hotelAvailabilityData, BorderLayout.CENTER);
-        viewHotelSubMenuPane.add("Availability", checkAvailabilityPanel);
-
-        // View Hotel - Submenu - Rooms
-        JPanel checkRoomsPanel = new JPanel();
-        viewHotelSubMenuPane.add("Rooms", checkRoomsPanel);
-
-        // View Hotel - Submenu - Reservations
-        JPanel checkReservationsPanel = new JPanel();
-        viewHotelSubMenuPane.add("Reservations", checkReservationsPanel);
-
-        viewHotelPanel.add(viewHotelSubMenuPane, BorderLayout.CENTER);
-        
-        viewHotelSubMenuPane.setFont(ARIAL_PLAIN);
         topMenuPane.addTab("View", viewHotelPanel);
 
         // Manage hotel
         JPanel manageHotelPanel = new JPanel();
         manageHotelPanel.setLayout(new BorderLayout());
         manageHotelPanel.add(manageHotelNameLabel, BorderLayout.NORTH);
+
         topMenuPane.addTab("Manage", manageHotelPanel);
 
         // Simulate booking
@@ -106,7 +73,6 @@ public class TopView extends JFrame {
         bookHotelPanel.add(bookHotelPanelLabel);
         topMenuPane.addTab("Book", bookHotelPanel);
 
-        topMenuPane.setFont(ARIAL_PLAIN);
         this.add(topMenuPane, BorderLayout.CENTER);
     }
 
@@ -116,21 +82,8 @@ public class TopView extends JFrame {
 
     public void setListeners(HotelListListener hotelListListener,
             AvailabilityCalendarListener availabilityCalendarListener) {
-        hotelList.getSelectionModel()
-                .addListSelectionListener(hotelListListener);
-        availabilityCalendar
-                .addMouseListener(availabilityCalendarListener);
-        availabilityCalendar
-                .getSelectionModel()
-                .addListSelectionListener(availabilityCalendarListener);
-        availabilityCalendar
-                .getColumnModel()
-                .getSelectionModel()
-                .addListSelectionListener(availabilityCalendarListener);
-        availabilityCalendar
-                .addKeyListener(availabilityCalendarListener);
-        availabilityCalendar
-                .addMouseMotionListener(availabilityCalendarListener);
+        this.hotelListPanel.setListener(hotelListListener);
+        this.viewHotelPanel.setCalendarListener(availabilityCalendarListener);
     }
 
     public void setTabIndex(int index) {
@@ -138,30 +91,27 @@ public class TopView extends JFrame {
     }
 
     public void setHotelListData(ArrayList<String> data) {
-        String[] arr = new String[data.size() + 1];
-        data.add("Add hotel...");
-        hotelList.setListData(data.toArray(arr));
+        this.hotelListPanel.updateHotelList(data);
     }
 
     public int getHotelListPrevSelectedIndex() {
-        return this.hotelListPrevSelectedIndex;
+        return this.hotelListPanel.getFallbackIndex();
     }
 
     public void setHotelListPrevSelectedIndex(int index) {
-        this.hotelListPrevSelectedIndex = index;
+        this.hotelListPanel.setFallbackIndex(index);
     }
 
     public int getHotelListSelectedIndex() {
-        return hotelList.getSelectedIndex();
+        return this.hotelListPanel.getSelectedIndex();
     }
 
     public void setHotelListSelectedIndex(int index) {
-        hotelList.setSelectionInterval(index, index);
+        this.hotelListPanel.setSelectedIndex(index);
     }
 
     public void removeHotelListSelection() {
-        hotelList.removeSelectionInterval(
-                0, hotelList.getComponentCount());
+        this.hotelListPanel.clearSelection();
     }
 
     public void setHotelNameLabelText(String text) {
@@ -170,19 +120,19 @@ public class TopView extends JFrame {
     }
 
     public void setHotelDataText(String text) {
-        hotelHighLevelData.setText(text);
+        this.viewHotelPanel.updateHotelData(text);
     }
 
     public void setHotelAvailabilityDataText(String text) {
-        hotelAvailabilityData.setText(text);
+        this.viewHotelPanel.updateAvailability(text);
     }
 
     public int getAvailabilityCalendarRowFromMouse(Point point) {
-        return availabilityCalendar.rowAtPoint(point);
+        return this.viewHotelPanel.getCalendarRowAtPoint(point);
     }
 
     public int getAvailabilityCalendarColFromMouse(Point point) {
-        return availabilityCalendar.columnAtPoint(point);
+        return this.viewHotelPanel.getCalendarColAtPoint(point);
     }
 
     public int getContext() {
@@ -193,13 +143,8 @@ public class TopView extends JFrame {
         int retval = (this.getContext() + 1) * 100;
         switch (getContext()) {
             case TopView.VIEW_HOTEL_SCREEN:
-                return retval + viewHotelSubMenuPane.getSelectedIndex() + 1;
+                return retval + this.viewHotelPanel.getSelectedSubpanelIndex() + 1;
         }
         return -1;
-    }
-
-    public void resetAvailabilityCalendarSelection() {
-        availabilityCalendar.removeRowSelectionInterval(Calendar.MAX_ROWS-1, 0);
-        availabilityCalendar.removeColumnSelectionInterval(Calendar.MAX_COLS-1, 0);
     }
 }
