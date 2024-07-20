@@ -18,6 +18,7 @@ import javax.swing.JTabbedPane;
 
 import src.controller.gui.AvailabilityCalendarListener;
 import src.controller.gui.HotelListListener;
+import src.controller.gui.ManagePricesListener;
 import src.controller.gui.RenameHotelListener;
 import src.controller.gui.UpdateBasePriceListener;
 
@@ -39,9 +40,9 @@ public class TopView extends JFrame {
     public TopView() {
         super("Hotel Reservation System");
         // try {
-        //     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        // UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         // } catch (Exception e) {
-        //     System.err.println("Unable to configure look and feel.");
+        // System.err.println("Unable to configure look and feel.");
         // }
         this.setLocationByPlatform(true);
         this.setLayout(new BorderLayout());
@@ -88,11 +89,13 @@ public class TopView extends JFrame {
             HotelListListener hotelListListener,
             AvailabilityCalendarListener availabilityCalendarListener,
             RenameHotelListener renameHotelListener,
-            UpdateBasePriceListener updateBasePriceListener) {
+            UpdateBasePriceListener updateBasePriceListener,
+            ManagePricesListener managePricesListener) {
         this.hotelListPanel.setListener(hotelListListener);
         this.viewHotelPanel.setCalendarListener(availabilityCalendarListener);
         this.manageHotelPanel.setRenameHotelListener(renameHotelListener);
         this.manageHotelPanel.setUpdateBasePriceListener(updateBasePriceListener);
+        this.manageHotelPanel.setManagePricesListener(managePricesListener);
     }
 
     public void setTabIndex(int index) {
@@ -138,7 +141,9 @@ public class TopView extends JFrame {
     }
 
     public void updateRoomList(String[] data) {
-       this.viewHotelPanel.updateRoomList(new ArrayList<>(Arrays.asList(data)));
+        ArrayList<String> dataAsList = new ArrayList<>(Arrays.asList(data));
+        this.viewHotelPanel.updateRoomList(dataAsList);
+        this.manageHotelPanel.updateRoomList(dataAsList);
     }
 
     public int getAvailabilityCalendarRowFromMouse(Point point) {
@@ -168,6 +173,10 @@ public class TopView extends JFrame {
 
     public void setUpdateBasePriceText(String basePrice) {
         this.manageHotelPanel.setUpdateBasePriceText(basePrice);
+    }
+
+    public void setManagePricesCalendarText(int day, String text) {
+        this.manageHotelPanel.setManagePricesCalendarText(day, text);
     }
 
     // Error dialogs

@@ -6,15 +6,11 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
-import javax.swing.ListSelectionModel;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-
 import src.model.ReservationSystem;
 import src.view.gui.Calendar;
 import src.view.gui.TopView;
 
-abstract class CalendarListener implements ListSelectionListener, MouseListener, MouseMotionListener, KeyListener {
+abstract class CalendarListener implements MouseListener, MouseMotionListener, KeyListener {
     ReservationSystem reservationSystem;
     TopView view;
     int receivedIndex;
@@ -30,12 +26,10 @@ abstract class CalendarListener implements ListSelectionListener, MouseListener,
     protected abstract void handleSelected(int row, int col);
 
     // Selected from a keyboard input and then pressed enter
-    protected abstract void handleEntered(int row, int col);
+    protected abstract void handlePressEnterKey(int row, int col);
 
     // Seleected from a mouse input
     protected abstract void handleClicked(int row, int col);
-
-    protected abstract void handleExited(int row, int col);
 
     protected abstract void handleReleased(int row, int col);
     
@@ -44,12 +38,6 @@ abstract class CalendarListener implements ListSelectionListener, MouseListener,
     protected abstract void handleMoved(int row, int col);
 
     protected abstract void handleReleasedOutsideComponent();
-
-    @Override
-    public void valueChanged(ListSelectionEvent e) {
-        ListSelectionModel lsm = (ListSelectionModel) e.getSource();
-        receivedIndex = lsm.getLeadSelectionIndex();
-    }
 
     @Override
     public void keyPressed(KeyEvent e) {
@@ -75,7 +63,7 @@ abstract class CalendarListener implements ListSelectionListener, MouseListener,
                 handleSelected(row, col);
                 break;
             case KeyEvent.VK_ENTER:
-                handleEntered(row, col);
+                handlePressEnterKey(row, col);
         }
     }
 
@@ -115,16 +103,12 @@ abstract class CalendarListener implements ListSelectionListener, MouseListener,
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        row = view.getAvailabilityCalendarRowFromMouse(e.getPoint());
-        col = view.getAvailabilityCalendarColFromMouse(e.getPoint());
-        handleEntered(row, col);
+
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        row = view.getAvailabilityCalendarRowFromMouse(e.getPoint());
-        col = view.getAvailabilityCalendarColFromMouse(e.getPoint());
-        handleExited(row, col);
+        
     }
 
     @Override
@@ -136,10 +120,7 @@ abstract class CalendarListener implements ListSelectionListener, MouseListener,
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        row = view.getAvailabilityCalendarRowFromMouse(e.getPoint());
-        col = view.getAvailabilityCalendarColFromMouse(e.getPoint());
-        handleMoved(row, col);
-        System.out.println("Not overridden movin");
+
     }
 
     public void setRow(int row) {

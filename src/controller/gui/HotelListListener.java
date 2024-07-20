@@ -39,7 +39,8 @@ public class HotelListListener implements ListSelectionListener {
             // Selected "Add hotel" button
             String name = view.promptAddHotel();
             if (reservationSystem.addHotel(name)) {
-                // view.setTabIndex(TopView.VIEW_HOTEL_SCREEN); // ? Not needed as we have a way of updating default GUI fields, see [1]
+                // view.setTabIndex(TopView.VIEW_HOTEL_SCREEN); // ? Not needed as we have a way
+                // of updating default GUI fields, see [1]
                 view.resetState();
                 this.updateHotelList();
                 view.setHotelListSelectedIndex(selectedIndex); // redundant but gives a nice blue selection
@@ -57,7 +58,7 @@ public class HotelListListener implements ListSelectionListener {
         if (selectedIndex >= 0 && selectedIndex < hotelCount) {
             // * [1] Set default values in GUI after selecting a hotel
             Hotel hotel = reservationSystem.getHotel(selectedIndex);
-            
+
             // View hotel
             view.setHotelDataText(hotel.toString());
             view.setHotelListPrevSelectedIndex(selectedIndex);
@@ -66,6 +67,14 @@ public class HotelListListener implements ListSelectionListener {
             // Manage hotel
             view.setRenameHotelText(hotel.getName());
             view.setUpdateBasePriceText(String.valueOf(hotel.getBasePrice()));
+            for (int day = 1; day <= 31; day++) {
+                view.setManagePricesCalendarText(
+                        day,
+                        String.format(
+                                "%d: %.2f",
+                                day,
+                                hotel.getPriceModifierOnNight(day)));
+            }
         }
     }
 

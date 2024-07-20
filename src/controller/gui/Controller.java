@@ -10,6 +10,7 @@ public class Controller {
     HotelListListener hotelListListener;
     RenameHotelListener renameHotelListener;
     UpdateBasePriceListener updateBasePriceListener;
+    ManagePricesListener managePricesListener;
 
     public Controller(ReservationSystem reservationSystem, TopView view) {
         this.reservationSystem = reservationSystem;
@@ -18,11 +19,13 @@ public class Controller {
         hotelListListener = new HotelListListener(reservationSystem, view);
         renameHotelListener = new RenameHotelListener(reservationSystem, view);
         updateBasePriceListener = new UpdateBasePriceListener(reservationSystem, view);
+        managePricesListener = new ManagePricesListener(reservationSystem, view);
 
         this.view.setListeners(
             hotelListListener,
             availabilityCalendarListener,
             renameHotelListener,
-            updateBasePriceListener);
+            updateBasePriceListener,
+            managePricesListener);
     }
 }

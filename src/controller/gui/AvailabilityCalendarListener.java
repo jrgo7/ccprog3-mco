@@ -1,7 +1,5 @@
 package src.controller.gui;
 
-import java.awt.event.MouseEvent;
-
 import src.model.Hotel;
 import src.model.ReservationSystem;
 import src.view.gui.Calendar;
@@ -24,17 +22,13 @@ public class AvailabilityCalendarListener extends CalendarListener {
     }
 
     @Override
-    protected void handleEntered(int row, int col) {
-
-    }
-
-    @Override
-    protected void handleExited(int row, int col) {
+    protected void handlePressEnterKey(int row, int col) {
 
     }
 
     @Override
     protected void handleReleased(int row, int col) {
+        
     }
 
     protected void handleReleasedOutsideComponent() {
@@ -44,18 +38,6 @@ public class AvailabilityCalendarListener extends CalendarListener {
     @Override
     protected void handleDragged(int row, int col) {
         handleCheckAvailability(row, col);
-    }
-
-    @Override
-    public void mouseMoved(MouseEvent e) {
-        // So CalendarListener.mouseMoved does not overwrite row, col
-
-    }
-    
-    @Override
-    public void mouseEntered(MouseEvent e) {
-        // So CalendarListener.mouseEntered does not overwrite row, col
-
     }
 
     @Override

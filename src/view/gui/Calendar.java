@@ -12,7 +12,7 @@ public class Calendar extends JTable {
         super(MAX_ROWS, MAX_COLS);
         this.setCellSelectionEnabled(true);
         this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        TableModel model = getModel();
+        TableModel model = this.getModel();
         for (int i = 1; i <= 31; i++) {
             model.setValueAt(i, (i - 1) / MAX_COLS, (i - 1) % MAX_COLS);
         }
@@ -25,6 +25,11 @@ public class Calendar extends JTable {
             return -1;
         }
         return row * 7 + col % 7 + 1;
+    }
+
+    public void setCalendarText(int day, String text) {
+        this.getModel().setValueAt(
+            text, (day - 1) / MAX_COLS, (day - 1) % MAX_COLS);
     }
 
     // Prevents all cells from being edited
