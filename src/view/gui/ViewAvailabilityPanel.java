@@ -5,7 +5,7 @@ import java.awt.Point;
 
 import javax.swing.JPanel;
 import javax.swing.JTable;
-import javax.swing.JTextArea;
+import javax.swing.JEditorPane;
 
 import src.controller.gui.AvailabilityCalendarListener;
 
@@ -14,15 +14,15 @@ public class ViewAvailabilityPanel extends JPanel {
     /** The {@link Calendar} showing available dates. */
     private Calendar calendarComponent;
 
-    /** The {@link JTextArea} containing availability information for the hotel. */
-    private JTextArea availabilityComponent;
+    /** The {@link JEditorPane} containing availability information for the hotel. */
+    private JEditorPane availabilityComponent;
 
     /** Initializes the panel to contain availability information. */
     public ViewAvailabilityPanel() {
         this.setLayout(new BorderLayout());
 
         calendarComponent = new Calendar();
-        availabilityComponent = new JTextArea();
+        availabilityComponent = new JEditorPane();
         availabilityComponent.setEditable(false);
 
         this.add(calendarComponent, BorderLayout.NORTH);
@@ -58,6 +58,11 @@ public class ViewAvailabilityPanel extends JPanel {
      */
     public int getCalendarColAtPoint(Point point) {
         return this.calendarComponent.columnAtPoint(point);
+    }
+
+    public void resetCalendarSelection() {
+        this.calendarComponent.removeRowSelectionInterval(Calendar.MAX_ROWS-1, 0);
+        this.calendarComponent.removeColumnSelectionInterval(Calendar.MAX_COLS-1, 0);
     }
 
     /**
