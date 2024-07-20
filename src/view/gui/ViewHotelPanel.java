@@ -9,8 +9,8 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 
-
 import src.controller.gui.AvailabilityCalendarListener;
+import src.controller.gui.RoomListListener;
 import src.model.Hotel;
 
 /** Represents the View Hotel panel. */
@@ -47,6 +47,14 @@ public class ViewHotelPanel extends JPanel {
 
         subpanels.setFont(TopView.ARIAL_PLAIN_FONT);
         this.add(subpanels, BorderLayout.CENTER);
+    }
+
+    public void setRoomListListener(RoomListListener roomListListener) {
+        this.viewRoomSubPanel.setRoomListListener(roomListListener);
+    }
+
+    public void updateRoomData(String data) {
+        this.viewRoomSubPanel.updateRoomData(data);
     }
 
     /**
