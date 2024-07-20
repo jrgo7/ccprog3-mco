@@ -159,6 +159,7 @@ public class TopView extends JFrame {
     }
 
     // Manage hotel delegations
+
     public String getRenameHotelText() {
         return this.manageHotelPanel.getRenameHotelText();
     }
@@ -177,6 +178,18 @@ public class TopView extends JFrame {
 
     public void setManagePricesCalendarText(int day, String text) {
         this.manageHotelPanel.setManagePricesCalendarText(day, text);
+    }
+
+    public String getPriceModifierField() {
+        return this.manageHotelPanel.getPriceModifierField();
+    }
+
+    public void setPriceModifierField(String text) {
+        this.manageHotelPanel.setPriceModifierField(text);
+    }
+
+    public void setModifiedPriceText(String text) {
+        this.manageHotelPanel.setModifiedPriceText(text);
     }
 
     // Error dialogs
@@ -202,6 +215,14 @@ public class TopView extends JFrame {
                 "The base price cannot be updated while reservations exist " +
                         "in the current hotel. The base price must also be at least 100.",
                 "Invalid base price update error",
+                JOptionPane.ERROR_MESSAGE);
+    }
+
+    public void showPriceModifierError() {
+        JOptionPane.showMessageDialog(
+                this,
+                "The price modifier must be within 0.50-1.50.",
+                "Invalid price modifier error",
                 JOptionPane.ERROR_MESSAGE);
     }
 

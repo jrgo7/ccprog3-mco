@@ -113,6 +113,18 @@ public class ManageHotelPanel extends JPanel {
         this.managePricesSubpanel.setCalendarText(day, text);
     }
 
+    public String getPriceModifierField() {
+        return this.managePricesSubpanel.getPriceModifierField();
+    }
+
+    public void setPriceModifierField(String text) {
+        this.managePricesSubpanel.setPriceModifierField(text);
+    }
+
+    public void setModifiedPriceText(String text) {
+        this.managePricesSubpanel.setModifiedPriceText(text);
+    }
+
     public void setManagePricesListener(ManagePricesListener listener) {
         this.managePricesSubpanel.setListener(listener);
     }
