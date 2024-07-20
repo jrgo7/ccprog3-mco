@@ -439,7 +439,7 @@ public class Hotel {
   public String toString() {
     return String.format("""
         <div style="font-family: sans-serif">
-          <h1>%s</h1>
+          <h2>%s</h2>
           <ul>
             <li>Rooms: %d<br></li>
             <ul>

@@ -14,9 +14,12 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+// import javax.swing.UIManager;
 
 import src.controller.gui.AvailabilityCalendarListener;
 import src.controller.gui.HotelListListener;
+import src.controller.gui.RenameHotelListener;
+import src.controller.gui.UpdateBasePriceListener;
 
 /** Represents the top menu in the application's GUI. */
 /* TODO: Maybe have a JFrame as a field in TopView instead of inheritance */
@@ -28,17 +31,17 @@ public class TopView extends JFrame {
     static public final Font ARIAL_PLAIN_FONT = new Font("Arial", Font.PLAIN, 14);
     private HotelListPanel hotelListPanel;
     private ViewHotelPanel viewHotelPanel;
+    private ManageHotelPanel manageHotelPanel;
 
     JList<String> hotelList;
     JTabbedPane topMenuPane = new JTabbedPane();
-    JLabel manageHotelNameLabel = new JLabel();
 
     public TopView() {
         super("Hotel Reservation System");
         // try {
-        // UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        //     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         // } catch (Exception e) {
-        // System.err.println("Unable to configure look and feel.");
+        //     System.err.println("Unable to configure look and feel.");
         // }
         this.setLocationByPlatform(true);
         this.setLayout(new BorderLayout());
@@ -63,9 +66,7 @@ public class TopView extends JFrame {
         topMenuPane.addTab("View", viewHotelPanel);
 
         // Manage hotel
-        JPanel manageHotelPanel = new JPanel();
-        manageHotelPanel.setLayout(new BorderLayout());
-        manageHotelPanel.add(manageHotelNameLabel, BorderLayout.NORTH);
+        manageHotelPanel = new ManageHotelPanel();
 
         topMenuPane.addTab("Manage", manageHotelPanel);
 
@@ -83,10 +84,15 @@ public class TopView extends JFrame {
         return JOptionPane.showInputDialog("Hotel name");
     }
 
-    public void setListeners(HotelListListener hotelListListener,
-            AvailabilityCalendarListener availabilityCalendarListener) {
+    public void setListeners(
+            HotelListListener hotelListListener,
+            AvailabilityCalendarListener availabilityCalendarListener,
+            RenameHotelListener renameHotelListener,
+            UpdateBasePriceListener updateBasePriceListener) {
         this.hotelListPanel.setListener(hotelListListener);
         this.viewHotelPanel.setCalendarListener(availabilityCalendarListener);
+        this.manageHotelPanel.setRenameHotelListener(renameHotelListener);
+        this.manageHotelPanel.setUpdateBasePriceListener(updateBasePriceListener);
     }
 
     public void setTabIndex(int index) {
@@ -94,7 +100,7 @@ public class TopView extends JFrame {
     }
 
     public void setHotelListData(ArrayList<String> data) {
-        this.hotelListPanel.updateList(data);
+        this.hotelListPanel.setList(data);
     }
 
     public int getHotelListPrevSelectedIndex() {
@@ -117,10 +123,11 @@ public class TopView extends JFrame {
         this.hotelListPanel.clearSelection();
     }
 
-    public void setHotelNameLabelText(String text) {
-        manageHotelNameLabel.setText(text);
-        System.out.println(text);
+    public void setTopMenuPaneVisible(boolean enable) {
+        this.topMenuPane.setVisible(enable);
     }
+
+    // View hotel delegations
 
     public void setHotelDataText(String text) {
         this.viewHotelPanel.updateHotelData(text);
@@ -144,7 +151,49 @@ public class TopView extends JFrame {
 
     public void resetAvailabilityCalendarSelection() {
         this.viewHotelPanel.resetCalendarSelection();
+    }
 
+    // Manage hotel delegations
+    public String getRenameHotelText() {
+        return this.manageHotelPanel.getRenameHotelText();
+    }
+
+    public void setRenameHotelText(String name) {
+        this.manageHotelPanel.setRenameHotelText(name);
+    }
+
+    public String getUpdateBasePriceText() {
+        return this.manageHotelPanel.getUpdateBasePriceText();
+    }
+
+    public void setUpdateBasePriceText(String basePrice) {
+        this.manageHotelPanel.setUpdateBasePriceText(basePrice);
+    }
+
+    // Error dialogs
+    public void noHotelNameProvidedError() {
+        JOptionPane.showMessageDialog(
+                this,
+                "Please provide a non-empty hotel name.",
+                "No hotel name provided error",
+                JOptionPane.ERROR_MESSAGE);
+    }
+
+    public void showHotelNameExistsError() {
+        JOptionPane.showMessageDialog(
+                this,
+                "A hotel with this name already exists!",
+                "Hotel name conflict error",
+                JOptionPane.ERROR_MESSAGE);
+    }
+
+    public void invalidBasePriceUpdateError() {
+        JOptionPane.showMessageDialog(
+                this,
+                "The base price cannot be updated while reservations exist " +
+                        "in the current hotel. The base price must also be at least 100.",
+                "Invalid base price update error",
+                JOptionPane.ERROR_MESSAGE);
     }
 
     /**

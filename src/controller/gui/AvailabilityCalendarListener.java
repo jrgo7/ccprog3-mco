@@ -78,7 +78,7 @@ public class AvailabilityCalendarListener extends CalendarListener {
         view.setHotelAvailabilityDataText(
                 String.format("""
                         <div style="font-family: sans-serif">
-                        <h2>Day %d</h1>
+                        <h2>Day %d</h2>
                         <ul>
                         <li>Reservations: %d</li>
                         <li>Rooms available: %d room%s.</li>

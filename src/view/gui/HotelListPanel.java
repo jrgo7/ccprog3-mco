@@ -2,24 +2,27 @@ package src.view.gui;
 
 import java.util.ArrayList;
 
+/**
+ * Represents the {@link ListPanel} containing the list of hotels in the
+ * application.
+ */
 public class HotelListPanel extends ListPanel {
+    /**
+     * Initializes the panel to a given width.
+     * 
+     * @param width The width of the panel
+     */
     public HotelListPanel(int width) {
         super("Hotels", width);
     }
 
-    /*
-     * TODO: Why isnt `{@inheritDoc}` working is it because its inherited from an
-     * abstract method
-     */
     /**
      * {@inheritDoc} The last element of the list will be a string containing
      * {@code Add hotel...}.
-     * 
-     * @param data The updated list of hotel names
      */
     @Override
-    public void updateList(ArrayList<String> data) {
+    public void setList(ArrayList<String> data) {
         data.add("Add hotel...");
-        super.updateList(data);
+        super.setList(data);
     }
 }

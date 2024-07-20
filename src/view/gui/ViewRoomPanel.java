@@ -17,6 +17,6 @@ public class ViewRoomPanel extends JPanel {
     }
 
     public void updateRoomList(ArrayList<String> data) {
-        this.roomListPanel.updateList(data);
+        this.roomListPanel.setList(data);
     }
 }
