@@ -192,6 +192,10 @@ public class TopView extends JFrame {
         this.manageHotelPanel.setModifiedPriceText(text);
     }
 
+    public void setPriceModiferCalendarDay(int day) {
+        this.manageHotelPanel.setPriceModiferCalendarDay(day);
+    }
+
     // Error dialogs
     public void noHotelNameProvidedError() {
         JOptionPane.showMessageDialog(

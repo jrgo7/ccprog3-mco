@@ -22,7 +22,7 @@ public class ManagePricesPanel extends JPanel {
 
         calendarComponent = new Calendar();
         this.add(calendarComponent);
-
+        
         modifiedPriceData = new JEditorPane("text/html", "<p></p>");
         modifiedPriceData.setEditable(false);
         this.add(modifiedPriceData);
@@ -59,6 +59,10 @@ public class ManagePricesPanel extends JPanel {
 
     public void setPriceModifierField(String text) {
         this.priceField.setText(text);
+    }
+
+    public void selectCalendarDay(int day) {
+        this.calendarComponent.selectDay(day);
     }
 
     public void setListener(ManagePricesListener listener) {

@@ -83,7 +83,6 @@ public class ManagePricesListener extends CalendarListener implements ActionList
         this.setPriceModifierField();
         this.setRow(row);
         this.setCol(col);
-        // TODO After updating the price and using any arrow key, the selection
-        // TODO highlight does not move. Maybe reset the selection?
+        view.setPriceModiferCalendarDay(day);
     }
 }
