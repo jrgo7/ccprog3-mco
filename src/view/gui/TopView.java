@@ -208,6 +208,10 @@ public class TopView extends JFrame {
         this.manageHotelPanel.setPriceModiferCalendarDay(day);
     }
 
+    public boolean getIsPriceModifierCalendarFocused() {
+        return this.manageHotelPanel.getIsPriceModifierCalendarFocused();
+    }
+
     // Error dialogs
     public void noHotelNameProvidedError() {
         JOptionPane.showMessageDialog(

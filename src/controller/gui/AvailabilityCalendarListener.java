@@ -1,5 +1,7 @@
 package src.controller.gui;
 
+import java.awt.event.KeyEvent;
+
 import src.model.Hotel;
 import src.model.ReservationSystem;
 import src.view.gui.Calendar;
@@ -43,6 +45,15 @@ public class AvailabilityCalendarListener extends CalendarListener {
     @Override
     protected void handleMoved(int row, int col) {
 
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+            e.consume(); // Prevent enter from changing calendar position
+        } else {
+            super.keyPressed(e);
+        }
     }
 
     public void handleCheckAvailability(int row, int col) {
