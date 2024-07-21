@@ -86,16 +86,21 @@ public class TopView extends JFrame {
         return JOptionPane.showInputDialog("Hotel name");
     }
 
-    public void setListeners(
-            HotelListListener hotelListListener,
+    public void setTopViewHotelListListener(HotelListListener hotelListListener) {
+        this.hotelListPanel.setListener(hotelListListener);
+    }
+
+    public void setViewHotelListeners(
             AvailabilityCalendarListener availabilityCalendarListener,
-            RoomListListener viewRoomListListener,
+            RoomListListener viewRoomListListener) {
+        this.viewHotelPanel.setCalendarListener(availabilityCalendarListener);
+        this.viewHotelPanel.setRoomListListener(viewRoomListListener);
+    }
+
+    public void setManageHotelListeners(
             RenameHotelListener renameHotelListener,
             UpdateBasePriceListener updateBasePriceListener,
             ManagePricesListener managePricesListener) {
-        this.hotelListPanel.setListener(hotelListListener);
-        this.viewHotelPanel.setCalendarListener(availabilityCalendarListener);
-        this.viewHotelPanel.setRoomListListener(viewRoomListListener);
         this.manageHotelPanel.setRenameHotelListener(renameHotelListener);
         this.manageHotelPanel.setUpdateBasePriceListener(updateBasePriceListener);
         this.manageHotelPanel.setManagePricesListener(managePricesListener);

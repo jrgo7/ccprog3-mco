@@ -36,8 +36,7 @@ public abstract class ListPanel extends JPanel {
 
         JEditorPane header = new JEditorPane("text/html",
                 "<h1 style=\"font-family: sans-serif\">" + name + "</h1>");
-        this.setFont(new Font("Arial", 0, 32));
-
+        header.setEditable(false);
         this.add(header, BorderLayout.NORTH);
 
         this.listComponent = new JList<String>();
