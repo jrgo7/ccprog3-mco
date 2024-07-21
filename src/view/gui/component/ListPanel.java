@@ -34,14 +34,13 @@ public abstract class ListPanel extends JPanel {
         this.fallbackIndex = 0;
 
         JEditorPane header = new JEditorPane("text/html",
-                "<h1 style=\"font-family: sans-serif\">" + name + "</h1>");
+                "<h2 style=\"font-family: sans-serif\">" + name + "</h2>");
         header.setEditable(false);
         this.add(header, BorderLayout.NORTH);
 
         this.listComponent = new JList<String>();
         this.listComponent.setFixedCellWidth(width);
-        this.listComponent
-                .setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        this.listComponent.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         this.add(listComponent);
     }

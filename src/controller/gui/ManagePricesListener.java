@@ -18,24 +18,31 @@ public class ManagePricesListener extends CalendarListener
     }
 
     private void setPriceModifierField() {
-        int day = Calendar.toDay(row, col);
-        if (day < 1 || day > 31) {
+        int date = Calendar.toDate(row, col);
+        if (date < 1 || date > 31) {
             return;
         }
-        Hotel hotel = reservationSystem.getHotel(
-                view.getHotelListSelectedIndex());
+        Hotel hotel = reservationSystem.getHotel(view.getHotelListSelectedIndex());
         view.setPriceModifierField(
-                String.valueOf(hotel
-                        .getPriceModifierOnNight(Calendar.toDay(row, col))));
+                String.valueOf(hotel.getPriceModifierOnNight(date)));
+        setModifiedPriceText();
+    }
+
+    private void setModifiedPriceText() {
+        int date = Calendar.toDate(row, col);
+        if (date < 1 || date > 31) {
+            return;
+        }
+        Hotel hotel = reservationSystem.getHotel(view.getHotelListSelectedIndex());
         view.setModifiedPriceText(String.format("""
                 <div style="font-family: sans-serif">
-                <h2>Day %d</h2>
+                <h2>Date %d</h2>
                 %.2f * %.2f = %.2f
                 </div>""",
-                Calendar.toDay(row, col),
+                Calendar.toDate(row, col),
                 hotel.getBasePrice(),
-                hotel.getPriceModifierOnNight(day),
-                hotel.getBasePrice() * hotel.getPriceModifierOnNight(day)));
+                hotel.getPriceModifierOnNight(date),
+                hotel.getBasePrice() * hotel.getPriceModifierOnNight(date)));
     }
 
     @Override
@@ -45,8 +52,10 @@ public class ManagePricesListener extends CalendarListener
 
     @Override
     protected void handlePressEnterKey(int row, int col) {
-        if (!view.getIsPriceModifierCalendarFocused()) {
+        if (view.getIsUpdatePriceModifierFieldFocused()) {
             updatePriceModifier();
+        } else if (view.getIsUpdateBasePriceFieldFocused()) {
+            updateBasePrice();
         }
     }
 
@@ -72,40 +81,67 @@ public class ManagePricesListener extends CalendarListener
 
     @Override
     protected void handleReleasedOutsideComponent() {
-
+        view.resetPriceModifierCalendarSelection();
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
         if (view.getIsPriceModifierCalendarFocused()) {
-            if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                e.consume(); // Prevent enter from changing calendar position
+            if (e.getKeyCode() == KeyEvent.VK_ENTER ||
+                    e.getKeyCode() == KeyEvent.VK_TAB) {
+                e.consume(); // Prevent enter/tab from changing calendar position
+            } else {
+                super.keyPressed(e);
             }
-            super.keyPressed(e);
+        } else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+            handlePressEnterKey(row, col);
         }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        updatePriceModifier();
+        switch (e.getActionCommand()) {
+            case "Update base price":
+                updateBasePrice();
+                break;
+            case "Update price modifier":
+                updatePriceModifier();
+                break;
+        }
+    }
+
+    public void updateBasePrice() {
+        int index = view.getHotelListSelectedIndex(); // saved as setting the
+                                                      // hotel list removes the
+                                                      // selection
+        try {
+            double newBasePrice = Double.parseDouble(view.getUpdateBasePriceText());
+            if (reservationSystem.getHotel(index).setBasePrice(newBasePrice)) {
+                setModifiedPriceText();
+            } else {
+                view.invalidBasePriceUpdateError();
+            }
+        } catch (NumberFormatException e) {
+            view.invalidBasePriceUpdateError();
+        }
     }
 
     public void updatePriceModifier() {
         int row = this.getRow();
         int col = this.getCol();
-        int day = Calendar.toDay(row, col);
+        int date = Calendar.toDate(row, col);
         double newModifier = Double.parseDouble(view.getPriceModifierField());
         Hotel hotel = reservationSystem
                 .getHotel(view.getHotelListSelectedIndex());
-        if (hotel.setPriceModifier(day, newModifier)) {
+        if (hotel.setPriceModifier(date, newModifier)) {
             view.setManagePricesCalendarText(
-                    day, String.format("%d: %.2f", day, newModifier));
+                    date, String.format("%d: %.2f", date, newModifier));
         } else {
             view.showPriceModifierError();
         }
         this.setPriceModifierField();
         this.setRow(row);
         this.setCol(col);
-        view.setPriceModiferCalendarDay(day);
+        view.setPriceModiferCalendarDate(date);
     }
 }

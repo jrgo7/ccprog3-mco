@@ -58,25 +58,25 @@ public class CLIDriver {
 
     /**
      * Displays the number of reservations and available rooms for a given
-     * {@link Hotel} on a given day.
+     * {@link Hotel} on a given date.
      * 
      * @param hotel The hotel instance to inspect
      * @see #displayViewHotelScreen()
      */
     private void viewAvailabilityCount(Hotel hotel) {
-        int day = CLIUtility.promptInt(this.sc,
-                "Enter a day (1-31):", 1, 31);
-        boolean isOneRoom = hotel.getAvailableRoomCount(day) == 1;
+        int date = CLIUtility.promptInt(this.sc,
+                "Enter a date (1-31):", 1, 31);
+        boolean isOneRoom = hotel.getAvailableRoomCount(date) == 1;
 
         CLIUtility.printBorder();
         System.out.printf("""
-                Reservations on day %d: %d
+                Reservations on date %d: %d
                 There %s %d room%s available.
                 """,
-                day,
-                hotel.getReservationCountOnDate(day, false),
+                date,
+                hotel.getReservationCountOnDate(date, false),
                 isOneRoom ? "is" : "are",
-                hotel.getAvailableRoomCount(day),
+                hotel.getAvailableRoomCount(date),
                 isOneRoom ? "" : "s");
     }
 
@@ -151,7 +151,7 @@ public class CLIDriver {
 
         CLIUtility.printBorder();
         switch (input) {
-        /* Number of available and booked rooms on a day */
+        /* Number of available and booked rooms on a date */
         case 0:
             viewAvailabilityCount(hotel);
             break;
@@ -447,9 +447,9 @@ public class CLIDriver {
         CLIUtility.printBorder();
         System.out.println(hotel.getCalendarStringForRoom(roomIndex));
         int in = CLIUtility.promptInt(this.sc,
-                "Enter a check-in day (you cannot select 31):", 1, 30);
+                "Enter a check-in date (you cannot select 31):", 1, 30);
         int out = CLIUtility.promptInt(this.sc,
-                "Enter a check-out day (you cannot check out on the same day):",
+                "Enter a check-out date (you cannot check out on the same date):",
                 in + 1, 31);
 
         /* Prompt the user to input a discount code */

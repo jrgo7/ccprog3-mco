@@ -31,8 +31,8 @@ public class Reservation {
      * Initializes a new reservation instance given booking information.
      * 
      * @param guestName The name of the guest
-     * @param checkIn   The check-in day
-     * @param checkOut  The check-out day
+     * @param checkIn   The check-in date
+     * @param checkOut  The check-out date
      * @param room      The room instance to book a reservation for
      * @see Hotel#addReservation(String, int, int, int)
      */
@@ -50,19 +50,19 @@ public class Reservation {
         return this.guestName;
     }
 
-    /** {@return the check-in day of the reservation} */
+    /** {@return the check-in date of the reservation} */
     public int getCheckIn() {
         return this.checkIn;
     }
 
-    /** {@return the check-out day of the reservation} */
+    /** {@return the check-out date of the reservation} */
     public int getCheckOut() {
         return this.checkOut;
     }
 
     /**
      * {@return the number of nights the reservation is good for} Calculated as
-     * {@code check-out day - check-in day}
+     * {@code check-out date - check-in date}
      */
     public int getNightCount() {
         return this.checkOut - this.checkIn;

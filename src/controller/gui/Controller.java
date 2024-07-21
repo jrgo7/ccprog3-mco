@@ -9,7 +9,6 @@ public class Controller {
     AvailabilityCalendarListener availabilityCalendarListener;
     HotelListListener hotelListListener;
     RenameHotelListener renameHotelListener;
-    UpdateBasePriceListener updateBasePriceListener;
     ManagePricesListener managePricesListener;
     RoomListListener viewRoomListListener;
     ManageRoomListener manageRoomListListener;
@@ -21,10 +20,7 @@ public class Controller {
                 reservationSystem, view);
         hotelListListener = new HotelListListener(reservationSystem, view);
         renameHotelListener = new RenameHotelListener(reservationSystem, view);
-        updateBasePriceListener = new UpdateBasePriceListener(reservationSystem,
-                view);
-        managePricesListener = new ManagePricesListener(reservationSystem,
-                view);
+        managePricesListener = new ManagePricesListener(reservationSystem, view);
         viewRoomListListener = new RoomListListener(reservationSystem, view);
         manageRoomListListener = new ManageRoomListener(reservationSystem, view);
         this.view.setTopViewHotelListListener(hotelListListener);
@@ -33,7 +29,6 @@ public class Controller {
                 viewRoomListListener);
         this.view.setManageHotelListeners(
                 renameHotelListener,
-                updateBasePriceListener,
                 managePricesListener,
                 manageRoomListListener);
     }

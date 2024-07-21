@@ -125,39 +125,39 @@ public class Hotel {
 
     /**
      * Returns the number of {@link Reservation}s tied to the hotel for a given
-     * day.
+     * date.
      * 
-     * @param day             The day to check for reservations
+     * @param date             The date to check for reservations
      * @param excludeCheckOut Flag to exclude reservations that check out on the
-     *                        day provided. If {@code true}, then a reservation
-     *                        whose check-out day is {@code day} will be
+     *                        date provided. If {@code true}, then a reservation
+     *                        whose check-out date is {@code date} will be
      *                        counted.
-     * @return the number of reservations tied to the hotel for a given day
+     * @return the number of reservations tied to the hotel for a given date
      * @see #getAvailableRoomCount(int)
      */
-    public int getReservationCountOnDate(int day, boolean excludeCheckOut) {
+    public int getReservationCountOnDate(int date, boolean excludeCheckOut) {
         int retval = 0;
 
         for (Reservation i : this.reservations)
-            if (day >= i.getCheckIn() &&
+            if (date >= i.getCheckIn() &&
                     (excludeCheckOut
                             /*
                              * Use a different condition when including
-                             * reservations that check out on the given day
+                             * reservations that check out on the given date
                              */
-                            ? day < i.getCheckOut()
-                            : day <= i.getCheckOut()))
+                            ? date < i.getCheckOut()
+                            : date <= i.getCheckOut()))
                 retval++;
 
         return retval;
     }
 
     /**
-     * Returns a list of days during which a {@link Room} at a given index is
+     * Returns a list of dates during which a {@link Room} at a given index is
      * available.
      * 
      * @param roomIndex The index of the room to inspect
-     * @return a list of days on which a room is available
+     * @return a list of dates on which a room is available
      * @see Room#getAvailableDates()
      */
     public ArrayList<Integer> getAvailableDatesForRoom(int roomIndex) {
@@ -165,11 +165,11 @@ public class Hotel {
     }
 
     /**
-     * Returns a calendar string indicating the days during which a {@link Room}
+     * Returns a calendar string indicating the dates during which a {@link Room}
      * instance at a given index is available.
      * 
      * @param roomIndex The index of the room to inspect
-     * @return a formatted calendar string showing the days on which a room is
+     * @return a formatted calendar string showing the dates on which a room is
      *         available
      */
     public String getCalendarStringForRoom(int roomIndex) {
@@ -232,21 +232,21 @@ public class Hotel {
     }
 
     /**
-     * Sets the price modifier for a given day. Fails if attempting to set a
+     * Sets the price modifier for a given date. Fails if attempting to set a
      * value greater than {@code 1.50} or lower than {@code 0.50}.
      * 
-     * @param day      The day to set a price modifier for
+     * @param date      The date to set a price modifier for
      * @param modifier The new price modifier to set
-     * @return {@code true} if the price modifier for the day was set
+     * @return {@code true} if the price modifier for the date was set
      *         successfully, {@code false} otherwise.
      */
-    public boolean setPriceModifier(int day, double modifier) {
+    public boolean setPriceModifier(int date, double modifier) {
         if (modifier < 0.5 || modifier > 1.5)
             return false;
-        else if (day < 1 || day > 31)
+        else if (date < 1 || date > 31)
             return false;
 
-        this.priceModifiers[day - 1] = modifier;
+        this.priceModifiers[date - 1] = modifier;
         return true;
     }
 
@@ -322,19 +322,19 @@ public class Hotel {
      * Creates a new {@link Reservation} given booking information and the index
      * of the {@link Room} for which a reservation will be made. The reservation
      * will then be tied to both the hotel and the selected room. Fails if the
-     * check-in day is outside the valid range ({@code 1} to {@code 30}), the
-     * check-out day is before the check-in day, if there are availability
+     * check-in date is outside the valid range ({@code 1} to {@code 30}), the
+     * check-out date is before the check-in date, if there are availability
      * conflicts with the room, if the room index is out of range, or if the
      * discount code used is invalid for the reservation.
      * <p>
-     * Note that a reservation can be made with a check-out day that overlaps
-     * with the check-in day of another reservation. This is because a room is
-     * marked as available on a day even if there exist reservations that check
-     * out on that day.
+     * Note that a reservation can be made with a check-out date that overlaps
+     * with the check-in date of another reservation. This is because a room is
+     * marked as available on a date even if there exist reservations that check
+     * out on that date.
      * 
      * @param guestName The name of the guest
-     * @param checkIn   The check-in day
-     * @param checkOut  The check-out day
+     * @param checkIn   The check-in date
+     * @param checkOut  The check-out date
      * @param roomIndex The index of the room to book a reservation for
      * @return {@code true} if a reservation was made successfully,
      *         {@code false} otherwise
@@ -347,9 +347,9 @@ public class Hotel {
             return false;
 
         Room room = this.rooms.get(roomIndex);
-        /* No need to check validity on check-out day */
-        for (int day = checkIn; day < checkOut; day++)
-            if (!room.isAvailableOn(day))
+        /* No need to check validity on check-out date */
+        for (int date = checkIn; date < checkOut; date++)
+            if (!room.isAvailableOn(date))
                 return false;
 
         Reservation reservation = new Reservation(
@@ -422,18 +422,18 @@ public class Hotel {
     }
 
     /**
-     * Returns the number of available rooms available on a given day.
-     * Calculated by subtracting the number of reservations on a given day
-     * (excluding those that check out on that day) from the total number of
+     * Returns the number of available rooms available on a given date.
+     * Calculated by subtracting the number of reservations on a given date
+     * (excluding those that check out on that date) from the total number of
      * rooms.
      * 
-     * @param day The day to inspect
-     * @return the number of available rooms on the given day
+     * @param date The date to inspect
+     * @return the number of available rooms on the given date
      */
-    public int getAvailableRoomCount(int day) {
+    public int getAvailableRoomCount(int date) {
         return this.getRoomCount()
-                /* Exclude reservations that check out on the day */
-                - this.getReservationCountOnDate(day, true);
+                /* Exclude reservations that check out on the date */
+                - this.getReservationCountOnDate(date, true);
     }
 
     /**

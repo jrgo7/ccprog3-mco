@@ -22,8 +22,13 @@ public class RoomListPanel extends ListPanel {
      */
     @Override
     public void setList(ArrayList<String> data) {
-        if (this.addable)
-            data.add("Add room...");
-        super.setList(data);
+        if (this.addable) {
+            ArrayList<String> dataAppended = new ArrayList<>();
+            dataAppended.addAll(data);
+            dataAppended.add("Add room...");
+            super.setList(dataAppended);
+        } else {
+            super.setList(data);
+        }
     }
 }

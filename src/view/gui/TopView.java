@@ -10,13 +10,11 @@ import java.util.Arrays;
 
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTabbedPane;
-// import javax.swing.UIManager;
+import javax.swing.UIManager;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.UIManager;
 
@@ -26,9 +24,9 @@ import src.controller.gui.ManagePricesListener;
 import src.controller.gui.ManageRoomListener;
 import src.controller.gui.RenameHotelListener;
 import src.controller.gui.RoomListListener;
-import src.controller.gui.UpdateBasePriceListener;
 import src.view.gui.component.HotelListPanel;
 import src.view.gui.panel.ManageHotelPanel;
+import src.view.gui.panel.SimulateBookingPanel;
 import src.view.gui.panel.ViewHotelPanel;
 
 /** Represents the top menu in the application's GUI. */
@@ -38,22 +36,22 @@ public class TopView extends JFrame {
     static public final int CHECK_AVAILABILITY_SCREEN = 101;
     static public final int MANAGE_HOTEL_SCREEN = 1;
     static public final int SIMULATE_BOOKING_SCREEN = 2;
-    static public final Font ARIAL_PLAIN_FONT = new Font("Arial", Font.PLAIN,
-            14);
+    static public final Font ARIAL_PLAIN_FONT = new Font("Arial", Font.PLAIN, 14);
     private HotelListPanel hotelListPanel;
     private ViewHotelPanel viewHotelPanel;
     private ManageHotelPanel manageHotelPanel;
+    private SimulateBookingPanel simulateBookingPanel;
 
     JList<String> hotelList;
-    JTabbedPane topMenuPane = new JTabbedPane();
+    JTabbedPane topMenuPane;
 
     public TopView() {
         super("Hotel Reservation System");
-         try {
-         UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-         } catch (Exception e) {
-         System.err.println("Unable to configure look and feel.");
-         }
+        try {
+        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
+        System.err.println("Unable to configure look and feel.");
+        }
         this.setLocationByPlatform(true);
         this.setLayout(new BorderLayout());
         Dimension systemResolution = Toolkit.getDefaultToolkit()
@@ -68,30 +66,26 @@ public class TopView extends JFrame {
     }
 
     public void init() {
+        topMenuPane = new JTabbedPane();
         // Hotel list panel
         hotelListPanel = new HotelListPanel(this.getWidth() / 3);
 
         this.add(hotelListPanel, BorderLayout.WEST);
 
-        // View Hotel
         viewHotelPanel = new ViewHotelPanel();
-
         topMenuPane.addTab("View", viewHotelPanel);
 
-        // Manage hotel
         manageHotelPanel = new ManageHotelPanel();
-
         topMenuPane.addTab("Manage", manageHotelPanel);
 
-        // Simulate booking
-        JPanel bookHotelPanel = new JPanel();
-        JLabel bookHotelPanelLabel = new JLabel("Simulate booking");
-        bookHotelPanel.add(bookHotelPanelLabel);
-        topMenuPane.addTab("Book", bookHotelPanel);
+        simulateBookingPanel = new SimulateBookingPanel();
+        topMenuPane.addTab("Book", simulateBookingPanel);
 
         topMenuPane.setFont(ARIAL_PLAIN_FONT);
         this.add(topMenuPane, BorderLayout.CENTER);
     }
+
+    // Global / "Top menu"
 
     public String promptAddHotel() {
         return JOptionPane.showInputDialog("Hotel name");
@@ -130,12 +124,10 @@ public class TopView extends JFrame {
 
     public void setManageHotelListeners(
             RenameHotelListener renameHotelListener,
-            UpdateBasePriceListener updateBasePriceListener,
             ManagePricesListener managePricesListener,
             ManageRoomListener manageRoomListener) {
         this.manageHotelPanel.setRenameHotelListener(renameHotelListener);
-        this.manageHotelPanel
-                .setUpdateBasePriceListener(updateBasePriceListener);
+        this.manageHotelPanel.setUpdateBasePriceListener(managePricesListener);
         this.manageHotelPanel.setManagePricesListener(managePricesListener);
         this.manageHotelPanel.setManageRoomListener(manageRoomListener);
     }
@@ -186,6 +178,7 @@ public class TopView extends JFrame {
         ArrayList<String> dataAsList = new ArrayList<>(Arrays.asList(data));
         this.viewHotelPanel.updateRoomList(dataAsList);
         this.manageHotelPanel.updateRoomList(dataAsList);
+        this.simulateBookingPanel.updateRoomList(dataAsList);
     }
 
     public void updateRoomData(String data) {
@@ -222,8 +215,8 @@ public class TopView extends JFrame {
         this.manageHotelPanel.setUpdateBasePriceText(basePrice);
     }
 
-    public void setManagePricesCalendarText(int day, String text) {
-        this.manageHotelPanel.setManagePricesCalendarText(day, text);
+    public void setManagePricesCalendarText(int date, String text) {
+        this.manageHotelPanel.setManagePricesCalendarText(date, text);
     }
 
     public String getPriceModifierField() {
@@ -238,12 +231,24 @@ public class TopView extends JFrame {
         this.manageHotelPanel.setModifiedPriceText(text);
     }
 
-    public void setPriceModiferCalendarDay(int day) {
-        this.manageHotelPanel.setPriceModiferCalendarDay(day);
+    public void setPriceModiferCalendarDate(int date) {
+        this.manageHotelPanel.setPriceModiferCalendarDate(date);
     }
 
     public boolean getIsPriceModifierCalendarFocused() {
         return this.manageHotelPanel.getIsPriceModifierCalendarFocused();
+    }
+
+    public void resetPriceModifierCalendarSelection() {
+        this.manageHotelPanel.resetPriceModifierCalendarSelection();
+    }
+
+    public boolean getIsUpdatePriceModifierFieldFocused() {
+        return this.manageHotelPanel.getIsUpdatePriceModifierFieldFocused();
+    }
+
+    public boolean getIsUpdateBasePriceFieldFocused() {
+        return this.manageHotelPanel.getIsUpdateBasePriceFieldFocused();
     }
 
     // Error dialogs

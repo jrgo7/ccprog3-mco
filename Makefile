@@ -3,8 +3,8 @@ main:
 	make gui
 
 gui:
-	javac src/view/gui/GUIDriver.java
-	java src/view/gui/GUIDriver.java
+	javac src/controller/gui/GUIDriver.java
+	java src/controller/gui/GUIDriver.java
 
 cli:
 	del /s /q *.class

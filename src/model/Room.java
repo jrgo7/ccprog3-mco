@@ -79,7 +79,7 @@ public class Room {
     }
 
     /**
-     * {@return a list of days on which the room is available}
+     * {@return a list of dates on which the room is available}
      * 
      * @see #isAvailableOn(int)
      */
@@ -94,38 +94,38 @@ public class Room {
     }
 
     /**
-     * Checks whether a room is available on a given day, i.e., there are no
-     * reservations for the room on a given day (excluding reservations that
-     * check out on that day).
+     * Checks whether a room is available on a given date, i.e., there are no
+     * reservations for the room on a given date (excluding reservations that
+     * check out on that date).
      * 
-     * @param day The day to inspect
-     * @return {@code true} if the room is available on the given day,
+     * @param date The date to inspect
+     * @return {@code true} if the room is available on the given date,
      *         {@code false} otherwise
      */
-    public boolean isAvailableOn(int day) {
+    public boolean isAvailableOn(int date) {
         for (Reservation i : this.reservations)
-            /* Exclude reservations that check out on the given day */
-            if (i.getCheckIn() <= day && i.getCheckOut() > day)
+            /* Exclude reservations that check out on the given date */
+            if (i.getCheckIn() <= date && i.getCheckOut() > date)
                 return false;
         return true;
     }
 
     /**
-     * {@return a string representation of available days formatted as a
-     * calendar} Unavailable days are marked with {@code --} instead of the day
+     * {@return a string representation of available dates formatted as a
+     * calendar} Unavailable dates are marked with {@code --} instead of the date
      * number.
      */
     public String getAvailableDatesAsCalendarString() {
-        int day;
+        int date;
         String result = "Room is available on:";
 
-        for (day = 1; day <= 31; day++) {
-            if (day % 7 == 1)
+        for (date = 1; date <= 31; date++) {
+            if (date % 7 == 1)
                 result += "\n";
-            if (!this.isAvailableOn(day))
+            if (!this.isAvailableOn(date))
                 result += "--   ";
             else
-                result += String.format("%-5d", day);
+                result += String.format("%-5d", date);
         }
 
         return result;
@@ -133,19 +133,21 @@ public class Room {
 
     /**
      * {@inheritDoc} Includes its name, base price, and a calendar containing
-     * the days on which the room is available.
+     * the dates on which the room is available.
      * 
      * @see #getAvailableDatesAsCalendarString()
      */
     @Override
     public String toString() {
         return String.format("""
-                Room information:
-                    Name: %s
-                    Price/night: %.2f
-                %s""",
+                <div style="font-family: sans-serif">
+                <h3>%s</h3>
+                <ul>
+                <li>Price/night: %.2f</li>
+                </ul>
+                Room is available on the following dates:
+                </div>""",
                 this.getName(),
-                this.getBasePrice(),
-                this.getAvailableDatesAsCalendarString());
+                this.getBasePrice());
     }
 }

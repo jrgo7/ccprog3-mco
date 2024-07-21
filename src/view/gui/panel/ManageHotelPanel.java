@@ -13,7 +13,6 @@ import javax.swing.JTextField;
 import src.controller.gui.ManagePricesListener;
 import src.controller.gui.ManageRoomListener;
 import src.controller.gui.RenameHotelListener;
-import src.controller.gui.UpdateBasePriceListener;
 import src.view.gui.TopView;
 import src.view.gui.component.DecimalDocument;
 import src.view.gui.subpanel.ManagePricesPanel;
@@ -41,7 +40,7 @@ public class ManageHotelPanel extends JPanel {
         infoEditPanel.add(renameLabel, 0);
         renameHotelField = new JTextField();
         infoEditPanel.add(renameHotelField, 1);
-        renameHotelButton = new JButton("Rename");
+        renameHotelButton = new JButton("Rename hotel");
         infoEditPanel.add(renameHotelButton, 2);
 
         JLabel basePriceLabel = new JLabel("Update base price:");
@@ -51,7 +50,7 @@ public class ManageHotelPanel extends JPanel {
         basePriceField = new JTextField();
         basePriceField.setDocument(new DecimalDocument());
         infoEditPanel.add(basePriceField, 4);
-        updateBasePriceButton = new JButton("Update");
+        updateBasePriceButton = new JButton("Update base price");
         infoEditPanel.add(updateBasePriceButton, 5);
 
         this.add(infoEditPanel, BorderLayout.NORTH);
@@ -98,7 +97,7 @@ public class ManageHotelPanel extends JPanel {
                                                          // pressing enter
     }
 
-    public void setUpdateBasePriceListener(UpdateBasePriceListener listener) {
+    public void setUpdateBasePriceListener(ManagePricesListener listener) {
         this.basePriceField.addKeyListener(listener);
         this.updateBasePriceButton.addActionListener(listener);
         this.updateBasePriceButton.addKeyListener(listener);
@@ -117,8 +116,8 @@ public class ManageHotelPanel extends JPanel {
 
     // Manage prices subpanel
 
-    public void setManagePricesCalendarText(int day, String text) {
-        this.managePricesSubpanel.setCalendarText(day, text);
+    public void setManagePricesCalendarText(int date, String text) {
+        this.managePricesSubpanel.setCalendarText(date, text);
     }
 
     public String getPriceModifierField() {
@@ -133,12 +132,24 @@ public class ManageHotelPanel extends JPanel {
         this.managePricesSubpanel.setModifiedPriceText(text);
     }
 
-    public void setPriceModiferCalendarDay(int day) {
-        this.managePricesSubpanel.selectCalendarDay(day);
+    public void setPriceModiferCalendarDate(int date) {
+        this.managePricesSubpanel.selectCalendarDate(date);
     }
 
     public boolean getIsPriceModifierCalendarFocused() {
         return this.managePricesSubpanel.getIsCalendarFocused();
+    }
+
+    public void resetPriceModifierCalendarSelection() {
+        this.managePricesSubpanel.resetCalendarSelection();
+    }
+
+    public boolean getIsUpdatePriceModifierFieldFocused() {
+        return this.managePricesSubpanel.getIsUpdatePriceModifierFieldFocused();
+    }
+
+    public boolean getIsUpdateBasePriceFieldFocused() {
+        return this.basePriceField.isFocusOwner();
     }
 
     public void setManagePricesListener(ManagePricesListener listener) {
