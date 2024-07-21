@@ -15,7 +15,7 @@ public class ViewRoomPanel extends JPanel {
 
     private JEditorPane roomDataComponent;
 
-    public ViewRoomPanel () {
+    public ViewRoomPanel() {
         this.setLayout(new BorderLayout());
 
         this.roomListPanel = new RoomListPanel(200);

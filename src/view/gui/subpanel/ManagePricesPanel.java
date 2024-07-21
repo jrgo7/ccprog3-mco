@@ -67,6 +67,10 @@ public class ManagePricesPanel extends JPanel {
         this.calendarComponent.selectDay(day);
     }
 
+    public boolean getIsCalendarFocused() {
+        return this.calendarComponent.isFocusOwner();
+    }
+
     public void setListener(ManagePricesListener listener) {
         this.calendarComponent.addMouseListener(listener);
         this.calendarComponent.addKeyListener(listener);

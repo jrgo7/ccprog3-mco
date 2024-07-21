@@ -134,6 +134,10 @@ public class ManageHotelPanel extends JPanel {
         this.managePricesSubpanel.selectCalendarDay(day);
     }
 
+    public boolean getIsPriceModifierCalendarFocused() {
+        return this.managePricesSubpanel.getIsCalendarFocused();
+    }
+
     public void setManagePricesListener(ManagePricesListener listener) {
         this.managePricesSubpanel.setListener(listener);
     }

@@ -89,26 +89,29 @@ public class TopView extends JFrame {
         return JOptionPane.showInputDialog("Hotel name");
     }
 
-    public void setListeners(
-            HotelListListener hotelListListener,
+    public void setTopViewHotelListListener(HotelListListener hotelListListener) {
+        this.hotelListPanel.setListener(hotelListListener);
+    }
+
+    public void setViewHotelListeners(
             AvailabilityCalendarListener availabilityCalendarListener,
+            RoomListListener viewRoomListListener) {
+        this.viewHotelPanel.setCalendarListener(availabilityCalendarListener);
+        this.viewHotelPanel.setRoomListListener(viewRoomListListener);
+    }
+
+    public void setManageHotelListeners(
             RenameHotelListener renameHotelListener,
             UpdateBasePriceListener updateBasePriceListener,
-            RoomListListener viewRoomListListener,
             ManagePricesListener managePricesListener) {
-        this.hotelListPanel.setListener(hotelListListener);
-        this.viewHotelPanel.setCalendarListener(availabilityCalendarListener);
         this.manageHotelPanel.setRenameHotelListener(renameHotelListener);
         this.manageHotelPanel.setUpdateBasePriceListener(updateBasePriceListener);
-        this.viewHotelPanel.setRoomListListener(viewRoomListListener);
         this.manageHotelPanel.setManagePricesListener(managePricesListener);
     }
 
     public void setTabIndex(int index) {
         topMenuPane.setSelectedIndex(index);
     }
-
-
 
     public void setHotelListData(ArrayList<String> data) {
         this.hotelListPanel.setList(data);
@@ -206,6 +209,10 @@ public class TopView extends JFrame {
 
     public void setPriceModiferCalendarDay(int day) {
         this.manageHotelPanel.setPriceModiferCalendarDay(day);
+    }
+
+    public boolean getIsPriceModifierCalendarFocused() {
+        return this.manageHotelPanel.getIsPriceModifierCalendarFocused();
     }
 
     // Error dialogs

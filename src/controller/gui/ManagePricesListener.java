@@ -2,6 +2,7 @@ package src.controller.gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 
 import src.model.Hotel;
 import src.model.ReservationSystem;
@@ -15,9 +16,12 @@ public class ManagePricesListener extends CalendarListener implements ActionList
     }
 
     private void setPriceModifierField() {
-        Hotel hotel = reservationSystem.getHotel(
-                view.getHotelListSelectedIndex());
         int day = Calendar.toDay(row, col);
+        if (day < 1 || day > 31) {
+            return;
+        }
+        Hotel hotel = reservationSystem.getHotel(
+            view.getHotelListSelectedIndex());
         view.setPriceModifierField(
                 String.valueOf(hotel.getPriceModifierOnNight(Calendar.toDay(row, col))));
         view.setModifiedPriceText(String.format("""
@@ -38,12 +42,14 @@ public class ManagePricesListener extends CalendarListener implements ActionList
 
     @Override
     protected void handlePressEnterKey(int row, int col) {
-
+        if (!view.getIsPriceModifierCalendarFocused()) {
+            updatePriceModifier();
+        }
     }
 
     @Override
     protected void handleClicked(int row, int col) {
-
+        setPriceModifierField();
     }
 
     @Override
@@ -54,7 +60,6 @@ public class ManagePricesListener extends CalendarListener implements ActionList
     @Override
     protected void handleDragged(int row, int col) {
         setPriceModifierField();
-
     }
 
     @Override
@@ -68,7 +73,21 @@ public class ManagePricesListener extends CalendarListener implements ActionList
     }
 
     @Override
+    public void keyPressed(KeyEvent e) {
+        if (view.getIsPriceModifierCalendarFocused()) {
+            if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                e.consume(); // Prevent enter from changing calendar position
+            }
+            super.keyPressed(e);
+        }
+    }
+
+    @Override
     public void actionPerformed(ActionEvent e) {
+        updatePriceModifier();
+    }
+
+    public void updatePriceModifier() {
         int row = this.getRow();
         int col = this.getCol();
         int day = Calendar.toDay(row, col);
