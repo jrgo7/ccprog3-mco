@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import javax.swing.JEditorPane;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
 import javax.swing.event.ListSelectionListener;
 
 import src.controller.gui.RoomListListener;
@@ -20,7 +19,8 @@ public class ViewRoomPanel extends JPanel {
     public ViewRoomPanel() {
         this.setLayout(new BorderLayout());
 
-        this.roomListPanel = new RoomListPanel(200);
+        this.roomListPanel = new RoomListPanel(200, false);
+
         this.add(roomListPanel, BorderLayout.WEST);
 
         JPanel roomDataPanel = new JPanel();

@@ -13,7 +13,7 @@ public class ManageRoomsPanel extends JPanel {
     public ManageRoomsPanel() {
         this.setLayout(new BorderLayout());
 
-        this.roomListPanel = new RoomListPanel(200);
+        this.roomListPanel = new RoomListPanel(200, true);
 
         this.add(roomListPanel, BorderLayout.WEST);
     }
