@@ -8,15 +8,21 @@ import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JSpinner;
 import javax.swing.JTabbedPane;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.UIManager;
 
 import src.controller.gui.AvailabilityCalendarListener;
 import src.controller.gui.HotelListListener;
 import src.controller.gui.ManagePricesListener;
+import src.controller.gui.ManageRoomListener;
 import src.controller.gui.RenameHotelListener;
 import src.controller.gui.RoomListListener;
 import src.controller.gui.SimulateBookingRoomListListener;
@@ -40,9 +46,9 @@ public class TopView extends JFrame {
     public TopView() {
         super("Hotel Reservation System");
         try {
-        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception e) {
-        System.err.println("Unable to configure look and feel.");
+            System.err.println("Unable to configure look and feel.");
         }
         this.setLocationByPlatform(true);
         this.setLayout(new BorderLayout());
@@ -54,6 +60,7 @@ public class TopView extends JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.init();
         this.setVisible(true);
+
     }
 
     public void init() {
@@ -82,6 +89,32 @@ public class TopView extends JFrame {
         return JOptionPane.showInputDialog("Hotel name");
     }
 
+    public int[] promptAddRoom(int limit) {
+        JPanel promptPanel = new JPanel();
+
+        promptPanel.setLayout(new BorderLayout());
+
+        promptPanel.add(
+                new JLabel("Select the number and type of rooms to add:"),
+                BorderLayout.NORTH);
+
+        JSpinner spinner = new JSpinner(new SpinnerNumberModel(1, 1, limit, 1));
+        promptPanel.add(spinner, BorderLayout.WEST);
+
+        JComboBox<String> options = new JComboBox<>(new String[] {
+                "Regular", "Deluxe", "Executive"
+        });
+        promptPanel.add(options, BorderLayout.CENTER);
+
+        JOptionPane.showConfirmDialog(null,
+                promptPanel, "Add rooms", JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE);
+
+        return new int[] {
+                options.getSelectedIndex(), (Integer) spinner.getValue()
+        };
+    }
+
     public void setTopViewHotelListListener(
             HotelListListener hotelListListener) {
         this.hotelListPanel.setListener(hotelListListener);
@@ -96,10 +129,12 @@ public class TopView extends JFrame {
 
     public void setManageHotelListeners(
             RenameHotelListener renameHotelListener,
-            ManagePricesListener managePricesListener) {
+            ManagePricesListener managePricesListener,
+            ManageRoomListener manageRoomListener) {
         this.manageHotelPanel.setRenameHotelListener(renameHotelListener);
         this.manageHotelPanel.setUpdateBasePriceListener(managePricesListener);
         this.manageHotelPanel.setManagePricesListener(managePricesListener);
+        this.manageHotelPanel.setManageRoomListener(manageRoomListener);
     }
 
     public void setTabIndex(int index) {
@@ -165,6 +200,10 @@ public class TopView extends JFrame {
 
     public void resetAvailabilityCalendarSelection() {
         this.viewHotelPanel.resetCalendarSelection();
+    }
+
+    public int getViewRoomSelectedIndex() {
+        return this.viewHotelPanel.getViewRoomSelectedIndex();
     }
 
     // Manage hotel delegations
@@ -287,6 +326,14 @@ public class TopView extends JFrame {
                 this,
                 "The price modifier must be within 0.50-1.50.",
                 "Invalid price modifier error",
+                JOptionPane.ERROR_MESSAGE);
+    }
+
+    public void showRoomCountFullError() {
+        JOptionPane.showMessageDialog(
+                this,
+                "A room may only have up to 50 rooms.",
+                "Room limit reached error",
                 JOptionPane.ERROR_MESSAGE);
     }
 

@@ -47,4 +47,8 @@ public class ViewRoomPanel extends JPanel {
     public void setRoomListListener(RoomListListener roomListListener) {
         this.roomListPanel.setListener((ListSelectionListener) roomListListener);
     }
+
+    public int getViewRoomSelectedIndex() {
+        return this.roomListPanel.getSelectedIndex();
+    }
 }

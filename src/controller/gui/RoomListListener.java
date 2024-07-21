@@ -19,8 +19,11 @@ public class RoomListListener extends ListAddListener {
 
     @Override
     public void valueChanged(ListSelectionEvent e) {
-        updateRoomData(e.getFirstIndex());
-        System.out.println(e.getFirstIndex());
+        if (e.getValueIsAdjusting())
+            return;
+
+        updateDataPanel(view.getViewRoomSelectedIndex());
+        System.out.println(view.getViewRoomSelectedIndex());
     }
 
     @Override
@@ -31,7 +34,9 @@ public class RoomListListener extends ListAddListener {
 
     @Override
     protected void updateDataPanel(int selectedIndex) {
-
+        this.view.updateRoomData(
+                reservationSystem.getRoomString(
+                    view.getHotelListSelectedIndex(), selectedIndex));
     }
 
     @Override

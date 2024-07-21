@@ -11,6 +11,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
 import src.controller.gui.ManagePricesListener;
+import src.controller.gui.ManageRoomListener;
 import src.controller.gui.RenameHotelListener;
 import src.view.gui.TopView;
 import src.view.gui.component.DecimalDocument;
@@ -105,6 +106,10 @@ public class ManageHotelPanel extends JPanel {
     // Manage rooms subpanel
     public void updateRoomList(ArrayList<String> data) {
         this.manageRoomsSubpanel.updateRoomList(data);
+    }
+
+    public void setManageRoomListener(ManageRoomListener manageRoomListener) {
+        this.manageRoomsSubpanel.setListener(manageRoomListener);
     }
 
     // Manage reservations subpanel

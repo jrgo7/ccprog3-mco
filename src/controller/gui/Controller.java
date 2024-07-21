@@ -12,6 +12,7 @@ public class Controller {
     ManagePricesListener managePricesListener;
     RoomListListener viewRoomListListener;
     SimulateBookingRoomListListener simulateBookingRoomListListener;
+    ManageRoomListener manageRoomListListener;
 
     public Controller(ReservationSystem reservationSystem, TopView view) {
         this.reservationSystem = reservationSystem;
@@ -23,13 +24,15 @@ public class Controller {
         managePricesListener = new ManagePricesListener(reservationSystem, view);
         viewRoomListListener = new RoomListListener(reservationSystem, view);
         simulateBookingRoomListListener = new SimulateBookingRoomListListener(reservationSystem, view);
+        manageRoomListListener = new ManageRoomListener(reservationSystem, view);
         this.view.setTopViewHotelListListener(hotelListListener);
         this.view.setViewHotelListeners(
                 availabilityCalendarListener,
                 viewRoomListListener);
         this.view.setManageHotelListeners(
                 renameHotelListener,
-                managePricesListener);
+                managePricesListener,
+                manageRoomListListener);
         this.view.setSimulateBookingListeners(
                 simulateBookingRoomListListener
         );

@@ -130,4 +130,8 @@ public class ViewHotelPanel extends JPanel {
     public void updateRoomList(ArrayList<String> data) {
         this.viewRoomSubPanel.updateRoomList(data);
     }
+
+    public int getViewRoomSelectedIndex() {
+        return this.viewRoomSubPanel.getViewRoomSelectedIndex();
+    }
 }

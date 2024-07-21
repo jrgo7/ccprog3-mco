@@ -23,7 +23,16 @@ public class ManageRoomListener extends ListAddListener {
     /** {@inheritDoc} */
     @Override
     protected void addToList(int selectedIndex) {
-        /* TODO */
+        /* TODO: Refactor */
+        int limit = 50 - this.getListLength();
+        if (limit <= 0)
+            view.showRoomCountFullError();
+        else {
+            int[] result = view.promptAddRoom(limit);
+            reservationSystem.getHotel(view.getHotelListSelectedIndex()).addRooms(result[1], result[0] + 1);
+            updateList();
+        }
+
     }
 
     /** {@inheritDoc} */
