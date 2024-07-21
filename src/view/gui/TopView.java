@@ -10,11 +10,12 @@ import java.util.Arrays;
 
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTabbedPane;
-import javax.swing.UIManager;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.UIManager;
 
@@ -36,7 +37,8 @@ public class TopView extends JFrame {
     static public final int CHECK_AVAILABILITY_SCREEN = 101;
     static public final int MANAGE_HOTEL_SCREEN = 1;
     static public final int SIMULATE_BOOKING_SCREEN = 2;
-    static public final Font ARIAL_PLAIN_FONT = new Font("Arial", Font.PLAIN, 14);
+    static public final Font ARIAL_PLAIN_FONT = new Font("Arial", Font.PLAIN,
+            14);
     private HotelListPanel hotelListPanel;
     private ViewHotelPanel viewHotelPanel;
     private ManageHotelPanel manageHotelPanel;
@@ -48,9 +50,9 @@ public class TopView extends JFrame {
     public TopView() {
         super("Hotel Reservation System");
         try {
-        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception e) {
-        System.err.println("Unable to configure look and feel.");
+            System.err.println("Unable to configure look and feel.");
         }
         this.setLocationByPlatform(true);
         this.setLayout(new BorderLayout());
@@ -62,7 +64,7 @@ public class TopView extends JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.init();
         this.setVisible(true);
-        
+
     }
 
     public void init() {
@@ -96,18 +98,25 @@ public class TopView extends JFrame {
 
         promptPanel.setLayout(new BorderLayout());
 
-        promptPanel.add(new JLabel("Select the number and type of rooms to add:"), BorderLayout.NORTH);
+        promptPanel.add(
+                new JLabel("Select the number and type of rooms to add:"),
+                BorderLayout.NORTH);
 
         JSpinner spinner = new JSpinner(new SpinnerNumberModel(1, 1, limit, 1));
         promptPanel.add(spinner, BorderLayout.WEST);
 
-        JComboBox<String> options = new JComboBox<>(new String[] {"Regular", "Deluxe", "Executive"});
+        JComboBox<String> options = new JComboBox<>(new String[] {
+                "Regular", "Deluxe", "Executive"
+        });
         promptPanel.add(options, BorderLayout.CENTER);
 
         JOptionPane.showConfirmDialog(null,
-        promptPanel, "Add rooms", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
-        
-        return new int[] {options.getSelectedIndex(), (Integer) spinner.getValue()};
+                promptPanel, "Add rooms", JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE);
+
+        return new int[] {
+                options.getSelectedIndex(), (Integer) spinner.getValue()
+        };
     }
 
     public void setTopViewHotelListListener(
@@ -195,6 +204,10 @@ public class TopView extends JFrame {
 
     public void resetAvailabilityCalendarSelection() {
         this.viewHotelPanel.resetCalendarSelection();
+    }
+
+    public int getViewRoomSelectedIndex() {
+        return this.viewHotelPanel.getViewRoomSelectedIndex();
     }
 
     // Manage hotel delegations

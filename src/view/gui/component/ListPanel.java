@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javax.swing.JEditorPane;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionListener;
 
@@ -42,7 +43,7 @@ public abstract class ListPanel extends JPanel {
         this.listComponent.setFixedCellWidth(width);
         this.listComponent.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-        this.add(listComponent);
+        this.add(new JScrollPane(listComponent));
     }
 
     /**

@@ -14,16 +14,13 @@ public class RoomListListener extends ListAddListener {
 
     }
 
-    public void updateRoomData(int index) {
-        this.view.updateRoomData(
-                reservationSystem.getHotel(view.getHotelListSelectedIndex())
-                        .getRoomString(index));
-    }
-
     @Override
     public void valueChanged(ListSelectionEvent e) {
-        updateRoomData(e.getFirstIndex());
-        System.out.println(e.getFirstIndex());
+        if (e.getValueIsAdjusting())
+            return;
+
+        updateDataPanel(view.getViewRoomSelectedIndex());
+        System.out.println(view.getViewRoomSelectedIndex());
     }
 
     @Override
@@ -39,7 +36,9 @@ public class RoomListListener extends ListAddListener {
 
     @Override
     protected void updateDataPanel(int selectedIndex) {
-
+        this.view.updateRoomData(
+                reservationSystem.getHotel(view.getHotelListSelectedIndex())
+                        .getRoomString(selectedIndex));
     }
 
     @Override
@@ -49,6 +48,6 @@ public class RoomListListener extends ListAddListener {
 
     @Override
     protected int getListLength() {
-        return reservationSystem.getHotel(getListLength()).getRoomCount();
+        return reservationSystem.getHotel(view.getHotelListSelectedIndex()).getRoomCount();
     }
 }
