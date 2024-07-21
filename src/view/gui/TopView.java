@@ -21,7 +21,6 @@ import src.controller.gui.HotelListListener;
 import src.controller.gui.ManagePricesListener;
 import src.controller.gui.RenameHotelListener;
 import src.controller.gui.RoomListListener;
-import src.controller.gui.UpdateBasePriceListener;
 import src.view.gui.component.HotelListPanel;
 import src.view.gui.panel.ManageHotelPanel;
 import src.view.gui.panel.ViewHotelPanel;
@@ -105,11 +104,9 @@ public class TopView extends JFrame {
 
     public void setManageHotelListeners(
             RenameHotelListener renameHotelListener,
-            UpdateBasePriceListener updateBasePriceListener,
             ManagePricesListener managePricesListener) {
         this.manageHotelPanel.setRenameHotelListener(renameHotelListener);
-        this.manageHotelPanel
-                .setUpdateBasePriceListener(updateBasePriceListener);
+        this.manageHotelPanel.setUpdateBasePriceListener(managePricesListener);
         this.manageHotelPanel.setManagePricesListener(managePricesListener);
     }
 
@@ -217,6 +214,18 @@ public class TopView extends JFrame {
 
     public boolean getIsPriceModifierCalendarFocused() {
         return this.manageHotelPanel.getIsPriceModifierCalendarFocused();
+    }
+
+    public void resetPriceModifierCalendarSelection() {
+        this.manageHotelPanel.resetPriceModifierCalendarSelection();
+    }
+
+    public boolean getIsUpdatePriceModifierFieldFocused() {
+        return this.manageHotelPanel.getIsUpdatePriceModifierFieldFocused();
+    }
+
+    public boolean getIsUpdateBasePriceFieldFocused() {
+        return this.manageHotelPanel.getIsUpdateBasePriceFieldFocused();
     }
 
     // Error dialogs

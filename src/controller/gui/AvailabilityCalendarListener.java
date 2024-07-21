@@ -50,8 +50,9 @@ public class AvailabilityCalendarListener extends CalendarListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-            e.consume(); // Prevent enter from changing calendar position
+        if (e.getKeyCode() == KeyEvent.VK_ENTER ||
+                e.getKeyCode() == KeyEvent.VK_TAB) {
+            e.consume(); // Prevent enter/tab from changing calendar position
         } else {
             super.keyPressed(e);
         }

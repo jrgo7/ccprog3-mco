@@ -22,11 +22,18 @@ public class ManagePricesListener extends CalendarListener
         if (day < 1 || day > 31) {
             return;
         }
-        Hotel hotel = reservationSystem.getHotel(
-                view.getHotelListSelectedIndex());
+        Hotel hotel = reservationSystem.getHotel(view.getHotelListSelectedIndex());
         view.setPriceModifierField(
-                String.valueOf(hotel
-                        .getPriceModifierOnNight(Calendar.toDay(row, col))));
+                String.valueOf(hotel.getPriceModifierOnNight(day)));
+        setModifiedPriceText();
+    }
+
+    private void setModifiedPriceText() {
+        int day = Calendar.toDay(row, col);
+        if (day < 1 || day > 31) {
+            return;
+        }
+        Hotel hotel = reservationSystem.getHotel(view.getHotelListSelectedIndex());
         view.setModifiedPriceText(String.format("""
                 <div style="font-family: sans-serif">
                 <h2>Day %d</h2>
@@ -45,8 +52,10 @@ public class ManagePricesListener extends CalendarListener
 
     @Override
     protected void handlePressEnterKey(int row, int col) {
-        if (!view.getIsPriceModifierCalendarFocused()) {
+        if (view.getIsUpdatePriceModifierFieldFocused()) {
             updatePriceModifier();
+        } else if (view.getIsUpdateBasePriceFieldFocused()) {
+            updateBasePrice();
         }
     }
 
@@ -72,22 +81,49 @@ public class ManagePricesListener extends CalendarListener
 
     @Override
     protected void handleReleasedOutsideComponent() {
-
+        view.resetPriceModifierCalendarSelection();
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
         if (view.getIsPriceModifierCalendarFocused()) {
-            if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                e.consume(); // Prevent enter from changing calendar position
+            if (e.getKeyCode() == KeyEvent.VK_ENTER ||
+                    e.getKeyCode() == KeyEvent.VK_TAB) {
+                e.consume(); // Prevent enter/tab from changing calendar position
+            } else {
+                super.keyPressed(e);
             }
-            super.keyPressed(e);
+        } else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+            handlePressEnterKey(row, col);
         }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        updatePriceModifier();
+        switch (e.getActionCommand()) {
+            case "Update base price":
+                updateBasePrice();
+                break;
+            case "Update price modifier":
+                updatePriceModifier();
+                break;
+        }
+    }
+
+    public void updateBasePrice() {
+        int index = view.getHotelListSelectedIndex(); // saved as setting the
+                                                      // hotel list removes the
+                                                      // selection
+        try {
+            double newBasePrice = Double.parseDouble(view.getUpdateBasePriceText());
+            if (reservationSystem.getHotel(index).setBasePrice(newBasePrice)) {
+                setModifiedPriceText();
+            } else {
+                view.invalidBasePriceUpdateError();
+            }
+        } catch (NumberFormatException e) {
+            view.invalidBasePriceUpdateError();
+        }
     }
 
     public void updatePriceModifier() {
