@@ -36,6 +36,10 @@ public class UpdateBasePriceListener implements ActionListener, KeyListener {
         } catch (NumberFormatException e) {
             view.invalidBasePriceUpdateError();
         }
+
+        this.view.updateRoomData(
+                reservationSystem.getHotel(view.getHotelListSelectedIndex())
+                        .getRoomString(index));
     }
 
     @Override

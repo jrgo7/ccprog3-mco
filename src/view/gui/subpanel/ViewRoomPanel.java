@@ -18,7 +18,7 @@ public class ViewRoomPanel extends JPanel {
     public ViewRoomPanel() {
         this.setLayout(new BorderLayout());
 
-        this.roomListPanel = new RoomListPanel(200);
+        this.roomListPanel = new RoomListPanel(200, false);
 
         this.add(roomListPanel, BorderLayout.WEST);
 
