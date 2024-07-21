@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
-import src.model.Hotel;
 import src.model.ReservationSystem;
 import src.view.gui.TopView;
 import src.view.gui.component.Calendar;
@@ -22,9 +21,10 @@ public class ManagePricesListener extends CalendarListener
         if (date < 1 || date > 31) {
             return;
         }
-        Hotel hotel = reservationSystem.getHotel(view.getHotelListSelectedIndex());
         view.setPriceModifierField(
-                String.valueOf(hotel.getPriceModifierOnNight(date)));
+                String.valueOf(
+                    reservationSystem.getPriceModifier(
+                        view.getHotelListSelectedIndex(), date)));
         setModifiedPriceText();
     }
 
@@ -33,16 +33,20 @@ public class ManagePricesListener extends CalendarListener
         if (date < 1 || date > 31) {
             return;
         }
-        Hotel hotel = reservationSystem.getHotel(view.getHotelListSelectedIndex());
+
+        int index = view.getHotelListSelectedIndex();
+        double basePrice = reservationSystem.getBasePrice(index);
+        double priceModifier = reservationSystem.getPriceModifier(index, date);
+
         view.setModifiedPriceText(String.format("""
                 <div style="font-family: sans-serif">
                 <h2>Day %d</h2>
                 %.2f * %.2f = %.2f
                 </div>""",
                 Calendar.toDate(row, col),
-                hotel.getBasePrice(),
-                hotel.getPriceModifierOnNight(date),
-                hotel.getBasePrice() * hotel.getPriceModifierOnNight(date)));
+                basePrice,
+                priceModifier,
+                basePrice * priceModifier));
     }
 
     @Override
@@ -111,12 +115,10 @@ public class ManagePricesListener extends CalendarListener
     }
 
     public void updateBasePrice() {
-        int index = view.getHotelListSelectedIndex(); // saved as setting the
-                                                      // hotel list removes the
-                                                      // selection
+        int index = view.getHotelListSelectedIndex();
         try {
             double newBasePrice = Double.parseDouble(view.getUpdateBasePriceText());
-            if (reservationSystem.getHotel(index).setBasePrice(newBasePrice)) {
+            if (reservationSystem.setBasePrice(index, newBasePrice)) {
                 setModifiedPriceText();
             } else {
                 view.invalidBasePriceUpdateError();
@@ -130,10 +132,9 @@ public class ManagePricesListener extends CalendarListener
         int row = this.getRow();
         int col = this.getCol();
         int date = Calendar.toDate(row, col);
+        int index = view.getHotelListSelectedIndex();
         double newModifier = Double.parseDouble(view.getPriceModifierField());
-        Hotel hotel = reservationSystem
-                .getHotel(view.getHotelListSelectedIndex());
-        if (hotel.setPriceModifier(date, newModifier)) {
+        if (reservationSystem.setPriceModifier(index, date, newModifier)) {
             view.setManagePricesCalendarText(
                     date, String.format("%d: %.2f", date, newModifier));
         } else {

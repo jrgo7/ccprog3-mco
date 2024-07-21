@@ -2,7 +2,6 @@ package src.controller.gui;
 
 import javax.swing.event.ListSelectionEvent;
 
-import src.model.Hotel;
 import src.model.ReservationSystem;
 import src.view.gui.TopView;
 
@@ -15,8 +14,7 @@ public class RoomListListener extends ListAddListener {
 
     public void updateRoomData(int index) {
         this.view.updateRoomData(
-                reservationSystem.getHotel(view.getHotelListSelectedIndex())
-                        .getRoomString(index));
+                reservationSystem.getRoomString(view.getHotelListSelectedIndex(), index));
     }
 
     @Override
@@ -27,13 +25,8 @@ public class RoomListListener extends ListAddListener {
 
     @Override
     public void updateList() {
-        Hotel hotel = reservationSystem.getHotel(
-                view.getHotelListSelectedIndex());
-        if (hotel != null) {
-            view.updateRoomList(
-                    reservationSystem.getHotel(
-                            view.getHotelListSelectedIndex()).getRoomNames());
-        }
+        view.updateRoomList(
+                reservationSystem.getRoomNames(view.getHotelListSelectedIndex()));
     }
 
     @Override
@@ -48,6 +41,6 @@ public class RoomListListener extends ListAddListener {
 
     @Override
     protected int getListLength() {
-        return reservationSystem.getHotel(getListLength()).getRoomCount();
+        return reservationSystem.getRoomCount(view.getHotelListSelectedIndex());
     }
 }

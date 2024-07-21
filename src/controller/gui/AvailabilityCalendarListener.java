@@ -2,7 +2,6 @@ package src.controller.gui;
 
 import java.awt.event.KeyEvent;
 
-import src.model.Hotel;
 import src.model.ReservationSystem;
 import src.view.gui.TopView;
 import src.view.gui.component.Calendar;
@@ -59,18 +58,14 @@ public class AvailabilityCalendarListener extends CalendarListener {
     }
 
     public void handleCheckAvailability(int row, int col) {
-        Hotel hotel = reservationSystem
-                .getHotel(view.getHotelListSelectedIndex());
-        if (hotel == null) {
-            return;
-        }
+        int index = view.getHotelListSelectedIndex();
         int date = Calendar.toDate(row, col);
         if (date > 31 || date < 1) {
             view.setHotelAvailabilityDataText("<p></p>");
             return; // Block invalid input
         }
 
-        boolean isOneRoom = hotel.getAvailableRoomCount(date) == 1;
+        boolean isOneRoom = reservationSystem.getAvailableRoomCount(index, date) == 1;
         view.setHotelAvailabilityDataText(
                 String.format("""
                         <div style="font-family: sans-serif">
@@ -82,8 +77,8 @@ public class AvailabilityCalendarListener extends CalendarListener {
                         </div>
                         """,
                         date,
-                        hotel.getReservationCountOnDate(date, false),
-                        hotel.getAvailableRoomCount(date),
+                        reservationSystem.getReservationCountOnDate(index, date, false),
+                        reservationSystem.getAvailableRoomCount(index, date),
                         isOneRoom ? "" : "s"));
     }
 

@@ -11,13 +11,13 @@ public class ManageRoomListener extends ListAddListener {
     /** {@inheritDoc} */
     @Override
     protected int getListLength() {
-        return reservationSystem.getHotel(view.getHotelListSelectedIndex()).getRoomCount();
+        return reservationSystem.getRoomCount(view.getHotelListSelectedIndex());
     }
 
     /** {@inheritDoc} */
     @Override
     public void updateList() {
-        view.updateRoomList(reservationSystem.getHotel(view.getHotelListSelectedIndex()).getRoomNames());
+        view.updateRoomList(reservationSystem.getRoomNames(view.getHotelListSelectedIndex()));
     }
 
     /** {@inheritDoc} */

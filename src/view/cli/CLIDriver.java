@@ -46,8 +46,7 @@ public class CLIDriver {
                     "Creating a new hotel named " + name + ". Proceed?"))
                 return;
 
-            hotel = new Hotel(name);
-            valid = this.system.addHotel(hotel);
+            valid = this.system.addHotel(name);
             /*
              * Ensure that the new hotel's name does not yet exist in the system
              */
@@ -137,10 +136,9 @@ public class CLIDriver {
 
         int hotelIndex = CLIUtility.promptChoice(this.sc,
                 "Select a hotel:", this.system.getHotelNames());
-        Hotel hotel = this.system.getHotel(hotelIndex);
 
         CLIUtility.printBorder();
-        System.out.println(hotel.toString());
+        System.out.println(system.getHotelString(hotelIndex));
 
         CLIUtility.printBorder();
         int input = CLIUtility.promptChoice(this.sc, "Select an option:",
@@ -153,15 +151,15 @@ public class CLIDriver {
         switch (input) {
         /* Number of available and booked rooms on a date */
         case 0:
-            viewAvailabilityCount(hotel);
+            viewAvailabilityCount(hotelIndex);
             break;
         /* Room data */
         case 1:
-            viewRoomData(hotel);
+            viewRoomData(hotelIndex);
             break;
         /* Reservation data */
         case 2:
-            viewReservationData(hotel);
+            viewReservationData(hotelIndex);
             break;
         /* Back */
         case 3:
@@ -183,7 +181,7 @@ public class CLIDriver {
         boolean valid;
 
         /* Get the original name of the hotel */
-        String oldName = this.system.getHotel(hotelIndex).getName();
+        String oldName = this.system.getHotelName(hotelIndex);
         do {
             name = CLIUtility.promptString(this.sc, message);
 

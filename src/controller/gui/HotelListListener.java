@@ -1,6 +1,5 @@
 package src.controller.gui;
 
-import src.model.Hotel;
 import src.model.ReservationSystem;
 import src.view.gui.TopView;
 
@@ -52,23 +51,24 @@ public class HotelListListener extends ListAddListener {
     @Override
     protected void updateDataPanel(int selectedIndex) {
         /* Set default values in GUI */
-        Hotel hotel = reservationSystem.getHotel(selectedIndex);
 
         /* View Hotel */
-        view.setHotelDataText(hotel.toString());
+        view.setHotelDataText(reservationSystem.getHotelString(selectedIndex));
         view.setHotelListPrevSelectedIndex(selectedIndex);
         view.updateRoomList(
-                reservationSystem.getHotel(selectedIndex).getRoomNames());
+                reservationSystem.getRoomNames(selectedIndex));
 
         /* Manage Hotel */
-        view.setRenameHotelText(hotel.getName());
-        view.setUpdateBasePriceText(String.valueOf(hotel.getBasePrice()));
-        for (int day = 1; day <= 31; day++)
+        view.setRenameHotelText(reservationSystem.getHotelName(selectedIndex));
+        view.setUpdateBasePriceText(
+                String.valueOf(
+                        reservationSystem.getBasePrice(selectedIndex)));
+        for (int date = 1; date <= 31; date++)
             view.setManagePricesCalendarText(
-                    day,
+                    date,
                     String.format(
                             "%d: %.2f",
-                            day,
-                            hotel.getPriceModifierOnNight(day)));
+                            date,
+                            reservationSystem.getPriceModifier(selectedIndex, date)));
     }
 }

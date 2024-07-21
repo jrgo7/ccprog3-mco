@@ -99,12 +99,12 @@ public class Reservation {
      * 
      * @param night The night to calculate the price for
      * @see Room#getBasePrice()
-     * @see Hotel#getPriceModifierOnNight(int)
+     * @see Hotel#getPriceModifier(int)
      * @see #getDiscountCodeModifier(int)
      */
     private double getPriceForNight(int night) {
         return this.room.getBasePrice()
-                * this.hotel.getPriceModifierOnNight(night)
+                * this.hotel.getPriceModifier(night)
                 * getDiscountCodeModifier(night);
     }
 

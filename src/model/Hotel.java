@@ -60,7 +60,7 @@ public class Hotel {
     }
 
     /** {@return the price modifier for a given night} */
-    public double getPriceModifierOnNight(int night) {
+    public double getPriceModifier(int night) {
         return this.priceModifiers[night - 1];
     }
 

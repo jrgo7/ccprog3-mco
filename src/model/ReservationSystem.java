@@ -33,7 +33,7 @@ public class ReservationSystem {
      * @return the hotel instance at the given index, or {@code null} if the
      *         index is out of range
      */
-    public Hotel getHotel(int index) {
+    private Hotel getHotel(int index) {
         if (index < 0 || index >= this.hotels.size())
             return null;
         return this.hotels.get(index);
@@ -76,20 +76,15 @@ public class ReservationSystem {
      * Adds a given {@link Hotel} to the list of hotels in the system. Fails if
      * a hotel with the same name already exists in the system.
      * 
-     * @param hotel The hotel instance to add to the system
+     * @param name The name of the new hotel instance to add to the system
      * @return {@code true} if the hotel was created successfully, {@code false}
      *         otherwise
      */
-    public boolean addHotel(Hotel hotel) {
-        if (hotelNameExists(hotel.getName()) || hotel.getName() == null)
+    public boolean addHotel(String name) {
+        if (hotelNameExists(name) || name == null)
             return false;
 
-        this.hotels.add(hotel);
-        return true;
-    }
-
-    public boolean addHotel(String name) {
-        return addHotel(new Hotel(name));
+        return this.hotels.add(new Hotel(name));
     }
 
     /**
@@ -144,5 +139,62 @@ public class ReservationSystem {
      */
     public int getHotelCount() {
         return this.hotels.size();
+    }
+
+    public int getReservationCountOnDate(
+            int hotelIndex, int date, boolean excludeCheckOut) {
+        return this.getHotel(hotelIndex).getReservationCountOnDate(date, excludeCheckOut);
+    }
+
+    public int getAvailableRoomCount(int hotelIndex, int date) {
+        return this.getHotel(hotelIndex).getAvailableRoomCount(date);
+    }
+
+    public String[] getRoomNames(int hotelIndex) {
+        return this.getHotel(hotelIndex).getRoomNames();
+    }
+
+    public String getHotelString(int hotelIndex) {
+        return this.getHotel(hotelIndex).toString();
+    }
+
+    public String getHotelName(int hotelIndex) {
+        return this.getHotel(hotelIndex).getName();
+    }
+
+    public double getBasePrice(int hotelIndex) {
+        return this.getHotel(hotelIndex).getBasePrice();
+    }
+
+    public boolean setBasePrice(int hotelIndex, double basePrice) {
+        return this.getHotel(hotelIndex).setBasePrice(basePrice);
+    }
+
+    public double getPriceModifier(int hotelIndex, int date) {
+        return this.getHotel(hotelIndex).getPriceModifier(date);
+    }
+
+    public boolean setPriceModifier(int hotelIndex, int date, double priceModifier) {
+        return this.getHotel(hotelIndex).setPriceModifier(date, priceModifier);
+    }
+
+    public int getRoomCount(int hotelIndex) {
+        return this.getHotel(hotelIndex).getRoomCount();
+    }
+
+    public String getRoomString(int hotelIndex, int roomIndex) {
+        return this.getHotel(hotelIndex).getRoomString(roomIndex);
+    }
+
+    public boolean addReservation(
+            int hotelIndex, String guestName, int checkIn, int checkOut,
+            int roomIndex, String discountCode) {
+        return this.getHotel(hotelIndex).addReservation(
+                guestName, checkIn, checkOut, roomIndex, discountCode);
+    }
+
+    public ArrayList<Integer> getAvailableDatesForRoom(
+            int hotelIndex, int roomIndex) {
+        return this.getHotel(hotelIndex).getAvailableDatesForRoom(roomIndex);
     }
 }
