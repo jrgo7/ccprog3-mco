@@ -1,7 +1,6 @@
 package src.controller.gui;
 
 import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 import src.model.Hotel;
 import src.model.ReservationSystem;

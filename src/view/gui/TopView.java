@@ -19,6 +19,7 @@ import src.controller.gui.HotelListListener;
 import src.controller.gui.ManagePricesListener;
 import src.controller.gui.RenameHotelListener;
 import src.controller.gui.RoomListListener;
+import src.controller.gui.SimulateBookingRoomListListener;
 import src.view.gui.component.HotelListPanel;
 import src.view.gui.panel.ManageHotelPanel;
 import src.view.gui.panel.SimulateBookingPanel;
@@ -27,10 +28,6 @@ import src.view.gui.panel.ViewHotelPanel;
 /** Represents the top menu in the application's GUI. */
 /* TODO: Maybe have a JFrame as a field in TopView instead of inheritance */
 public class TopView extends JFrame {
-    static public final int VIEW_HOTEL_SCREEN = 0;
-    static public final int CHECK_AVAILABILITY_SCREEN = 101;
-    static public final int MANAGE_HOTEL_SCREEN = 1;
-    static public final int SIMULATE_BOOKING_SCREEN = 2;
     static public final Font ARIAL_PLAIN_FONT = new Font("Arial", Font.PLAIN, 14);
     private HotelListPanel hotelListPanel;
     private ViewHotelPanel viewHotelPanel;
@@ -224,6 +221,41 @@ public class TopView extends JFrame {
         return this.manageHotelPanel.getIsUpdateBasePriceFieldFocused();
     }
 
+    // Simulate booking
+    
+    public void setSimulateBookingCalendarAvailability(ArrayList<Integer> dates) {
+        this.simulateBookingPanel.setCalendarAvailability(dates);
+    }
+
+    public String getBookingGuestName() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getBookingGuestName'");
+    }
+
+    public int getBookingCheckIn() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getBookingCheckIn'");
+    }
+
+    public int getBookingCheckOut() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getBookingCheckOut'");
+    }
+
+    public int getBookingRoomIndex() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getBookingRoomIndex'");
+    }
+
+    public String getBookingDiscountCode() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getBookingDiscountCode'");
+    }
+
+    public void setSimulateBookingListeners(SimulateBookingRoomListListener listener) {
+        this.simulateBookingPanel.setListener(listener);
+    }
+
     // Error dialogs
     public void noHotelNameProvidedError() {
         JOptionPane.showMessageDialog(
@@ -264,18 +296,5 @@ public class TopView extends JFrame {
     public void resetState() {
         this.resetAvailabilityCalendarSelection();
         this.setHotelAvailabilityDataText("<p></p>");
-    }
-
-    public int getContext() {
-        return topMenuPane.getSelectedIndex();
-    }
-
-    public int getSubcontext() {
-        int retval = (this.getContext() + 1) * 100;
-        switch (getContext()) {
-        case TopView.VIEW_HOTEL_SCREEN:
-            return retval + this.viewHotelPanel.getSelectedSubpanelIndex() + 1;
-        }
-        return -1;
     }
 }

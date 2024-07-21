@@ -12,6 +12,8 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.TableModel;
 
+import src.controller.gui.SimulateBookingRoomListListener;
+import src.view.gui.TopView;
 import src.view.gui.component.Calendar;
 import src.view.gui.component.RoomListPanel;
 
@@ -27,19 +29,21 @@ public class SimulateBookingPanel extends JPanel {
         this.setLayout(new BorderLayout());
 
         JPanel textFieldPanel = new JPanel();
-        textFieldPanel.setLayout(new GridLayout(2, 2));
+        textFieldPanel.setLayout(new GridLayout(1, 4));
 
         JLabel guestNameLabel = new JLabel("Guest name:");
+        guestNameLabel.setFont(TopView.ARIAL_PLAIN_FONT);
         textFieldPanel.add(guestNameLabel);
+        
+        guestNameField = new JTextField();
+        textFieldPanel.add(guestNameField);
 
         JLabel discountCodeLabel = new JLabel("Discount code:");
+        discountCodeLabel.setFont(TopView.ARIAL_PLAIN_FONT);
         textFieldPanel.add(discountCodeLabel);
 
         discountCodeField = new JTextField();
         textFieldPanel.add(discountCodeField);
-
-        guestNameField = new JTextField();
-        textFieldPanel.add(guestNameField);
 
         this.add(textFieldPanel, BorderLayout.NORTH);
 
@@ -56,8 +60,8 @@ public class SimulateBookingPanel extends JPanel {
         // TODO for testing only
         TableModel model = priceBreakdownTable.getModel();
         for (int i = 0; i < 3; i++) {
-            model.setValueAt("Value", i, 0);
-            model.setValueAt("Value", i, 1);
+            model.setValueAt("Dates", i, 0);
+            model.setValueAt("Price", i, 1);
         }
         // TODO END
         centerPanel.add(priceBreakdownTable);
@@ -71,5 +75,13 @@ public class SimulateBookingPanel extends JPanel {
 
     public void updateRoomList(ArrayList<String> data) {
         this.roomListPanel.setList(data);
+    }
+
+    public void setCalendarAvailability(ArrayList<Integer> dates) {
+        this.durationPickerCalendar.setAvailability(dates);
+    }
+
+    public void setListener(SimulateBookingRoomListListener listener) {
+        this.roomListPanel.setListener(listener);
     }
 }

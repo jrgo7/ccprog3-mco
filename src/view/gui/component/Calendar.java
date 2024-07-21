@@ -47,9 +47,9 @@ public class Calendar extends JTable {
     // "White-out" unavailable dates, showing only the available dates
     public void setAvailability(ArrayList<Integer> availableDates) {
         for (int date = 1; date <= 31; date++) {
-            setCalendarText(
-                date,
-                (availableDates.contains(date)) ? String.valueOf(date) : "");
+            this.setCalendarText(
+                    date,
+                    (availableDates.contains(date)) ? String.valueOf(date) : "");
         }
     }
 

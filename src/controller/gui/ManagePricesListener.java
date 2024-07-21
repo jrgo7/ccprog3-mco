@@ -36,7 +36,7 @@ public class ManagePricesListener extends CalendarListener
         Hotel hotel = reservationSystem.getHotel(view.getHotelListSelectedIndex());
         view.setModifiedPriceText(String.format("""
                 <div style="font-family: sans-serif">
-                <h2>Date %d</h2>
+                <h2>Day %d</h2>
                 %.2f * %.2f = %.2f
                 </div>""",
                 Calendar.toDate(row, col),
