@@ -20,6 +20,7 @@ import src.controller.gui.AvailabilityCalendarListener;
 import src.controller.gui.HotelListListener;
 import src.controller.gui.ManagePricesListener;
 import src.controller.gui.RenameHotelListener;
+import src.controller.gui.RoomListListener;
 import src.controller.gui.UpdateBasePriceListener;
 
 /** Represents the top menu in the application's GUI. */
@@ -88,11 +89,13 @@ public class TopView extends JFrame {
     public void setListeners(
             HotelListListener hotelListListener,
             AvailabilityCalendarListener availabilityCalendarListener,
+            RoomListListener viewRoomListListener,
             RenameHotelListener renameHotelListener,
             UpdateBasePriceListener updateBasePriceListener,
             ManagePricesListener managePricesListener) {
         this.hotelListPanel.setListener(hotelListListener);
         this.viewHotelPanel.setCalendarListener(availabilityCalendarListener);
+        this.viewHotelPanel.setRoomListListener(viewRoomListListener);
         this.manageHotelPanel.setRenameHotelListener(renameHotelListener);
         this.manageHotelPanel.setUpdateBasePriceListener(updateBasePriceListener);
         this.manageHotelPanel.setManagePricesListener(managePricesListener);
@@ -144,6 +147,10 @@ public class TopView extends JFrame {
         ArrayList<String> dataAsList = new ArrayList<>(Arrays.asList(data));
         this.viewHotelPanel.updateRoomList(dataAsList);
         this.manageHotelPanel.updateRoomList(dataAsList);
+    }
+
+    public void updateRoomData(String data) {
+        this.viewHotelPanel.updateRoomData(data);
     }
 
     public int getAvailabilityCalendarRowFromMouse(Point point) {
