@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
+import src.controller.gui.ManageRoomListener;
 import src.view.gui.component.RoomListPanel;
 
 public class ManageRoomsPanel extends JPanel {
@@ -20,5 +21,9 @@ public class ManageRoomsPanel extends JPanel {
 
     public void updateRoomList(ArrayList<String> data) {
         this.roomListPanel.setList(data);
+    }
+
+    public void setListener(ManageRoomListener manageRoomListener) {
+        this.roomListPanel.setListener(manageRoomListener);
     }
 }

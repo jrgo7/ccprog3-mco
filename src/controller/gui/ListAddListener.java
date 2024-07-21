@@ -39,7 +39,7 @@ public abstract class ListAddListener implements ListSelectionListener {
             TopView view) {
         this.reservationSystem = reservationSystem;
         this.view = view;
-        this.updateList();
+        //this.updateList();
     }
 
     /**
