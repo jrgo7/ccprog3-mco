@@ -197,4 +197,8 @@ public class ReservationSystem {
             int hotelIndex, int roomIndex) {
         return this.getHotel(hotelIndex).getAvailableDatesForRoom(roomIndex);
     }
+
+    public void addRooms(int hotelIndex, int amount, int roomType) {
+        this.getHotel(hotelIndex).addRooms(amount, roomType);
+    }
 }

@@ -29,7 +29,7 @@ public class ManageRoomListener extends ListAddListener {
             view.showRoomCountFullError();
         else {
             int[] result = view.promptAddRoom(limit);
-            reservationSystem.getHotel(view.getHotelListSelectedIndex()).addRooms(result[1], result[0] + 1);
+            reservationSystem.addRooms(view.getHotelListSelectedIndex(), result[1], result[0] + 1);
             updateList();
         }
 
