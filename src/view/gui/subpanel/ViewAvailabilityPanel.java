@@ -65,10 +65,7 @@ public class ViewAvailabilityPanel extends JPanel {
     }
 
     public void resetCalendarSelection() {
-        this.calendarComponent.removeRowSelectionInterval(Calendar.MAX_ROWS - 1,
-                0);
-        this.calendarComponent
-                .removeColumnSelectionInterval(Calendar.MAX_COLS - 1, 0);
+        this.calendarComponent.resetSelection();
     }
 
     /**

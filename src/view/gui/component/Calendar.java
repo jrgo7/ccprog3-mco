@@ -71,4 +71,9 @@ public class Calendar extends JTable {
         this.setColumnSelectionInterval(col, col);
         this.requestFocus();
     }
+
+    public void resetSelection() {
+        this.removeRowSelectionInterval(Calendar.MAX_ROWS-1, 0);
+        this.removeColumnSelectionInterval(Calendar.MAX_COLS-1, 0);
+    }
 }
