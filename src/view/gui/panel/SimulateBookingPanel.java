@@ -47,7 +47,7 @@ public class SimulateBookingPanel extends JPanel {
         JPanel centerPanel = new JPanel();
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.X_AXIS));
 
-        roomListComponent = new RoomListPanel(100);
+        roomListComponent = new RoomListPanel(200, false);
         centerPanel.add(roomListComponent);
 
         durationPickerCalendar = new Calendar();
