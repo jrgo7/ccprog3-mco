@@ -64,13 +64,13 @@ public class AvailabilityCalendarListener extends CalendarListener {
         if (hotel == null) {
             return;
         }
-        int day = Calendar.toDay(row, col);
-        if (day > 31 || day < 1) {
+        int date = Calendar.toDate(row, col);
+        if (date > 31 || date < 1) {
             view.setHotelAvailabilityDataText("<p></p>");
             return; // Block invalid input
         }
 
-        boolean isOneRoom = hotel.getAvailableRoomCount(day) == 1;
+        boolean isOneRoom = hotel.getAvailableRoomCount(date) == 1;
         view.setHotelAvailabilityDataText(
                 String.format("""
                         <div style="font-family: sans-serif">
@@ -81,9 +81,9 @@ public class AvailabilityCalendarListener extends CalendarListener {
                         </ul>
                         </div>
                         """,
-                        day,
-                        hotel.getReservationCountOnDate(day, false),
-                        hotel.getAvailableRoomCount(day),
+                        date,
+                        hotel.getReservationCountOnDate(date, false),
+                        hotel.getAvailableRoomCount(date),
                         isOneRoom ? "" : "s"));
     }
 

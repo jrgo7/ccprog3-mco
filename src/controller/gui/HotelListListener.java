@@ -69,13 +69,13 @@ public class HotelListListener implements ListSelectionListener {
             // Manage hotel
             view.setRenameHotelText(hotel.getName());
             view.setUpdateBasePriceText(String.valueOf(hotel.getBasePrice()));
-            for (int day = 1; day <= 31; day++) {
+            for (int date = 1; date <= 31; date++) {
                 view.setManagePricesCalendarText(
-                        day,
+                        date,
                         String.format(
                                 "%d: %.2f",
-                                day,
-                                hotel.getPriceModifierOnNight(day)));
+                                date,
+                                hotel.getPriceModifierOnNight(date)));
             }
         }
     }
