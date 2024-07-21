@@ -1,8 +1,8 @@
 package src.view.gui.panel;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -10,7 +10,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.border.Border;
 import javax.swing.table.TableModel;
 
 import src.view.gui.component.Calendar;
@@ -19,7 +18,7 @@ import src.view.gui.component.RoomListPanel;
 public class SimulateBookingPanel extends JPanel {
     private JTextField guestNameField;
     private JTextField discountCodeField;
-    private RoomListPanel roomListComponent;
+    private RoomListPanel roomListPanel;
     private Calendar durationPickerCalendar;
     private JTable priceBreakdownTable;
     private JButton bookButton;
@@ -47,8 +46,8 @@ public class SimulateBookingPanel extends JPanel {
         JPanel centerPanel = new JPanel();
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.X_AXIS));
 
-        roomListComponent = new RoomListPanel(200, false);
-        centerPanel.add(roomListComponent);
+        roomListPanel = new RoomListPanel(200, false);
+        centerPanel.add(roomListPanel);
 
         durationPickerCalendar = new Calendar();
         centerPanel.add(durationPickerCalendar);
@@ -68,5 +67,9 @@ public class SimulateBookingPanel extends JPanel {
         bookButton = new JButton("Book");
 
         this.add(bookButton, BorderLayout.SOUTH);
+    }
+
+    public void updateRoomList(ArrayList<String> data) {
+        this.roomListPanel.setList(data);
     }
 }

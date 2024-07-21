@@ -1,6 +1,5 @@
 package src.controller.gui;
 
-import src.model.Hotel;
 import src.model.ReservationSystem;
 import src.view.gui.TopView;
 

@@ -9,12 +9,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
-// import javax.swing.UIManager;
+import javax.swing.UIManager;
 
 import src.controller.gui.AvailabilityCalendarListener;
 import src.controller.gui.HotelListListener;
@@ -40,15 +38,15 @@ public class TopView extends JFrame {
     private SimulateBookingPanel simulateBookingPanel;
 
     JList<String> hotelList;
-    JTabbedPane topMenuPane = new JTabbedPane();
+    JTabbedPane topMenuPane;
 
     public TopView() {
         super("Hotel Reservation System");
-        // try {
-        // UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        // } catch (Exception e) {
-        // System.err.println("Unable to configure look and feel.");
-        // }
+        try {
+        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
+        System.err.println("Unable to configure look and feel.");
+        }
         this.setLocationByPlatform(true);
         this.setLayout(new BorderLayout());
         Dimension systemResolution = Toolkit.getDefaultToolkit()
@@ -62,6 +60,7 @@ public class TopView extends JFrame {
     }
 
     public void init() {
+        topMenuPane = new JTabbedPane();
         // Hotel list panel
         hotelListPanel = new HotelListPanel(this.getWidth() / 3);
 
@@ -79,6 +78,8 @@ public class TopView extends JFrame {
         topMenuPane.setFont(ARIAL_PLAIN_FONT);
         this.add(topMenuPane, BorderLayout.CENTER);
     }
+
+    // Global / "Top menu"
 
     public String promptAddHotel() {
         return JOptionPane.showInputDialog("Hotel name");
@@ -150,6 +151,7 @@ public class TopView extends JFrame {
         ArrayList<String> dataAsList = new ArrayList<>(Arrays.asList(data));
         this.viewHotelPanel.updateRoomList(dataAsList);
         this.manageHotelPanel.updateRoomList(dataAsList);
+        this.simulateBookingPanel.updateRoomList(dataAsList);
     }
 
     public void updateRoomData(String data) {
