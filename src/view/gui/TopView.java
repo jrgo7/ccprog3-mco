@@ -22,6 +22,9 @@ import src.controller.gui.ManagePricesListener;
 import src.controller.gui.RenameHotelListener;
 import src.controller.gui.RoomListListener;
 import src.controller.gui.UpdateBasePriceListener;
+import src.view.gui.component.HotelListPanel;
+import src.view.gui.panel.ManageHotelPanel;
+import src.view.gui.panel.ViewHotelPanel;
 
 /** Represents the top menu in the application's GUI. */
 /* TODO: Maybe have a JFrame as a field in TopView instead of inheritance */

@@ -1,4 +1,4 @@
-package src.view.gui;
+package src.view.gui.component;
 
 /** Represents the {@link ListPanel} containing the list of rooms in a hotel. */
 public class RoomListPanel extends ListPanel {

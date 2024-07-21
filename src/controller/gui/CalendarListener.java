@@ -7,8 +7,8 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 import src.model.ReservationSystem;
-import src.view.gui.Calendar;
 import src.view.gui.TopView;
+import src.view.gui.component.Calendar;
 
 abstract class CalendarListener implements MouseListener, MouseMotionListener, KeyListener {
     ReservationSystem reservationSystem;

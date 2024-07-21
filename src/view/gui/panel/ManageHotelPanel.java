@@ -1,4 +1,4 @@
-package src.view.gui;
+package src.view.gui.panel;
 
 import java.util.ArrayList;
 
@@ -13,6 +13,11 @@ import javax.swing.JTextField;
 import src.controller.gui.ManagePricesListener;
 import src.controller.gui.RenameHotelListener;
 import src.controller.gui.UpdateBasePriceListener;
+import src.view.gui.TopView;
+import src.view.gui.component.DecimalDocument;
+import src.view.gui.subpanel.ManagePricesPanel;
+import src.view.gui.subpanel.ManageReservationsPanel;
+import src.view.gui.subpanel.ManageRoomsPanel;
 
 import javax.swing.JButton;
 

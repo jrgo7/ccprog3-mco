@@ -1,4 +1,4 @@
-package src.view.gui;
+package src.view.gui.subpanel;
 
 import java.awt.GridLayout;
 
@@ -10,6 +10,8 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 
 import src.controller.gui.ManagePricesListener;
+import src.view.gui.component.Calendar;
+import src.view.gui.component.DecimalDocument;
 
 public class ManagePricesPanel extends JPanel {
     private Calendar calendarComponent;

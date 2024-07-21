@@ -1,4 +1,4 @@
-package src.view.gui;
+package src.view.gui.subpanel;
 
 import java.awt.BorderLayout;
 import java.awt.Point;
@@ -8,6 +8,7 @@ import javax.swing.JTable;
 import javax.swing.JEditorPane;
 
 import src.controller.gui.AvailabilityCalendarListener;
+import src.view.gui.component.Calendar;
 
 /** Represents the View Availability subpanel under View Hotel. */
 public class ViewAvailabilityPanel extends JPanel {

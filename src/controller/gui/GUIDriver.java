@@ -1,7 +1,7 @@
-package src.view.gui;
+package src.controller.gui;
 
-import src.controller.gui.Controller;
 import src.model.ReservationSystem;
+import src.view.gui.TopView;
 
 public class GUIDriver {
     public static void main(String[] args) {

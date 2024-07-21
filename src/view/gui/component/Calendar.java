@@ -1,8 +1,10 @@
-package src.view.gui;
+package src.view.gui.component;
 
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.TableModel;
+
+import src.view.gui.TopView;
 
 public class Calendar extends JTable {
     public final static int MAX_COLS = 7;

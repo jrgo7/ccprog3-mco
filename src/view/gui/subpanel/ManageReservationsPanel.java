@@ -1,4 +1,4 @@
-package src.view.gui;
+package src.view.gui.subpanel;
 
 import javax.swing.JPanel;
 

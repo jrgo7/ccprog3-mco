@@ -1,4 +1,4 @@
-package src.view.gui;
+package src.view.gui.panel;
 
 import java.awt.BorderLayout;
 import java.awt.Point;
@@ -12,6 +12,9 @@ import javax.swing.JTable;
 import src.controller.gui.AvailabilityCalendarListener;
 import src.controller.gui.RoomListListener;
 import src.model.Hotel;
+import src.view.gui.TopView;
+import src.view.gui.subpanel.ViewAvailabilityPanel;
+import src.view.gui.subpanel.ViewRoomPanel;
 
 /** Represents the View Hotel panel. */
 public class ViewHotelPanel extends JPanel {

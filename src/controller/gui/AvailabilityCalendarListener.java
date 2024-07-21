@@ -2,8 +2,8 @@ package src.controller.gui;
 
 import src.model.Hotel;
 import src.model.ReservationSystem;
-import src.view.gui.Calendar;
 import src.view.gui.TopView;
+import src.view.gui.component.Calendar;
 
 public class AvailabilityCalendarListener extends CalendarListener {
 

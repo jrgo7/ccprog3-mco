@@ -1,9 +1,11 @@
-package src.view.gui;
+package src.view.gui.subpanel;
 
 import java.awt.BorderLayout;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
+
+import src.view.gui.component.RoomListPanel;
 
 public class ManageRoomsPanel extends JPanel {
     private RoomListPanel roomListPanel;
