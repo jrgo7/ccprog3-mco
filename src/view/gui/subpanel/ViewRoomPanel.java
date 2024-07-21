@@ -37,6 +37,7 @@ public class ViewRoomPanel extends JPanel {
     }
 
     public void setRoomListListener(RoomListListener roomListListener) {
-        this.roomListPanel.setListener((ListSelectionListener) roomListListener);
+        this.roomListPanel
+                .setListener((ListSelectionListener) roomListListener);
     }
 }

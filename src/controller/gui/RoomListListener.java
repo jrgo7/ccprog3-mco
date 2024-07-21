@@ -13,12 +13,14 @@ public class RoomListListener implements ListSelectionListener {
     public RoomListListener(ReservationSystem reservationSystem, TopView view) {
         this.reservationSystem = reservationSystem;
         this.view = view;
-        //updateRoomData(0);
-        
+        // updateRoomData(0);
+
     }
 
     public void updateRoomData(int index) {
-        this.view.updateRoomData(reservationSystem.getHotel(view.getHotelListSelectedIndex()).getRoomString(index));
+        this.view.updateRoomData(
+                reservationSystem.getHotel(view.getHotelListSelectedIndex())
+                        .getRoomString(index));
     }
 
     @Override

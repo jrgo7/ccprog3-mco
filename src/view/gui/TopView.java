@@ -33,7 +33,8 @@ public class TopView extends JFrame {
     static public final int CHECK_AVAILABILITY_SCREEN = 101;
     static public final int MANAGE_HOTEL_SCREEN = 1;
     static public final int SIMULATE_BOOKING_SCREEN = 2;
-    static public final Font ARIAL_PLAIN_FONT = new Font("Arial", Font.PLAIN, 14);
+    static public final Font ARIAL_PLAIN_FONT = new Font("Arial", Font.PLAIN,
+            14);
     private HotelListPanel hotelListPanel;
     private ViewHotelPanel viewHotelPanel;
     private ManageHotelPanel manageHotelPanel;
@@ -50,7 +51,8 @@ public class TopView extends JFrame {
         // }
         this.setLocationByPlatform(true);
         this.setLayout(new BorderLayout());
-        Dimension systemResolution = Toolkit.getDefaultToolkit().getScreenSize();
+        Dimension systemResolution = Toolkit.getDefaultToolkit()
+                .getScreenSize();
         this.setMinimumSize(new Dimension(
                 (int) systemResolution.getWidth() / 2,
                 (int) systemResolution.getHeight() / 2));
@@ -89,7 +91,8 @@ public class TopView extends JFrame {
         return JOptionPane.showInputDialog("Hotel name");
     }
 
-    public void setTopViewHotelListListener(HotelListListener hotelListListener) {
+    public void setTopViewHotelListListener(
+            HotelListListener hotelListListener) {
         this.hotelListPanel.setListener(hotelListListener);
     }
 
@@ -105,7 +108,8 @@ public class TopView extends JFrame {
             UpdateBasePriceListener updateBasePriceListener,
             ManagePricesListener managePricesListener) {
         this.manageHotelPanel.setRenameHotelListener(renameHotelListener);
-        this.manageHotelPanel.setUpdateBasePriceListener(updateBasePriceListener);
+        this.manageHotelPanel
+                .setUpdateBasePriceListener(updateBasePriceListener);
         this.manageHotelPanel.setManagePricesListener(managePricesListener);
     }
 
@@ -264,8 +268,8 @@ public class TopView extends JFrame {
     public int getSubcontext() {
         int retval = (this.getContext() + 1) * 100;
         switch (getContext()) {
-            case TopView.VIEW_HOTEL_SCREEN:
-                return retval + this.viewHotelPanel.getSelectedSubpanelIndex() + 1;
+        case TopView.VIEW_HOTEL_SCREEN:
+            return retval + this.viewHotelPanel.getSelectedSubpanelIndex() + 1;
         }
         return -1;
     }

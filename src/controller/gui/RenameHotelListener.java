@@ -11,8 +11,9 @@ import src.view.gui.TopView;
 public class RenameHotelListener implements ActionListener, KeyListener {
     ReservationSystem reservationSystem;
     TopView view;
-    
-    public RenameHotelListener(ReservationSystem reservationSystem, TopView view) {
+
+    public RenameHotelListener(ReservationSystem reservationSystem,
+            TopView view) {
         this.reservationSystem = reservationSystem;
         this.view = view;
     }
@@ -23,7 +24,9 @@ public class RenameHotelListener implements ActionListener, KeyListener {
     }
 
     public void renameHotel() {
-        int index = view.getHotelListSelectedIndex(); // saved as setting the hotel list removes the selection
+        int index = view.getHotelListSelectedIndex(); // saved as setting the
+                                                      // hotel list removes the
+                                                      // selection
         if (reservationSystem.renameHotel(index, view.getRenameHotelText())) {
             view.setHotelListData(reservationSystem.getHotelNamesAsList());
             view.setHotelListSelectedIndex(index);

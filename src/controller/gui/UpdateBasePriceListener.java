@@ -12,7 +12,8 @@ public class UpdateBasePriceListener implements ActionListener, KeyListener {
     ReservationSystem reservationSystem;
     TopView view;
 
-    public UpdateBasePriceListener(ReservationSystem reservationSystem, TopView view) {
+    public UpdateBasePriceListener(ReservationSystem reservationSystem,
+            TopView view) {
         this.reservationSystem = reservationSystem;
         this.view = view;
     }
@@ -23,15 +24,18 @@ public class UpdateBasePriceListener implements ActionListener, KeyListener {
     }
 
     public void updateBasePrice() {
-        int index = view.getHotelListSelectedIndex(); // saved as setting the hotel list removes the selection
+        int index = view.getHotelListSelectedIndex(); // saved as setting the
+                                                      // hotel list removes the
+                                                      // selection
         try {
-            double newBasePrice = Double.parseDouble(view.getUpdateBasePriceText());
+            double newBasePrice = Double
+                    .parseDouble(view.getUpdateBasePriceText());
             if (!reservationSystem.getHotel(index).setBasePrice(newBasePrice)) {
                 view.invalidBasePriceUpdateError();
             }
         } catch (NumberFormatException e) {
             view.invalidBasePriceUpdateError();
-        } 
+        }
     }
 
     @Override

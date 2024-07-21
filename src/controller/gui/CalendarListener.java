@@ -10,7 +10,8 @@ import src.model.ReservationSystem;
 import src.view.gui.TopView;
 import src.view.gui.component.Calendar;
 
-abstract class CalendarListener implements MouseListener, MouseMotionListener, KeyListener {
+abstract class CalendarListener
+        implements MouseListener, MouseMotionListener, KeyListener {
     ReservationSystem reservationSystem;
     TopView view;
     int receivedIndex;
@@ -32,7 +33,7 @@ abstract class CalendarListener implements MouseListener, MouseMotionListener, K
     protected abstract void handleClicked(int row, int col);
 
     protected abstract void handleReleased(int row, int col);
-    
+
     protected abstract void handleDragged(int row, int col);
 
     protected abstract void handleMoved(int row, int col);
@@ -42,28 +43,28 @@ abstract class CalendarListener implements MouseListener, MouseMotionListener, K
     @Override
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
-            case KeyEvent.VK_LEFT:
-            case KeyEvent.VK_KP_LEFT:
-                col = Math.max(col - 1, 0);
-                handleSelected(row, col);
-                break;
-            case KeyEvent.VK_RIGHT:
-            case KeyEvent.VK_KP_RIGHT:
-                col = Math.min(col + 1, Calendar.MAX_COLS - 1);
-                handleSelected(row, col);
-                break;
-            case KeyEvent.VK_UP:
-            case KeyEvent.VK_KP_UP:
-                row = Math.max(row - 1, 0);
-                handleSelected(row, col);
-                break;
-            case KeyEvent.VK_DOWN:
-            case KeyEvent.VK_KP_DOWN:
-                row = Math.min(row + 1, Calendar.MAX_ROWS - 1);
-                handleSelected(row, col);
-                break;
-            case KeyEvent.VK_ENTER:
-                handlePressEnterKey(row, col);
+        case KeyEvent.VK_LEFT:
+        case KeyEvent.VK_KP_LEFT:
+            col = Math.max(col - 1, 0);
+            handleSelected(row, col);
+            break;
+        case KeyEvent.VK_RIGHT:
+        case KeyEvent.VK_KP_RIGHT:
+            col = Math.min(col + 1, Calendar.MAX_COLS - 1);
+            handleSelected(row, col);
+            break;
+        case KeyEvent.VK_UP:
+        case KeyEvent.VK_KP_UP:
+            row = Math.max(row - 1, 0);
+            handleSelected(row, col);
+            break;
+        case KeyEvent.VK_DOWN:
+        case KeyEvent.VK_KP_DOWN:
+            row = Math.min(row + 1, Calendar.MAX_ROWS - 1);
+            handleSelected(row, col);
+            break;
+        case KeyEvent.VK_ENTER:
+            handlePressEnterKey(row, col);
         }
     }
 
@@ -108,7 +109,7 @@ abstract class CalendarListener implements MouseListener, MouseMotionListener, K
 
     @Override
     public void mouseExited(MouseEvent e) {
-        
+
     }
 
     @Override

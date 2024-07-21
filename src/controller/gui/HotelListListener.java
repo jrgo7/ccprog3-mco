@@ -12,7 +12,8 @@ public class HotelListListener implements ListSelectionListener {
     ReservationSystem reservationSystem;
     TopView view;
 
-    public HotelListListener(ReservationSystem reservationSystem, TopView view) {
+    public HotelListListener(ReservationSystem reservationSystem,
+            TopView view) {
         this.reservationSystem = reservationSystem;
         this.view = view;
         this.updateHotelList();
@@ -39,11 +40,14 @@ public class HotelListListener implements ListSelectionListener {
             // Selected "Add hotel" button
             String name = view.promptAddHotel();
             if (reservationSystem.addHotel(name)) {
-                // view.setTabIndex(TopView.VIEW_HOTEL_SCREEN); // ? Not needed as we have a way
+                // view.setTabIndex(TopView.VIEW_HOTEL_SCREEN); // ? Not needed
+                // as we have a way
                 // of updating default GUI fields, see [1]
                 view.resetState();
                 this.updateHotelList();
-                view.setHotelListSelectedIndex(selectedIndex); // redundant but gives a nice blue selection
+                view.setHotelListSelectedIndex(selectedIndex); // redundant but
+                                                               // gives a nice
+                                                               // blue selection
                                                                // highlight
             } else if (reservationSystem.getHotelCount() > 0) {
                 view.setHotelListSelectedIndex(
@@ -62,7 +66,8 @@ public class HotelListListener implements ListSelectionListener {
             // View hotel
             view.setHotelDataText(hotel.toString());
             view.setHotelListPrevSelectedIndex(selectedIndex);
-            view.updateRoomList(reservationSystem.getHotel(selectedIndex).getRoomNames());
+            view.updateRoomList(
+                    reservationSystem.getHotel(selectedIndex).getRoomNames());
 
             // Manage hotel
             view.setRenameHotelText(hotel.getName());

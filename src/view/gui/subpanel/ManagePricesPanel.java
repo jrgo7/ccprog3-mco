@@ -7,7 +7,6 @@ import javax.swing.JButton;
 import javax.swing.JEditorPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.border.Border;
 
 import src.controller.gui.ManagePricesListener;
 import src.view.gui.component.Calendar;
@@ -24,7 +23,7 @@ public class ManagePricesPanel extends JPanel {
 
         calendarComponent = new Calendar();
         this.add(calendarComponent);
-        
+
         modifiedPriceData = new JEditorPane("text/html", "<p></p>");
         modifiedPriceData.setEditable(false);
         this.add(modifiedPriceData);
@@ -32,14 +31,13 @@ public class ManagePricesPanel extends JPanel {
         JPanel fieldPanel = new JPanel();
         fieldPanel.setLayout(new GridLayout(1, 2));
 
-        
         priceField = new JTextField();
         priceField.setDocument(new DecimalDocument());
         fieldPanel.add(priceField, 0);
 
         priceUpdateButton = new JButton("Update price modifier");
         fieldPanel.add(priceUpdateButton, 1);
-        
+
         this.add(fieldPanel);
     }
 
@@ -49,6 +47,7 @@ public class ManagePricesPanel extends JPanel {
 
     /**
      * "Day X: basePrice * priceModifier = newPrice"
+     * 
      * @param text
      */
     public void setModifiedPriceText(String text) {

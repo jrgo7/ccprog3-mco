@@ -1,10 +1,10 @@
 package src.view.gui.panel;
 
-import java.util.ArrayList;
-
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.util.ArrayList;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
@@ -18,8 +18,6 @@ import src.view.gui.component.DecimalDocument;
 import src.view.gui.subpanel.ManagePricesPanel;
 import src.view.gui.subpanel.ManageReservationsPanel;
 import src.view.gui.subpanel.ManageRoomsPanel;
-
-import javax.swing.JButton;
 
 public class ManageHotelPanel extends JPanel {
     private JTabbedPane subpanels;
@@ -54,9 +52,8 @@ public class ManageHotelPanel extends JPanel {
         infoEditPanel.add(basePriceField, 4);
         updateBasePriceButton = new JButton("Update");
         infoEditPanel.add(updateBasePriceButton, 5);
-        
-        this.add(infoEditPanel, BorderLayout.NORTH);
 
+        this.add(infoEditPanel, BorderLayout.NORTH);
 
         subpanels = new JTabbedPane();
 
@@ -93,9 +90,11 @@ public class ManageHotelPanel extends JPanel {
 
     public void setRenameHotelListener(RenameHotelListener listener) {
         this.renameHotelField.addKeyListener(listener);
-        
+
         this.renameHotelButton.addActionListener(listener);
-        this.renameHotelButton.addKeyListener(listener); // * enables "tabbing" to this button and pressing enter
+        this.renameHotelButton.addKeyListener(listener); // * enables "tabbing"
+                                                         // to this button and
+                                                         // pressing enter
     }
 
     public void setUpdateBasePriceListener(UpdateBasePriceListener listener) {
@@ -103,14 +102,13 @@ public class ManageHotelPanel extends JPanel {
         this.updateBasePriceButton.addActionListener(listener);
         this.updateBasePriceButton.addKeyListener(listener);
     }
-    
+
     // Manage rooms subpanel
     public void updateRoomList(ArrayList<String> data) {
         this.manageRoomsSubpanel.updateRoomList(data);
     }
 
     // Manage reservations subpanel
-
 
     // Manage prices subpanel
 

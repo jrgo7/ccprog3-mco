@@ -10,7 +10,8 @@ public class DecimalDocument extends PlainDocument {
     }
 
     @Override
-    public void insertString(int offs, String str, AttributeSet a) throws BadLocationException {
+    public void insertString(int offs, String str, AttributeSet a)
+            throws BadLocationException {
         if (this.getText(0, this.getLength()).contains(".")) {
             str = str.replaceAll("\\D", "");
         } else {

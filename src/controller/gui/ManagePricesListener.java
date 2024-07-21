@@ -9,9 +9,11 @@ import src.model.ReservationSystem;
 import src.view.gui.TopView;
 import src.view.gui.component.Calendar;
 
-public class ManagePricesListener extends CalendarListener implements ActionListener {
+public class ManagePricesListener extends CalendarListener
+        implements ActionListener {
 
-    public ManagePricesListener(ReservationSystem reservationSystem, TopView view) {
+    public ManagePricesListener(ReservationSystem reservationSystem,
+            TopView view) {
         super(reservationSystem, view);
     }
 
@@ -21,9 +23,10 @@ public class ManagePricesListener extends CalendarListener implements ActionList
             return;
         }
         Hotel hotel = reservationSystem.getHotel(
-            view.getHotelListSelectedIndex());
+                view.getHotelListSelectedIndex());
         view.setPriceModifierField(
-                String.valueOf(hotel.getPriceModifierOnNight(Calendar.toDay(row, col))));
+                String.valueOf(hotel
+                        .getPriceModifierOnNight(Calendar.toDay(row, col))));
         view.setModifiedPriceText(String.format("""
                 <div style="font-family: sans-serif">
                 <h2>Day %d</h2>
@@ -92,7 +95,8 @@ public class ManagePricesListener extends CalendarListener implements ActionList
         int col = this.getCol();
         int day = Calendar.toDay(row, col);
         double newModifier = Double.parseDouble(view.getPriceModifierField());
-        Hotel hotel = reservationSystem.getHotel(view.getHotelListSelectedIndex());
+        Hotel hotel = reservationSystem
+                .getHotel(view.getHotelListSelectedIndex());
         if (hotel.setPriceModifier(day, newModifier)) {
             view.setManagePricesCalendarText(
                     day, String.format("%d: %.2f", day, newModifier));

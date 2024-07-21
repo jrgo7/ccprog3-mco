@@ -9,7 +9,7 @@ import src.view.gui.TopView;
 public class Calendar extends JTable {
     public final static int MAX_COLS = 7;
     public final static int MAX_ROWS = 5;
-    
+
     public Calendar() {
         super(MAX_ROWS, MAX_COLS);
         this.setCellSelectionEnabled(true);
@@ -39,7 +39,7 @@ public class Calendar extends JTable {
 
     public void setCalendarText(int day, String text) {
         this.getModel().setValueAt(
-            text, getRowFromDay(day), getColFromDay(day));
+                text, getRowFromDay(day), getColFromDay(day));
     }
 
     // Prevents all cells from being edited

@@ -32,7 +32,8 @@ public class ViewHotelPanel extends JPanel {
     public ViewHotelPanel() {
         this.setLayout(new BorderLayout());
 
-        this.hotelDataComponent = new JEditorPane("text/html", "<h1 style=\"font-family: sans-serif\">Hotels</h1>");
+        this.hotelDataComponent = new JEditorPane("text/html",
+                "<h1 style=\"font-family: sans-serif\">Hotels</h1>");
         this.hotelDataComponent.setEditable(false);
         this.add(this.hotelDataComponent, BorderLayout.NORTH);
 
@@ -82,8 +83,8 @@ public class ViewHotelPanel extends JPanel {
     }
 
     /**
-     * {@return the index of the row on where a given point lies on the availability
-     * calendar}
+     * {@return the index of the row on where a given point lies on the
+     * availability calendar}
      * 
      * @param point The point to capture in the table
      * @see JTable#rowAtPoint(Point)
@@ -112,10 +113,12 @@ public class ViewHotelPanel extends JPanel {
     /**
      * Sets a listener for the calendar in the View Availability subpanel.
      * 
-     * @param availabilityCalendarListener The listener to assign to the calendar
+     * @param availabilityCalendarListener The listener to assign to the
+     *                                     calendar
      * @see ViewAvailabilityPanel#setListener(AvailabilityCalendarListener)
      */
-    public void setCalendarListener(AvailabilityCalendarListener availabilityCalendarListener) {
+    public void setCalendarListener(
+            AvailabilityCalendarListener availabilityCalendarListener) {
         this.viewAvailabilitySubpanel.setListener(availabilityCalendarListener);
     }
 

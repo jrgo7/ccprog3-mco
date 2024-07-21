@@ -1,7 +1,6 @@
 package src.view.gui.component;
 
 import java.awt.BorderLayout;
-import java.awt.Font;
 import java.util.ArrayList;
 
 import javax.swing.JEditorPane;
@@ -41,7 +40,8 @@ public abstract class ListPanel extends JPanel {
 
         this.listComponent = new JList<String>();
         this.listComponent.setFixedCellWidth(width);
-        this.listComponent.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        this.listComponent
+                .setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         this.add(listComponent);
     }
@@ -57,12 +57,14 @@ public abstract class ListPanel extends JPanel {
     }
 
     /**
-     * Sets a {@link ListSelectionListener} to the {@link JList} tied to this panel.
+     * Sets a {@link ListSelectionListener} to the {@link JList} tied to this
+     * panel.
      * 
      * @param listener The listener to assign to the list
      */
     public void setListener(ListSelectionListener listener) {
-        this.listComponent.getSelectionModel().addListSelectionListener(listener);
+        this.listComponent.getSelectionModel()
+                .addListSelectionListener(listener);
     }
 
     /**
@@ -104,6 +106,7 @@ public abstract class ListPanel extends JPanel {
      * @see JList#removeSelectionInterval(int, int)
      */
     public void clearSelection() {
-        this.listComponent.removeSelectionInterval(0, this.listComponent.getComponentCount());
+        this.listComponent.removeSelectionInterval(0,
+                this.listComponent.getComponentCount());
     }
 }

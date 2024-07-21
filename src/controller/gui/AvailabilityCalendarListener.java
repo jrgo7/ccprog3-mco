@@ -9,7 +9,8 @@ import src.view.gui.component.Calendar;
 
 public class AvailabilityCalendarListener extends CalendarListener {
 
-    public AvailabilityCalendarListener(ReservationSystem reservationSystem, TopView view) {
+    public AvailabilityCalendarListener(ReservationSystem reservationSystem,
+            TopView view) {
         super(reservationSystem, view);
     }
 
@@ -30,7 +31,7 @@ public class AvailabilityCalendarListener extends CalendarListener {
 
     @Override
     protected void handleReleased(int row, int col) {
-        
+
     }
 
     protected void handleReleasedOutsideComponent() {
@@ -57,7 +58,8 @@ public class AvailabilityCalendarListener extends CalendarListener {
     }
 
     public void handleCheckAvailability(int row, int col) {
-        Hotel hotel = reservationSystem.getHotel(view.getHotelListSelectedIndex());
+        Hotel hotel = reservationSystem
+                .getHotel(view.getHotelListSelectedIndex());
         if (hotel == null) {
             return;
         }
