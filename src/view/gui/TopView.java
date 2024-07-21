@@ -23,6 +23,7 @@ import src.controller.gui.RenameHotelListener;
 import src.controller.gui.RoomListListener;
 import src.view.gui.component.HotelListPanel;
 import src.view.gui.panel.ManageHotelPanel;
+import src.view.gui.panel.SimulateBookingPanel;
 import src.view.gui.panel.ViewHotelPanel;
 
 /** Represents the top menu in the application's GUI. */
@@ -32,11 +33,11 @@ public class TopView extends JFrame {
     static public final int CHECK_AVAILABILITY_SCREEN = 101;
     static public final int MANAGE_HOTEL_SCREEN = 1;
     static public final int SIMULATE_BOOKING_SCREEN = 2;
-    static public final Font ARIAL_PLAIN_FONT = new Font("Arial", Font.PLAIN,
-            14);
+    static public final Font ARIAL_PLAIN_FONT = new Font("Arial", Font.PLAIN, 14);
     private HotelListPanel hotelListPanel;
     private ViewHotelPanel viewHotelPanel;
     private ManageHotelPanel manageHotelPanel;
+    private SimulateBookingPanel simulateBookingPanel;
 
     JList<String> hotelList;
     JTabbedPane topMenuPane = new JTabbedPane();
@@ -66,21 +67,14 @@ public class TopView extends JFrame {
 
         this.add(hotelListPanel, BorderLayout.WEST);
 
-        // View Hotel
         viewHotelPanel = new ViewHotelPanel();
-
         topMenuPane.addTab("View", viewHotelPanel);
 
-        // Manage hotel
         manageHotelPanel = new ManageHotelPanel();
-
         topMenuPane.addTab("Manage", manageHotelPanel);
 
-        // Simulate booking
-        JPanel bookHotelPanel = new JPanel();
-        JLabel bookHotelPanelLabel = new JLabel("Simulate booking");
-        bookHotelPanel.add(bookHotelPanelLabel);
-        topMenuPane.addTab("Book", bookHotelPanel);
+        simulateBookingPanel = new SimulateBookingPanel();
+        topMenuPane.addTab("Book", simulateBookingPanel);
 
         topMenuPane.setFont(ARIAL_PLAIN_FONT);
         this.add(topMenuPane, BorderLayout.CENTER);
