@@ -47,12 +47,12 @@ public class ManagePricesPanel extends JPanel {
         this.add(modifiedPriceData);
     }
 
-    public void setCalendarText(int day, String text) {
-        calendarComponent.setCalendarText(day, text);
+    public void setCalendarText(int date, String text) {
+        calendarComponent.setCalendarText(date, text);
     }
 
     /**
-     * "Day X: basePrice * priceModifier = newPrice"
+     * "Date X: basePrice * priceModifier = newPrice"
      * 
      * @param text
      */
@@ -68,8 +68,8 @@ public class ManagePricesPanel extends JPanel {
         this.priceModifierField.setText(text);
     }
 
-    public void selectCalendarDay(int day) {
-        this.calendarComponent.selectDay(day);
+    public void selectCalendarDate(int date) {
+        this.calendarComponent.selectDate(date);
     }
 
     public boolean getIsCalendarFocused() {

@@ -192,8 +192,8 @@ public class TopView extends JFrame {
         this.manageHotelPanel.setUpdateBasePriceText(basePrice);
     }
 
-    public void setManagePricesCalendarText(int day, String text) {
-        this.manageHotelPanel.setManagePricesCalendarText(day, text);
+    public void setManagePricesCalendarText(int date, String text) {
+        this.manageHotelPanel.setManagePricesCalendarText(date, text);
     }
 
     public String getPriceModifierField() {
@@ -208,8 +208,8 @@ public class TopView extends JFrame {
         this.manageHotelPanel.setModifiedPriceText(text);
     }
 
-    public void setPriceModiferCalendarDay(int day) {
-        this.manageHotelPanel.setPriceModiferCalendarDay(day);
+    public void setPriceModiferCalendarDate(int date) {
+        this.manageHotelPanel.setPriceModiferCalendarDate(date);
     }
 
     public boolean getIsPriceModifierCalendarFocused() {

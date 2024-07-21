@@ -140,12 +140,14 @@ public class Room {
     @Override
     public String toString() {
         return String.format("""
-                Room information:
-                    Name: %s
-                    Price/night: %.2f
-                %s""",
+                <div style="font-family: sans-serif">
+                <h3>%s</h3>
+                <ul>
+                <li>Price/night: %.2f</li>
+                </ul>
+                Room is available on the following dates:
+                </div>""",
                 this.getName(),
-                this.getBasePrice(),
-                this.getAvailableDatesAsCalendarString());
+                this.getBasePrice());
     }
 }

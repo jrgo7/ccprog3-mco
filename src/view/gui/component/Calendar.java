@@ -1,5 +1,7 @@
 package src.view.gui.component;
 
+import java.util.ArrayList;
+
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.TableModel;
@@ -22,24 +24,33 @@ public class Calendar extends JTable {
         this.setRowHeight(28);
     }
 
-    public static int toDay(int row, int col) {
+    public static int toDate(int row, int col) {
         if (row == -1 || col == -1) {
             return -1;
         }
         return row * 7 + col % 7 + 1;
     }
 
-    public int getRowFromDay(int day) {
-        return (day - 1) / MAX_COLS;
+    public int getRowFromDate(int date) {
+        return (date - 1) / MAX_COLS;
     }
 
-    public int getColFromDay(int day) {
-        return (day - 1) % MAX_COLS;
+    public int getColFromDate(int date) {
+        return (date - 1) % MAX_COLS;
     }
 
-    public void setCalendarText(int day, String text) {
+    public void setCalendarText(int date, String text) {
         this.getModel().setValueAt(
-                text, getRowFromDay(day), getColFromDay(day));
+                text, getRowFromDate(date), getColFromDate(date));
+    }
+
+    // "White-out" unavailable dates, showing only the available dates
+    public void setAvailability(ArrayList<Integer> availableDates) {
+        for (int date = 1; date <= 31; date++) {
+            setCalendarText(
+                date,
+                (availableDates.contains(date)) ? String.valueOf(date) : "");
+        }
     }
 
     // Prevents all cells from being edited
@@ -48,32 +59,16 @@ public class Calendar extends JTable {
         return false;
     }
 
-    // Mark the cell corresponding to a certain `day` as unavailable,
-    // i.e., set its backgronud color to red
-    public void setUnavailable(int day) {
-
-    }
-
-    // Mark the cell corresponding to a certain `day` as available,
-    // i.e., set its background color to the default
-    public void setAvailable(int day) {
-
-    }
-
-    public void colorByAvailability(int[] availableDates) {
-        // Set everything as unavailable then set the `availableDates`
-    }
-
-    public void selectDay(int day) {
-        int row = getRowFromDay(day);
-        int col = getColFromDay(day);
+    public void selectDate(int date) {
+        int row = getRowFromDate(date);
+        int col = getColFromDate(date);
         this.setRowSelectionInterval(row, row);
         this.setColumnSelectionInterval(col, col);
         this.requestFocus();
     }
 
     public void resetSelection() {
-        this.removeRowSelectionInterval(Calendar.MAX_ROWS-1, 0);
-        this.removeColumnSelectionInterval(Calendar.MAX_COLS-1, 0);
+        this.removeRowSelectionInterval(Calendar.MAX_ROWS - 1, 0);
+        this.removeColumnSelectionInterval(Calendar.MAX_COLS - 1, 0);
     }
 }

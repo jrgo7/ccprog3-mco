@@ -111,8 +111,8 @@ public class ManageHotelPanel extends JPanel {
 
     // Manage prices subpanel
 
-    public void setManagePricesCalendarText(int day, String text) {
-        this.managePricesSubpanel.setCalendarText(day, text);
+    public void setManagePricesCalendarText(int date, String text) {
+        this.managePricesSubpanel.setCalendarText(date, text);
     }
 
     public String getPriceModifierField() {
@@ -127,8 +127,8 @@ public class ManageHotelPanel extends JPanel {
         this.managePricesSubpanel.setModifiedPriceText(text);
     }
 
-    public void setPriceModiferCalendarDay(int day) {
-        this.managePricesSubpanel.selectCalendarDay(day);
+    public void setPriceModiferCalendarDate(int date) {
+        this.managePricesSubpanel.selectCalendarDate(date);
     }
 
     public boolean getIsPriceModifierCalendarFocused() {
