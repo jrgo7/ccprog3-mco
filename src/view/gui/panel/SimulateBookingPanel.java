@@ -4,11 +4,14 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 
+import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JEditorPane;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTable;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.table.TableModel;
 
@@ -22,8 +25,12 @@ public class SimulateBookingPanel extends JPanel {
     private JTextField discountCodeField;
     private RoomListPanel roomListPanel;
     private Calendar durationPickerCalendar;
-    private JTable priceBreakdownTable;
+    private JEditorPane priceBreakdownComponent;
     private JButton bookButton;
+    private ButtonGroup checkInOutGroup;
+    private JRadioButton checkInButton;
+    private JRadioButton checkOutButton;
+
 
     public SimulateBookingPanel() {
         this.setLayout(new BorderLayout());
@@ -53,18 +60,35 @@ public class SimulateBookingPanel extends JPanel {
         roomListPanel = new RoomListPanel(200, false);
         centerPanel.add(roomListPanel);
 
-        durationPickerCalendar = new Calendar();
-        centerPanel.add(durationPickerCalendar);
+        JPanel calendarPanel = new JPanel();
+        calendarPanel.setLayout(new BoxLayout(calendarPanel, BoxLayout.Y_AXIS));
+        
+        JPanel checkInOutPanel = new JPanel();
+        checkInOutPanel.setLayout(new BoxLayout(checkInOutPanel, BoxLayout.X_AXIS));
+        
+        checkInOutGroup = new ButtonGroup();
 
-        priceBreakdownTable = new JTable(3, 2);
-        // TODO for testing only
-        TableModel model = priceBreakdownTable.getModel();
-        for (int i = 0; i < 3; i++) {
-            model.setValueAt("Dates", i, 0);
-            model.setValueAt("Price", i, 1);
-        }
-        // TODO END
-        centerPanel.add(priceBreakdownTable);
+        checkInButton = new JRadioButton("Set check-in date");
+        checkInButton.setFont(TopView.ARIAL_PLAIN_FONT);
+        checkInOutPanel.add(checkInButton);
+        checkInOutGroup.add(checkInButton);
+        
+        checkOutButton = new JRadioButton("Set check-out date");
+        checkOutButton.setFont(TopView.ARIAL_PLAIN_FONT);
+        checkInOutPanel.add(checkOutButton);
+        checkInOutGroup.add(checkOutButton);
+
+        calendarPanel.add(checkInOutPanel);
+
+        durationPickerCalendar = new Calendar();
+        calendarPanel.add(durationPickerCalendar);
+        
+        priceBreakdownComponent = new JEditorPane(
+            "text/html",
+            "<h3 style=\"font-family: sans-serif\">Reservation data goes here</h3>");
+        calendarPanel.add(priceBreakdownComponent);
+
+        centerPanel.add(calendarPanel);
 
         this.add(centerPanel, BorderLayout.CENTER);
 

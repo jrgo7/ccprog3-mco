@@ -464,4 +464,9 @@ public class Hotel {
                 this.getExecutiveRoomCount(),
                 this.getEarnings());
     }
+
+    // ?
+    public Room getRoom(int roomIndex) {
+        return this.rooms.get(roomIndex);
+    }
 }

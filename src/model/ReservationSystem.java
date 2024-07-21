@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class ReservationSystem {
     /** The list of all hotels in the system. */
     private ArrayList<Hotel> hotels;
+    private ReservationBuilder reservationBuilder;
 
     /**
      * Initializes a reservation system containing zero instances of
@@ -14,7 +15,9 @@ public class ReservationSystem {
      */
     public ReservationSystem() {
         this.hotels = new ArrayList<Hotel>();
+        this.reservationBuilder = new ReservationBuilder();
     }
+
 
     /**
      * Checks if the system contains at least one hotel.
@@ -193,6 +196,13 @@ public class ReservationSystem {
                 guestName, checkIn, checkOut, roomIndex, discountCode);
     }
 
+    public boolean addReservation(ReservationBuilder builder) {
+        return addReservation(
+            builder.getHotelIndex(), builder.getGuestName(),
+            builder.getCheckIn(), builder.getCheckOut(),
+            builder.getRoomIndex(), builder.getDiscountCode());
+    }
+
     public ArrayList<Integer> getAvailableDatesForRoom(
             int hotelIndex, int roomIndex) {
         return this.getHotel(hotelIndex).getAvailableDatesForRoom(roomIndex);
@@ -201,4 +211,21 @@ public class ReservationSystem {
     public void addRooms(int hotelIndex, int amount, int roomType) {
         this.getHotel(hotelIndex).addRooms(amount, roomType);
     }
+
+    // reservation builder
+    
+    public ReservationBuilder getReservationBuilder() {
+        return reservationBuilder;
+    }
+
+    public String getReservationBuilderString() {
+        Reservation reservation = new Reservation(
+            this.getHotel(reservationBuilder.getHotelIndex()), 
+            reservationBuilder.getGuestName(),
+            reservationBuilder.getCheckIn(), 
+            reservationBuilder.getCheckOut(), 
+            this.getHotel(reservationBuilder.getHotelIndex()).getRoom(reservationBuilder.getRoomIndex()));
+        return reservation.toString();
+    }
+
 }

@@ -45,9 +45,17 @@ public class Reservation {
         this.room = room;
     }
 
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
+    }
+
     /** {@return the guest name tied to the reservation} */
     public String getGuestName() {
         return this.guestName;
+    }
+
+    public void setGuestName(String guestName) {
+        this.guestName = guestName;
     }
 
     /** {@return the check-in date of the reservation} */
@@ -55,9 +63,21 @@ public class Reservation {
         return this.checkIn;
     }
 
+    public void setCheckIn(int checkIn) {
+        this.checkIn = checkIn;
+    }
+
     /** {@return the check-out date of the reservation} */
     public int getCheckOut() {
         return this.checkOut;
+    }
+
+    public void setCheckOut(int checkOut) {
+        this.checkOut = checkOut;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
     }
 
     /**
@@ -77,17 +97,17 @@ public class Reservation {
     private double getDiscountCodeModifier(int night) {
         if (discountCode != null)
             switch (discountCode) {
-            case "I_WORK_HERE":
-                /* Applies a 10% discount */
-                return 0.9;
-            case "STAY4_GET1":
-                /* This code only gives the check-in date for free */
-                if (night == this.checkIn)
-                    return 0.0;
-                break;
-            case "PAYDAY":
-                /* Applies a 7% discount */
-                return 0.93;
+                case "I_WORK_HERE":
+                    /* Applies a 10% discount */
+                    return 0.9;
+                case "STAY4_GET1":
+                    /* This code only gives the check-in date for free */
+                    if (night == this.checkIn)
+                        return 0.0;
+                    break;
+                case "PAYDAY":
+                    /* Applies a 7% discount */
+                    return 0.93;
             }
 
         return 1.0;
@@ -145,22 +165,22 @@ public class Reservation {
     public boolean setDiscountCode(String discountCode) {
         if (discountCode != null)
             switch (discountCode) {
-            case "I_WORK_HERE":
-                /* Code always succeeds */
-                break;
-            case "STAY4_GET1":
-                /* Code fails if staying for less than 5 nights */
-                if (getNightCount() < 5)
+                case "I_WORK_HERE":
+                    /* Code always succeeds */
+                    break;
+                case "STAY4_GET1":
+                    /* Code fails if staying for less than 5 nights */
+                    if (getNightCount() < 5)
+                        return false;
+                    break;
+                case "PAYDAY":
+                    /* Code fails if stay does not include 15 or 30 */
+                    if (!(this.checkIn <= 15 && this.checkOut > 15)
+                            && !(this.checkIn <= 30 && this.checkOut > 30))
+                        return false;
+                    break;
+                default:
                     return false;
-                break;
-            case "PAYDAY":
-                /* Code fails if stay does not include 15 or 30 */
-                if (!(this.checkIn <= 15 && this.checkOut > 15)
-                        && !(this.checkIn <= 30 && this.checkOut > 30))
-                    return false;
-                break;
-            default:
-                return false;
             }
 
         /* Update discount code */
@@ -179,12 +199,35 @@ public class Reservation {
     public String getPriceBreakdown() {
         /* TODO: Rework this method */
         String breakdown = String.format(
-                "Reservation checking in on day %d and checking out on day %d:",
-                this.checkIn, this.checkOut);
-
-        for (int i = this.checkIn; i < this.checkOut; i++)
-            breakdown += String.format("\n%d-%d: %.2f", i, i + 1,
-                    this.getPriceForNight(i));
+                "<h4>Price breakdown</h4>",
+                this.checkIn,
+                this.checkOut);
+        breakdown += """
+                <table>
+                <tr>
+                <th>Date</th>
+                <th>Base price</th>
+                <th>Price modifier</th>
+                <th>Discount code modifier</th>
+                <th>Computed price for the night</th>
+                </tr>
+                """;
+        for (int date = this.checkIn; date < this.checkOut; date++)
+            breakdown += String.format(
+                    """
+                    <tr>
+                    <td>%d-%d</td>
+                    <td>%.2f</td>
+                    <td>%.2f</td>
+                    <td>%.2f</td>
+                    <td>%.2f</td>
+                    </tr>""",
+                    date,
+                    date + 1,
+                    this.room.getBasePrice(),
+                    this.hotel.getPriceModifier(date),
+                    this.getDiscountCodeModifier(date),
+                    this.getPriceForNight(date));
 
         return breakdown;
     }
@@ -220,13 +263,16 @@ public class Reservation {
     @Override
     public String toString() {
         return String.format("""
-                Guest: %s
+                <div style="font-family: sans-serif">
+                <h3>Reservation by %s</h3>
                 %s
-                Check-in: %d
-                Check-out: %d
-                Total price: %.2f
-                Discount code: %s
-                Price breakdown: %s""",
+                <ul>
+                <li>Duration: from %d to %d</li>
+                <li>Total price: %.2f</li>
+                <li>Discount code: %s</li>
+                <li>Price breakdown: %s</li>
+                </ul>
+                </div>""",
                 this.getGuestName(),
                 this.room.toString(),
                 this.getCheckIn(),

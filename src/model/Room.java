@@ -132,20 +132,16 @@ public class Room {
     }
 
     /**
-     * {@inheritDoc} Includes its name, base price, and a calendar containing
-     * the dates on which the room is available.
+     * {@inheritDoc} Includes its name and base price. A calendar containing
+     * the dates on which the room is available is also shown separately in
+     * the View rooms screen.
      * 
-     * @see #getAvailableDatesAsCalendarString()
      */
     @Override
     public String toString() {
         return String.format("""
                 <div style="font-family: sans-serif">
-                <h3>%s</h3>
-                <ul>
-                <li>Price/night: %.2f</li>
-                </ul>
-                Room is available on the following dates:
+                <ul><li>%s: Price/night: %.2f</li></ul>
                 </div>""",
                 this.getName(),
                 this.getBasePrice());
