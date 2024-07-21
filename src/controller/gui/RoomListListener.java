@@ -10,6 +10,7 @@ public class RoomListListener implements ListSelectionListener {
     private ReservationSystem reservationSystem;
     private TopView view;
 
+    /* TODO: Can this inherit from ListAddListener or something like that */
     public RoomListListener(ReservationSystem reservationSystem, TopView view) {
         this.reservationSystem = reservationSystem;
         this.view = view;
