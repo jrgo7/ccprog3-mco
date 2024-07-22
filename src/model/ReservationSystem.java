@@ -168,7 +168,7 @@ public class ReservationSystem {
         return this.getHotel(hotelIndex).getBasePrice();
     }
 
-    public boolean setBasePrice(int hotelIndex, double basePrice) {
+    public int setBasePrice(int hotelIndex, double basePrice) {
         return this.getHotel(hotelIndex).setBasePrice(basePrice);
     }
 

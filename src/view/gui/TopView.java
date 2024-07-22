@@ -380,12 +380,20 @@ public class TopView extends JFrame {
                 JOptionPane.ERROR_MESSAGE);
     }
 
-    public void invalidBasePriceUpdateError() {
+    public void basePriceUpdateLessThanMinimumError() {
+        JOptionPane.showMessageDialog(
+                this,
+                "The base price must be at least 100.",
+                "Invalid base price update error: less than minimum",
+                JOptionPane.ERROR_MESSAGE);
+    }
+
+    public void basePriceUpdateReservationsExistError() {
         JOptionPane.showMessageDialog(
                 this,
                 "The base price cannot be updated while reservations exist " +
-                "in the current hotel. The base price must also be at least 100.",
-                "Invalid base price update error",
+                "in the current hotel.",
+                "Invalid base price update error: reservations exist",
                 JOptionPane.ERROR_MESSAGE);
     }
 

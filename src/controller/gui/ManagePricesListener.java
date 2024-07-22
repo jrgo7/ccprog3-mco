@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
+import src.model.Hotel;
 import src.model.ReservationSystem;
 import src.view.gui.TopView;
 import src.view.gui.component.Calendar;
@@ -23,8 +24,8 @@ public class ManagePricesListener extends CalendarListener
         }
         view.setPriceModifierField(
                 String.valueOf(
-                    reservationSystem.getPriceModifier(
-                        view.getHotelListSelectedIndex(), date)));
+                        reservationSystem.getPriceModifier(
+                                view.getHotelListSelectedIndex(), date)));
         setModifiedPriceText();
     }
 
@@ -116,15 +117,18 @@ public class ManagePricesListener extends CalendarListener
 
     public void updateBasePrice() {
         int index = view.getHotelListSelectedIndex();
-        try {
-            double newBasePrice = Double.parseDouble(view.getUpdateBasePriceText());
-            if (reservationSystem.setBasePrice(index, newBasePrice)) {
+        double newBasePrice = Double.parseDouble(view.getUpdateBasePriceText());
+        int result = reservationSystem.setBasePrice(index, newBasePrice);
+        switch (result) {
+            case Hotel.SET_BASE_PRICE_SUCCESS:
                 setModifiedPriceText();
-            } else {
-                view.invalidBasePriceUpdateError();
-            }
-        } catch (NumberFormatException e) {
-            view.invalidBasePriceUpdateError();
+                break;
+            case Hotel.SET_BASE_PRICE_ERROR_LESS_THAN_MIN:
+                view.basePriceUpdateLessThanMinimumError();
+                break;
+            case Hotel.SET_BASE_PRICE_ERROR_RESERVATIONS_EXIST:
+                view.basePriceUpdateReservationsExistError();
+                break;
         }
     }
 

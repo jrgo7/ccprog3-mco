@@ -26,11 +26,17 @@ public class Hotel {
     /** The price modifiers for each night. */
     private double[] priceModifiers;
 
+    // Status codes
+    
     public static final int RESERVATION_SUCCESS = 0;
     public static final int RESERVATION_ERROR_INVALID_TIME = 1;
     public static final int RESERVATION_ERROR_INVALID_ROOM = 2;
     public static final int RESERVATION_ERROR_UNAVAILABLE_ROOM = 3;
     public static final int RESERVATION_ERROR_INVALID_DISCOUNT_CODE = 4;
+
+    public static final int SET_BASE_PRICE_SUCCESS = 0;
+    public static final int SET_BASE_PRICE_ERROR_LESS_THAN_MIN = 1;
+    public static final int SET_BASE_PRICE_ERROR_RESERVATIONS_EXIST = 2;
 
     /**
      * Initializes a new hotel instance given a name. The created hotel begins
@@ -225,16 +231,19 @@ public class Hotel {
      *         {@code false} otherwise
      * @see Room#setBasePrice(double)
      */
-    public boolean setBasePrice(double basePrice) {
-        if (basePrice < 100 || !this.reservations.isEmpty())
-            return false;
+    public int setBasePrice(double basePrice) {
+        if (basePrice < 100)
+            return SET_BASE_PRICE_ERROR_LESS_THAN_MIN;
+
+        if (!this.reservations.isEmpty())
+            return SET_BASE_PRICE_ERROR_RESERVATIONS_EXIST;
 
         this.basePrice = basePrice;
 
         for (Room room : this.rooms)
             room.setBasePrice(basePrice);
 
-        return true;
+        return SET_BASE_PRICE_SUCCESS;
     }
 
     /**

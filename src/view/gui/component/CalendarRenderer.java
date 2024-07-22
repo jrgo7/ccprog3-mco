@@ -11,17 +11,20 @@ import javax.swing.table.DefaultTableCellRenderer;
  * A custom renderer for Calendar objects that allows for per-cell rendering
  * based on (un)available dates and currently-selected check-in and check-out
  * parameters.
+ * 
  * TODO: Rename to BookingCalendarRenderer?
+ * 
  * TODO: Abstract to RoomAvailabilityCalendarRenderer (and CalendarRenderer)?
- * TODO: A potential HotelAvailabilityCalendarRenderer that shades in (availableRooms/totalRooms) red?
+ * 
+ * TODO: A potential HotelAvailabilityCalendarRenderer
+ * TODO: that shades in (availableRooms/totalRooms) red?
+ * 
  */
 public class CalendarRenderer extends DefaultTableCellRenderer {
-
     private static final int NONE = -1;
-
-    ArrayList<Integer> availableDates;
     private int checkIn = NONE;
     private int checkOut = NONE;
+    ArrayList<Integer> availableDates;
 
     public CalendarRenderer() {
         super();
