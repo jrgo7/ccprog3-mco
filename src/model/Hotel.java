@@ -26,6 +26,12 @@ public class Hotel {
     /** The price modifiers for each night. */
     private double[] priceModifiers;
 
+    public static final int RESERVATION_SUCCESS = 0;
+    public static final int RESERVATION_ERROR_INVALID_TIME = 1;
+    public static final int RESERVATION_ERROR_INVALID_ROOM = 2;
+    public static final int RESERVATION_ERROR_UNAVAILABLE_ROOM = 3;
+    public static final int RESERVATION_ERROR_INVALID_DISCOUNT_CODE = 4;
+
     /**
      * Initializes a new hotel instance given a name. The created hotel begins
      * with zero reservations, a base price of 1299.00, and one room.
@@ -340,29 +346,35 @@ public class Hotel {
      *         {@code false} otherwise
      * @see Room#isAvailableOn(int)
      */
-    public boolean addReservation(String guestName, int checkIn, int checkOut,
+    public int addReservation(String guestName, int checkIn, int checkOut,
             int roomIndex, String discountCode) {
-        if (checkIn > 30 || checkIn < 1 || checkOut <= checkIn
-                || roomIndex >= this.rooms.size() || roomIndex < 0)
-            return false;
+        if (checkIn > 30 || checkIn < 1 || checkOut <= checkIn) {
+            return RESERVATION_ERROR_INVALID_TIME;
+        }
+
+        if (roomIndex >= this.rooms.size() || roomIndex < 0) {
+            return RESERVATION_ERROR_INVALID_ROOM;
+        }
 
         Room room = this.rooms.get(roomIndex);
         /* No need to check validity on check-out date */
-        for (int date = checkIn; date < checkOut; date++)
-            if (!room.isAvailableOn(date))
-                return false;
-
+        for (int date = checkIn; date < checkOut; date++) {
+            if (!room.isAvailableOn(date)) {
+                return RESERVATION_ERROR_UNAVAILABLE_ROOM;
+            }
+        }
+            
         Reservation reservation = new Reservation(
                 this, guestName, checkIn, checkOut, room);
 
         if (discountCode != null && !reservation.setDiscountCode(discountCode))
-            return false;
+            return RESERVATION_ERROR_INVALID_DISCOUNT_CODE;
 
         this.reservations.add(reservation);
 
         /* Also add the reservation to the room */
         room.addReservation(reservation);
-        return true;
+        return RESERVATION_SUCCESS;
     }
 
     /**

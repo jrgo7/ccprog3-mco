@@ -18,7 +18,6 @@ public class ReservationSystem {
         this.reservationBuilder = new ReservationBuilder();
     }
 
-
     /**
      * Checks if the system contains at least one hotel.
      * 
@@ -189,18 +188,18 @@ public class ReservationSystem {
         return this.getHotel(hotelIndex).getRoomString(roomIndex);
     }
 
-    public boolean addReservation(
+    public int addReservation(
             int hotelIndex, String guestName, int checkIn, int checkOut,
             int roomIndex, String discountCode) {
         return this.getHotel(hotelIndex).addReservation(
                 guestName, checkIn, checkOut, roomIndex, discountCode);
     }
 
-    public boolean addReservation(ReservationBuilder builder) {
+    public int addReservation(ReservationBuilder builder) {
         return addReservation(
-            builder.getHotelIndex(), builder.getGuestName(),
-            builder.getCheckIn(), builder.getCheckOut(),
-            builder.getRoomIndex(), builder.getDiscountCode());
+                builder.getHotelIndex(), builder.getGuestName(),
+                builder.getCheckIn(), builder.getCheckOut(),
+                builder.getRoomIndex(), builder.getDiscountCode());
     }
 
     public ArrayList<Integer> getAvailableDatesForRoom(
@@ -213,20 +212,26 @@ public class ReservationSystem {
     }
 
     // reservation builder
-    
+
     public ReservationBuilder getReservationBuilder() {
         return reservationBuilder;
     }
 
     public String getReservationBuilderString() {
         Reservation reservation = new Reservation(
-            this.getHotel(reservationBuilder.getHotelIndex()), 
-            reservationBuilder.getGuestName(),
-            reservationBuilder.getCheckIn(), 
-            reservationBuilder.getCheckOut(), 
-            this.getHotel(reservationBuilder.getHotelIndex()).getRoom(reservationBuilder.getRoomIndex()));
+                this.getHotel(reservationBuilder.getHotelIndex()),
+                reservationBuilder.getGuestName(),
+                reservationBuilder.getCheckIn(),
+                reservationBuilder.getCheckOut(),
+                this.getHotel(
+                        reservationBuilder.getHotelIndex())
+                        .getRoom(reservationBuilder.getRoomIndex()));
         reservation.setDiscountCode(reservationBuilder.getDiscountCode());
         return reservation.toString();
+    }
+
+    public void resetReservationBuilder() {
+        reservationBuilder = new ReservationBuilder();
     }
 
 }

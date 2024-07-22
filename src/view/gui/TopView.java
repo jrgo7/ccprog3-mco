@@ -287,8 +287,20 @@ public class TopView extends JFrame {
         return this.simulateBookingPanel.getRoomIndex();
     }
 
+    public void resetBookingRoomListSelection() {
+        this.simulateBookingPanel.resetRoomListSelection();
+    }
+
     public String getBookingDiscountCode() {
         return this.simulateBookingPanel.getDiscountCodeFieldText();
+    }
+
+    public void setBookingDiscountCode(String discountCode) {
+        this.simulateBookingPanel.setDiscountCodeFieldText(discountCode);
+    }
+
+    public void setBookingGuestName(String guestName) {
+        this.simulateBookingPanel.setGuestNameFieldText(guestName);
     }
 
     public void updateSimulateBookingReservationPreview(String text) {
@@ -308,6 +320,16 @@ public class TopView extends JFrame {
             BookingCalendarListener bookingCalendarListener) {
         this.simulateBookingPanel.setListeners(
                 simulateBookingRoomListListener, bookingCalendarListener);
+    }
+
+    public void resetBookingFields() {
+        this.simulateBookingPanel.setPreview("<p></p>");
+        this.simulateBookingPanel.setGuestNameFieldText("");
+        this.simulateBookingPanel.setDiscountCodeFieldText("");
+    }
+
+    public void setBookingDetailsVisible(boolean visible) {
+        this.simulateBookingPanel.setDetailsVisible(visible);
     }
 
     // Dialogs

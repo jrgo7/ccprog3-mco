@@ -3,7 +3,6 @@ package src.view.gui.panel;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.Point;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
@@ -32,9 +31,22 @@ public class SimulateBookingPanel extends JPanel {
     private ButtonGroup checkInOutGroup;
     private JRadioButton checkInButton;
     private JRadioButton checkOutButton;
+    private JPanel calendarPanel;
 
     public SimulateBookingPanel() {
         this.setLayout(new BorderLayout());
+
+        
+        JPanel centerPanel = new JPanel();
+        centerPanel.setLayout(
+                new BoxLayout(centerPanel, BoxLayout.X_AXIS));
+                
+        roomListPanel = new RoomListPanel(200, false);
+        centerPanel.add(roomListPanel);
+
+        calendarPanel = new JPanel();
+        calendarPanel.setLayout(
+                new BoxLayout(calendarPanel, BoxLayout.Y_AXIS));
 
         JPanel textFieldPanel = new JPanel();
         textFieldPanel.setLayout(new GridLayout(1, 4));
@@ -53,18 +65,8 @@ public class SimulateBookingPanel extends JPanel {
         discountCodeField = new JTextField();
         textFieldPanel.add(discountCodeField);
 
-        this.add(textFieldPanel, BorderLayout.NORTH);
+        calendarPanel.add(textFieldPanel, BorderLayout.NORTH);
 
-        JPanel centerPanel = new JPanel();
-        centerPanel.setLayout(
-                new BoxLayout(centerPanel, BoxLayout.X_AXIS));
-
-        roomListPanel = new RoomListPanel(200, false);
-        centerPanel.add(roomListPanel);
-
-        JPanel calendarPanel = new JPanel();
-        calendarPanel.setLayout(
-                new BoxLayout(calendarPanel, BoxLayout.Y_AXIS));
 
         JPanel checkInOutPanel = new JPanel();
         checkInOutPanel.setLayout(
@@ -72,9 +74,9 @@ public class SimulateBookingPanel extends JPanel {
 
         checkInOutGroup = new ButtonGroup();
 
-        // TODO Autoselect this on program startup
         checkInButton = new JRadioButton("Set check-in date");
         checkInButton.setFont(TopView.ARIAL_PLAIN_FONT);
+        checkInButton.setEnabled(true);
         checkInOutPanel.add(checkInButton);
         checkInOutGroup.add(checkInButton);
 
@@ -100,7 +102,7 @@ public class SimulateBookingPanel extends JPanel {
         bookButton = new JButton("Book");
         southPanel.add(bookButton);
 
-        previewButton = new JButton("Update preview");
+        previewButton = new JButton("Reset");
         southPanel.add(previewButton);
 
         calendarPanel.add(southPanel);
@@ -108,6 +110,8 @@ public class SimulateBookingPanel extends JPanel {
         centerPanel.add(calendarPanel);
 
         this.add(centerPanel, BorderLayout.CENTER);
+
+        calendarPanel.setVisible(false);
     }
 
     public void updateRoomList(ArrayList<String> data) {
@@ -119,13 +123,17 @@ public class SimulateBookingPanel extends JPanel {
     }
 
     public void setCalendarCheckIn(int date) {
-        if (date >= 1 && date <= 31)
-            this.bookingCalendar.setCalendarText(date, String.format("%d: CHECK-IN", date));
+        if (date >= 1 && date <= 31) {
+            this.bookingCalendar.setCalendarText(
+                date, String.format("%d: START", date));
+        }
     }
 
     public void setCalendarCheckOut(int date) {
-        if (date >= 1 && date <= 31)
-            this.bookingCalendar.setCalendarText(date, String.format("%d: CHECK-OUT", date));
+        if (date >= 1 && date <= 31) {
+            this.bookingCalendar.setCalendarText(
+                date, String.format("%d: END", date));
+        }
     }
 
     public String getGuestNameFieldText() {
@@ -158,13 +166,30 @@ public class SimulateBookingPanel extends JPanel {
         return this.bookingCalendar.columnAtPoint(point);
     }
 
+    public void resetRoomListSelection() {
+        this.roomListPanel.setSelectedIndex(-1);
+    }
 
+	public void setDiscountCodeFieldText(String discountCode) {
+        this.discountCodeField.setText(discountCode);
+    }
+
+	public void setGuestNameFieldText(String guestName) {
+        this.guestNameField.setText(guestName);
+	}
+
+    public void setDetailsVisible(boolean visible) {
+        this.calendarPanel.setVisible(visible);
+    }
 
     public void setListeners(
             SimulateBookingRoomListListener simulateBookingRoomListListener,
             BookingCalendarListener bookingCalendarListener) {
 
         this.roomListPanel.setListener(simulateBookingRoomListListener);
+
+        this.guestNameField.addKeyListener(bookingCalendarListener);
+        this.discountCodeField.addKeyListener(bookingCalendarListener);
 
         // Following methods could be defined as Calendar.setListener() method
         this.bookingCalendar.addMouseListener(bookingCalendarListener);
@@ -178,4 +203,6 @@ public class SimulateBookingPanel extends JPanel {
         this.bookButton.addActionListener(bookingCalendarListener);
         this.previewButton.addActionListener(bookingCalendarListener);
     }
+
+
 }

@@ -43,6 +43,7 @@ public class Reservation {
         this.checkIn = checkIn;
         this.checkOut = checkOut;
         this.room = room;
+        this.discountCode = "";
     }
 
     public void setHotel(Hotel hotel) {
@@ -95,7 +96,7 @@ public class Reservation {
      * @see #setDiscountCode(String)
      */
     private double getDiscountCodeModifier(int night) {
-        if (discountCode != null)
+        if (!discountCode.equals(""))
             switch (discountCode) {
                 case "I_WORK_HERE":
                     /* Applies a 10% discount */
@@ -163,7 +164,7 @@ public class Reservation {
      *         {@code false} otherwise
      */
     public boolean setDiscountCode(String discountCode) {
-        if (discountCode != null)
+        if (!discountCode.equals("")) {
             switch (discountCode) {
                 case "I_WORK_HERE":
                     /* Code always succeeds */
@@ -182,6 +183,7 @@ public class Reservation {
                 default:
                     return false;
             }
+        }
 
         /* Update discount code */
         this.discountCode = discountCode;
@@ -215,13 +217,13 @@ public class Reservation {
         for (int date = this.checkIn; date < this.checkOut; date++)
             breakdown += String.format(
                     """
-                    <tr>
-                    <td>%d-%d</td>
-                    <td>%.2f</td>
-                    <td>%.2f</td>
-                    <td>%.2f</td>
-                    <td>%.2f</td>
-                    </tr>""",
+                            <tr>
+                            <td>%d-%d</td>
+                            <td>%.2f</td>
+                            <td>%.2f</td>
+                            <td>%.2f</td>
+                            <td>%.2f</td>
+                            </tr>""",
                     date,
                     date + 1,
                     this.room.getBasePrice(),
@@ -278,7 +280,7 @@ public class Reservation {
                 this.getCheckIn(),
                 this.getCheckOut(),
                 this.getTotalPrice(),
-                this.discountCode == null ? "none" : this.discountCode,
+                this.discountCode,
                 this.getPriceBreakdown());
     }
 }

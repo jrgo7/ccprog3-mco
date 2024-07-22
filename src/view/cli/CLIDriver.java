@@ -35,7 +35,6 @@ public class CLIDriver {
     private void displayCreateHotelScreen() {
         String name, message = "Input a name for the hotel:";
         boolean valid;
-        Hotel hotel;
 
         do {
             CLIUtility.printBorder();

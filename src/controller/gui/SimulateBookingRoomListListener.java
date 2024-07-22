@@ -18,5 +18,7 @@ public class SimulateBookingRoomListListener extends RoomListListener {
         view.setBookingCalendarAvailability(
                 reservationSystem.getAvailableDatesForRoom(
                         hotelIndex, index));
+        
+        view.setBookingDetailsVisible(true);
     }
 }
