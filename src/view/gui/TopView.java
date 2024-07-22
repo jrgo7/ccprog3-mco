@@ -207,6 +207,15 @@ public class TopView extends JFrame {
         return this.viewHotelPanel.getViewRoomSelectedIndex();
     }
 
+    public void updateReservationList(String[] data) {
+        ArrayList<String> dataAsList = new ArrayList<>(Arrays.asList(data));
+        this.viewHotelPanel.updateReservationList(dataAsList);
+    }
+
+    public int getViewReservationSelectedIndex() {
+        return this.viewHotelPanel.getViewReservationSelectedIndex();
+    }
+
     // Manage hotel delegations
 
     public String getRenameHotelText() {
