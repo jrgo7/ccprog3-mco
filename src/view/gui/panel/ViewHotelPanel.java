@@ -46,8 +46,6 @@ public class ViewHotelPanel extends JPanel {
         this.viewAvailabilitySubpanel = new ViewAvailabilityPanel();
         this.subpanels.add("Availability", this.viewAvailabilitySubpanel);
 
-        /* TODO: Subpanels for viewing rooms and reservations */
-
         this.viewRoomSubPanel = new ViewRoomPanel();
         this.subpanels.add("Rooms", viewRoomSubPanel);
 
@@ -140,6 +138,12 @@ public class ViewHotelPanel extends JPanel {
         return this.viewRoomSubPanel.getViewRoomSelectedIndex();
     }
 
+    public void resetRoomListSelection() {
+        this.viewRoomSubPanel.resetRoomListSelection();
+    }
+
+    // Reservation
+
     public void updateReservationList(ArrayList<String> data) {
         this.viewReservationsSubPanel.updateReservationList(data);
     }
@@ -155,4 +159,5 @@ public class ViewHotelPanel extends JPanel {
     public void setReservationListener(ReservationListListener listener) {
         this.viewReservationsSubPanel.setListener(listener);
     }
+
 }

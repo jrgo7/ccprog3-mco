@@ -9,7 +9,8 @@ public class ReservationBuilder {
     private String discountCode;
 
     public ReservationBuilder() {
-        
+        this.checkIn = 1;
+        this.checkOut = 31;
     }
 
     public void setHotelIndex(int hotelIndex) {
@@ -20,12 +21,26 @@ public class ReservationBuilder {
         this.guestName = guestName;
     }
 
-    public void setCheckIn(int checkIn) {
-        this.checkIn = checkIn;
+    public boolean validateDates(int checkIn, int checkOut) {
+        System.out.printf("checkIn: %d | checkOut: %d\n", checkIn, checkOut);
+        return (checkIn >= 1 && checkIn < 31) &&
+                (checkOut > 1 && checkOut <= 31) && checkIn < checkOut;
     }
 
-    public void setCheckOut(int checkOut) {
-        this.checkOut = checkOut;
+    public boolean setCheckIn(int checkIn) {
+        boolean changed = validateDates(checkIn, this.checkOut);
+        if (changed) {
+            this.checkIn = checkIn;
+        }
+        return changed;
+    }
+
+    public boolean setCheckOut(int checkOut) {
+        boolean changed = validateDates(this.checkIn, checkOut);
+        if (changed) {
+            this.checkOut = checkOut;
+        }
+        return changed;
     }
 
     public void setRoomIndex(int roomIndex) {

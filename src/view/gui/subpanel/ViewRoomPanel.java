@@ -55,4 +55,9 @@ public class ViewRoomPanel extends JPanel {
     public int getViewRoomSelectedIndex() {
         return this.roomListPanel.getSelectedIndex();
     }
+
+    public void resetRoomListSelection() {
+        this.roomListPanel.clearSelection();
+        this.roomDataPanel.setVisible(false);
+    }
 }

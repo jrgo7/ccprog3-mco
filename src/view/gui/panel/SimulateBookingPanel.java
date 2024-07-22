@@ -1,10 +1,15 @@
 package src.view.gui.panel;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Point;
+import java.awt.ScrollPane;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -12,7 +17,9 @@ import javax.swing.JEditorPane;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+
 
 import src.controller.gui.BookingCalendarListener;
 import src.controller.gui.SimulateBookingRoomListListener;
@@ -36,7 +43,6 @@ public class SimulateBookingPanel extends JPanel {
     public SimulateBookingPanel() {
         this.setLayout(new BorderLayout());
 
-        
         roomListPanel = new RoomListPanel(200, false);
         this.add(roomListPanel, BorderLayout.WEST);
 
@@ -45,49 +51,52 @@ public class SimulateBookingPanel extends JPanel {
                 new BoxLayout(detailsPanel, BoxLayout.Y_AXIS));
 
         JPanel textFieldPanel = new JPanel();
-        textFieldPanel.setLayout(new GridLayout(1, 4));
-
+        textFieldPanel.setLayout(new GridLayout(2, 2));
         JLabel guestNameLabel = new JLabel("Guest name:");
         guestNameLabel.setFont(TopView.ARIAL_PLAIN_FONT);
         textFieldPanel.add(guestNameLabel);
-
         guestNameField = new JTextField();
         textFieldPanel.add(guestNameField);
-
         JLabel discountCodeLabel = new JLabel("Discount code:");
         discountCodeLabel.setFont(TopView.ARIAL_PLAIN_FONT);
         textFieldPanel.add(discountCodeLabel);
-
         discountCodeField = new JTextField();
         textFieldPanel.add(discountCodeField);
-
-        detailsPanel.add(textFieldPanel, BorderLayout.NORTH);
-
+        textFieldPanel.setSize(WIDTH, HEIGHT);
+        detailsPanel.add(textFieldPanel);
 
         JPanel checkInOutPanel = new JPanel();
         checkInOutPanel.setLayout(
-            new BoxLayout(checkInOutPanel, BoxLayout.X_AXIS));
-
+                new BoxLayout(checkInOutPanel, BoxLayout.X_AXIS));
         checkInOutGroup = new ButtonGroup();
-
+        checkInOutPanel.add(Box.createHorizontalGlue());
         checkInButton = new JRadioButton("Set check-in date");
         checkInButton.setFont(TopView.ARIAL_PLAIN_FONT);
         checkInButton.setEnabled(true);
         checkInOutPanel.add(checkInButton);
         checkInOutGroup.add(checkInButton);
-
+        checkInOutPanel.add(Box.createHorizontalGlue());
         checkOutButton = new JRadioButton("Set check-out date");
         checkOutButton.setFont(TopView.ARIAL_PLAIN_FONT);
         checkInOutPanel.add(checkOutButton);
         checkInOutGroup.add(checkOutButton);
-
+        checkInOutPanel.add(Box.createHorizontalGlue());
         detailsPanel.add(checkInOutPanel);
 
         bookingCalendar = new Calendar();
         detailsPanel.add(bookingCalendar);
 
-        reservationPreview = new JEditorPane("text/html", "<p></p>");
-        detailsPanel.add(reservationPreview);
+        JPanel reservationPreviewPanel = new JPanel();
+        reservationPreviewPanel.setLayout(new BorderLayout());
+        reservationPreview = new JEditorPane("text/html", "<p>x</p>");
+        reservationPreview.setEditable(false);
+        JScrollPane reservationScrollPane = new JScrollPane(
+                reservationPreview,
+                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        reservationScrollPane.setSize(1000, 1000);
+        reservationPreviewPanel.add(reservationScrollPane, BorderLayout.CENTER);
+        detailsPanel.add(reservationPreviewPanel);
 
         JPanel southPanel = new JPanel();
         southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.X_AXIS));
@@ -118,15 +127,17 @@ public class SimulateBookingPanel extends JPanel {
     public void setCalendarCheckIn(int date) {
         if (date >= 1 && date <= 31) {
             this.bookingCalendar.setCalendarText(
-                date, String.format("%d: START", date));
+                    date, String.format("%d: START", date));
         }
+        this.bookingCalendar.setCalendarCheckIn(date);
     }
 
     public void setCalendarCheckOut(int date) {
         if (date >= 1 && date <= 31) {
             this.bookingCalendar.setCalendarText(
-                date, String.format("%d: END", date));
+                    date, String.format("%d: END", date));
         }
+        this.bookingCalendar.setCalendarCheckOut(date);
     }
 
     public String getGuestNameFieldText() {
@@ -160,16 +171,17 @@ public class SimulateBookingPanel extends JPanel {
     }
 
     public void resetRoomListSelection() {
-        this.roomListPanel.setSelectedIndex(-1);
+        this.roomListPanel.clearSelection();
+        this.detailsPanel.setVisible(false);
     }
 
-	public void setDiscountCodeFieldText(String discountCode) {
+    public void setDiscountCodeFieldText(String discountCode) {
         this.discountCodeField.setText(discountCode);
     }
 
-	public void setGuestNameFieldText(String guestName) {
+    public void setGuestNameFieldText(String guestName) {
         this.guestNameField.setText(guestName);
-	}
+    }
 
     public void setDetailsVisible(boolean visible) {
         this.detailsPanel.setVisible(visible);
@@ -196,6 +208,5 @@ public class SimulateBookingPanel extends JPanel {
         this.bookButton.addActionListener(bookingCalendarListener);
         this.resetButton.addActionListener(bookingCalendarListener);
     }
-
 
 }

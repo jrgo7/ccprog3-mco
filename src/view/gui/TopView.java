@@ -11,7 +11,6 @@ import java.util.Arrays;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
@@ -28,22 +27,26 @@ import src.controller.gui.RenameHotelListener;
 import src.controller.gui.ReservationListListener;
 import src.controller.gui.RoomListListener;
 import src.controller.gui.SimulateBookingRoomListListener;
+import src.controller.gui.TopMenuPaneListener;
 import src.view.gui.component.HotelListPanel;
 import src.view.gui.panel.ManageHotelPanel;
 import src.view.gui.panel.SimulateBookingPanel;
 import src.view.gui.panel.ViewHotelPanel;
 
 /** Represents the top menu in the application's GUI. */
-/* TODO: Maybe have a JFrame as a field in TopView instead of inheritance */
 public class TopView extends JFrame {
     static public final Font ARIAL_PLAIN_FONT = new Font("Arial", Font.PLAIN, 14);
+    static public final int VIEW_HOTEL_TAB = 0;
+    static public final int MANAGE_HOTEL_TAB = 1;
+    static public final int SIMULATE_BOOKING_TAB = 2;
+
     private HotelListPanel hotelListPanel;
     private ViewHotelPanel viewHotelPanel;
     private ManageHotelPanel manageHotelPanel;
     private SimulateBookingPanel simulateBookingPanel;
 
-    JList<String> hotelList;
-    JTabbedPane topMenuPane;
+    private JTabbedPane topMenuPane;
+
 
     public TopView() {
         super("Hotel Reservation System");
@@ -122,6 +125,10 @@ public class TopView extends JFrame {
         this.hotelListPanel.setListener(hotelListListener);
     }
 
+    public void setTopMenuPaneListener(TopMenuPaneListener listener)  {
+        topMenuPane.addChangeListener(listener);
+    }
+
     public void setViewHotelListeners(
             AvailabilityCalendarListener availabilityCalendarListener,
             RoomListListener viewRoomListListener,
@@ -143,6 +150,10 @@ public class TopView extends JFrame {
 
     public void setTabIndex(int index) {
         topMenuPane.setSelectedIndex(index);
+    }
+
+    public int getTabIndex() {
+        return topMenuPane.getSelectedIndex();
     }
 
     public void setHotelListData(ArrayList<String> data) {
@@ -204,6 +215,10 @@ public class TopView extends JFrame {
 
     public void resetAvailabilityCalendarSelection() {
         this.viewHotelPanel.resetCalendarSelection();
+    }
+
+    public void resetViewRoomListSelection() {
+        this.viewHotelPanel.resetRoomListSelection();
     }
 
     public int getViewRoomSelectedIndex() {

@@ -12,10 +12,6 @@ import src.view.gui.TopView;
 import src.view.gui.component.Calendar;
 
 public class BookingCalendarListener extends CalendarListener implements ActionListener {
-    // TODO: Update the preview automatically (no button)
-    // TODO: Reset button
-    // TODO: Auto-reset on submission (and update the availability calendar)
-
     static final private int CHECK_IN = 0;
     static final private int CHECK_OUT = 1;
     private int mode = CHECK_IN;
@@ -44,12 +40,9 @@ public class BookingCalendarListener extends CalendarListener implements ActionL
                 reservationSystem.getAvailableDatesForRoom(
                         view.getHotelListSelectedIndex(),
                         view.getBookingRoomIndex()));
-        if (checkIn != -1) {
-            view.setBookingCalendarCheckIn(checkIn);
-        }
-        if (checkOut != -1) {
-            view.setBookingCalendarCheckOut(checkOut);
-        }
+
+        view.setBookingCalendarCheckIn(checkIn);
+        view.setBookingCalendarCheckOut(checkOut);
     }
 
     @Override
@@ -107,24 +100,29 @@ public class BookingCalendarListener extends CalendarListener implements ActionL
         } else if (command.equals("Set check-out date")) {
             mode = CHECK_OUT;
         } else if (command.equals("Reset")) {
-            view.resetBookingFields();
-            reservationSystem.resetReservationBuilder();
+            resetBookingScreen();
         } else if (command.equals("Book")) {
             submitReservation();
         }
+    }
+
+    private void resetBookingScreen() {
+        view.resetBookingFields();
+        view.resetBookingRoomListSelection();
+        reservationSystem.resetReservationBuilder();
     }
 
     private void selectedDate(int row, int col) {
         ReservationBuilder builder = reservationSystem.getReservationBuilder();
         int date = Calendar.toDate(row, col);
         if (mode == CHECK_IN) {
-            System.out.println("Check-in date: " + date);
-            builder.setCheckIn(date); // TODO validation -- get a return value
-            updateReservationPreview();
+            if (builder.setCheckIn(date)) {
+                updateReservationPreview();
+            }
         } else if (mode == CHECK_OUT) {
-            System.out.println("Check-out date: " + date);
-            builder.setCheckOut(date); // TODO validation -- get a return value
-            updateReservationPreview();
+            if (builder.setCheckOut(date)) {
+                updateReservationPreview();
+            }
         }
     }
 
@@ -139,13 +137,9 @@ public class BookingCalendarListener extends CalendarListener implements ActionL
         switch (result) {
             case Hotel.RESERVATION_SUCCESS:
                 view.showReservationSuccess();
-                view.resetBookingFields();
-                view.setBookingCalendarAvailability(
-                        reservationSystem.getAvailableDatesForRoom(
-                                view.getHotelListSelectedIndex(),
-                                view.getBookingRoomIndex()));
-                reservationSystem.resetReservationBuilder();
-                view.updateReservationList(reservationSystem.getReservationNames(hotelIndex));
+                view.updateReservationList(
+                    reservationSystem.getReservationNames(hotelIndex));
+                resetBookingScreen();
                 break;
             case Hotel.RESERVATION_ERROR_INVALID_TIME:
                 view.showReservationError("Invalid time chosen.");

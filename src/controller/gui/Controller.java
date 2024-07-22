@@ -7,6 +7,7 @@ public class Controller {
     ReservationSystem reservationSystem;
     TopView view;
 
+    TopMenuPaneListener topMenuPaneListener;
     HotelListListener hotelListListener;
 
     AvailabilityCalendarListener availabilityCalendarListener;
@@ -25,6 +26,7 @@ public class Controller {
         this.reservationSystem = reservationSystem;
         this.view = view;
 
+        topMenuPaneListener = new TopMenuPaneListener(reservationSystem, view);
         hotelListListener = new HotelListListener(reservationSystem, view);
 
         availabilityCalendarListener = new AvailabilityCalendarListener(
@@ -43,8 +45,9 @@ public class Controller {
         bookingCalendarListener = new BookingCalendarListener(
                 reservationSystem, view);
 
-                viewReservationListListener = new ReservationListListener(reservationSystem, view);
+        viewReservationListListener = new ReservationListListener(reservationSystem, view);
 
+        this.view.setTopMenuPaneListener(topMenuPaneListener);
         this.view.setTopViewHotelListListener(hotelListListener);
         
         this.view.setViewHotelListeners(
