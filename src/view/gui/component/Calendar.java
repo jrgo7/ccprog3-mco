@@ -40,7 +40,6 @@ public class Calendar extends JTable {
     }
 
     public void setCalendarText(int date, String text) {
-        System.out.printf("Setting row %d, col %d with %s\n", getRowFromDate(date), getColFromDate(date), text);
         this.getModel().setValueAt(text, getRowFromDate(date), getColFromDate(date));
     }
 
