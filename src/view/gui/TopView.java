@@ -20,6 +20,7 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.UIManager;
 
 import src.controller.gui.AvailabilityCalendarListener;
+import src.controller.gui.BookingCalendarListener;
 import src.controller.gui.HotelListListener;
 import src.controller.gui.ManagePricesListener;
 import src.controller.gui.ManageRoomListener;
@@ -261,41 +262,55 @@ public class TopView extends JFrame {
     }
 
     // Simulate booking
-    
-    public void setSimulateBookingCalendarAvailability(ArrayList<Integer> dates) {
+
+    public void setBookingCalendarAvailability(ArrayList<Integer> dates) {
         this.simulateBookingPanel.setCalendarAvailability(dates);
     }
 
+    public void setBookingCalendarCheckIn(int date) {
+        this.simulateBookingPanel.setCalendarCheckIn(date);
+    }
+
+    public void setBookingCalendarCheckOut(int date) {
+        this.simulateBookingPanel.setCalendarCheckOut(date);
+    }
+
     public String getBookingGuestName() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getBookingGuestName'");
+        return this.simulateBookingPanel.getGuestNameFieldText();
     }
 
-    public int getBookingCheckIn() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getBookingCheckIn'");
-    }
-
-    public int getBookingCheckOut() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getBookingCheckOut'");
+    public int getBookingCalendarDay() {
+        return this.simulateBookingPanel.getBookingCalendarDay();
     }
 
     public int getBookingRoomIndex() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getBookingRoomIndex'");
+        return this.simulateBookingPanel.getRoomIndex();
     }
 
     public String getBookingDiscountCode() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getBookingDiscountCode'");
+        return this.simulateBookingPanel.getDiscountCodeFieldText();
     }
 
-    public void setSimulateBookingListeners(SimulateBookingRoomListListener listener) {
-        this.simulateBookingPanel.setListener(listener);
+    public void updateSimulateBookingReservationPreview(String text) {
+        this.simulateBookingPanel.setPreview(text);
     }
 
-    // Error dialogs
+    public int getBookingCalendarRowFromMouse(Point point) {
+        return this.simulateBookingPanel.getBookingCalendarRowFromMouse(point);
+    }
+
+    public int getBookingCalendarColFromMouse(Point point) {
+        return this.simulateBookingPanel.getBookingCalendarColFromMouse(point);
+    }
+
+    public void setSimulateBookingListeners(
+            SimulateBookingRoomListListener simulateBookingRoomListListener,
+            BookingCalendarListener bookingCalendarListener) {
+        this.simulateBookingPanel.setListeners(
+                simulateBookingRoomListListener, bookingCalendarListener);
+    }
+
+    // Dialogs
     public void noHotelNameProvidedError() {
         JOptionPane.showMessageDialog(
                 this,
@@ -334,6 +349,22 @@ public class TopView extends JFrame {
                 this,
                 "A room may only have up to 50 rooms.",
                 "Room limit reached error",
+                JOptionPane.ERROR_MESSAGE);
+    }
+
+    public void showReservationSuccess() {
+        JOptionPane.showMessageDialog(
+                this,
+                "Your reservation was made successfully.",
+                "Reservation success",
+                JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    public void showReservationError() {
+        JOptionPane.showMessageDialog(
+                this,
+                "Your reservation was not made successfully.",
+                "Invalid reservation error",
                 JOptionPane.ERROR_MESSAGE);
     }
 

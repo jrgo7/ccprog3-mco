@@ -11,8 +11,12 @@ public class SimulateBookingRoomListListener extends RoomListListener {
 
     @Override
     public void updateDataPanel(int index) {
-        view.setSimulateBookingCalendarAvailability(
+        int hotelIndex = view.getHotelListSelectedIndex();
+        if (index < 0 || hotelIndex < 0)
+            return;
+
+        view.setBookingCalendarAvailability(
                 reservationSystem.getAvailableDatesForRoom(
-                        view.getHotelListSelectedIndex(), index));
+                        hotelIndex, index));
     }
 }

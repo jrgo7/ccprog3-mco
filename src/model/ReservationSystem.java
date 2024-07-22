@@ -225,6 +225,7 @@ public class ReservationSystem {
             reservationBuilder.getCheckIn(), 
             reservationBuilder.getCheckOut(), 
             this.getHotel(reservationBuilder.getHotelIndex()).getRoom(reservationBuilder.getRoomIndex()));
+        reservation.setDiscountCode(reservationBuilder.getDiscountCode());
         return reservation.toString();
     }
 

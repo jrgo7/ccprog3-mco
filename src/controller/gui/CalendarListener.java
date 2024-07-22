@@ -14,6 +14,7 @@ abstract class CalendarListener
         implements MouseListener, MouseMotionListener, KeyListener {
     ReservationSystem reservationSystem;
     TopView view;
+    Calendar calendar;
     int receivedIndex;
     int row;
     int col;
@@ -68,6 +69,11 @@ abstract class CalendarListener
         }
     }
 
+    protected void setRowAndCol(MouseEvent e) {
+        row = view.getAvailabilityCalendarRowFromMouse(e.getPoint());
+        col = view.getAvailabilityCalendarColFromMouse(e.getPoint());
+    }
+
     @Override
     public void keyTyped(KeyEvent e) {
 
@@ -80,20 +86,19 @@ abstract class CalendarListener
 
     @Override
     public void mouseClicked(MouseEvent e) {
-
+        setRowAndCol(e);
+        handleClicked(row, col);
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-        row = view.getAvailabilityCalendarRowFromMouse(e.getPoint());
-        col = view.getAvailabilityCalendarColFromMouse(e.getPoint());
+        setRowAndCol(e);
         handleClicked(row, col);
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        row = view.getAvailabilityCalendarRowFromMouse(e.getPoint());
-        col = view.getAvailabilityCalendarColFromMouse(e.getPoint());
+        setRowAndCol(e);
         handleReleased(row, col);
         if (row == -1 || col == -1) {
             row = 0;
@@ -114,8 +119,7 @@ abstract class CalendarListener
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        row = view.getAvailabilityCalendarRowFromMouse(e.getPoint());
-        col = view.getAvailabilityCalendarColFromMouse(e.getPoint());
+        setRowAndCol(e);
         handleDragged(row, col);
     }
 
