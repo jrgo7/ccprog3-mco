@@ -234,4 +234,15 @@ public class ReservationSystem {
         reservationBuilder = new ReservationBuilder();
     }
 
+    public String[] getReservationNames(int hotelIndex) {
+        return this.getHotel(hotelIndex).getReservationNames();
+    }
+
+    public String getReservationString(int hotelIndex, int reservationIndex) {
+        return this.getHotel(hotelIndex).getReservationString(reservationIndex);
+    }
+
+    public int getReservationCount(int hotelIndex) {
+        return  this.getHotel(hotelIndex).getReservationCount();
+    }
 }

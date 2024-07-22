@@ -10,10 +10,12 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 
 import src.controller.gui.AvailabilityCalendarListener;
+import src.controller.gui.ReservationListListener;
 import src.controller.gui.RoomListListener;
 import src.model.Hotel;
 import src.view.gui.TopView;
 import src.view.gui.subpanel.ViewAvailabilityPanel;
+import src.view.gui.subpanel.ViewReservationsPanel;
 import src.view.gui.subpanel.ViewRoomPanel;
 
 /** Represents the View Hotel panel. */
@@ -28,6 +30,8 @@ public class ViewHotelPanel extends JPanel {
     private ViewAvailabilityPanel viewAvailabilitySubpanel;
 
     private ViewRoomPanel viewRoomSubPanel;
+
+    private ViewReservationsPanel viewReservationsSubPanel;
 
     public ViewHotelPanel() {
         this.setLayout(new BorderLayout());
@@ -47,7 +51,8 @@ public class ViewHotelPanel extends JPanel {
         this.viewRoomSubPanel = new ViewRoomPanel();
         this.subpanels.add("Rooms", viewRoomSubPanel);
 
-        this.subpanels.add("Reservations", new JPanel());
+        this.viewReservationsSubPanel = new ViewReservationsPanel();
+        this.subpanels.add("Reservations", viewReservationsSubPanel);
 
         subpanels.setFont(TopView.ARIAL_PLAIN_FONT);
         this.add(subpanels, BorderLayout.CENTER);
@@ -133,5 +138,21 @@ public class ViewHotelPanel extends JPanel {
 
     public int getViewRoomSelectedIndex() {
         return this.viewRoomSubPanel.getViewRoomSelectedIndex();
+    }
+
+    public void updateReservationList(ArrayList<String> data) {
+        this.viewReservationsSubPanel.updateReservationList(data);
+    }
+
+    public int getViewReservationSelectedIndex() {
+        return this.viewReservationsSubPanel.getSelectedIndex();
+    }
+
+    public void updateReservationData(String data) {
+        this.viewReservationsSubPanel.updateReservationData(data);
+    }
+
+    public void setReservationListener(ReservationListListener listener) {
+        this.viewReservationsSubPanel.setListener(listener);
     }
 }

@@ -33,5 +33,6 @@ public class SimulateBookingRoomListListener extends RoomListListener {
                         hotelIndex, index));
 
         view.setBookingDetailsVisible(true);
+        view.updateReservationList(reservationSystem.getReservationNames(hotelIndex));
     }
 }

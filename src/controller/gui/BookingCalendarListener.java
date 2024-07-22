@@ -129,6 +129,11 @@ public class BookingCalendarListener extends CalendarListener implements ActionL
     }
 
     public void submitReservation() {
+        int hotelIndex = view.getHotelListSelectedIndex();
+
+        if (hotelIndex < 0)
+            return;
+
         int result = reservationSystem.addReservation(
                 reservationSystem.getReservationBuilder());
         switch (result) {
@@ -140,6 +145,7 @@ public class BookingCalendarListener extends CalendarListener implements ActionL
                                 view.getHotelListSelectedIndex(),
                                 view.getBookingRoomIndex()));
                 reservationSystem.resetReservationBuilder();
+                view.updateReservationList(reservationSystem.getReservationNames(hotelIndex));
                 break;
             case Hotel.RESERVATION_ERROR_INVALID_TIME:
                 view.showReservationError("Invalid time chosen.");
