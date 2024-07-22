@@ -270,8 +270,8 @@ public class Reservation {
                 <li>Duration: from %d to %d</li>
                 <li>Total price: %.2f</li>
                 <li>Discount code: %s</li>
-                <li>Price breakdown: %s</li>
                 </ul>
+                %s
                 </div>""",
                 this.getGuestName(),
                 this.room.toString(),

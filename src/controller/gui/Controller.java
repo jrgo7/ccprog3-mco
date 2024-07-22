@@ -6,35 +6,51 @@ import src.view.gui.TopView;
 public class Controller {
     ReservationSystem reservationSystem;
     TopView view;
-    AvailabilityCalendarListener availabilityCalendarListener;
+
     HotelListListener hotelListListener;
+
+    AvailabilityCalendarListener availabilityCalendarListener;
+    RoomListListener viewRoomListListener;
+
     RenameHotelListener renameHotelListener;
     ManagePricesListener managePricesListener;
-    RoomListListener viewRoomListListener;
-    SimulateBookingRoomListListener simulateBookingRoomListListener;
     ManageRoomListener manageRoomListListener;
+
+    SimulateBookingRoomListListener simulateBookingRoomListListener;
+    BookingCalendarListener bookingCalendarListener;
 
     public Controller(ReservationSystem reservationSystem, TopView view) {
         this.reservationSystem = reservationSystem;
         this.view = view;
+
+        hotelListListener = new HotelListListener(reservationSystem, view);
+
         availabilityCalendarListener = new AvailabilityCalendarListener(
                 reservationSystem, view);
-        hotelListListener = new HotelListListener(reservationSystem, view);
-        renameHotelListener = new RenameHotelListener(reservationSystem, view);
-        managePricesListener = new ManagePricesListener(reservationSystem, view);
         viewRoomListListener = new RoomListListener(reservationSystem, view);
-        simulateBookingRoomListListener = new SimulateBookingRoomListListener(reservationSystem, view);
-        manageRoomListListener = new ManageRoomListener(reservationSystem, view);
+        
+        renameHotelListener = new RenameHotelListener(
+                reservationSystem, view);
+        managePricesListener = new ManagePricesListener(
+                reservationSystem, view);
+        manageRoomListListener = new ManageRoomListener(
+                reservationSystem, view);
+        
+        simulateBookingRoomListListener = new SimulateBookingRoomListListener(
+                reservationSystem, view);
+        bookingCalendarListener = new BookingCalendarListener(
+                reservationSystem, view);
+
         this.view.setTopViewHotelListListener(hotelListListener);
+        
         this.view.setViewHotelListeners(
-                availabilityCalendarListener,
-                viewRoomListListener);
+                availabilityCalendarListener, viewRoomListListener);
+
         this.view.setManageHotelListeners(
-                renameHotelListener,
-                managePricesListener,
+                renameHotelListener, managePricesListener,
                 manageRoomListListener);
+
         this.view.setSimulateBookingListeners(
-                simulateBookingRoomListListener
-        );
+                simulateBookingRoomListListener, bookingCalendarListener);
     }
 }

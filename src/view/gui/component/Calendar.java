@@ -21,7 +21,7 @@ public class Calendar extends JTable {
             model.setValueAt(i, (i - 1) / MAX_COLS, (i - 1) % MAX_COLS);
         }
         this.setFont(TopView.ARIAL_PLAIN_FONT);
-        this.setRowHeight(28);
+        this.setRowHeight(64);
     }
 
     public static int toDate(int row, int col) {
@@ -40,8 +40,12 @@ public class Calendar extends JTable {
     }
 
     public void setCalendarText(int date, String text) {
-        this.getModel().setValueAt(
-                text, getRowFromDate(date), getColFromDate(date));
+        System.out.printf("Setting row %d, col %d with %s\n", getRowFromDate(date), getColFromDate(date), text);
+        this.getModel().setValueAt(text, getRowFromDate(date), getColFromDate(date));
+    }
+
+    public void setCalendarText(int row, int col, String text) {
+        this.getModel().setValueAt(text, row, col);
     }
 
     // "White-out" unavailable dates, showing only the available dates
