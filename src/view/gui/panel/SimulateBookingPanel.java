@@ -20,7 +20,6 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
-
 import src.controller.gui.BookingCalendarListener;
 import src.controller.gui.SimulateBookingRoomListListener;
 import src.view.gui.TopView;
@@ -39,6 +38,12 @@ public class SimulateBookingPanel extends JPanel {
     private JRadioButton checkInButton;
     private JRadioButton checkOutButton;
     private JPanel detailsPanel;
+
+    static public final String RESERVATION_PREVIEW_INITIAL_TEXT = """
+            <p style=\"font-family: sans-serif\">
+            As you input your booking details, this panel will update
+            automatically.
+            </p>""";
 
     public SimulateBookingPanel() {
         this.setLayout(new BorderLayout());
@@ -88,7 +93,8 @@ public class SimulateBookingPanel extends JPanel {
 
         JPanel reservationPreviewPanel = new JPanel();
         reservationPreviewPanel.setLayout(new BorderLayout());
-        reservationPreview = new JEditorPane("text/html", "<p>x</p>");
+        reservationPreview = new JEditorPane(
+                "text/html", RESERVATION_PREVIEW_INITIAL_TEXT);
         reservationPreview.setEditable(false);
         JScrollPane reservationScrollPane = new JScrollPane(
                 reservationPreview,

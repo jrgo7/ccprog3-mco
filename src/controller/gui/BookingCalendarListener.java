@@ -10,6 +10,7 @@ import src.model.ReservationBuilder;
 import src.model.ReservationSystem;
 import src.view.gui.TopView;
 import src.view.gui.component.Calendar;
+import src.view.gui.panel.SimulateBookingPanel;
 
 public class BookingCalendarListener extends CalendarListener implements ActionListener {
     static final private int CHECK_IN = 0;
@@ -110,6 +111,9 @@ public class BookingCalendarListener extends CalendarListener implements ActionL
         view.resetBookingFields();
         view.resetBookingRoomListSelection();
         reservationSystem.resetReservationBuilder();
+        updateReservationPreview();
+        view.updateSimulateBookingReservationPreview(
+            SimulateBookingPanel.RESERVATION_PREVIEW_INITIAL_TEXT);
     }
 
     private void selectedDate(int row, int col) {
