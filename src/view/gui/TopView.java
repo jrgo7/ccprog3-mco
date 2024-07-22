@@ -25,6 +25,7 @@ import src.controller.gui.HotelListListener;
 import src.controller.gui.ManagePricesListener;
 import src.controller.gui.ManageRoomListener;
 import src.controller.gui.RenameHotelListener;
+import src.controller.gui.ReservationListListener;
 import src.controller.gui.RoomListListener;
 import src.controller.gui.SimulateBookingRoomListListener;
 import src.view.gui.component.HotelListPanel;
@@ -123,9 +124,11 @@ public class TopView extends JFrame {
 
     public void setViewHotelListeners(
             AvailabilityCalendarListener availabilityCalendarListener,
-            RoomListListener viewRoomListListener) {
+            RoomListListener viewRoomListListener,
+            ReservationListListener viewReservationListener) {
         this.viewHotelPanel.setCalendarListener(availabilityCalendarListener);
         this.viewHotelPanel.setRoomListListener(viewRoomListListener);
+        this.viewHotelPanel.setReservationListener(viewReservationListener);
     }
 
     public void setManageHotelListeners(
@@ -214,6 +217,10 @@ public class TopView extends JFrame {
 
     public int getViewReservationSelectedIndex() {
         return this.viewHotelPanel.getViewReservationSelectedIndex();
+    }
+
+    public void setReservationData(String data) {
+        this.viewHotelPanel.updateReservationData(data);
     }
 
     // Manage hotel delegations

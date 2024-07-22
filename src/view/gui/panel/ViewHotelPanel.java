@@ -10,6 +10,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 
 import src.controller.gui.AvailabilityCalendarListener;
+import src.controller.gui.ReservationListListener;
 import src.controller.gui.RoomListListener;
 import src.model.Hotel;
 import src.view.gui.TopView;
@@ -145,5 +146,13 @@ public class ViewHotelPanel extends JPanel {
 
     public int getViewReservationSelectedIndex() {
         return this.viewReservationsSubPanel.getSelectedIndex();
+    }
+
+    public void updateReservationData(String data) {
+        this.viewReservationsSubPanel.updateReservationData(data);
+    }
+
+    public void setReservationListener(ReservationListListener listener) {
+        this.viewReservationsSubPanel.setListener(listener);
     }
 }

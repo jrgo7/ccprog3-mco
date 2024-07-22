@@ -45,7 +45,7 @@ public class ReservationListListener extends ListAddListener {
 
         if (hotelIndex < 0)
             hotelIndex = 0;
-        this.view.updateRoomData(
+        this.view.setReservationData(
                 reservationSystem.getReservationString(hotelIndex, selectedIndex));
     }
 
