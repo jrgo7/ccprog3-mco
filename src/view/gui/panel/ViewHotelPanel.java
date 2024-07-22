@@ -57,8 +57,8 @@ public class ViewHotelPanel extends JPanel {
         this.viewRoomSubPanel.setRoomListListener(roomListListener);
     }
 
-    public void updateRoomData(String data) {
-        this.viewRoomSubPanel.updateRoomData(data);
+    public void updateRoomData(String data, ArrayList<Integer> availableDates) {
+        this.viewRoomSubPanel.updateRoomData(data, availableDates);
     }
 
     /**

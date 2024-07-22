@@ -267,8 +267,8 @@ public class Reservation {
         return String.format("""
                 <div style="font-family: sans-serif">
                 <h3>Reservation by %s</h3>
-                %s
                 <ul>
+                <li>Room: %s</li>
                 <li>Duration: from %d to %d</li>
                 <li>Total price: %.2f</li>
                 <li>Discount code: %s</li>
@@ -276,7 +276,7 @@ public class Reservation {
                 %s
                 </div>""",
                 this.getGuestName(),
-                this.room.toString(),
+                this.room.toStringMinimal(),
                 this.getCheckIn(),
                 this.getCheckOut(),
                 this.getTotalPrice(),

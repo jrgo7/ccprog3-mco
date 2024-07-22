@@ -15,6 +15,7 @@ public class ViewRoomPanel extends JPanel {
     private RoomListPanel roomListPanel;
     private JEditorPane roomDataComponent;
     private Calendar roomAvailabilityCalendar;
+    private JPanel roomDataPanel;
 
     public ViewRoomPanel() {
         this.setLayout(new BorderLayout());
@@ -23,7 +24,7 @@ public class ViewRoomPanel extends JPanel {
 
         this.add(roomListPanel, BorderLayout.WEST);
 
-        JPanel roomDataPanel = new JPanel();
+        roomDataPanel = new JPanel();
         roomDataPanel.setLayout(new BorderLayout());
         
         this.roomDataComponent = new JEditorPane("text/html", "<p></p>");
@@ -32,12 +33,15 @@ public class ViewRoomPanel extends JPanel {
 
         this.roomAvailabilityCalendar = new Calendar();
         roomDataPanel.add(roomAvailabilityCalendar, BorderLayout.CENTER);
+        this.roomDataPanel.setVisible(false);
 
         this.add(roomDataPanel, BorderLayout.CENTER);
     }
 
-    public void updateRoomData(String data) {
+    public void updateRoomData(String data, ArrayList<Integer> availableDates) {
         this.roomDataComponent.setText(data);
+        this.roomAvailabilityCalendar.setAvailability(availableDates);
+        this.roomDataPanel.setVisible(true);
     }
 
     public void updateRoomList(ArrayList<String> data) {

@@ -56,8 +56,8 @@ public class TopView extends JFrame {
         Dimension systemResolution = Toolkit.getDefaultToolkit()
                 .getScreenSize();
         this.setMinimumSize(new Dimension(
-                (int) systemResolution.getWidth() / 2,
-                (int) systemResolution.getHeight() / 2));
+                (int) (systemResolution.getWidth() / 1.5),
+                (int) (systemResolution.getHeight() / 1.5)));
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.init();
         this.setVisible(true);
@@ -187,8 +187,8 @@ public class TopView extends JFrame {
         this.simulateBookingPanel.updateRoomList(dataAsList);
     }
 
-    public void updateRoomData(String data) {
-        this.viewHotelPanel.updateRoomData(data);
+    public void updateRoomData(String data, ArrayList<Integer> availableDates) {
+        this.viewHotelPanel.updateRoomData(data, availableDates);
     }
 
     public int getAvailabilityCalendarRowFromMouse(Point point) {
@@ -353,7 +353,7 @@ public class TopView extends JFrame {
         JOptionPane.showMessageDialog(
                 this,
                 "The base price cannot be updated while reservations exist " +
-                        "in the current hotel. The base price must also be at least 100.",
+                "in the current hotel. The base price must also be at least 100.",
                 "Invalid base price update error",
                 JOptionPane.ERROR_MESSAGE);
     }
@@ -382,10 +382,10 @@ public class TopView extends JFrame {
                 JOptionPane.INFORMATION_MESSAGE);
     }
 
-    public void showReservationError() {
+    public void showReservationError(String error) {
         JOptionPane.showMessageDialog(
                 this,
-                "Your reservation was not made successfully.",
+                "Your reservation was not made successfully.\n" + error,
                 "Invalid reservation error",
                 JOptionPane.ERROR_MESSAGE);
     }

@@ -142,12 +142,20 @@ public class BookingCalendarListener extends CalendarListener implements ActionL
                 reservationSystem.resetReservationBuilder();
                 break;
             case Hotel.RESERVATION_ERROR_INVALID_TIME:
+                view.showReservationError("Invalid time chosen.");
                 break;
             case Hotel.RESERVATION_ERROR_INVALID_ROOM:
+                view.showReservationError("Invalid room chosen.");
                 break;
             case Hotel.RESERVATION_ERROR_UNAVAILABLE_ROOM:
+                view.showReservationError("Room chosen is unavailable.");
                 break;
             case Hotel.RESERVATION_ERROR_INVALID_DISCOUNT_CODE:
+                view.showReservationError(
+                    "Discount code \"" +
+                    reservationSystem
+                        .getReservationBuilder().getDiscountCode() +
+                    "\" is invalid.");
                 break;
         }
     }

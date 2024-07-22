@@ -10,6 +10,8 @@ import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionListener;
 
+import src.view.gui.TopView;
+
 /**
  * Represents an abstract {@link JPanel} that wraps around a single
  * {@link JList} component.
@@ -42,7 +44,8 @@ public abstract class ListPanel extends JPanel {
         this.listComponent = new JList<String>();
         this.listComponent.setFixedCellWidth(width);
         this.listComponent.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
+        this.listComponent.setFont(TopView.ARIAL_PLAIN_FONT);
+        
         this.add(new JScrollPane(listComponent));
     }
 

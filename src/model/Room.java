@@ -141,8 +141,25 @@ public class Room {
     public String toString() {
         return String.format("""
                 <div style="font-family: sans-serif">
-                <ul><li>%s: Price/night: %.2f</li></ul>
+                <h3>%s</h3>
+                <ul><li>Price/night: %.2f</li></ul>
                 </div>""",
+                this.getName(),
+                this.getBasePrice());
+    }
+
+    /**
+     * Same as toString, but meant for Reservation.toString where the room
+     * string representation is part of the reservation's.
+     * @return
+     */
+    public String toStringMinimal() {
+        return String.format(
+                """
+                %s
+                <ul>
+                <li>Price/night: %.2f</li>
+                </ul>""",
                 this.getName(),
                 this.getBasePrice());
     }

@@ -61,10 +61,10 @@ public class CLIDriver {
      * @param hotel The hotel instance to inspect
      * @see #displayViewHotelScreen()
      */
-    private void viewAvailabilityCount(Hotel hotel) {
+    private void viewAvailabilityCount(int hotelIndex) {
         int date = CLIUtility.promptInt(this.sc,
                 "Enter a date (1-31):", 1, 31);
-        boolean isOneRoom = hotel.getAvailableRoomCount(date) == 1;
+        boolean isOneRoom = system.getAvailableRoomCount(hotelIndex, date) == 1;
 
         CLIUtility.printBorder();
         System.out.printf("""
@@ -353,11 +353,10 @@ public class CLIDriver {
 
         int hotelIndex = CLIUtility.promptChoice(this.sc,
                 "Select a hotel:", this.system.getHotelNames());
-        Hotel hotel = this.system.getHotel(hotelIndex);
 
         CLIUtility.printBorder();
         System.out.println("Currently managing the following hotel:");
-        System.out.println(hotel.getName());
+        System.out.println(system.getHotelName(hotelIndex));
 
         CLIUtility.printBorder();
         int choice = CLIUtility.promptChoice(this.sc, "Select an option:",
@@ -373,19 +372,19 @@ public class CLIDriver {
             break;
         /* Add room(s) */
         case 1:
-            addRooms(hotel);
+            addRooms(hotelIndex);
             break;
         /* Remove room(s) */
         case 2:
-            while (removeRooms(hotel));
+            while (removeRooms(hotelIndex));
             break;
         /* Update base price */
         case 3:
-            updateBasePrice(hotel);
+            updateBasePrice(hotelIndex);
             break;
         /* Remove reservation */
         case 4:
-            removeReservation(hotel);
+            removeReservation(hotelIndex);
             break;
         /* Remove hotel */
         case 5:
@@ -417,13 +416,13 @@ public class CLIDriver {
 
         /* Hotel selection */
         CLIUtility.printBorder();
-        Hotel hotel = this.system.getHotel(
-                CLIUtility.promptChoice(this.sc, "Select a hotel:",
-                        this.system.getHotelNames()));
+                
 
         /* Room selection */
         CLIUtility.printBorder();
-        String[] roomNames = hotel.getRoomNames();
+        String[] roomNames = system.getRoomNames(
+            CLIUtility.promptChoice(this.sc, "Select a hotel:",
+            this.system.getHotelNames()));
         int roomIndex = CLIUtility.promptChoice(this.sc, "Select a room:",
                 roomNames);
 
