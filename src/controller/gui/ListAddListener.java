@@ -7,13 +7,22 @@ import javax.swing.event.ListSelectionListener;
 import src.model.ReservationSystem;
 import src.view.gui.TopView;
 
+/** Represents an abstract listener for {@link ListPanel} components. */
 public abstract class ListAddListener implements ListSelectionListener {
+    /** The {@link ReservationSystem} tied to the listener. */
     protected ReservationSystem reservationSystem;
+    
+    /** The {@link TopView} used to communicate with the GUI. */
     protected TopView view;
 
-    /**
-     * Refreshes the list.
-     */
+    public ListAddListener(ReservationSystem reservationSystem,
+            TopView view) {
+        this.reservationSystem = reservationSystem;
+        this.view = view;
+        this.updateList();
+    }
+
+    /** Refreshes the list. */
     public abstract void updateList();
 
     /**
@@ -34,13 +43,6 @@ public abstract class ListAddListener implements ListSelectionListener {
 
     /** {@return the list length} */
     protected abstract int getListLength();
-
-    public ListAddListener(ReservationSystem reservationSystem,
-            TopView view) {
-        this.reservationSystem = reservationSystem;
-        this.view = view;
-        //this.updateList();
-    }
 
     /**
      * {@inheritDoc} Calls {@link #addToList(int)} when selecting the last item

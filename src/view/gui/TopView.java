@@ -106,12 +106,12 @@ public class TopView extends JFrame {
         });
         promptPanel.add(options, BorderLayout.CENTER);
 
-        JOptionPane.showConfirmDialog(null,
+        int response = JOptionPane.showConfirmDialog(null,
                 promptPanel, "Add rooms", JOptionPane.OK_CANCEL_OPTION,
                 JOptionPane.QUESTION_MESSAGE);
 
         return new int[] {
-                options.getSelectedIndex(), (Integer) spinner.getValue()
+                response == 0 ? options.getSelectedIndex() : -1, (Integer) spinner.getValue()
         };
     }
 

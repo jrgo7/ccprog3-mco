@@ -2,8 +2,16 @@ package src.controller.gui;
 
 import src.model.ReservationSystem;
 import src.view.gui.TopView;
+import src.view.gui.component.HotelListPanel;
 
+/**
+ * Represents an event listener that handles actions received by a
+ * {@link HotelListPanel}.
+ * 
+ * @see ListAddListener
+ */
 public class HotelListListener extends ListAddListener {
+    /** Initializes the listener and updates the list */
     public HotelListListener(ReservationSystem reservationSystem,
             TopView view) {
         super(reservationSystem, view);
@@ -12,63 +20,81 @@ public class HotelListListener extends ListAddListener {
         this.updateList();
     }
 
-    /** {@inheritDoc} */
+    /** {@inheritDoc} Equal to the number of hotels in the system. */
     @Override
     protected int getListLength() {
-        return reservationSystem.getHotelCount();
+        return this.reservationSystem.getHotelCount();
     }
 
     /** {@inheritDoc} */
     @Override
     public void updateList() {
-        view.setHotelListData(reservationSystem.getHotelNamesAsList());
+        this.view.setHotelListData(reservationSystem.getHotelNamesAsList());
+
+        /* Hide panel when there are no hotels in the system */
         if (reservationSystem.getHotelCount() == 0)
-            view.setTopMenuPaneVisible(false);
+            this.view.setTopMenuPaneVisible(false);
         else
-            view.setTopMenuPaneVisible(true);
+            this.view.setTopMenuPaneVisible(true);
     }
 
     /** {@inheritDoc} Prompts the user to add a hotel to the list. */
     @Override
     protected void addToList(int selectedIndex) {
-        String name = view.promptAddHotel();
+        /* Exit if selected index is invalid */
+        if (selectedIndex < 0)
+            return;
+
+        /* Prompts the user to enter a hotel name */
+        String name = this.view.promptAddHotel();
+
         if (reservationSystem.addHotel(name)) {
-            view.resetState();
+            /* Refreshing the view after each update keeps it synchronized */
+            this.view.resetState();
             this.updateList();
+
             /* Redundant but gives a nice blue selection highlight */
-            view.setHotelListSelectedIndex(selectedIndex);
+            this.view.setHotelListSelectedIndex(selectedIndex);
         } else if (reservationSystem.getHotelCount() > 0) {
-            view.setHotelListSelectedIndex(
-                    view.getHotelListPrevSelectedIndex());
+            this.view.setHotelListSelectedIndex(
+                    this.view.getHotelListPrevSelectedIndex());
+
             /* The user did not cancel */
             if (name != null)
-                view.showHotelNameExistsError();
+                this.view.showHotelNameExistsError();
         } else
-            view.removeHotelListSelection();
+            this.view.removeHotelListSelection();
     }
 
-    /** {@inheritDoc} Displays hotel information and updates the right panel. */
+    /** {@inheritDoc} Updates panel to display hotel information. */
     @Override
     protected void updateDataPanel(int selectedIndex) {
-        /* Set default values in GUI */
+        /* Exit if selected index is invalid */
+        if (selectedIndex < 0)
+            return;
 
-        /* View Hotel */
-        view.setHotelDataText(reservationSystem.getHotelString(selectedIndex));
-        view.setHotelListPrevSelectedIndex(selectedIndex);
-        view.updateRoomList(
+        /* Updates the list's fallback index */
+        this.view.setHotelListPrevSelectedIndex(selectedIndex);
+
+        /* Updates View Hotel panels */
+        this.view.setHotelDataText(
+                reservationSystem.getHotelString(selectedIndex));
+        this.view.updateRoomList(
                 reservationSystem.getRoomNames(selectedIndex));
 
-        /* Manage Hotel */
-        view.setRenameHotelText(reservationSystem.getHotelName(selectedIndex));
-        view.setUpdateBasePriceText(
+        /* Updates Manage Hotel panels */
+        this.view.setRenameHotelText(
+                reservationSystem.getHotelName(selectedIndex));
+        this.view.setUpdateBasePriceText(
                 String.valueOf(
                         reservationSystem.getBasePrice(selectedIndex)));
         for (int date = 1; date <= 31; date++)
-            view.setManagePricesCalendarText(
+            this.view.setManagePricesCalendarText(
                     date,
                     String.format(
                             "%d: %.2f",
                             date,
-                            reservationSystem.getPriceModifier(selectedIndex, date)));
+                            reservationSystem.getPriceModifier(selectedIndex,
+                                    date)));
     }
 }
