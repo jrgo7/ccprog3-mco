@@ -1,6 +1,5 @@
 package src.view.gui.component;
 
-import java.awt.Color;
 import java.awt.Component;
 import javax.swing.JTable;
 
@@ -40,13 +39,16 @@ public class BookingCalendarRenderer extends RoomAvailabilityCalendarRenderer {
         if (!isSelected && date <= 31 && checkIn != NONE && checkOut != NONE &&
                 date >= checkIn && date <= checkOut) {
             if (!availableDates.contains(date)) {
-                super.setBackground(Color.RED);
+                super.setForeground(table.getSelectionForeground());
+                super.setBackground(ColorCollection.SELECTION_INVALID);
             } else if (date == checkIn) {
-                super.setBackground(Color.decode("#baf801"));
+                super.setForeground(table.getSelectionForeground());
+                super.setBackground(ColorCollection.SELECTION_BORDER);
             } else if (date == checkOut) {
-                super.setBackground(Color.decode("#baf801"));
+                super.setForeground(table.getSelectionForeground());
+                super.setBackground(ColorCollection.SELECTION_BORDER);
             } else {
-                super.setBackground(Color.CYAN);
+                super.setBackground(ColorCollection.SELECTION_COMPLEMENT);
             }
         }
 

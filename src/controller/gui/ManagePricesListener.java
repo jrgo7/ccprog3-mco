@@ -41,10 +41,8 @@ public class ManagePricesListener extends CalendarListener
         double priceModifier = reservationSystem.getPriceModifier(index, date);
 
         view.setModifiedPriceText(String.format("""
-                <div style="font-family: sans-serif">
                 <h2>Day %d</h2>
-                %.2f * %.2f = %.2f
-                </div>""",
+                %.2f * %.2f = %.2f""",
                 this.getDate(),
                 basePrice,
                 priceModifier,

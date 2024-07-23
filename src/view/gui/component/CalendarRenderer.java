@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Component;
 
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 
 /**
@@ -33,15 +34,14 @@ public class CalendarRenderer extends DefaultTableCellRenderer {
         super.getTableCellRendererComponent(
                 table, value, isSelected, hasFocus, row, column);
         int date = Calendar.toDate(row, column);
-
+        
+        super.setHorizontalAlignment(SwingConstants.CENTER);
         super.setForeground(Color.BLACK);
         if (date > 31) {
             super.setBackground(Color.WHITE);
         } else if (isSelected) {
             super.setForeground(table.getSelectionForeground());
             super.setBackground(table.getSelectionBackground());
-        } else if (date % 2 == 0) {
-            super.setBackground(Color.decode("#e1e1e1"));
         } else {
             super.setBackground(Color.WHITE);
         }

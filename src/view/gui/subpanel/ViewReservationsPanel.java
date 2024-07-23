@@ -3,16 +3,16 @@ package src.view.gui.subpanel;
 import java.awt.BorderLayout;
 import java.util.ArrayList;
 
-import javax.swing.JEditorPane;
 import javax.swing.JPanel;
 
+import src.view.gui.component.StyledHTMLPane; 
 import src.controller.gui.ReservationListListener;
 import src.view.gui.component.ReservationListPanel;
 
 public class ViewReservationsPanel extends JPanel {
     private ReservationListPanel reservationListPanel;
 
-    private JEditorPane reservationDataComponent;
+    private StyledHTMLPane reservationDataComponent;
 
     public ViewReservationsPanel() {
         this.setLayout(new BorderLayout());
@@ -22,7 +22,7 @@ public class ViewReservationsPanel extends JPanel {
 
 
         this.reservationListPanel = new ReservationListPanel(200);
-        this.reservationDataComponent = new JEditorPane("text/html", "<p></p>");
+        this.reservationDataComponent = new StyledHTMLPane();
         this.reservationDataComponent.setEditable(false);
 
         reservationDataPanel.add(this.reservationDataComponent, BorderLayout.NORTH);

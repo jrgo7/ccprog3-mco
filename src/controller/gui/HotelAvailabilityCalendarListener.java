@@ -30,14 +30,11 @@ public class HotelAvailabilityCalendarListener extends CalendarListener {
         boolean isOneRoom = reservationSystem.getAvailableRoomCount(index, date) == 1;
         view.setHotelAvailabilityDataText(
                 String.format("""
-                        <div style="font-family: sans-serif">
                         <h2>Day %d</h2>
                         <ul>
                         <li>Reservations: %d</li>
                         <li>Rooms available: %d room%s.</li>
-                        </ul>
-                        </div>
-                        """,
+                        </ul>""",
                         date,
                         reservationSystem.getReservationCountOnDate(index, date, false),
                         reservationSystem.getAvailableRoomCount(index, date),

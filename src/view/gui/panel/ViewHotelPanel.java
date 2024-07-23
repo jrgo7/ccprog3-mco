@@ -4,27 +4,26 @@ import java.awt.BorderLayout;
 import java.awt.Point;
 import java.util.ArrayList;
 
-import javax.swing.JEditorPane;
+import src.view.gui.component.StyledHTMLPane; import src.view.gui.component.StyledTabbedPane;
+
 import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 
 import src.controller.gui.HotelAvailabilityCalendarListener;
 import src.controller.gui.ReservationListListener;
 import src.controller.gui.RoomListListener;
 import src.model.Hotel;
-import src.view.gui.TopView;
 import src.view.gui.subpanel.ViewAvailabilityPanel;
 import src.view.gui.subpanel.ViewReservationsPanel;
 import src.view.gui.subpanel.ViewRoomPanel;
 
 /** Represents the View Hotel panel. */
 public class ViewHotelPanel extends JPanel {
-    /** The {@link JEditorPane} containing {@link Hotel} data. */
-    private JEditorPane hotelDataComponent;
+    /** The {@link StyledHTMLPane} containing {@link Hotel} data. */
+    private StyledHTMLPane hotelDataComponent;
 
-    /** A {@link JTabbedPane} containing subpanels. */
-    private JTabbedPane subpanels;
+    /** A {@link StyledTabbedPane} containing subpanels. */
+    private StyledTabbedPane subpanels;
 
     /** The View Availability subpanel tied to this panel. */
     private ViewAvailabilityPanel viewAvailabilitySubpanel;
@@ -36,23 +35,23 @@ public class ViewHotelPanel extends JPanel {
     public ViewHotelPanel() {
         this.setLayout(new BorderLayout());
 
-        this.hotelDataComponent = new JEditorPane("text/html",
-                "<h1 style=\"font-family: sans-serif\">Hotels</h1>");
+        this.hotelDataComponent = new StyledHTMLPane();
+        this.hotelDataComponent.setText("<h1>Hotels</h1>");
+        
         this.hotelDataComponent.setEditable(false);
         this.add(this.hotelDataComponent, BorderLayout.NORTH);
 
-        this.subpanels = new JTabbedPane();
+        this.subpanels = new StyledTabbedPane();
 
         this.viewAvailabilitySubpanel = new ViewAvailabilityPanel();
-        this.subpanels.add("Availability", this.viewAvailabilitySubpanel);
+        this.subpanels.add("Check availability", this.viewAvailabilitySubpanel);
 
         this.viewRoomSubPanel = new ViewRoomPanel();
-        this.subpanels.add("Rooms", viewRoomSubPanel);
+        this.subpanels.add("Check rooms", viewRoomSubPanel);
 
         this.viewReservationsSubPanel = new ViewReservationsPanel();
-        this.subpanels.add("Reservations", viewReservationsSubPanel);
+        this.subpanels.add("Check reservations", viewReservationsSubPanel);
 
-        subpanels.setFont(TopView.SEGOE_UI_FONT);
         this.add(subpanels, BorderLayout.CENTER);
     }
 
@@ -65,7 +64,7 @@ public class ViewHotelPanel extends JPanel {
     }
 
     /**
-     * Updates the {@link JEditorPane} containing the hotel data.
+     * Updates the {@link StyledHTMLPane} containing the hotel data.
      * 
      * @param text The hotel data string to use
      */

@@ -3,7 +3,8 @@ package src.view.gui.subpanel;
 import java.awt.BorderLayout;
 import java.awt.Point;
 
-import javax.swing.JEditorPane;
+import src.view.gui.component.StyledHTMLPane;
+
 import javax.swing.JPanel;
 import javax.swing.JTable;
 
@@ -17,17 +18,17 @@ public class ViewAvailabilityPanel extends JPanel {
     private RoomAvailabilityCalendar calendarComponent;
 
     /**
-     * The {@link JEditorPane} containing availability information for the
+     * The {@link StyledHTMLPane} containing availability information for the
      * hotel.
      */
-    private JEditorPane availabilityComponent;
+    private StyledHTMLPane availabilityComponent;
 
     /** Initializes the panel to contain availability information. */
     public ViewAvailabilityPanel() {
         this.setLayout(new BorderLayout());
 
         calendarComponent = new RoomAvailabilityCalendar();
-        availabilityComponent = new JEditorPane("text/html", "");
+        availabilityComponent = new StyledHTMLPane();
         availabilityComponent.setEditable(false);
 
         this.add(calendarComponent, BorderLayout.NORTH);

@@ -140,10 +140,8 @@ public class Room {
     @Override
     public String toString() {
         return String.format("""
-                <div style="font-family: sans-serif">
                 <h3>%s</h3>
-                <ul><li>Base price: %.2f per night</li></ul>
-                </div>""",
+                <ul><li>Base price: %.2f per night</li></ul>""",
                 this.getName(),
                 this.getBasePrice());
     }

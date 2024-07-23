@@ -27,7 +27,7 @@ public class Hotel {
     private double[] priceModifiers;
 
     // Status codes
-    
+
     public static final int RESERVATION_SUCCESS = 0;
     public static final int RESERVATION_ERROR_INVALID_TIME = 1;
     public static final int RESERVATION_ERROR_INVALID_ROOM = 2;
@@ -139,7 +139,7 @@ public class Hotel {
      * Returns the number of {@link Reservation}s tied to the hotel for a given
      * date.
      * 
-     * @param date             The date to check for reservations
+     * @param date            The date to check for reservations
      * @param excludeCheckOut Flag to exclude reservations that check out on the
      *                        date provided. If {@code true}, then a reservation
      *                        whose check-out date is {@code date} will be
@@ -250,7 +250,7 @@ public class Hotel {
      * Sets the price modifier for a given date. Fails if attempting to set a
      * value greater than {@code 1.50} or lower than {@code 0.50}.
      * 
-     * @param date      The date to set a price modifier for
+     * @param date     The date to set a price modifier for
      * @param modifier The new price modifier to set
      * @return {@code true} if the price modifier for the date was set
      *         successfully, {@code false} otherwise.
@@ -285,33 +285,33 @@ public class Hotel {
          * design pattern because this looks pretty bad
          */
         switch (type) {
-        default:
-        case 1:
-            for (int i = 0; i < count && this.rooms.size() < 50; i++)
-                this.rooms.add(
-                        new Room(
-                                String.format(formatString,
-                                        1 + this.lastRoomNumber++),
-                                this.basePrice));
-            break;
-        case 2:
-            formatString += "-DX";
-            for (int i = 0; i < count && this.rooms.size() < 50; i++)
-                this.rooms.add(
-                        new DeluxeRoom(
-                                String.format(formatString,
-                                        1 + this.lastRoomNumber++),
-                                this.basePrice));
-            break;
-        case 3:
-            formatString += "-EX";
-            for (int i = 0; i < count && this.rooms.size() < 50; i++)
-                this.rooms.add(
-                        new ExecutiveRoom(
-                                String.format(formatString,
-                                        1 + this.lastRoomNumber++),
-                                this.basePrice));
-            break;
+            default:
+            case 1:
+                for (int i = 0; i < count && this.rooms.size() < 50; i++)
+                    this.rooms.add(
+                            new Room(
+                                    String.format(formatString,
+                                            1 + this.lastRoomNumber++),
+                                    this.basePrice));
+                break;
+            case 2:
+                formatString += "-DX";
+                for (int i = 0; i < count && this.rooms.size() < 50; i++)
+                    this.rooms.add(
+                            new DeluxeRoom(
+                                    String.format(formatString,
+                                            1 + this.lastRoomNumber++),
+                                    this.basePrice));
+                break;
+            case 3:
+                formatString += "-EX";
+                for (int i = 0; i < count && this.rooms.size() < 50; i++)
+                    this.rooms.add(
+                            new ExecutiveRoom(
+                                    String.format(formatString,
+                                            1 + this.lastRoomNumber++),
+                                    this.basePrice));
+                break;
         }
     }
 
@@ -372,7 +372,7 @@ public class Hotel {
                 return RESERVATION_ERROR_UNAVAILABLE_ROOM;
             }
         }
-            
+
         Reservation reservation = new Reservation(
                 this, guestName, checkIn, checkOut, room);
 
@@ -465,18 +465,16 @@ public class Hotel {
     @Override
     public String toString() {
         return String.format("""
-                <div style="font-family: sans-serif">
-                  <h2>%s</h2>
+                <h2>%s</h2>
+                <ul>
+                  <li>Rooms: %d<br></li>
                   <ul>
-                    <li>Rooms: %d<br></li>
-                    <ul>
-                    <li>of which Normal Rooms: %d</li>
-                    <li>of which Deluxe Rooms: %d</li>
-                    <li>of which Executive Rooms: %d</li>
-                    </ul>
-                    <li>Estimated earnings: %.2f</li>
+                  <li>of which Normal Rooms: %d</li>
+                  <li>of which Deluxe Rooms: %d</li>
+                  <li>of which Executive Rooms: %d</li>
                   </ul>
-                  </div>""",
+                  <li>Estimated earnings: %.2f</li>
+                </ul>""",
                 this.getName(),
                 this.getRoomCount(),
                 this.getRoomCount() - this.getDeluxeRoomCount()

@@ -3,7 +3,8 @@ package src.view.gui.subpanel;
 import java.awt.BorderLayout;
 import java.util.ArrayList;
 
-import javax.swing.JEditorPane;
+import src.view.gui.component.StyledHTMLPane;
+
 import javax.swing.JPanel;
 import javax.swing.event.ListSelectionListener;
 
@@ -13,7 +14,7 @@ import src.view.gui.component.RoomListPanel;
 
 public class ViewRoomPanel extends JPanel {
     private RoomListPanel roomListPanel;
-    private JEditorPane roomDataComponent;
+    private StyledHTMLPane roomDataComponent;
     private RoomAvailabilityCalendar roomAvailabilityCalendar;
     private JPanel roomDataPanel;
 
@@ -27,7 +28,7 @@ public class ViewRoomPanel extends JPanel {
         roomDataPanel = new JPanel();
         roomDataPanel.setLayout(new BorderLayout());
         
-        this.roomDataComponent = new JEditorPane("text/html", "<p></p>");
+        this.roomDataComponent = new StyledHTMLPane();
         this.roomDataComponent.setEditable(false);
         roomDataPanel.add(roomDataComponent, BorderLayout.NORTH);
 

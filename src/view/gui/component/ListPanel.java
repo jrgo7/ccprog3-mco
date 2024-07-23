@@ -3,14 +3,13 @@ package src.view.gui.component;
 import java.awt.BorderLayout;
 import java.util.ArrayList;
 
-import javax.swing.JEditorPane;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionListener;
 
-import src.view.gui.TopView;
 
 /**
  * Represents an abstract {@link JPanel} that wraps around a single
@@ -36,15 +35,16 @@ public abstract class ListPanel extends JPanel {
         this.setLayout(new BorderLayout());
         this.fallbackIndex = 0;
 
-        JEditorPane header = new JEditorPane("text/html",
-                "<h2 style=\"font-family: sans-serif\">" + name + "</h2>");
-        header.setEditable(false);
+        JLabel header = new JLabel(name);
+        header.setFont(FontCollection.SEGOE_UI_BODY_LARGE);
+
         this.add(header, BorderLayout.NORTH);
 
         this.listComponent = new JList<String>();
         this.listComponent.setFixedCellWidth(width);
+        this.listComponent.setFixedCellHeight(42);
         this.listComponent.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        this.listComponent.setFont(TopView.SEGOE_UI_FONT);
+        this.listComponent.setFont(FontCollection.SEGOE_UI_BODY);
         
         this.add(new JScrollPane(listComponent));
     }

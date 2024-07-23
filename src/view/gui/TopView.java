@@ -2,7 +2,6 @@ package src.view.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.util.ArrayList;
@@ -14,9 +13,10 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
-import javax.swing.JTabbedPane;
+import src.view.gui.component.StyledTabbedPane;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.UIManager;
+import javax.swing.border.EmptyBorder;
 
 import src.controller.gui.HotelAvailabilityCalendarListener;
 import src.controller.gui.SimulateBookingCalendarListener;
@@ -28,6 +28,7 @@ import src.controller.gui.ReservationListListener;
 import src.controller.gui.RoomListListener;
 import src.controller.gui.SimulateBookingRoomListListener;
 import src.controller.gui.TopMenuPaneListener;
+import src.view.gui.component.FontCollection;
 import src.view.gui.component.HotelListPanel;
 import src.view.gui.panel.ManageHotelPanel;
 import src.view.gui.panel.SimulateBookingPanel;
@@ -35,14 +36,13 @@ import src.view.gui.panel.ViewHotelPanel;
 
 /** Represents the top menu in the application's GUI. */
 public class TopView extends JFrame {
-    static public final Font SEGOE_UI_FONT = new Font("Segoe UI", Font.PLAIN, 12);
     static public final int VIEW_HOTEL_TAB = 0;
     static public final int MANAGE_HOTEL_TAB = 1;
     static public final int SIMULATE_BOOKING_TAB = 2;
 
     private HotelListPanel hotelListPanel;
 
-    private JTabbedPane topMenuPane;
+    private StyledTabbedPane topMenuPane;
     private ViewHotelPanel viewHotelPanel;
     private ManageHotelPanel manageHotelPanel;
     private SimulateBookingPanel simulateBookingPanel;
@@ -55,7 +55,6 @@ public class TopView extends JFrame {
             System.err.println("Unable to configure look and feel.");
         }
         this.setLocationByPlatform(true);
-        this.setLayout(new BorderLayout());
         Dimension systemResolution = Toolkit.getDefaultToolkit()
                 .getScreenSize();
         this.setMinimumSize(new Dimension(
@@ -68,23 +67,30 @@ public class TopView extends JFrame {
     }
 
     public void init() {
-        topMenuPane = new JTabbedPane();
-        // Hotel list panel
-        hotelListPanel = new HotelListPanel(this.getWidth() / 3);
+        this.setLayout(new BorderLayout());
 
-        this.add(hotelListPanel, BorderLayout.WEST);
+        JPanel paddingPanel = new JPanel();
+        paddingPanel.setLayout(new BorderLayout());
+        paddingPanel.setBorder(new EmptyBorder(28, 28, 28, 28));
+
+        topMenuPane = new StyledTabbedPane();
+        // Hotel list panel
+        hotelListPanel = new HotelListPanel(this.getWidth() / 4);
+
+        paddingPanel.add(hotelListPanel, BorderLayout.WEST);
 
         viewHotelPanel = new ViewHotelPanel();
-        topMenuPane.addTab("View", viewHotelPanel);
+        topMenuPane.addTab("View hotel", viewHotelPanel);
 
         manageHotelPanel = new ManageHotelPanel();
-        topMenuPane.addTab("Manage", manageHotelPanel);
+        topMenuPane.addTab("Manage hotel", manageHotelPanel);
 
         simulateBookingPanel = new SimulateBookingPanel();
-        topMenuPane.addTab("Book", simulateBookingPanel);
+        topMenuPane.addTab("Simulate booking", simulateBookingPanel);
 
-        topMenuPane.setFont(SEGOE_UI_FONT);
-        this.add(topMenuPane, BorderLayout.CENTER);
+        paddingPanel.add(topMenuPane, BorderLayout.CENTER);
+
+        this.add(paddingPanel, BorderLayout.CENTER);
     }
 
     // Global / "Top menu" methods
@@ -367,17 +373,19 @@ public class TopView extends JFrame {
 
         promptPanel.setLayout(new BorderLayout());
 
-        promptPanel.add(
-                new JLabel("Select the number and type of rooms to add:"),
-                BorderLayout.NORTH);
+        JLabel prompt = new JLabel("Select the number and type of rooms to add:");
+        prompt.setFont(FontCollection.SEGOE_UI_BODY);
+        promptPanel.add(prompt, BorderLayout.NORTH);
 
         JSpinner spinner = new JSpinner(
             new SpinnerNumberModel(1, 1, limit, 1));
         promptPanel.add(spinner, BorderLayout.WEST);
+        spinner.setFont(FontCollection.SEGOE_UI_BODY);
 
         JComboBox<String> options = new JComboBox<>(new String[] {
                 "Regular", "Deluxe", "Executive"
         });
+        options.setFont(FontCollection.SEGOE_UI_BODY);
         promptPanel.add(options, BorderLayout.CENTER);
 
         int response = JOptionPane.showConfirmDialog(null,
