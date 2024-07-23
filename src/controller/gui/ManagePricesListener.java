@@ -3,6 +3,7 @@ package src.controller.gui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 
 import src.model.Hotel;
 import src.model.ReservationSystem;
@@ -18,7 +19,7 @@ public class ManagePricesListener extends CalendarListener
     }
 
     private void setPriceModifierField() {
-        int date = Calendar.toDate(row, col);
+        int date = Calendar.toDate(getRow(), getCol());
         if (date < 1 || date > 31) {
             return;
         }
@@ -30,7 +31,7 @@ public class ManagePricesListener extends CalendarListener
     }
 
     private void setModifiedPriceText() {
-        int date = Calendar.toDate(row, col);
+        int date = this.getDate();
         if (date < 1 || date > 31) {
             return;
         }
@@ -44,7 +45,7 @@ public class ManagePricesListener extends CalendarListener
                 <h2>Day %d</h2>
                 %.2f * %.2f = %.2f
                 </div>""",
-                Calendar.toDate(row, col),
+                this.getDate(),
                 basePrice,
                 priceModifier,
                 basePrice * priceModifier));
@@ -55,8 +56,7 @@ public class ManagePricesListener extends CalendarListener
         setPriceModifierField();
     }
 
-    @Override
-    protected void handlePressEnterKey(int row, int col) {
+    private void handlePressEnterKey(int row, int col) {
         if (view.getIsUpdatePriceModifierFieldFocused()) {
             updatePriceModifier();
         } else if (view.getIsUpdateBasePriceFieldFocused()) {
@@ -92,14 +92,9 @@ public class ManagePricesListener extends CalendarListener
     @Override
     public void keyPressed(KeyEvent e) {
         if (view.getIsPriceModifierCalendarFocused()) {
-            if (e.getKeyCode() == KeyEvent.VK_ENTER ||
-                    e.getKeyCode() == KeyEvent.VK_TAB) {
-                e.consume(); // Prevent enter/tab from changing calendar position
-            } else {
-                super.keyPressed(e);
-            }
+            super.keyPressed(e);
         } else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-            handlePressEnterKey(row, col);
+            handlePressEnterKey(this.getRow(), this.getCol());
         }
     }
 
@@ -133,9 +128,7 @@ public class ManagePricesListener extends CalendarListener
     }
 
     public void updatePriceModifier() {
-        int row = this.getRow();
-        int col = this.getCol();
-        int date = Calendar.toDate(row, col);
+        int date = this.getDate();
         int index = view.getHotelListSelectedIndex();
         double newModifier = Double.parseDouble(view.getPriceModifierField());
         if (reservationSystem.setPriceModifier(index, date, newModifier)) {
@@ -145,8 +138,12 @@ public class ManagePricesListener extends CalendarListener
             view.showPriceModifierError();
         }
         this.setPriceModifierField();
-        this.setRow(row);
-        this.setCol(col);
         view.setPriceModiferCalendarDate(date);
+    }
+
+    @Override
+    protected void setRowAndCol(MouseEvent e) {
+        setRow(view.getPriceModifierCalendarRowFromMouse(e.getPoint()));
+        setCol(view.getPriceModifierCalendarColFromMouse(e.getPoint()));
     }
 }

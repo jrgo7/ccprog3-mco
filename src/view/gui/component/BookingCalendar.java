@@ -1,7 +1,5 @@
 package src.view.gui.component;
 
-import java.util.ArrayList;
-
 import javax.swing.ListSelectionModel;
 import javax.swing.table.TableModel;
 

@@ -1,6 +1,6 @@
 package src.controller.gui;
 
-import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 
 import src.model.ReservationSystem;
 import src.view.gui.TopView;
@@ -24,13 +24,8 @@ public class AvailabilityCalendarListener extends CalendarListener {
     }
 
     @Override
-    protected void handlePressEnterKey(int row, int col) {
-
-    }
-
-    @Override
     protected void handleReleased(int row, int col) {
-
+        
     }
 
     protected void handleReleasedOutsideComponent() {
@@ -45,16 +40,6 @@ public class AvailabilityCalendarListener extends CalendarListener {
     @Override
     protected void handleMoved(int row, int col) {
 
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_ENTER ||
-                e.getKeyCode() == KeyEvent.VK_TAB) {
-            e.consume(); // Prevent enter/tab from changing calendar position
-        } else {
-            super.keyPressed(e);
-        }
     }
 
     public void handleCheckAvailability(int row, int col) {
@@ -80,6 +65,12 @@ public class AvailabilityCalendarListener extends CalendarListener {
                         reservationSystem.getReservationCountOnDate(index, date, false),
                         reservationSystem.getAvailableRoomCount(index, date),
                         isOneRoom ? "" : "s"));
+    }
+
+    @Override
+    protected void setRowAndCol(MouseEvent e) {
+        this.setRow(view.getAvailabilityCalendarRowFromMouse(e.getPoint()));
+        this.setCol(view.getAvailabilityCalendarColFromMouse(e.getPoint()));
     }
 
 }

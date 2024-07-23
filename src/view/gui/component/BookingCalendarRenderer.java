@@ -4,7 +4,7 @@ import java.awt.Component;
 import javax.swing.JTable;
 
 public class BookingCalendarRenderer extends AvailabilityCalendarRenderer {
-    private static final int NONE = -1;
+    public static final int NONE = -1;
     private int checkIn = NONE;
     private int checkOut = NONE;
 
@@ -19,7 +19,7 @@ public class BookingCalendarRenderer extends AvailabilityCalendarRenderer {
     public void setCheckIn(int checkIn) {
         this.checkIn = checkIn;
     }
-
+    
     /*
      * {@inheritDoc}
      */

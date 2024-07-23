@@ -276,6 +276,14 @@ public class TopView extends JFrame {
         this.manageHotelPanel.setPriceModiferCalendarDate(date);
     }
 
+    public int getPriceModifierCalendarRowFromMouse(Point point) {
+        return this.manageHotelPanel.getCalendarRowAtPoint(point);
+    }
+
+    public int getPriceModifierCalendarColFromMouse(Point point) {
+        return this.manageHotelPanel.getCalendarColAtPoint(point);
+    }
+
     public boolean getIsPriceModifierCalendarFocused() {
         return this.manageHotelPanel.getIsPriceModifierCalendarFocused();
     }
@@ -354,11 +362,15 @@ public class TopView extends JFrame {
     }
 
     public void resetBookingFields() {
-        this.simulateBookingPanel.setPreview("<p></p>");
         this.simulateBookingPanel.setGuestNameFieldText("");
         this.simulateBookingPanel.setDiscountCodeFieldText("");
+        this.simulateBookingPanel.enableCheckInButton();
     }
 
+    public void resetBookingCalendarSelection() {
+        this.simulateBookingPanel.resetCalendarSelection();
+    }
+    
     public void setBookingDetailsVisible(boolean visible) {
         this.simulateBookingPanel.setDetailsVisible(visible);
     }

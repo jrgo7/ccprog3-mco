@@ -142,7 +142,7 @@ public class Room {
         return String.format("""
                 <div style="font-family: sans-serif">
                 <h3>%s</h3>
-                <ul><li>Price/night: %.2f</li></ul>
+                <ul><li>Base price: %.2f per night</li></ul>
                 </div>""",
                 this.getName(),
                 this.getBasePrice());
@@ -158,7 +158,7 @@ public class Room {
                 """
                 %s
                 <ul>
-                <li>Price/night: %.2f</li>
+                <li>Base price: %.2f per night</li>
                 </ul>""",
                 this.getName(),
                 this.getBasePrice());

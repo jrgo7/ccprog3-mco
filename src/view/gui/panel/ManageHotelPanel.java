@@ -2,6 +2,7 @@ package src.view.gui.panel;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.Point;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -154,6 +155,14 @@ public class ManageHotelPanel extends JPanel {
 
     public void setManagePricesListener(ManagePricesListener listener) {
         this.managePricesSubpanel.setListener(listener);
+    }
+
+    public int getCalendarRowAtPoint(Point point) {
+        return this.managePricesSubpanel.getCalendarRowAtPoint(point);
+    }
+
+    public int getCalendarColAtPoint(Point point) {
+        return this.managePricesSubpanel.getCalendarColAtPoint(point);
     }
 
 }

@@ -1,6 +1,7 @@
 package src.view.gui.subpanel;
 
 import java.awt.GridLayout;
+import java.awt.Point;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -84,12 +85,20 @@ public class ManagePricesPanel extends JPanel {
         return this.priceModifierField.isFocusOwner();
     }
 
+    public int getCalendarRowAtPoint(Point point) {
+        return this.calendarComponent.rowAtPoint(point);
+    }
+
+    public int getCalendarColAtPoint(Point point) {
+        return this.calendarComponent.columnAtPoint(point);
+    }
+
     public void setListener(ManagePricesListener listener) {
-        this.calendarComponent.addMouseListener(listener);
-        this.calendarComponent.addKeyListener(listener);
-        this.calendarComponent.addMouseMotionListener(listener);
+        this.calendarComponent.setListener(listener);
         this.priceModifierField.addKeyListener(listener);
         this.priceUpdateButton.addActionListener(listener);
         this.priceUpdateButton.addKeyListener(listener);
     }
+
+
 }

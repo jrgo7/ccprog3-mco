@@ -9,6 +9,7 @@ import src.model.Hotel;
 import src.model.ReservationBuilder;
 import src.model.ReservationSystem;
 import src.view.gui.TopView;
+import src.view.gui.component.BookingCalendarRenderer;
 import src.view.gui.component.Calendar;
 import src.view.gui.panel.SimulateBookingPanel;
 
@@ -63,11 +64,6 @@ public class BookingCalendarListener extends CalendarListener implements ActionL
     }
 
     @Override
-    protected void handlePressEnterKey(int row, int col) {
-
-    }
-
-    @Override
     protected void handleDragged(int row, int col) {
         selectedDate(row, col);
     }
@@ -84,7 +80,7 @@ public class BookingCalendarListener extends CalendarListener implements ActionL
 
     @Override
     protected void handleReleasedOutsideComponent() {
-
+        view.resetBookingCalendarSelection();
     }
 
     @Override
@@ -108,12 +104,14 @@ public class BookingCalendarListener extends CalendarListener implements ActionL
     }
 
     private void resetBookingScreen() {
+        this.mode = CHECK_IN;
         view.resetBookingFields();
         view.resetBookingRoomListSelection();
-        reservationSystem.resetReservationBuilder();
-        updateReservationPreview();
         view.updateSimulateBookingReservationPreview(
             SimulateBookingPanel.RESERVATION_PREVIEW_INITIAL_TEXT);
+        reservationSystem.resetReservationBuilder();
+        view.setBookingCalendarCheckIn(BookingCalendarRenderer.NONE);
+        view.setBookingCalendarCheckOut(BookingCalendarRenderer.NONE);
     }
 
     private void selectedDate(int row, int col) {
