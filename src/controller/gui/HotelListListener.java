@@ -53,14 +53,14 @@ public class HotelListListener extends ListAddListener {
             this.view.resetState();
             this.updateList();
 
-            /* Redundant but gives a nice blue selection highlight */
+            /* Prevents the selection highlight from disappearing */
             this.view.setHotelListSelectedIndex(selectedIndex);
         } else if (reservationSystem.getHotelCount() > 0) {
             this.view.setHotelListSelectedIndex(
                     this.view.getHotelListPrevSelectedIndex());
 
             /* The user did not cancel */
-            if (name != null)
+            if (name != null) 
                 this.view.showHotelNameExistsError();
         } else
             this.view.removeHotelListSelection();

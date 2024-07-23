@@ -4,12 +4,13 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.TableModel;
 
+import org.w3c.dom.events.MouseEvent;
+
 import src.controller.gui.CalendarListener;
 import src.view.gui.TopView;
 
 /**
- * A custom component representing a set of dates
- * to be displayed, selected, or edited.
+ * A custom component representing a set of dates.
  */
 public class Calendar extends JTable {
     /** Columns in {@link Calendar} objects */
@@ -26,6 +27,8 @@ public class Calendar extends JTable {
      */
     public Calendar() {
         super(MAX_ROWS, MAX_COLS);
+
+        // Instantiate a renderer, set it as the default for all classes.
         this.renderer = new CalendarRenderer();
         this.setDefaultRenderer(Object.class, renderer);
 
@@ -112,6 +115,7 @@ public class Calendar extends JTable {
 
     /**
      * Select a specified date in this object.
+     * 
      * @param date
      */
     public void selectDate(int date) {
@@ -131,7 +135,8 @@ public class Calendar extends JTable {
     }
 
     /**
-     * Calls {@link Calendar#setListener(AvailabilityCalendarListener)}.
+     * Add a {@link CalendarListener} instance as a listener to receive
+     * associated events defined therein.
      * 
      * @param listener The listener to assign to the calendar
      */

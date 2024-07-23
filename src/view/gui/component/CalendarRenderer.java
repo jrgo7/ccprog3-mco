@@ -7,9 +7,9 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
 /**
- * A custom renderer for Calendar objects that allows for per-cell rendering
- * based on (un)available dates and currently-selected check-in and check-out
- * parameters.
+ * A custom renderer for Calendar objects. On its own, it produces a 
+ * checkerboard pattern, and sets invalid cells past day 31 with a white
+ * background.
  * 
  * TODO: A potential HotelAvailabilityCalendarRenderer
  * TODO: that shades in (availableRooms/totalRooms) red?
@@ -17,11 +17,14 @@ import javax.swing.table.DefaultTableCellRenderer;
  */
 public class CalendarRenderer extends DefaultTableCellRenderer {
 
+    /**
+     * Creates a default instance of this class.
+     */
     public CalendarRenderer() {
         super();
     }
 
-    /*
+    /**
      * {@inheritDoc}
      */
     @Override

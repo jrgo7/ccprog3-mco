@@ -3,6 +3,11 @@ package src.view.gui.component;
 import java.awt.Component;
 import javax.swing.JTable;
 
+/**
+ * An extended {@link AvailabilityCalendarRenderer} that adds more highlighting
+ * rules with respect to a check-in and check-out date, wherein the range
+ * encompassed therein are highlighted with a selection background.
+ */
 public class BookingCalendarRenderer extends AvailabilityCalendarRenderer {
     public static final int NONE = -1;
     private int checkIn = NONE;
@@ -20,7 +25,7 @@ public class BookingCalendarRenderer extends AvailabilityCalendarRenderer {
         this.checkIn = checkIn;
     }
     
-    /*
+    /**
      * {@inheritDoc}
      */
     @Override

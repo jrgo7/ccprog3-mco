@@ -1,31 +1,30 @@
 package src.view.gui.component;
 
-import javax.swing.ListSelectionModel;
-import javax.swing.table.TableModel;
-
-import src.view.gui.TopView;
-
+/**
+ * This class extends {@link AvailabilityCalendar} by adding functionality to
+ * set its internal {@link BookingCalendarRenderer} with a specific check-in
+ * and check-out date, used in order to provide a highlighted selection of the
+ * range encompassed therein.
+ */
 public class BookingCalendar extends AvailabilityCalendar {
     public BookingCalendar() {
         super();
         this.renderer = new BookingCalendarRenderer();
         this.setDefaultRenderer(Object.class, renderer);
-        this.setCellSelectionEnabled(true);
-        this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        TableModel model = this.getModel();
-        for (int i = 1; i <= 31; i++) {
-            model.setValueAt(i, (i - 1) / MAX_COLS, (i - 1) % MAX_COLS);
-        }
-        this.setFont(TopView.ARIAL_PLAIN_FONT);
-        this.setRowHeight(64);
     }
 
-    // Set values for the internal renderer to render checkIn date
+    /**
+     * Set values for the internal renderer to render checkIn date
+     * @param checkIn
+     */
     public void setCalendarCheckIn(int checkIn) {
         ((BookingCalendarRenderer) renderer).setCheckIn(checkIn);
     }
 
-    // Set values for the internal renderer to render checkOut date
+    /**
+     * Set values for the internal renderer to render checkOut date
+     * @param checkOut
+     */
     public void setCalendarCheckOut(int checkOut) {
         ((BookingCalendarRenderer) renderer).setCheckOut(checkOut);
     }

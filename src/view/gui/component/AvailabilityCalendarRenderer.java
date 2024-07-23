@@ -6,6 +6,11 @@ import java.util.ArrayList;
 
 import javax.swing.JTable;
 
+/*
+ * An extended {@link CalendarRenderer} that adds highlighting rules with
+ * respect to a list of available dates of a certain room, wherein
+ * unavailable dates are colored red.
+ */
 public class AvailabilityCalendarRenderer extends CalendarRenderer {
     ArrayList<Integer> availableDates;
 
@@ -27,16 +32,6 @@ public class AvailabilityCalendarRenderer extends CalendarRenderer {
                 table, value, isSelected, hasFocus, row, column);
         int date = Calendar.toDate(row, column);
 
-        System.out.printf("""
-                date: %d
-                availableDates != null: %s
-                ^ and !availableDates.contains(date): %s
-                date <= 31: %s
-                """,
-                date,
-                availableDates != null,
-                availableDates != null && !availableDates.contains(date),
-                date <= 31);
         if (availableDates != null && !availableDates.contains(date) && date <= 31) {
             System.out.println("\tSetting " + date + " cell to pink.\n");
             super.setBackground(Color.PINK);
