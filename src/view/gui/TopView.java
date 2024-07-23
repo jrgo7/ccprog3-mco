@@ -18,8 +18,8 @@ import javax.swing.JTabbedPane;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.UIManager;
 
-import src.controller.gui.AvailabilityCalendarListener;
-import src.controller.gui.BookingCalendarListener;
+import src.controller.gui.HotelAvailabilityCalendarListener;
+import src.controller.gui.SimulateBookingCalendarListener;
 import src.controller.gui.HotelListListener;
 import src.controller.gui.ManagePricesListener;
 import src.controller.gui.ManageRoomListener;
@@ -41,12 +41,11 @@ public class TopView extends JFrame {
     static public final int SIMULATE_BOOKING_TAB = 2;
 
     private HotelListPanel hotelListPanel;
+
+    private JTabbedPane topMenuPane;
     private ViewHotelPanel viewHotelPanel;
     private ManageHotelPanel manageHotelPanel;
     private SimulateBookingPanel simulateBookingPanel;
-
-    private JTabbedPane topMenuPane;
-
 
     public TopView() {
         super("Hotel Reservation System");
@@ -88,49 +87,19 @@ public class TopView extends JFrame {
         this.add(topMenuPane, BorderLayout.CENTER);
     }
 
-    // Global / "Top menu"
-
-    public String promptAddHotel() {
-        return JOptionPane.showInputDialog("Hotel name");
-    }
-
-    public int[] promptAddRoom(int limit) {
-        JPanel promptPanel = new JPanel();
-
-        promptPanel.setLayout(new BorderLayout());
-
-        promptPanel.add(
-                new JLabel("Select the number and type of rooms to add:"),
-                BorderLayout.NORTH);
-
-        JSpinner spinner = new JSpinner(new SpinnerNumberModel(1, 1, limit, 1));
-        promptPanel.add(spinner, BorderLayout.WEST);
-
-        JComboBox<String> options = new JComboBox<>(new String[] {
-                "Regular", "Deluxe", "Executive"
-        });
-        promptPanel.add(options, BorderLayout.CENTER);
-
-        int response = JOptionPane.showConfirmDialog(null,
-                promptPanel, "Add rooms", JOptionPane.OK_CANCEL_OPTION,
-                JOptionPane.QUESTION_MESSAGE);
-
-        return new int[] {
-                response == 0 ? options.getSelectedIndex() : -1, (Integer) spinner.getValue()
-        };
-    }
+    // Global / "Top menu" methods
 
     public void setTopViewHotelListListener(
             HotelListListener hotelListListener) {
         this.hotelListPanel.setListener(hotelListListener);
     }
 
-    public void setTopMenuPaneListener(TopMenuPaneListener listener)  {
+    public void setTopMenuPaneListener(TopMenuPaneListener listener) {
         topMenuPane.addChangeListener(listener);
     }
 
     public void setViewHotelListeners(
-            AvailabilityCalendarListener availabilityCalendarListener,
+            HotelAvailabilityCalendarListener availabilityCalendarListener,
             RoomListListener viewRoomListListener,
             ReservationListListener viewReservationListener) {
         this.viewHotelPanel.setCalendarListener(availabilityCalendarListener);
@@ -182,6 +151,14 @@ public class TopView extends JFrame {
 
     public void setTopMenuPaneVisible(boolean enable) {
         this.topMenuPane.setVisible(enable);
+    }
+
+    /**
+     * To be triggered when a hotel gets added
+     */
+    public void resetState() {
+        this.resetAvailabilityCalendarSelection();
+        this.setHotelAvailabilityDataText("<p></p>");
     }
 
     // View hotel delegations
@@ -300,7 +277,7 @@ public class TopView extends JFrame {
         return this.manageHotelPanel.getIsUpdateBasePriceFieldFocused();
     }
 
-    // Simulate booking
+    // Simulate booking delegations
 
     public void setBookingCalendarAvailability(ArrayList<Integer> dates) {
         this.simulateBookingPanel.setCalendarAvailability(dates);
@@ -346,6 +323,10 @@ public class TopView extends JFrame {
         this.simulateBookingPanel.setPreview(text);
     }
 
+    public boolean getIsBookingCalendarFocused() {
+        return this.simulateBookingPanel.getIsCalendarFocused();
+    }
+
     public int getBookingCalendarRowFromMouse(Point point) {
         return this.simulateBookingPanel.getBookingCalendarRowFromMouse(point);
     }
@@ -356,7 +337,7 @@ public class TopView extends JFrame {
 
     public void setSimulateBookingListeners(
             SimulateBookingRoomListListener simulateBookingRoomListListener,
-            BookingCalendarListener bookingCalendarListener) {
+            SimulateBookingCalendarListener bookingCalendarListener) {
         this.simulateBookingPanel.setListeners(
                 simulateBookingRoomListListener, bookingCalendarListener);
     }
@@ -370,12 +351,45 @@ public class TopView extends JFrame {
     public void resetBookingCalendarSelection() {
         this.simulateBookingPanel.resetCalendarSelection();
     }
-    
+
     public void setBookingDetailsVisible(boolean visible) {
         this.simulateBookingPanel.setDetailsVisible(visible);
     }
 
-    // Dialogs
+    // Prompts and dialogs
+
+    public String promptAddHotel() {
+        return JOptionPane.showInputDialog("Hotel name");
+    }
+
+    public int[] promptAddRoom(int limit) {
+        JPanel promptPanel = new JPanel();
+
+        promptPanel.setLayout(new BorderLayout());
+
+        promptPanel.add(
+                new JLabel("Select the number and type of rooms to add:"),
+                BorderLayout.NORTH);
+
+        JSpinner spinner = new JSpinner(
+            new SpinnerNumberModel(1, 1, limit, 1));
+        promptPanel.add(spinner, BorderLayout.WEST);
+
+        JComboBox<String> options = new JComboBox<>(new String[] {
+                "Regular", "Deluxe", "Executive"
+        });
+        promptPanel.add(options, BorderLayout.CENTER);
+
+        int response = JOptionPane.showConfirmDialog(null,
+                promptPanel, "Add rooms", JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE);
+
+        return new int[] {
+                (response == 0) ? options.getSelectedIndex() : -1,
+                (Integer) spinner.getValue()
+        };
+    }
+
     public void noHotelNameProvidedError() {
         JOptionPane.showMessageDialog(
                 this,
@@ -404,7 +418,7 @@ public class TopView extends JFrame {
         JOptionPane.showMessageDialog(
                 this,
                 "The base price cannot be updated while reservations exist " +
-                "in the current hotel.",
+                        "in the current hotel.",
                 "Invalid base price update error: reservations exist",
                 JOptionPane.ERROR_MESSAGE);
     }
@@ -439,13 +453,5 @@ public class TopView extends JFrame {
                 "Your reservation was not made successfully.\n" + error,
                 "Invalid reservation error",
                 JOptionPane.ERROR_MESSAGE);
-    }
-
-    /**
-     * To be triggered when a hotel gets added
-     */
-    public void resetState() {
-        this.resetAvailabilityCalendarSelection();
-        this.setHotelAvailabilityDataText("<p></p>");
     }
 }

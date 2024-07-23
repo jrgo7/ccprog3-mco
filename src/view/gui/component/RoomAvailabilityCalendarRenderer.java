@@ -6,15 +6,15 @@ import java.util.ArrayList;
 
 import javax.swing.JTable;
 
-/*
+/**
  * An extended {@link CalendarRenderer} that adds highlighting rules with
  * respect to a list of available dates of a certain room, wherein
  * unavailable dates are colored red.
  */
-public class AvailabilityCalendarRenderer extends CalendarRenderer {
+public class RoomAvailabilityCalendarRenderer extends CalendarRenderer {
     ArrayList<Integer> availableDates;
 
-    public AvailabilityCalendarRenderer() {
+    public RoomAvailabilityCalendarRenderer() {
         super();
     }
 
@@ -22,7 +22,7 @@ public class AvailabilityCalendarRenderer extends CalendarRenderer {
         this.availableDates = availableDates;
     }
 
-    /*
+    /**
      * {@inheritDoc}
      */
     @Override

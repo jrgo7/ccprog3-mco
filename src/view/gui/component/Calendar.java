@@ -4,8 +4,6 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.TableModel;
 
-import org.w3c.dom.events.MouseEvent;
-
 import src.controller.gui.CalendarListener;
 import src.view.gui.TopView;
 

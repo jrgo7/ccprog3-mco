@@ -5,16 +5,25 @@ import javax.swing.event.ChangeListener;
 
 import src.model.ReservationSystem;
 import src.view.gui.TopView;
+import src.view.gui.panel.ViewHotelPanel;
 
 public class TopMenuPaneListener implements ChangeListener {
-    private ReservationSystem reservationSystem;
     private TopView view;
 
-    public TopMenuPaneListener(ReservationSystem reservationSystem, TopView view) {
-        this.reservationSystem = reservationSystem;
+    /**
+     * Construct a new {@link TopMenuPaneListener} instance.
+     * 
+     * Unlike the other listeners, {@link TopMenuPaneListener} does not interact
+     * with the underlying {@link ReservationSystem} model, and is simply used
+     * to refresh the {@link ViewHotelPanel} inside {@link TopView}.
+     * 
+     * @param view
+     */
+    public TopMenuPaneListener(TopView view) {
         this.view = view;
     }
 
+    /** {@inheritDoc} */
     @Override
     public void stateChanged(ChangeEvent e) {
         switch (view.getTabIndex()) {

@@ -6,6 +6,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
+import javax.swing.JTable;
+
 import src.model.ReservationSystem;
 import src.view.gui.TopView;
 import src.view.gui.component.Calendar;
@@ -25,6 +27,7 @@ public abstract class CalendarListener
     /** The last selected column as heard by this instance. */
     private int col;
 
+    /** Initialize this listener. */
     public CalendarListener(ReservationSystem reservationSystem, TopView view) {
         this.reservationSystem = reservationSystem;
         this.view = view;
@@ -57,8 +60,8 @@ public abstract class CalendarListener
 
     /**
      * Set the row and column based on a mouse event. Standard implementation
-     * for this method is to call {@link JTable#rowAtPoint(Point)} and
-     * {@link JTable#columnAtPoint(Point)} (perhaps by delegation), passing in
+     * for this method is to call {@link JTable#rowAtPoint()} and
+     * {@link JTable#columnAtPoint()} (perhaps by delegation), passing in
      * {@link MouseEvent#getPoint()}, and setting appropriate attributes via
      * {@link #setRow()} and {@link #CalendarListener.setCol()}.
      * 
@@ -121,7 +124,8 @@ public abstract class CalendarListener
     protected abstract void handleReleasedOutsideComponent();
 
     /**
-     * {@inheritDoc}
+     * When a key is pressed, adjust the current selection position.
+     * Enter and Tab keys are ignored for simplicity.
      */
     @Override
     public void keyPressed(KeyEvent e) {

@@ -17,7 +17,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 
-import src.controller.gui.BookingCalendarListener;
+import src.controller.gui.SimulateBookingCalendarListener;
 import src.controller.gui.SimulateBookingRoomListListener;
 import src.view.gui.TopView;
 import src.view.gui.component.BookingCalendar;
@@ -155,6 +155,10 @@ public class SimulateBookingPanel extends JPanel {
         return this.discountCodeField.getText();
     }
 
+    public boolean getIsCalendarFocused() {
+        return this.bookingCalendar.isFocusOwner();
+    }
+
     public int getBookingCalendarDay() {
         return Calendar.toDate(
                 this.bookingCalendar.getSelectedRow(),
@@ -204,7 +208,7 @@ public class SimulateBookingPanel extends JPanel {
 
     public void setListeners(
             SimulateBookingRoomListListener simulateBookingRoomListListener,
-            BookingCalendarListener bookingCalendarListener) {
+            SimulateBookingCalendarListener bookingCalendarListener) {
 
         this.roomListPanel.setListener(simulateBookingRoomListListener);
 

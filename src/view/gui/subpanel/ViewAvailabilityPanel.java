@@ -7,14 +7,14 @@ import javax.swing.JEditorPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 
-import src.controller.gui.AvailabilityCalendarListener;
-import src.view.gui.component.AvailabilityCalendar;
+import src.controller.gui.HotelAvailabilityCalendarListener;
+import src.view.gui.component.RoomAvailabilityCalendar;
 import src.view.gui.component.Calendar;
 
 /** Represents the View Availability subpanel under View Hotel. */
 public class ViewAvailabilityPanel extends JPanel {
     /** The {@link Calendar} showing available dates. */
-    private AvailabilityCalendar calendarComponent;
+    private RoomAvailabilityCalendar calendarComponent;
 
     /**
      * The {@link JEditorPane} containing availability information for the
@@ -26,7 +26,7 @@ public class ViewAvailabilityPanel extends JPanel {
     public ViewAvailabilityPanel() {
         this.setLayout(new BorderLayout());
 
-        calendarComponent = new AvailabilityCalendar();
+        calendarComponent = new RoomAvailabilityCalendar();
         availabilityComponent = new JEditorPane("text/html", "");
         availabilityComponent.setEditable(false);
 
@@ -70,11 +70,11 @@ public class ViewAvailabilityPanel extends JPanel {
     }
 
     /**
-     * Calls {@link Calendar#setListener(AvailabilityCalendarListener)}.
+     * Calls {@link Calendar#setListener(HotelAvailabilityCalendarListener)}.
      * 
      * @param listener The listener to assign to the calendar
      */
-    public void setListener(AvailabilityCalendarListener listener) {
+    public void setListener(HotelAvailabilityCalendarListener listener) {
         this.calendarComponent.setListener(listener);
     }
 }

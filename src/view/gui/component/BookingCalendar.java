@@ -1,12 +1,12 @@
 package src.view.gui.component;
 
 /**
- * This class extends {@link AvailabilityCalendar} by adding functionality to
+ * This class extends {@link RoomAvailabilityCalendar} by adding functionality to
  * set its internal {@link BookingCalendarRenderer} with a specific check-in
  * and check-out date, used in order to provide a highlighted selection of the
  * range encompassed therein.
  */
-public class BookingCalendar extends AvailabilityCalendar {
+public class BookingCalendar extends RoomAvailabilityCalendar {
     public BookingCalendar() {
         super();
         this.renderer = new BookingCalendarRenderer();

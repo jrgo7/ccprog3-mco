@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 
-import src.controller.gui.AvailabilityCalendarListener;
+import src.controller.gui.HotelAvailabilityCalendarListener;
 import src.controller.gui.ReservationListListener;
 import src.controller.gui.RoomListListener;
 import src.model.Hotel;
@@ -118,10 +118,10 @@ public class ViewHotelPanel extends JPanel {
      * 
      * @param availabilityCalendarListener The listener to assign to the
      *                                     calendar
-     * @see ViewAvailabilityPanel#setListener(AvailabilityCalendarListener)
+     * @see ViewAvailabilityPanel#setListener(HotelAvailabilityCalendarListener)
      */
     public void setCalendarListener(
-            AvailabilityCalendarListener availabilityCalendarListener) {
+            HotelAvailabilityCalendarListener availabilityCalendarListener) {
         this.viewAvailabilitySubpanel.setListener(availabilityCalendarListener);
     }
 

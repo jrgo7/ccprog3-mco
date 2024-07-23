@@ -4,11 +4,11 @@ import java.awt.Component;
 import javax.swing.JTable;
 
 /**
- * An extended {@link AvailabilityCalendarRenderer} that adds more highlighting
+ * An extended {@link RoomAvailabilityCalendarRenderer} that adds more highlighting
  * rules with respect to a check-in and check-out date, wherein the range
  * encompassed therein are highlighted with a selection background.
  */
-public class BookingCalendarRenderer extends AvailabilityCalendarRenderer {
+public class BookingCalendarRenderer extends RoomAvailabilityCalendarRenderer {
     public static final int NONE = -1;
     private int checkIn = NONE;
     private int checkOut = NONE;
