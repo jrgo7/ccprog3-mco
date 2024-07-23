@@ -38,7 +38,7 @@ public class Calendar extends JTable {
             model.setValueAt(i, (i - 1) / MAX_COLS, (i - 1) % MAX_COLS);
         }
 
-        this.setFont(TopView.ARIAL_PLAIN_FONT);
+        this.setFont(TopView.SEGOE_UI_FONT);
         this.setRowHeight(64);
     }
 

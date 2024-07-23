@@ -44,7 +44,7 @@ public abstract class ListPanel extends JPanel {
         this.listComponent = new JList<String>();
         this.listComponent.setFixedCellWidth(width);
         this.listComponent.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        this.listComponent.setFont(TopView.ARIAL_PLAIN_FONT);
+        this.listComponent.setFont(TopView.SEGOE_UI_FONT);
         
         this.add(new JScrollPane(listComponent));
     }

@@ -31,7 +31,7 @@ public class ManagePricesPanel extends JPanel {
         fieldPanel.setLayout(new GridLayout(1, 3));
 
         JLabel priceModifierLabel = new JLabel("Update price modifier:");
-        priceModifierLabel.setFont(TopView.ARIAL_PLAIN_FONT);
+        priceModifierLabel.setFont(TopView.SEGOE_UI_FONT);
         fieldPanel.add(priceModifierLabel, 0);
 
         priceModifierField = new JTextField();
@@ -39,6 +39,7 @@ public class ManagePricesPanel extends JPanel {
         fieldPanel.add(priceModifierField, 1);
 
         priceUpdateButton = new JButton("Update price modifier");
+        priceUpdateButton.setFont(TopView.SEGOE_UI_FONT);
         fieldPanel.add(priceUpdateButton, 2);
 
         this.add(fieldPanel);

@@ -29,26 +29,20 @@ public class SimulateBookingCalendarListener extends CalendarListener implements
     }
 
     /**
-     * Update the reservation preview
+     * Update the reservation preview.
      */
     public void updateReservationPreview() {
-        ReservationBuilder builder = reservationSystem.getReservationBuilder();
-        builder.setGuestName(view.getBookingGuestName());
-        builder.setDiscountCode(view.getBookingDiscountCode());
-        builder.setRoomIndex(view.getBookingRoomIndex());
-        builder.setHotelIndex(view.getHotelListSelectedIndex());
+        view.updateSimulateBookingReservationPreview(
+                reservationSystem.getReservationBuilderString());
 
-        int checkIn = builder.getCheckIn();
-        int checkOut = builder.getCheckOut();
         view.setBookingCalendarAvailability(
                 reservationSystem.getAvailableDatesForRoom(
                         view.getHotelListSelectedIndex(),
                         view.getBookingRoomIndex()));
 
-        view.setBookingCalendarCheckIn(checkIn);
-        view.setBookingCalendarCheckOut(checkOut);
-        view.updateSimulateBookingReservationPreview(
-                reservationSystem.getReservationBuilderString());
+        ReservationBuilder builder = reservationSystem.getReservationBuilder();
+        view.setBookingCalendarCheckIn(builder.getCheckIn());
+        view.setBookingCalendarCheckOut(builder.getCheckOut());
     }
 
     private void resetBookingScreen() {
@@ -65,11 +59,10 @@ public class SimulateBookingCalendarListener extends CalendarListener implements
     private void selectedDate(int row, int col) {
         ReservationBuilder builder = reservationSystem.getReservationBuilder();
         int date = Calendar.toDate(row, col);
-        boolean success;
-        success = (mode == CHECK_IN) ? builder.setCheckIn(date)
-                : builder.setCheckOut(date);
-        if (success) {
-            updateReservationPreview();
+        if (mode == CHECK_IN) {
+            builder.setCheckIn(date);
+        } else {
+            builder.setCheckOut(date);
         }
     }
 
@@ -111,26 +104,29 @@ public class SimulateBookingCalendarListener extends CalendarListener implements
     /** {@inheritDoc} */
     @Override
     protected void setRowAndCol(MouseEvent e) {
-        setRow(view.getBookingCalendarRowFromMouse(e.getPoint()));
-        setCol(view.getBookingCalendarColFromMouse(e.getPoint()));
+        this.setRow(view.getBookingCalendarRowFromMouse(e.getPoint()));
+        this.setCol(view.getBookingCalendarColFromMouse(e.getPoint()));
     }
 
     /** {@inheritDoc} */
     @Override
     protected void handleSelected(int row, int col) {
-        selectedDate(row, col);
+        this.selectedDate(row, col);
+        this.updateReservationPreview();
     }
 
     /** {@inheritDoc} */
     @Override
     protected void handleClicked(int row, int col) {
-        selectedDate(row, col);
+        this.selectedDate(row, col);
+        this.updateReservationPreview();
     }
 
     /** {@inheritDoc} */
     @Override
     protected void handleDragged(int row, int col) {
-        selectedDate(row, col);
+        this.selectedDate(row, col);
+        this.updateReservationPreview();
     }
 
     /** {@inheritDoc} */
@@ -141,13 +137,15 @@ public class SimulateBookingCalendarListener extends CalendarListener implements
 
     @Override
     protected void handleReleased(int row, int col) {
-        selectedDate(row, col);
+        this.selectedDate(row, col);
+        this.updateReservationPreview();
     }
 
     /** {@inheritDoc} */
     @Override
     protected void handleReleasedOutsideComponent() {
         view.resetBookingCalendarSelection();
+        this.updateReservationPreview();
     }
 
     /**
@@ -172,7 +170,10 @@ public class SimulateBookingCalendarListener extends CalendarListener implements
      */
     @Override
     public void keyReleased(KeyEvent e) {
+        ReservationBuilder builder = reservationSystem.getReservationBuilder();
         if (!view.getIsBookingCalendarFocused()) {
+            builder.setGuestName(view.getBookingGuestName());
+            builder.setDiscountCode(view.getBookingDiscountCode());
             this.updateReservationPreview();
         }
     }

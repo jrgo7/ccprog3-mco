@@ -96,5 +96,8 @@ public class HotelListListener extends ListAddListener {
                             date,
                             reservationSystem.getPriceModifier(selectedIndex,
                                     date)));
+        
+        /* Changes the selected hotel index in Simulate Booking Panel */
+        reservationSystem.getReservationBuilder().setHotelIndex(selectedIndex);
     }
 }

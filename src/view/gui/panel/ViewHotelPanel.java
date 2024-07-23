@@ -52,7 +52,7 @@ public class ViewHotelPanel extends JPanel {
         this.viewReservationsSubPanel = new ViewReservationsPanel();
         this.subpanels.add("Reservations", viewReservationsSubPanel);
 
-        subpanels.setFont(TopView.ARIAL_PLAIN_FONT);
+        subpanels.setFont(TopView.SEGOE_UI_FONT);
         this.add(subpanels, BorderLayout.CENTER);
     }
 

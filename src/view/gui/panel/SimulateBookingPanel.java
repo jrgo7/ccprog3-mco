@@ -21,6 +21,7 @@ import src.controller.gui.SimulateBookingCalendarListener;
 import src.controller.gui.SimulateBookingRoomListListener;
 import src.view.gui.TopView;
 import src.view.gui.component.BookingCalendar;
+import src.view.gui.component.BookingCalendarRenderer;
 import src.view.gui.component.Calendar;
 import src.view.gui.component.RoomListPanel;
 
@@ -56,12 +57,12 @@ public class SimulateBookingPanel extends JPanel {
         JPanel textFieldPanel = new JPanel();
         textFieldPanel.setLayout(new GridLayout(1, 4));
         JLabel guestNameLabel = new JLabel("Guest name:");
-        guestNameLabel.setFont(TopView.ARIAL_PLAIN_FONT);
+        guestNameLabel.setFont(TopView.SEGOE_UI_FONT);
         textFieldPanel.add(guestNameLabel);
         guestNameField = new JTextField();
         textFieldPanel.add(guestNameField);
         JLabel discountCodeLabel = new JLabel("Discount code:");
-        discountCodeLabel.setFont(TopView.ARIAL_PLAIN_FONT);
+        discountCodeLabel.setFont(TopView.SEGOE_UI_FONT);
         textFieldPanel.add(discountCodeLabel);
         discountCodeField = new JTextField();
         textFieldPanel.add(discountCodeField);
@@ -78,13 +79,13 @@ public class SimulateBookingPanel extends JPanel {
         checkInOutGroup = new ButtonGroup();
         checkInOutPanel.add(Box.createHorizontalGlue());
         checkInButton = new JRadioButton("Set check-in date");
-        checkInButton.setFont(TopView.ARIAL_PLAIN_FONT);
+        checkInButton.setFont(TopView.SEGOE_UI_FONT);
         checkInButton.setSelected(true);
         checkInOutPanel.add(checkInButton);
         checkInOutGroup.add(checkInButton);
         checkInOutPanel.add(Box.createHorizontalGlue());
         checkOutButton = new JRadioButton("Set check-out date");
-        checkOutButton.setFont(TopView.ARIAL_PLAIN_FONT);
+        checkOutButton.setFont(TopView.SEGOE_UI_FONT);
         checkInOutPanel.add(checkOutButton);
         checkInOutGroup.add(checkOutButton);
         checkInOutPanel.add(Box.createHorizontalGlue());
@@ -109,11 +110,11 @@ public class SimulateBookingPanel extends JPanel {
         southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.X_AXIS));
 
         bookButton = new JButton("Book");
-        bookButton.setFont(TopView.ARIAL_PLAIN_FONT);
+        bookButton.setFont(TopView.SEGOE_UI_FONT);
         southPanel.add(bookButton);
 
         resetButton = new JButton("Reset");
-        resetButton.setFont(TopView.ARIAL_PLAIN_FONT);
+        resetButton.setFont(TopView.SEGOE_UI_FONT);
         southPanel.add(resetButton);
 
         detailsPanel.add(southPanel);
@@ -132,17 +133,17 @@ public class SimulateBookingPanel extends JPanel {
     }
 
     public void setCalendarCheckIn(int date) {
-        if (date >= 1 && date <= 31) {
+        if (date != BookingCalendarRenderer.NONE) {
             this.bookingCalendar.setCalendarText(
-                    date, String.format("%d: START", date));
+                date, String.format("%d: START", date));
         }
         this.bookingCalendar.setCalendarCheckIn(date);
     }
 
     public void setCalendarCheckOut(int date) {
-        if (date >= 1 && date <= 31) {
+        if (date != BookingCalendarRenderer.NONE) {
             this.bookingCalendar.setCalendarText(
-                    date, String.format("%d: END", date));
+                date, String.format("%d: END", date));
         }
         this.bookingCalendar.setCalendarCheckOut(date);
     }

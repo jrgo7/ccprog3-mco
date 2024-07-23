@@ -33,7 +33,6 @@ public class RoomAvailabilityCalendarRenderer extends CalendarRenderer {
         int date = Calendar.toDate(row, column);
 
         if (availableDates != null && !availableDates.contains(date) && date <= 31) {
-            System.out.println("\tSetting " + date + " cell to pink.\n");
             super.setBackground(Color.PINK);
         }
         return this;

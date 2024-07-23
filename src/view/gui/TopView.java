@@ -35,7 +35,7 @@ import src.view.gui.panel.ViewHotelPanel;
 
 /** Represents the top menu in the application's GUI. */
 public class TopView extends JFrame {
-    static public final Font ARIAL_PLAIN_FONT = new Font("Arial", Font.PLAIN, 14);
+    static public final Font SEGOE_UI_FONT = new Font("Segoe UI", Font.PLAIN, 12);
     static public final int VIEW_HOTEL_TAB = 0;
     static public final int MANAGE_HOTEL_TAB = 1;
     static public final int SIMULATE_BOOKING_TAB = 2;
@@ -83,7 +83,7 @@ public class TopView extends JFrame {
         simulateBookingPanel = new SimulateBookingPanel();
         topMenuPane.addTab("Book", simulateBookingPanel);
 
-        topMenuPane.setFont(ARIAL_PLAIN_FONT);
+        topMenuPane.setFont(SEGOE_UI_FONT);
         this.add(topMenuPane, BorderLayout.CENTER);
     }
 

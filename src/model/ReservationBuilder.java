@@ -11,6 +11,8 @@ public class ReservationBuilder {
     public ReservationBuilder() {
         this.checkIn = 1;
         this.checkOut = 31;
+        this.guestName = "";
+        this.discountCode = "";
     }
 
     public void setHotelIndex(int hotelIndex) {
@@ -27,7 +29,6 @@ public class ReservationBuilder {
      * 
      * All of the conditions must be satisfied in order to return true:
      * * Either the new checkIn or checkOut is different from the old one.
-     * ? This prevents redundant updating in the model and critically the GUI
      * * The checkIn date is within day 1-30.
      * * The checkOut date is within 2-31.
      * 

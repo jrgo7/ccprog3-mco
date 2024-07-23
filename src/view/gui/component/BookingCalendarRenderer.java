@@ -1,10 +1,12 @@
 package src.view.gui.component;
 
+import java.awt.Color;
 import java.awt.Component;
 import javax.swing.JTable;
 
 /**
- * An extended {@link RoomAvailabilityCalendarRenderer} that adds more highlighting
+ * An extended {@link RoomAvailabilityCalendarRenderer} that adds more
+ * highlighting
  * rules with respect to a check-in and check-out date, wherein the range
  * encompassed therein are highlighted with a selection background.
  */
@@ -24,7 +26,7 @@ public class BookingCalendarRenderer extends RoomAvailabilityCalendarRenderer {
     public void setCheckIn(int checkIn) {
         this.checkIn = checkIn;
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -35,11 +37,19 @@ public class BookingCalendarRenderer extends RoomAvailabilityCalendarRenderer {
                 table, value, isSelected, hasFocus, row, column);
         int date = Calendar.toDate(row, column);
 
-        if ((checkIn == NONE && checkOut == NONE && isSelected) ||
-                (date >= checkIn && date <= checkOut && date <= 31)) {
-            super.setForeground(table.getSelectionForeground());
-            super.setBackground(table.getSelectionBackground());
+        if (!isSelected && date <= 31 && checkIn != NONE && checkOut != NONE &&
+                date >= checkIn && date <= checkOut) {
+            if (!availableDates.contains(date)) {
+                super.setBackground(Color.RED);
+            } else if (date == checkIn) {
+                super.setBackground(Color.decode("#baf801"));
+            } else if (date == checkOut) {
+                super.setBackground(Color.decode("#baf801"));
+            } else {
+                super.setBackground(Color.CYAN);
+            }
         }
+
         return this;
     }
 }

@@ -37,21 +37,23 @@ public class ManageHotelPanel extends JPanel {
         infoEditPanel.setLayout(new GridLayout(2, 3));
 
         JLabel renameLabel = new JLabel("Rename hotel:");
-        renameLabel.setFont(TopView.ARIAL_PLAIN_FONT);
+        renameLabel.setFont(TopView.SEGOE_UI_FONT);
         infoEditPanel.add(renameLabel, 0);
         renameHotelField = new JTextField();
         infoEditPanel.add(renameHotelField, 1);
         renameHotelButton = new JButton("Rename hotel");
+        renameHotelButton.setFont(TopView.SEGOE_UI_FONT);
         infoEditPanel.add(renameHotelButton, 2);
 
         JLabel basePriceLabel = new JLabel("Update base price:");
-        basePriceLabel.setFont(TopView.ARIAL_PLAIN_FONT);
+        basePriceLabel.setFont(TopView.SEGOE_UI_FONT);
         infoEditPanel.add(basePriceLabel, 3);
 
         basePriceField = new JTextField();
         basePriceField.setDocument(new DecimalDocument());
         infoEditPanel.add(basePriceField, 4);
         updateBasePriceButton = new JButton("Update base price");
+        updateBasePriceButton.setFont(TopView.SEGOE_UI_FONT);
         infoEditPanel.add(updateBasePriceButton, 5);
 
         this.add(infoEditPanel, BorderLayout.NORTH);
@@ -67,7 +69,7 @@ public class ManageHotelPanel extends JPanel {
         managePricesSubpanel = new ManagePricesPanel();
         subpanels.add("Prices", managePricesSubpanel);
 
-        subpanels.setFont(TopView.ARIAL_PLAIN_FONT);
+        subpanels.setFont(TopView.SEGOE_UI_FONT);
         this.add(subpanels, BorderLayout.CENTER);
     }
 
