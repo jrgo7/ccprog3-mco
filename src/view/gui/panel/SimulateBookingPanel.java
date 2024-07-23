@@ -1,12 +1,8 @@
 package src.view.gui.panel;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Point;
-import java.awt.ScrollPane;
-import java.awt.Toolkit;
 import java.util.ArrayList;
 
 import javax.swing.Box;
@@ -23,6 +19,7 @@ import javax.swing.JTextField;
 import src.controller.gui.BookingCalendarListener;
 import src.controller.gui.SimulateBookingRoomListListener;
 import src.view.gui.TopView;
+import src.view.gui.component.BookingCalendar;
 import src.view.gui.component.Calendar;
 import src.view.gui.component.RoomListPanel;
 
@@ -30,7 +27,7 @@ public class SimulateBookingPanel extends JPanel {
     private JTextField guestNameField;
     private JTextField discountCodeField;
     private RoomListPanel roomListPanel;
-    private Calendar bookingCalendar;
+    private BookingCalendar bookingCalendar;
     private JEditorPane reservationPreview;
     private JButton bookButton;
     private JButton resetButton;
@@ -88,7 +85,7 @@ public class SimulateBookingPanel extends JPanel {
         checkInOutPanel.add(Box.createHorizontalGlue());
         detailsPanel.add(checkInOutPanel);
 
-        bookingCalendar = new Calendar();
+        bookingCalendar = new BookingCalendar();
         detailsPanel.add(bookingCalendar);
 
         JPanel reservationPreviewPanel = new JPanel();
@@ -100,7 +97,6 @@ public class SimulateBookingPanel extends JPanel {
                 reservationPreview,
                 JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
                 JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        reservationScrollPane.setSize(1000, 1000);
         reservationPreviewPanel.add(reservationScrollPane, BorderLayout.CENTER);
         detailsPanel.add(reservationPreviewPanel);
 

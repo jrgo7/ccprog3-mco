@@ -8,13 +8,13 @@ import javax.swing.JPanel;
 import javax.swing.event.ListSelectionListener;
 
 import src.controller.gui.RoomListListener;
-import src.view.gui.component.Calendar;
+import src.view.gui.component.AvailabilityCalendar;
 import src.view.gui.component.RoomListPanel;
 
 public class ViewRoomPanel extends JPanel {
     private RoomListPanel roomListPanel;
     private JEditorPane roomDataComponent;
-    private Calendar roomAvailabilityCalendar;
+    private AvailabilityCalendar roomAvailabilityCalendar;
     private JPanel roomDataPanel;
 
     public ViewRoomPanel() {
@@ -31,7 +31,7 @@ public class ViewRoomPanel extends JPanel {
         this.roomDataComponent.setEditable(false);
         roomDataPanel.add(roomDataComponent, BorderLayout.NORTH);
 
-        this.roomAvailabilityCalendar = new Calendar();
+        this.roomAvailabilityCalendar = new AvailabilityCalendar();
         roomDataPanel.add(roomAvailabilityCalendar, BorderLayout.CENTER);
         this.roomDataPanel.setVisible(false);
 

@@ -8,12 +8,13 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 
 import src.controller.gui.AvailabilityCalendarListener;
+import src.view.gui.component.AvailabilityCalendar;
 import src.view.gui.component.Calendar;
 
 /** Represents the View Availability subpanel under View Hotel. */
 public class ViewAvailabilityPanel extends JPanel {
     /** The {@link Calendar} showing available dates. */
-    private Calendar calendarComponent;
+    private AvailabilityCalendar calendarComponent;
 
     /**
      * The {@link JEditorPane} containing availability information for the
@@ -25,7 +26,7 @@ public class ViewAvailabilityPanel extends JPanel {
     public ViewAvailabilityPanel() {
         this.setLayout(new BorderLayout());
 
-        calendarComponent = new Calendar();
+        calendarComponent = new AvailabilityCalendar();
         availabilityComponent = new JEditorPane("text/html", "");
         availabilityComponent.setEditable(false);
 

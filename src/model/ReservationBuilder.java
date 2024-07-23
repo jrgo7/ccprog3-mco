@@ -22,9 +22,9 @@ public class ReservationBuilder {
     }
 
     public boolean validateDates(int checkIn, int checkOut) {
-        System.out.printf("checkIn: %d | checkOut: %d\n", checkIn, checkOut);
-        return (checkIn >= 1 && checkIn < 31) &&
-                (checkOut > 1 && checkOut <= 31) && checkIn < checkOut;
+        return (this.checkIn == checkIn && this.checkOut == checkOut) ||
+                ((checkIn >= 1 && checkIn < 31) &&
+                        (checkOut > 1 && checkOut <= 31) && checkIn < checkOut);
     }
 
     public boolean setCheckIn(int checkIn) {

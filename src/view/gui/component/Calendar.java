@@ -1,10 +1,7 @@
 package src.view.gui.component;
 
-import java.util.ArrayList;
-
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
-import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
 
 import src.view.gui.TopView;
@@ -12,18 +9,24 @@ import src.view.gui.TopView;
 public class Calendar extends JTable {
     public final static int MAX_COLS = 7;
     public final static int MAX_ROWS = 5;
-    private CalendarRenderer calendarRenderer;
+    protected CalendarRenderer renderer;
 
+    /**
+     * Initialize a Calendar component with the default renderer and values.
+     */
     public Calendar() {
         super(MAX_ROWS, MAX_COLS);
-        this.calendarRenderer = new CalendarRenderer();
-        this.setDefaultRenderer(Object.class, calendarRenderer);
+        this.renderer = new CalendarRenderer();
+        this.setDefaultRenderer(Object.class, renderer);
+
         this.setCellSelectionEnabled(true);
         this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
         TableModel model = this.getModel();
         for (int i = 1; i <= 31; i++) {
             model.setValueAt(i, (i - 1) / MAX_COLS, (i - 1) % MAX_COLS);
         }
+
         this.setFont(TopView.ARIAL_PLAIN_FONT);
         this.setRowHeight(64);
     }
@@ -49,26 +52,6 @@ public class Calendar extends JTable {
 
     public void setCalendarText(int row, int col, String text) {
         this.getModel().setValueAt(text, row, col);
-    }
-
-    // "White-out" unavailable dates, showing only the available dates
-    public void setAvailability(ArrayList<Integer> availableDates) {
-        calendarRenderer.setAvailableDates(availableDates);
-        for (int date = 1; date <= 31; date++) {
-            this.setCalendarText(
-                    date,
-                    (availableDates.contains(date)) ? String.valueOf(date) : "X");
-        }
-    }
-
-    // Set values for the internal renderer to render checkIn date
-    public void setCalendarCheckIn(int checkIn) {
-        calendarRenderer.setCheckIn(checkIn);
-    }
-
-    // Set values for the internal renderer to render checkOut date
-    public void setCalendarCheckOut(int checkOut) {
-        calendarRenderer.setCheckOut(checkOut);
     }
 
     // Prevents all cells from being edited
