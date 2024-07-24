@@ -48,7 +48,7 @@ public class StyledHTMLPane extends JEditorPane {
      * @param text the text (in HTML format) to be displayed
      */
     public StyledHTMLPane(String text) {
-        super();
+        this();
         this.setText(text);
     }
 
