@@ -29,7 +29,6 @@ public class ViewAvailabilityPanel extends StyledPanel {
 
         calendarComponent = new RoomAvailabilityCalendar();
         availabilityComponent = new StyledHTMLPane();
-        availabilityComponent.setEditable(false);
 
         this.add(calendarComponent, BorderLayout.NORTH);
         this.add(availabilityComponent, BorderLayout.CENTER);

@@ -5,7 +5,7 @@ import java.awt.Point;
 
 import javax.swing.BoxLayout;
 import src.view.gui.component.StyledHTMLPane;
-import javax.swing.JLabel;
+import src.view.gui.component.StyledLabel;
 import src.view.gui.component.StyledPanel;
 import javax.swing.JTextField;
 
@@ -30,8 +30,7 @@ public class ManagePricesPanel extends StyledPanel {
         StyledPanel fieldPanel = new StyledPanel();
         fieldPanel.setLayout(new GridLayout(1, 3));
 
-        JLabel priceModifierLabel = new JLabel("Update price modifier:");
-        priceModifierLabel.setFont(FontCollection.SEGOE_UI_BODY);
+        StyledLabel priceModifierLabel = new StyledLabel("Update price modifier:");
         fieldPanel.add(priceModifierLabel, 0);
 
         priceModifierField = new JTextField();
@@ -39,13 +38,11 @@ public class ManagePricesPanel extends StyledPanel {
         fieldPanel.add(priceModifierField, 1);
 
         priceUpdateButton = new StyledButton("Update price modifier");
-        priceUpdateButton.setFont(FontCollection.SEGOE_UI_BODY);
         fieldPanel.add(priceUpdateButton, 2);
 
         this.add(fieldPanel);
 
         modifiedPriceData = new StyledHTMLPane();
-        modifiedPriceData.setEditable(false);
         this.add(modifiedPriceData);
     }
 

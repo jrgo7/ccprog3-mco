@@ -1,14 +1,13 @@
 package src.view.gui.component;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
 
-import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionListener;
-
 
 /**
  * Represents an abstract {@link StyledPanel} that wraps around a single
@@ -27,7 +26,7 @@ public abstract class ListPanel extends StyledPanel {
     /**
      * This header is shown at the top of the list.
      */
-    private JLabel header;
+    private StyledLabel header;
 
     /**
      * Initializes the panel to a given header name and width.
@@ -39,8 +38,7 @@ public abstract class ListPanel extends StyledPanel {
         this.setLayout(new BorderLayout());
         this.fallbackIndex = 0;
 
-        this.header = new JLabel(name);
-        this.header.setFont(FontCollection.SEGOE_UI_TITLE);
+        this.header = new StyledLabel(name, FontCollection.SEGOE_UI_TITLE);
 
         this.add(header, BorderLayout.NORTH);
 
@@ -50,19 +48,35 @@ public abstract class ListPanel extends StyledPanel {
         this.listComponent.setFixedCellWidth(width);
         this.listComponent.setFixedCellHeight(42);
         this.listComponent.setFont(FontCollection.SEGOE_UI_BODY);
-        
+
         this.add(new StyledScrollPane(listComponent));
     }
 
     /**
      * Initializes the panel with a given header name, width, and font.
+     * 
      * @param name
      * @param width
      * @param font
      */
-    public ListPanel(String name, int width, Font font) {
+    public ListPanel(String name, int width, Font headerFont) {
         this(name, width);
-        this.header.setFont(font);
+        this.header.setFont(headerFont);
+    }
+
+    /**
+     * Initializes the panel with a given header name, width, font, and
+     * background color.
+     * 
+     * @param name
+     * @param width
+     * @param font
+     * @param background
+     */
+    public ListPanel(String name, int width, Font headerFont, Color background) {
+        this(name, width, headerFont);
+        this.setBackground(background);
+        this.listComponent.setBackground(background);
     }
 
     /**

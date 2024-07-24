@@ -6,7 +6,7 @@ import java.awt.Point;
 import java.util.ArrayList;
 
 import src.view.gui.component.StyledButton;
-import javax.swing.JLabel;
+import src.view.gui.component.StyledLabel;
 import src.view.gui.component.StyledPanel;
 import src.view.gui.component.StyledTabbedPane;
 import javax.swing.JTextField;
@@ -36,8 +36,7 @@ public class ManageHotelPanel extends StyledPanel {
         StyledPanel infoEditPanel = new StyledPanel();
         infoEditPanel.setLayout(new GridLayout(2, 3));
 
-        JLabel renameLabel = new JLabel("Rename hotel:"); // TODO StyledLabel
-        renameLabel.setFont(FontCollection.SEGOE_UI_BODY);
+        StyledLabel renameLabel = new StyledLabel("Rename hotel:");
         infoEditPanel.add(renameLabel);
 
         renameHotelField = new JTextField();
@@ -46,8 +45,7 @@ public class ManageHotelPanel extends StyledPanel {
         renameHotelButton = new StyledButton("Rename hotel");
         infoEditPanel.add(renameHotelButton);
 
-        JLabel basePriceLabel = new JLabel("Update base price:");
-        basePriceLabel.setFont(FontCollection.SEGOE_UI_BODY);
+        StyledLabel basePriceLabel = new StyledLabel("Update base price:");
         infoEditPanel.add(basePriceLabel);
 
         basePriceField = new JTextField();

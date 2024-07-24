@@ -1,5 +1,6 @@
 package src.view.gui.component;
 
+import java.awt.Color;
 import java.awt.Component;
 
 import javax.swing.BorderFactory;
@@ -15,7 +16,7 @@ public class StyledScrollPane extends JScrollPane {
      */
     public StyledScrollPane(Component component) {
         super(component);
-        this.setBorder(BorderFactory.createEmptyBorder());
+        this.setStyle();
     }
 
     /**
@@ -26,7 +27,13 @@ public class StyledScrollPane extends JScrollPane {
      */
     public StyledScrollPane(Component component, int vsbPolicy, int hsbPolicy) {
         super(component, vsbPolicy, hsbPolicy);
+        this.setStyle();
+    }
+
+    public void setStyle() {
         this.setBorder(BorderFactory.createEmptyBorder());
+        this.getVerticalScrollBar().setBackground(Color.WHITE);
+
     }
 
 }

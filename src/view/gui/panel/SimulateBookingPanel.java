@@ -9,8 +9,9 @@ import java.util.ArrayList;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
-import src.view.gui.component.StyledHTMLPane; import javax.swing.JLabel;
+import src.view.gui.component.StyledHTMLPane; import src.view.gui.component.StyledLabel;
 import src.view.gui.component.StyledPanel;
+import src.view.gui.component.StyledRadioButton;
 import src.view.gui.component.StyledScrollPane;
 
 import javax.swing.JRadioButton;
@@ -36,8 +37,8 @@ public class SimulateBookingPanel extends StyledPanel {
     private StyledButton bookButton;
     private StyledButton resetButton;
     private ButtonGroup checkInOutGroup;
-    private JRadioButton checkInButton;
-    private JRadioButton checkOutButton;
+    private StyledRadioButton checkInButton;
+    private StyledRadioButton checkOutButton;
     private StyledPanel detailsPanel;
 
     static public final String RESERVATION_PREVIEW_INITIAL_TEXT = """
@@ -56,15 +57,13 @@ public class SimulateBookingPanel extends StyledPanel {
         StyledPanel textFieldPanel = new StyledPanel();
         textFieldPanel.setLayout(new GridLayout(2, 2));
         
-        JLabel guestNameLabel = new JLabel("Guest name:");
-        guestNameLabel.setFont(FontCollection.SEGOE_UI_BODY);
+        StyledLabel guestNameLabel = new StyledLabel("Guest name:");
         textFieldPanel.add(guestNameLabel);
 
         guestNameField = new JTextField();
         textFieldPanel.add(guestNameField);
         
-        JLabel discountCodeLabel = new JLabel("Discount code:");
-        discountCodeLabel.setFont(FontCollection.SEGOE_UI_BODY);
+        StyledLabel discountCodeLabel = new StyledLabel("Discount code:");
         textFieldPanel.add(discountCodeLabel);
         
         discountCodeField = new JTextField();
@@ -78,19 +77,20 @@ public class SimulateBookingPanel extends StyledPanel {
         checkInOutPanel.setLayout(
                 new BoxLayout(checkInOutPanel, BoxLayout.X_AXIS));
         checkInOutGroup = new ButtonGroup();
+
         checkInOutPanel.add(Box.createHorizontalGlue());
-        checkInButton = new JRadioButton("Set check-in date");
-        checkInButton.setFont(FontCollection.SEGOE_UI_BODY);
-        checkInButton.setBackground(Color.WHITE);
+        
+        checkInButton = new StyledRadioButton("Set check-in date");
         checkInButton.setSelected(true);
         checkInOutPanel.add(checkInButton);
         checkInOutGroup.add(checkInButton);
+
         checkInOutPanel.add(Box.createHorizontalGlue());
-        checkOutButton = new JRadioButton("Set check-out date");
-        checkOutButton.setFont(FontCollection.SEGOE_UI_BODY);
-        checkOutButton.setBackground(Color.WHITE);
+
+        checkOutButton = new StyledRadioButton("Set check-out date");
         checkInOutPanel.add(checkOutButton);
         checkInOutGroup.add(checkOutButton);
+
         checkInOutPanel.add(Box.createHorizontalGlue());
         detailsPanel.add(checkInOutPanel);
 
@@ -101,7 +101,6 @@ public class SimulateBookingPanel extends StyledPanel {
         reservationPreviewPanel.setLayout(new BorderLayout());
         reservationPreview = new StyledHTMLPane();
         reservationPreview.setText(RESERVATION_PREVIEW_INITIAL_TEXT);
-        reservationPreview.setEditable(false);
         StyledScrollPane reservationScrollPane = new StyledScrollPane(
                 reservationPreview,
                 JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,

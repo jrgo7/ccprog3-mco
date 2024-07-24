@@ -47,13 +47,8 @@ public class SimulateBookingCalendarListener extends CalendarListener implements
 
     private void resetBookingScreen() {
         this.mode = CHECK_IN;
-        view.resetBookingFields();
-        view.resetBookingRoomListSelection();
-        view.updateSimulateBookingReservationPreview(
-                SimulateBookingPanel.RESERVATION_PREVIEW_INITIAL_TEXT);
+        view.resetBookingScreen();
         reservationSystem.resetReservationBuilder();
-        view.setBookingCalendarCheckIn(BookingCalendarRenderer.NONE);
-        view.setBookingCalendarCheckOut(BookingCalendarRenderer.NONE);
     }
 
     private void selectedDate(int row, int col) {
@@ -186,7 +181,6 @@ public class SimulateBookingCalendarListener extends CalendarListener implements
     @Override
     public void actionPerformed(ActionEvent e) {
         String command = e.getActionCommand();
-        System.out.println(command);
         if (command.equals("Set check-in date")) {
             mode = CHECK_IN;
         } else if (command.equals("Set check-out date")) {

@@ -34,6 +34,7 @@ public class StyledHTMLPane extends JEditorPane {
                 h4 {
                     font-size: 14;
                 }""");
+        this.setEditable(false);
     }
 
 }

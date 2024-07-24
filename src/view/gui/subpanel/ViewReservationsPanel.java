@@ -23,7 +23,6 @@ public class ViewReservationsPanel extends StyledPanel {
 
         this.reservationListPanel = new ReservationListPanel(200);
         this.reservationDataComponent = new StyledHTMLPane();
-        this.reservationDataComponent.setEditable(false);
 
         reservationDataPanel.add(this.reservationDataComponent, BorderLayout.NORTH);
 

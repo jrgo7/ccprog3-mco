@@ -36,9 +36,7 @@ public class ViewHotelPanel extends StyledPanel {
         this.setLayout(new BorderLayout());
 
         this.hotelDataComponent = new StyledHTMLPane();
-        this.hotelDataComponent.setText("<h1>Hotels</h1>");
-        
-        this.hotelDataComponent.setEditable(false);
+        this.hotelDataComponent.setText("<h1>Hotels</h1>");        
         this.add(this.hotelDataComponent, BorderLayout.NORTH);
 
         this.subpanels = new StyledTabbedPane();

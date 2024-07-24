@@ -98,6 +98,8 @@ public class HotelListListener extends ListAddListener {
                                     date)));
         
         /* Changes the selected hotel index in Simulate Booking Panel */
+        reservationSystem.resetReservationBuilder();
         reservationSystem.getReservationBuilder().setHotelIndex(selectedIndex);
+        view.resetBookingScreen();
     }
 }

@@ -29,7 +29,6 @@ public class ViewRoomPanel extends StyledPanel {
         roomDataPanel.setLayout(new BorderLayout());
         
         this.roomDataComponent = new StyledHTMLPane();
-        this.roomDataComponent.setEditable(false);
         roomDataPanel.add(roomDataComponent, BorderLayout.NORTH);
 
         this.roomAvailabilityCalendar = new RoomAvailabilityCalendar();

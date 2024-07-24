@@ -1,6 +1,7 @@
 package src.view.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Insets;
 import java.awt.Point;
@@ -8,14 +9,14 @@ import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
+import src.view.gui.component.StyledLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.UIManager;
-import javax.swing.border.EmptyBorder;
 
 import src.controller.gui.HotelAvailabilityCalendarListener;
 import src.controller.gui.SimulateBookingCalendarListener;
@@ -27,6 +28,8 @@ import src.controller.gui.ReservationListListener;
 import src.controller.gui.RoomListListener;
 import src.controller.gui.SimulateBookingRoomListListener;
 import src.controller.gui.TopMenuPaneListener;
+import src.view.gui.component.BookingCalendarRenderer;
+import src.view.gui.component.ColorCollection;
 import src.view.gui.component.FontCollection;
 import src.view.gui.component.HotelListPanel;
 import src.view.gui.component.StyledPanel;
@@ -59,15 +62,15 @@ public class TopView extends JFrame {
         }
         UIManager.put(
             "TabbedPane.contentBorderInsets",
-            new Insets(-1, -1, -1, -1));
+            new Insets(0, 0, 0, 0));
         
         // Window manager
         this.setLocationByPlatform(true);
         Dimension systemResolution = Toolkit.getDefaultToolkit()
                 .getScreenSize();
         this.setMinimumSize(new Dimension(
-                (int) (systemResolution.getWidth() / 1.5),
-                (int) (systemResolution.getHeight() / 1.5)));
+                (int) (systemResolution.getWidth() / 2),
+                (int) (systemResolution.getHeight() / 1.1)));
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         // Component building
@@ -81,16 +84,20 @@ public class TopView extends JFrame {
 
         StyledPanel paddingPanel = new StyledPanel();
         paddingPanel.setLayout(new BorderLayout());
-        paddingPanel.setBorder(new EmptyBorder(28, 28, 28, 28));
+        paddingPanel.setBorder(BorderFactory.createEmptyBorder());
 
         topMenuPane = new StyledTabbedPane();
+
         // Hotel list panel
         hotelListPanel = new HotelListPanel(this.getWidth() / 4);
+        hotelListPanel.setBackground(ColorCollection.BACKGROUND_COMPLEMENT);
+        hotelListPanel.setBorder(BorderFactory.createEmptyBorder(28, 28, 28, 28));
 
         paddingPanel.add(hotelListPanel, BorderLayout.WEST);
 
         viewHotelPanel = new ViewHotelPanel();
         topMenuPane.addTab("View hotel", viewHotelPanel);
+        topMenuPane.setBackgroundAt(0, Color.RED);
 
         manageHotelPanel = new ManageHotelPanel();
         topMenuPane.addTab("Manage hotel", manageHotelPanel);
@@ -98,6 +105,7 @@ public class TopView extends JFrame {
         simulateBookingPanel = new SimulateBookingPanel();
         topMenuPane.addTab("Simulate booking", simulateBookingPanel);
 
+        topMenuPane.setBorder(BorderFactory.createEmptyBorder(28, 28, 28, 28));
         paddingPanel.add(topMenuPane, BorderLayout.CENTER);
 
         this.add(paddingPanel, BorderLayout.CENTER);
@@ -372,6 +380,15 @@ public class TopView extends JFrame {
         this.simulateBookingPanel.setDetailsVisible(visible);
     }
 
+    public void resetBookingScreen() {
+        this.resetBookingFields();
+        this.resetBookingRoomListSelection();
+        this.updateSimulateBookingReservationPreview(
+            SimulateBookingPanel.RESERVATION_PREVIEW_INITIAL_TEXT);
+        this.setBookingCalendarCheckIn(BookingCalendarRenderer.NONE);
+        this.setBookingCalendarCheckOut(BookingCalendarRenderer.NONE);
+    }
+
     // Prompts and dialogs
 
     public String promptAddHotel() {
@@ -383,8 +400,7 @@ public class TopView extends JFrame {
 
         promptPanel.setLayout(new BorderLayout());
 
-        JLabel prompt = new JLabel("Select the number and type of rooms to add:");
-        prompt.setFont(FontCollection.SEGOE_UI_BODY);
+        StyledLabel prompt = new StyledLabel("Select the number and type of rooms to add:");
         promptPanel.add(prompt, BorderLayout.NORTH);
 
         JSpinner spinner = new JSpinner(
