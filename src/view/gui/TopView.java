@@ -8,18 +8,14 @@ import java.awt.Point;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.Arrays;
-
 import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
-import src.view.gui.component.StyledLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.UIManager;
-
 import src.controller.gui.HotelAvailabilityCalendarListener;
-import src.controller.gui.SimulateBookingCalendarListener;
 import src.controller.gui.HotelListListener;
 import src.controller.gui.ManagePricesListener;
 import src.controller.gui.ManageReservationListener;
@@ -27,17 +23,19 @@ import src.controller.gui.ManageRoomListener;
 import src.controller.gui.RenameHotelListener;
 import src.controller.gui.ReservationListListener;
 import src.controller.gui.RoomListListener;
+import src.controller.gui.SimulateBookingCalendarListener;
 import src.controller.gui.SimulateBookingRoomListListener;
 import src.controller.gui.TopMenuPaneListener;
 import src.view.gui.component.BookingCalendarRenderer;
 import src.view.gui.component.ColorCollection;
 import src.view.gui.component.FontCollection;
 import src.view.gui.component.HotelListPanel;
+import src.view.gui.component.StyledLabel;
 import src.view.gui.component.StyledPanel;
+import src.view.gui.component.StyledTabbedPane;
 import src.view.gui.panel.ManageHotelPanel;
 import src.view.gui.panel.SimulateBookingPanel;
 import src.view.gui.panel.ViewHotelPanel;
-import src.view.gui.component.StyledTabbedPane;
 
 /** Represents the top menu in the application's GUI. */
 public class TopView extends JFrame {
@@ -217,18 +215,10 @@ public class TopView extends JFrame {
         this.viewHotelPanel.resetRoomListSelection();
     }
 
-    public int getViewRoomSelectedIndex() {
-        return this.viewHotelPanel.getViewRoomSelectedIndex();
-    }
-
     public void updateReservationList(String[] data) {
         ArrayList<String> dataAsList = new ArrayList<>(Arrays.asList(data));
         this.viewHotelPanel.updateReservationList(dataAsList);
         this.manageHotelPanel.updateReservationList(dataAsList);
-    }
-
-    public int getViewReservationSelectedIndex() {
-        return this.viewHotelPanel.getViewReservationSelectedIndex();
     }
 
     public int getManageReservationSelectedIndex() {
@@ -249,10 +239,6 @@ public class TopView extends JFrame {
     }
 
     // Manage hotel delegations
-
-    public void setManageHotelReservationData(String data) {
-        this.manageHotelPanel.updateReservationData(data);
-    }
 
     public String getRenameHotelText() {
         return this.manageHotelPanel.getRenameHotelText();
@@ -286,7 +272,7 @@ public class TopView extends JFrame {
         this.manageHotelPanel.setModifiedPriceText(text);
     }
 
-    public void setPriceModiferCalendarDate(int date) {
+    public void setPriceModifierCalendarDate(int date) {
         this.manageHotelPanel.setPriceModiferCalendarDate(date);
     }
 
@@ -332,9 +318,6 @@ public class TopView extends JFrame {
         return this.simulateBookingPanel.getGuestNameFieldText();
     }
 
-    public int getBookingCalendarDay() {
-        return this.simulateBookingPanel.getBookingCalendarDay();
-    }
 
     public int getBookingRoomIndex() {
         return this.simulateBookingPanel.getRoomIndex();
@@ -346,14 +329,6 @@ public class TopView extends JFrame {
 
     public String getBookingDiscountCode() {
         return this.simulateBookingPanel.getDiscountCodeFieldText();
-    }
-
-    public void setBookingDiscountCode(String discountCode) {
-        this.simulateBookingPanel.setDiscountCodeFieldText(discountCode);
-    }
-
-    public void setBookingGuestName(String guestName) {
-        this.simulateBookingPanel.setGuestNameFieldText(guestName);
     }
 
     public void updateSimulateBookingReservationPreview(String text) {
@@ -435,14 +410,6 @@ public class TopView extends JFrame {
                 (response == 0) ? options.getSelectedIndex() : -1,
                 (Integer) spinner.getValue()
         };
-    }
-
-    public void noHotelNameProvidedError() {
-        JOptionPane.showMessageDialog(
-                this,
-                "Please provide a non-empty hotel name.",
-                "No hotel name provided error",
-                JOptionPane.ERROR_MESSAGE);
     }
 
     public void showHotelNameExistsError() {

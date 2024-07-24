@@ -2,16 +2,13 @@ package src.view.gui.subpanel;
 
 import java.awt.BorderLayout;
 import java.util.ArrayList;
-
 import javax.swing.BoxLayout;
-import javax.swing.JEditorPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import src.view.gui.component.StyledPanel;
-
-import src.view.gui.component.StyledHTMLPane; 
 import src.controller.gui.ReservationListListener;
 import src.view.gui.component.ReservationListPanel;
+import src.view.gui.component.StyledHTMLPane;
+import src.view.gui.component.StyledPanel;
 
 public class ViewReservationsPanel extends StyledPanel {
     private ReservationListPanel reservationListPanel;

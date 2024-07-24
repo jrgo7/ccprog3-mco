@@ -41,3 +41,8 @@ replay_pid*
 
 # Javadoc
 javadoc/
+
+# IntelliJ
+out/*
+.idea/*
+*.iml

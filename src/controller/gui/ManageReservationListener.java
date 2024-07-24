@@ -1,10 +1,7 @@
 package src.controller.gui;
 
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
-import javax.swing.event.ListSelectionEvent;
-
+import java.awt.event.ActionListener;
 import src.model.ReservationSystem;
 import src.view.gui.TopView;
 
