@@ -4,42 +4,19 @@ import src.model.ReservationSystem;
 import src.view.gui.TopView;
 import src.view.gui.subpanel.ManageRoomsPanel;
 
+import java.util.ArrayList;
+
 /**
  * Represents an event listener that handles actions received by a
  * {@link ManageRoomsPanel}.
  * 
  * @see ListAddListener
  */
-public class ManageRoomListener extends ListAddListener {
+public class ManageRoomListener extends RoomListListener {
     /** Initializes the listener and updates the list */
     public ManageRoomListener(ReservationSystem reservationSystem,
             TopView view) {
         super(reservationSystem, view);
-    }
-
-    /**
-     * {@inheritDoc} Equivalent to the number of rooms in the selected hotel.
-     */
-    @Override
-    protected int getListLength() {
-        /* Exit if selected index is invalid */
-        int hotelIndex = this.view.getHotelListSelectedIndex();
-        if (hotelIndex < 0)
-            return 0;
-
-        return reservationSystem.getRoomCount(hotelIndex);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public void updateList() {
-        /* Exit if selected index is invalid */
-        int hotelIndex = this.view.getHotelListSelectedIndex();
-        if (hotelIndex < 0)
-            return;
-
-        view.updateRoomList(
-                reservationSystem.getRoomNames(hotelIndex));
     }
 
     /** {@inheritDoc} */
@@ -64,9 +41,16 @@ public class ManageRoomListener extends ListAddListener {
         }
     }
 
-    /** {@inheritDoc} */
     @Override
-    protected void updateDataPanel(int selectedIndex) {
-        /* TODO */
+    protected void updateDataPanelData(String data, ArrayList<Integer> availableDates) {
+        this.view.updateManageRoomData(data, availableDates);
     }
+
+    @Override
+    protected void handleValueChanged(int selectedIndex) {
+        if (selectedIndex == this.getListLength())
+            this.addToList(selectedIndex);
+        else if (selectedIndex >= 0)
+            this.updateDataPanel(selectedIndex);
+    };
 }

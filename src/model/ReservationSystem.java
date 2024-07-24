@@ -57,6 +57,10 @@ public class ReservationSystem {
         return true;
     }
 
+    public boolean removeReservation(int hotelIndex, int reservationIndex) {
+        return this.getHotel(hotelIndex).removeReservation(reservationIndex);
+    }   
+
     /**
      * Checks if a given name is already assigned to a {@link Hotel} in the
      * system. Used when creating a new hotel with {@link #addHotel(Hotel)} or

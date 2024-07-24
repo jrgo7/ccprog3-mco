@@ -3,6 +3,7 @@ package src.view.gui.panel;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.Point;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -12,6 +13,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
 import src.controller.gui.ManagePricesListener;
+import src.controller.gui.ManageReservationListener;
 import src.controller.gui.ManageRoomListener;
 import src.controller.gui.RenameHotelListener;
 import src.view.gui.TopView;
@@ -110,7 +112,11 @@ public class ManageHotelPanel extends JPanel {
     }
 
     public void setManageRoomListener(ManageRoomListener manageRoomListener) {
-        this.manageRoomsSubpanel.setListener(manageRoomListener);
+        this.manageRoomsSubpanel.setRoomListListener(manageRoomListener);
+    }
+
+    public void updateRoomData(String data, ArrayList<Integer> availableDates) {
+        this.manageRoomsSubpanel.updateRoomData(data, availableDates);
     }
 
     // Manage reservations subpanel
@@ -165,4 +171,24 @@ public class ManageHotelPanel extends JPanel {
         return this.managePricesSubpanel.getCalendarColAtPoint(point);
     }
 
+    public void setManageReservationsListener(ManageReservationListener listener) {
+        this.manageReservationsSubpanel.setListener(listener);
+        this.manageReservationsSubpanel.setRemoveButtonListener((ActionListener) listener);
+    }
+
+    public void updateReservationList(ArrayList<String> list) {
+        this.manageReservationsSubpanel.updateReservationList(list);
+    }
+
+    public void updateReservationData(String data) {
+        this.manageReservationsSubpanel.updateReservationData(data);
+    }
+
+    public int getManageReservationSelectedIndex() {
+        return this.manageReservationsSubpanel.getSelectedIndex();
+    }
+
+    public void setManageReservationVisible(boolean visible){
+        this.manageReservationsSubpanel.setWrapperVisible(visible);
+    }
 }

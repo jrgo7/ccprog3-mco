@@ -1,29 +1,12 @@
 package src.view.gui.subpanel;
 
-import java.awt.BorderLayout;
-import java.util.ArrayList;
-
-import javax.swing.JPanel;
-
 import src.controller.gui.ManageRoomListener;
-import src.view.gui.component.RoomListPanel;
+import src.controller.gui.RoomListListener;
 
-public class ManageRoomsPanel extends JPanel {
-    private RoomListPanel roomListPanel;
+import javax.swing.event.ListSelectionListener;
 
+public class ManageRoomsPanel extends ViewRoomPanel {
     public ManageRoomsPanel() {
-        this.setLayout(new BorderLayout());
-
-        this.roomListPanel = new RoomListPanel(200, true);
-
-        this.add(roomListPanel, BorderLayout.WEST);
-    }
-
-    public void updateRoomList(ArrayList<String> data) {
-        this.roomListPanel.setList(data);
-    }
-
-    public void setListener(ManageRoomListener manageRoomListener) {
-        this.roomListPanel.setListener(manageRoomListener);
+        super(true);
     }
 }

@@ -20,12 +20,6 @@ public class HotelListListener extends ListAddListener {
         this.updateList();
     }
 
-    /** {@inheritDoc} Equal to the number of hotels in the system. */
-    @Override
-    protected int getListLength() {
-        return this.reservationSystem.getHotelCount();
-    }
-
     /** {@inheritDoc} */
     @Override
     public void updateList() {
@@ -36,6 +30,54 @@ public class HotelListListener extends ListAddListener {
             this.view.setTopMenuPaneVisible(false);
         else
             this.view.setTopMenuPaneVisible(true);
+    }
+
+    /** {@inheritDoc} Equal to the number of hotels in the system. */
+    @Override
+    protected int getListLength() {
+        return this.reservationSystem.getHotelCount();
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    protected void handleValueChanged(int selectedIndex) {
+        if (selectedIndex == this.getListLength())
+            this.addToList(selectedIndex);
+        else if (selectedIndex >= 0)
+            this.updateDataPanel(selectedIndex);
+    };
+
+    /** {@inheritDoc} Updates panel to display hotel information. */
+    @Override
+    protected void updateDataPanel(int selectedIndex) {
+        /* Exit if selected index is invalid */
+        if (selectedIndex < 0)
+            return;
+
+        /* Updates the list's fallback index */
+        this.view.setHotelListPrevSelectedIndex(selectedIndex);
+
+        /* Updates View Hotel panels */
+        this.view.setHotelDataText(
+                reservationSystem.getHotelString(selectedIndex));
+        this.view.updateRoomList(
+                reservationSystem.getRoomNames(selectedIndex));
+
+        /* Updates Manage Hotel panels */
+        this.view.setRenameHotelText(
+                reservationSystem.getHotelName(selectedIndex));
+        this.view.setUpdateBasePriceText(
+                String.valueOf(
+                        reservationSystem.getBasePrice(selectedIndex)));
+                        
+        for (int date = 1; date <= 31; date++)
+            this.view.setManagePricesCalendarText(
+                    date,
+                    String.format(
+                            "%d: %.2f",
+                            date,
+                            reservationSystem.getPriceModifier(selectedIndex,
+                                    date)));
     }
 
     /** {@inheritDoc} Prompts the user to add a hotel to the list. */
@@ -60,41 +102,9 @@ public class HotelListListener extends ListAddListener {
                     this.view.getHotelListPrevSelectedIndex());
 
             /* The user did not cancel */
-            if (name != null) 
+            if (name != null)
                 this.view.showHotelNameExistsError();
         } else
             this.view.removeHotelListSelection();
-    }
-
-    /** {@inheritDoc} Updates panel to display hotel information. */
-    @Override
-    protected void updateDataPanel(int selectedIndex) {
-        /* Exit if selected index is invalid */
-        if (selectedIndex < 0)
-            return;
-
-        /* Updates the list's fallback index */
-        this.view.setHotelListPrevSelectedIndex(selectedIndex);
-
-        /* Updates View Hotel panels */
-        this.view.setHotelDataText(
-                reservationSystem.getHotelString(selectedIndex));
-        this.view.updateRoomList(
-                reservationSystem.getRoomNames(selectedIndex));
-
-        /* Updates Manage Hotel panels */
-        this.view.setRenameHotelText(
-                reservationSystem.getHotelName(selectedIndex));
-        this.view.setUpdateBasePriceText(
-                String.valueOf(
-                        reservationSystem.getBasePrice(selectedIndex)));
-        for (int date = 1; date <= 31; date++)
-            this.view.setManagePricesCalendarText(
-                    date,
-                    String.format(
-                            "%d: %.2f",
-                            date,
-                            reservationSystem.getPriceModifier(selectedIndex,
-                                    date)));
     }
 }

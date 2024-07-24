@@ -7,19 +7,9 @@ import src.view.gui.TopView;
 
 public class ReservationListListener extends ListAddListener {
     /** Initializes the listener and updates the list */
-    public ReservationListListener(ReservationSystem reservationSystem, TopView view) {
+    public ReservationListListener(ReservationSystem reservationSystem,
+            TopView view) {
         super(reservationSystem, view);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public void valueChanged(ListSelectionEvent e) {
-        /* Exit if selected value is still */
-        if (e.getValueIsAdjusting())
-            return;
-
-        updateDataPanel(view.getViewReservationSelectedIndex());
-        System.out.println(view.getViewReservationSelectedIndex());
     }
 
     /** {@inheritDoc} */
@@ -32,6 +22,26 @@ public class ReservationListListener extends ListAddListener {
 
         view.updateReservationList(
                 reservationSystem.getReservationNames(hotelIndex));
+
+        this.view.setManageReservationVisible(reservationSystem.getReservationCount(hotelIndex) > 0);
+    }
+
+    /** {@inheritDoc} Equal to the number of rooms in the selected hotel. */
+    @Override
+    protected int getListLength() {
+        /* Exit if selected index is invalid */
+        int hotelIndex = this.view.getHotelListSelectedIndex();
+        if (hotelIndex < 0)
+            return 0;
+
+        return reservationSystem.getReservationCount(hotelIndex);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    protected void handleValueChanged(int selectedIndex) {
+        this.updateDataPanel(selectedIndex);
+        this.updateList();
     }
 
     /** {@inheritDoc} */
@@ -46,26 +56,18 @@ public class ReservationListListener extends ListAddListener {
         if (hotelIndex < 0)
             hotelIndex = 0;
         this.view.setReservationData(
-                reservationSystem.getReservationString(hotelIndex, selectedIndex));
+                reservationSystem.getReservationString(hotelIndex,
+                        selectedIndex));
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc} Method implementation left blank as no special behavior is
+     * defined.
+     */
     @Override
     protected void addToList(int selectedIndex) {
         /*
-         * Method implementation left blank as there is no special behavior for
-         * ViewRoomLists in this case.
+         * Method implementation left blank as no special behavior is defined.
          */
-    }
-
-    /** {@inheritDoc} Equal to the number of rooms in the selected hotel. */
-    @Override
-    protected int getListLength() {
-        /* Exit if selected index is invalid */
-        int hotelIndex = this.view.getHotelListSelectedIndex();
-        if (hotelIndex < 0)
-            return 0;
-
-        return reservationSystem.getReservationCount(hotelIndex);
     }
 }

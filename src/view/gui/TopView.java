@@ -22,6 +22,7 @@ import src.controller.gui.AvailabilityCalendarListener;
 import src.controller.gui.BookingCalendarListener;
 import src.controller.gui.HotelListListener;
 import src.controller.gui.ManagePricesListener;
+import src.controller.gui.ManageReservationListener;
 import src.controller.gui.ManageRoomListener;
 import src.controller.gui.RenameHotelListener;
 import src.controller.gui.ReservationListListener;
@@ -141,11 +142,13 @@ public class TopView extends JFrame {
     public void setManageHotelListeners(
             RenameHotelListener renameHotelListener,
             ManagePricesListener managePricesListener,
-            ManageRoomListener manageRoomListener) {
+            ManageRoomListener manageRoomListener,
+            ManageReservationListener manageReservationListener) {
         this.manageHotelPanel.setRenameHotelListener(renameHotelListener);
         this.manageHotelPanel.setUpdateBasePriceListener(managePricesListener);
         this.manageHotelPanel.setManagePricesListener(managePricesListener);
         this.manageHotelPanel.setManageRoomListener(manageRoomListener);
+        this.manageHotelPanel.setManageReservationsListener(manageReservationListener);
     }
 
     public void setTabIndex(int index) {
@@ -205,6 +208,10 @@ public class TopView extends JFrame {
         this.viewHotelPanel.updateRoomData(data, availableDates);
     }
 
+    public void updateManageRoomData(String data, ArrayList<Integer> availableDates) {
+        this.manageHotelPanel.updateRoomData(data, availableDates);
+    }
+
     public int getAvailabilityCalendarRowFromMouse(Point point) {
         return this.viewHotelPanel.getCalendarRowAtPoint(point);
     }
@@ -228,17 +235,35 @@ public class TopView extends JFrame {
     public void updateReservationList(String[] data) {
         ArrayList<String> dataAsList = new ArrayList<>(Arrays.asList(data));
         this.viewHotelPanel.updateReservationList(dataAsList);
+        this.manageHotelPanel.updateReservationList(dataAsList);
     }
 
     public int getViewReservationSelectedIndex() {
         return this.viewHotelPanel.getViewReservationSelectedIndex();
     }
 
+    public int getManageReservationSelectedIndex() {
+        return this.manageHotelPanel.getManageReservationSelectedIndex();
+    }
+
     public void setReservationData(String data) {
         this.viewHotelPanel.updateReservationData(data);
     }
+    
+    public void setManageReservationData(String data) {
+        this.manageHotelPanel.updateReservationData(data);
+    }
+
+    public void setManageReservationVisible(boolean visible){
+        this.viewHotelPanel.setReservationVisible(visible);
+        this.manageHotelPanel.setManageReservationVisible(visible);
+    }
 
     // Manage hotel delegations
+
+    public void setManageHotelReservationData(String data) {
+        this.manageHotelPanel.updateReservationData(data);
+    }
 
     public String getRenameHotelText() {
         return this.manageHotelPanel.getRenameHotelText();

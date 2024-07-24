@@ -13,15 +13,6 @@ public class SimulateBookingRoomListListener extends RoomListListener {
 
     /** {@inheritDoc} */
     @Override
-    public void valueChanged(ListSelectionEvent e) {
-        if (e.getValueIsAdjusting())
-            return;
-
-        updateDataPanel(view.getBookingRoomIndex());
-    }
-
-    /** {@inheritDoc} */
-    @Override
     public void updateDataPanel(int index) {
         int hotelIndex = view.getHotelListSelectedIndex();
 

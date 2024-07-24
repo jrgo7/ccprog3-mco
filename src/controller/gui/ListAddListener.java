@@ -6,12 +6,13 @@ import javax.swing.event.ListSelectionListener;
 
 import src.model.ReservationSystem;
 import src.view.gui.TopView;
+import src.view.gui.component.ListPanel;
 
 /** Represents an abstract listener for {@link ListPanel} components. */
 public abstract class ListAddListener implements ListSelectionListener {
     /** The {@link ReservationSystem} tied to the listener. */
     protected ReservationSystem reservationSystem;
-    
+
     /** The {@link TopView} used to communicate with the GUI. */
     protected TopView view;
 
@@ -24,6 +25,18 @@ public abstract class ListAddListener implements ListSelectionListener {
 
     /** Refreshes the list. */
     public abstract void updateList();
+
+    /** {@return the list length} */
+    protected abstract int getListLength();
+
+    /**
+     * Called when handling a change in the list selection.
+     * 
+     * @param selectedIndex The index of the new selection. Obtained through
+     *                      {@link ListSelectionModel#getMinSelectionIndex()}.
+     * @see #value
+     */
+    protected abstract void handleValueChanged(int selectedIndex);
 
     /**
      * Called when viewing an item in the list to update an information panel.
@@ -41,9 +54,6 @@ public abstract class ListAddListener implements ListSelectionListener {
      */
     protected abstract void addToList(int selectedIndex);
 
-    /** {@return the list length} */
-    protected abstract int getListLength();
-
     /**
      * {@inheritDoc} Calls {@link #addToList(int)} when selecting the last item
      * in the list (designated as the "add" option), or
@@ -57,9 +67,7 @@ public abstract class ListAddListener implements ListSelectionListener {
         ListSelectionModel lsm = (ListSelectionModel) e.getSource();
         int selectedIndex = lsm.getMinSelectionIndex();
 
-        if (selectedIndex == this.getListLength())
-            this.addToList(selectedIndex);
-        else if (selectedIndex >= 0)
-            this.updateDataPanel(selectedIndex);
+        this.handleValueChanged(selectedIndex);
+        //this.updateList();
     }
 }

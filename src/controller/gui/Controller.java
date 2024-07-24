@@ -16,6 +16,7 @@ public class Controller {
     RenameHotelListener renameHotelListener;
     ManagePricesListener managePricesListener;
     ManageRoomListener manageRoomListListener;
+    ManageReservationListener manageReservationListener;
 
     SimulateBookingRoomListListener simulateBookingRoomListListener;
     BookingCalendarListener bookingCalendarListener;
@@ -45,6 +46,8 @@ public class Controller {
         bookingCalendarListener = new BookingCalendarListener(
                 reservationSystem, view);
 
+                manageReservationListener = new ManageReservationListener(reservationSystem, view);
+
         viewReservationListListener = new ReservationListListener(reservationSystem, view);
 
         this.view.setTopMenuPaneListener(topMenuPaneListener);
@@ -55,7 +58,7 @@ public class Controller {
 
         this.view.setManageHotelListeners(
                 renameHotelListener, managePricesListener,
-                manageRoomListListener);
+                manageRoomListListener, manageReservationListener);
 
         this.view.setSimulateBookingListeners(
                 simulateBookingRoomListListener, bookingCalendarListener);

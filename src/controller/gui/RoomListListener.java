@@ -1,5 +1,7 @@
 package src.controller.gui;
 
+import java.util.ArrayList;
+
 import javax.swing.event.ListSelectionEvent;
 
 import src.model.ReservationSystem;
@@ -20,13 +22,8 @@ public class RoomListListener extends ListAddListener {
 
     /** {@inheritDoc} */
     @Override
-    public void valueChanged(ListSelectionEvent e) {
-        /* Exit if selected value is still */
-        if (e.getValueIsAdjusting())
-            return;
-
-        updateDataPanel(view.getViewRoomSelectedIndex());
-        System.out.println(view.getViewRoomSelectedIndex());
+    protected void handleValueChanged(int selectedIndex) {
+        this.updateDataPanel(selectedIndex);
     }
 
     /** {@inheritDoc} */
@@ -41,6 +38,10 @@ public class RoomListListener extends ListAddListener {
                 reservationSystem.getRoomNames(hotelIndex));
     }
 
+    protected void updateDataPanelData(String data, ArrayList<Integer> availableDates) {
+        this.view.updateRoomData(data, availableDates);
+    }
+
     /** {@inheritDoc} */
     @Override
     protected void updateDataPanel(int selectedIndex) {
@@ -52,7 +53,7 @@ public class RoomListListener extends ListAddListener {
 
         if (hotelIndex < 0)
             hotelIndex = 0;
-        this.view.updateRoomData(
+        this.updateDataPanelData(
                 reservationSystem.getRoomString(hotelIndex, selectedIndex),
                 reservationSystem.getAvailableDatesForRoom(hotelIndex, selectedIndex));
 

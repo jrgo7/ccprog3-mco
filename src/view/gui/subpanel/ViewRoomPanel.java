@@ -12,15 +12,15 @@ import src.view.gui.component.AvailabilityCalendar;
 import src.view.gui.component.RoomListPanel;
 
 public class ViewRoomPanel extends JPanel {
-    private RoomListPanel roomListPanel;
+    protected RoomListPanel roomListPanel;
     private JEditorPane roomDataComponent;
     private AvailabilityCalendar roomAvailabilityCalendar;
     private JPanel roomDataPanel;
 
-    public ViewRoomPanel() {
+    public ViewRoomPanel(boolean addable) {
         this.setLayout(new BorderLayout());
 
-        this.roomListPanel = new RoomListPanel(200, false);
+        this.roomListPanel = new RoomListPanel(200, addable);
 
         this.add(roomListPanel, BorderLayout.WEST);
 
@@ -36,6 +36,10 @@ public class ViewRoomPanel extends JPanel {
         this.roomDataPanel.setVisible(false);
 
         this.add(roomDataPanel, BorderLayout.CENTER);
+    }
+
+    public ViewRoomPanel() {
+        this(false);
     }
 
     public void updateRoomData(String data, ArrayList<Integer> availableDates) {

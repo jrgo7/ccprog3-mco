@@ -160,4 +160,7 @@ public class ViewHotelPanel extends JPanel {
         this.viewReservationsSubPanel.setListener(listener);
     }
 
+    public void setReservationVisible(boolean visible){
+        this.viewReservationsSubPanel.setWrapperVisible(visible);
+    }
 }
