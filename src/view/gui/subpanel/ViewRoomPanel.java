@@ -5,18 +5,18 @@ import java.util.ArrayList;
 
 import src.view.gui.component.StyledHTMLPane;
 
-import javax.swing.JPanel;
+import src.view.gui.component.StyledPanel;
 import javax.swing.event.ListSelectionListener;
 
 import src.controller.gui.RoomListListener;
 import src.view.gui.component.RoomAvailabilityCalendar;
 import src.view.gui.component.RoomListPanel;
 
-public class ViewRoomPanel extends JPanel {
+public class ViewRoomPanel extends StyledPanel {
     private RoomListPanel roomListPanel;
     private StyledHTMLPane roomDataComponent;
     private RoomAvailabilityCalendar roomAvailabilityCalendar;
-    private JPanel roomDataPanel;
+    private StyledPanel roomDataPanel;
 
     public ViewRoomPanel() {
         this.setLayout(new BorderLayout());
@@ -25,7 +25,7 @@ public class ViewRoomPanel extends JPanel {
 
         this.add(roomListPanel, BorderLayout.WEST);
 
-        roomDataPanel = new JPanel();
+        roomDataPanel = new StyledPanel();
         roomDataPanel.setLayout(new BorderLayout());
         
         this.roomDataComponent = new StyledHTMLPane();

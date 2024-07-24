@@ -3,12 +3,12 @@ package src.view.gui.subpanel;
 import java.awt.BorderLayout;
 import java.util.ArrayList;
 
-import javax.swing.JPanel;
+import src.view.gui.component.StyledPanel;
 
 import src.controller.gui.ManageRoomListener;
 import src.view.gui.component.RoomListPanel;
 
-public class ManageRoomsPanel extends JPanel {
+public class ManageRoomsPanel extends StyledPanel {
     private RoomListPanel roomListPanel;
 
     public ManageRoomsPanel() {

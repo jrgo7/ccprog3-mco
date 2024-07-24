@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import src.view.gui.component.StyledButton;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
+import src.view.gui.component.StyledPanel;
 import src.view.gui.component.StyledTabbedPane;
 import javax.swing.JTextField;
 
@@ -20,7 +20,7 @@ import src.view.gui.subpanel.ManagePricesPanel;
 import src.view.gui.subpanel.ManageReservationsPanel;
 import src.view.gui.subpanel.ManageRoomsPanel;
 
-public class ManageHotelPanel extends JPanel {
+public class ManageHotelPanel extends StyledPanel {
     private StyledTabbedPane subpanels;
     private ManageRoomsPanel manageRoomsSubpanel;
     private ManageReservationsPanel manageReservationsSubpanel;
@@ -33,7 +33,7 @@ public class ManageHotelPanel extends JPanel {
     public ManageHotelPanel() {
         this.setLayout(new BorderLayout());
 
-        JPanel infoEditPanel = new JPanel();
+        StyledPanel infoEditPanel = new StyledPanel();
         infoEditPanel.setLayout(new GridLayout(2, 3));
 
         JLabel renameLabel = new JLabel("Rename hotel:"); // TODO StyledLabel

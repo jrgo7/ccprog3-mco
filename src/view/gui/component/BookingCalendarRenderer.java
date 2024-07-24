@@ -43,7 +43,6 @@ public class BookingCalendarRenderer extends RoomAvailabilityCalendarRenderer {
                 super.setForeground(Color.WHITE);
                 super.setBackground(ColorCollection.SELECTION_INVALID);
             } else if (date == checkIn || date == checkOut) {
-                System.out.println("This is the border");
                 super.setForeground(Color.WHITE);
                 super.setBackground(ColorCollection.SELECTION_BORDER);
             } else {

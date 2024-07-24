@@ -2,6 +2,7 @@ package src.view.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Insets;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.util.ArrayList;
@@ -11,9 +12,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JSpinner;
-import src.view.gui.component.StyledTabbedPane;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
@@ -30,9 +29,11 @@ import src.controller.gui.SimulateBookingRoomListListener;
 import src.controller.gui.TopMenuPaneListener;
 import src.view.gui.component.FontCollection;
 import src.view.gui.component.HotelListPanel;
+import src.view.gui.component.StyledPanel;
 import src.view.gui.panel.ManageHotelPanel;
 import src.view.gui.panel.SimulateBookingPanel;
 import src.view.gui.panel.ViewHotelPanel;
+import src.view.gui.component.StyledTabbedPane;
 
 /** Represents the top menu in the application's GUI. */
 public class TopView extends JFrame {
@@ -49,11 +50,18 @@ public class TopView extends JFrame {
 
     public TopView() {
         super("Hotel Reservation System");
+        
+        // Global styling
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception e) {
             System.err.println("Unable to configure look and feel.");
         }
+        UIManager.put(
+            "TabbedPane.contentBorderInsets",
+            new Insets(-1, -1, -1, -1));
+        
+        // Window manager
         this.setLocationByPlatform(true);
         Dimension systemResolution = Toolkit.getDefaultToolkit()
                 .getScreenSize();
@@ -61,15 +69,17 @@ public class TopView extends JFrame {
                 (int) (systemResolution.getWidth() / 1.5),
                 (int) (systemResolution.getHeight() / 1.5)));
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.init();
-        this.setVisible(true);
 
+        // Component building
+        this.init();
+        
+        this.setVisible(true);
     }
 
     public void init() {
         this.setLayout(new BorderLayout());
 
-        JPanel paddingPanel = new JPanel();
+        StyledPanel paddingPanel = new StyledPanel();
         paddingPanel.setLayout(new BorderLayout());
         paddingPanel.setBorder(new EmptyBorder(28, 28, 28, 28));
 
@@ -369,7 +379,7 @@ public class TopView extends JFrame {
     }
 
     public int[] promptAddRoom(int limit) {
-        JPanel promptPanel = new JPanel();
+        StyledPanel promptPanel = new StyledPanel();
 
         promptPanel.setLayout(new BorderLayout());
 

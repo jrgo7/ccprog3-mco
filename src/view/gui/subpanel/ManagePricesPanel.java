@@ -6,7 +6,7 @@ import java.awt.Point;
 import javax.swing.BoxLayout;
 import src.view.gui.component.StyledHTMLPane;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
+import src.view.gui.component.StyledPanel;
 import javax.swing.JTextField;
 
 import src.controller.gui.ManagePricesListener;
@@ -15,7 +15,7 @@ import src.view.gui.component.DecimalDocument;
 import src.view.gui.component.FontCollection;
 import src.view.gui.component.StyledButton;
 
-public class ManagePricesPanel extends JPanel {
+public class ManagePricesPanel extends StyledPanel {
     private Calendar calendarComponent;
     private JTextField priceModifierField;
     private StyledHTMLPane modifiedPriceData;
@@ -27,7 +27,7 @@ public class ManagePricesPanel extends JPanel {
         calendarComponent = new Calendar();
         this.add(calendarComponent);
 
-        JPanel fieldPanel = new JPanel();
+        StyledPanel fieldPanel = new StyledPanel();
         fieldPanel.setLayout(new GridLayout(1, 3));
 
         JLabel priceModifierLabel = new JLabel("Update price modifier:");

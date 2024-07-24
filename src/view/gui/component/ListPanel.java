@@ -1,21 +1,20 @@
 package src.view.gui.component;
 
 import java.awt.BorderLayout;
+import java.awt.Font;
 import java.util.ArrayList;
 
 import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionListener;
 
 
 /**
- * Represents an abstract {@link JPanel} that wraps around a single
+ * Represents an abstract {@link StyledPanel} that wraps around a single
  * {@link JList} component.
  */
-public abstract class ListPanel extends JPanel {
+public abstract class ListPanel extends StyledPanel {
     /** The {@link JList} contained in the panel. */
     private JList<String> listComponent;
 
@@ -26,7 +25,12 @@ public abstract class ListPanel extends JPanel {
     private int fallbackIndex;
 
     /**
-     * Initializes the panel to a given width and with a header.
+     * This header is shown at the top of the list.
+     */
+    private JLabel header;
+
+    /**
+     * Initializes the panel to a given header name and width.
      * 
      * @param name  The string to put in the header
      * @param width The width of the panel
@@ -35,18 +39,30 @@ public abstract class ListPanel extends JPanel {
         this.setLayout(new BorderLayout());
         this.fallbackIndex = 0;
 
-        JLabel header = new JLabel(name);
-        header.setFont(FontCollection.SEGOE_UI_BODY_LARGE);
+        this.header = new JLabel(name);
+        this.header.setFont(FontCollection.SEGOE_UI_TITLE);
 
         this.add(header, BorderLayout.NORTH);
 
         this.listComponent = new JList<String>();
+        this.listComponent.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
         this.listComponent.setFixedCellWidth(width);
         this.listComponent.setFixedCellHeight(42);
-        this.listComponent.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         this.listComponent.setFont(FontCollection.SEGOE_UI_BODY);
         
-        this.add(new JScrollPane(listComponent));
+        this.add(new StyledScrollPane(listComponent));
+    }
+
+    /**
+     * Initializes the panel with a given header name, width, and font.
+     * @param name
+     * @param width
+     * @param font
+     */
+    public ListPanel(String name, int width, Font font) {
+        this(name, width);
+        this.header.setFont(font);
     }
 
     /**

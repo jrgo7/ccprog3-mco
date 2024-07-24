@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import src.view.gui.component.StyledHTMLPane; import src.view.gui.component.StyledTabbedPane;
 
-import javax.swing.JPanel;
+import src.view.gui.component.StyledPanel;
 import javax.swing.JTable;
 
 import src.controller.gui.HotelAvailabilityCalendarListener;
@@ -18,7 +18,7 @@ import src.view.gui.subpanel.ViewReservationsPanel;
 import src.view.gui.subpanel.ViewRoomPanel;
 
 /** Represents the View Hotel panel. */
-public class ViewHotelPanel extends JPanel {
+public class ViewHotelPanel extends StyledPanel {
     /** The {@link StyledHTMLPane} containing {@link Hotel} data. */
     private StyledHTMLPane hotelDataComponent;
 

@@ -5,7 +5,7 @@ import java.awt.Point;
 
 import src.view.gui.component.StyledHTMLPane;
 
-import javax.swing.JPanel;
+import src.view.gui.component.StyledPanel;
 import javax.swing.JTable;
 
 import src.controller.gui.HotelAvailabilityCalendarListener;
@@ -13,7 +13,7 @@ import src.view.gui.component.RoomAvailabilityCalendar;
 import src.view.gui.component.Calendar;
 
 /** Represents the View Availability subpanel under View Hotel. */
-public class ViewAvailabilityPanel extends JPanel {
+public class ViewAvailabilityPanel extends StyledPanel {
     /** The {@link Calendar} showing available dates. */
     private RoomAvailabilityCalendar calendarComponent;
 

@@ -1,7 +1,7 @@
 package src.view.gui.subpanel;
 
-import javax.swing.JPanel;
+import src.view.gui.component.StyledPanel;
 
-public class ManageReservationsPanel extends JPanel {
+public class ManageReservationsPanel extends StyledPanel {
 
 }

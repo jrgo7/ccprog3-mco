@@ -1,6 +1,7 @@
 package src.view.gui.panel;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Point;
 import java.util.ArrayList;
@@ -9,7 +10,9 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import src.view.gui.component.StyledHTMLPane; import javax.swing.JLabel;
-import javax.swing.JPanel;
+import src.view.gui.component.StyledPanel;
+import src.view.gui.component.StyledScrollPane;
+
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
@@ -24,7 +27,7 @@ import src.view.gui.component.FontCollection;
 import src.view.gui.component.RoomListPanel;
 import src.view.gui.component.StyledButton;
 
-public class SimulateBookingPanel extends JPanel {
+public class SimulateBookingPanel extends StyledPanel {
     private JTextField guestNameField;
     private JTextField discountCodeField;
     private RoomListPanel roomListPanel;
@@ -35,7 +38,7 @@ public class SimulateBookingPanel extends JPanel {
     private ButtonGroup checkInOutGroup;
     private JRadioButton checkInButton;
     private JRadioButton checkOutButton;
-    private JPanel detailsPanel;
+    private StyledPanel detailsPanel;
 
     static public final String RESERVATION_PREVIEW_INITIAL_TEXT = """
             Input your booking details to update this preview.""";
@@ -46,11 +49,11 @@ public class SimulateBookingPanel extends JPanel {
         roomListPanel = new RoomListPanel(200, false);
         this.add(roomListPanel, BorderLayout.WEST);
 
-        detailsPanel = new JPanel();
+        detailsPanel = new StyledPanel();
         detailsPanel.setLayout(
                 new BoxLayout(detailsPanel, BoxLayout.Y_AXIS));
 
-        JPanel textFieldPanel = new JPanel();
+        StyledPanel textFieldPanel = new StyledPanel();
         textFieldPanel.setLayout(new GridLayout(2, 2));
         
         JLabel guestNameLabel = new JLabel("Guest name:");
@@ -71,19 +74,21 @@ public class SimulateBookingPanel extends JPanel {
 
         detailsPanel.add(new JSeparator());
 
-        JPanel checkInOutPanel = new JPanel();
+        StyledPanel checkInOutPanel = new StyledPanel();
         checkInOutPanel.setLayout(
                 new BoxLayout(checkInOutPanel, BoxLayout.X_AXIS));
         checkInOutGroup = new ButtonGroup();
         checkInOutPanel.add(Box.createHorizontalGlue());
         checkInButton = new JRadioButton("Set check-in date");
         checkInButton.setFont(FontCollection.SEGOE_UI_BODY);
+        checkInButton.setBackground(Color.WHITE);
         checkInButton.setSelected(true);
         checkInOutPanel.add(checkInButton);
         checkInOutGroup.add(checkInButton);
         checkInOutPanel.add(Box.createHorizontalGlue());
         checkOutButton = new JRadioButton("Set check-out date");
         checkOutButton.setFont(FontCollection.SEGOE_UI_BODY);
+        checkOutButton.setBackground(Color.WHITE);
         checkInOutPanel.add(checkOutButton);
         checkInOutGroup.add(checkOutButton);
         checkInOutPanel.add(Box.createHorizontalGlue());
@@ -92,19 +97,19 @@ public class SimulateBookingPanel extends JPanel {
         bookingCalendar = new BookingCalendar();
         detailsPanel.add(bookingCalendar);
 
-        JPanel reservationPreviewPanel = new JPanel();
+        StyledPanel reservationPreviewPanel = new StyledPanel();
         reservationPreviewPanel.setLayout(new BorderLayout());
         reservationPreview = new StyledHTMLPane();
         reservationPreview.setText(RESERVATION_PREVIEW_INITIAL_TEXT);
         reservationPreview.setEditable(false);
-        JScrollPane reservationScrollPane = new JScrollPane(
+        StyledScrollPane reservationScrollPane = new StyledScrollPane(
                 reservationPreview,
                 JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
                 JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         reservationPreviewPanel.add(reservationScrollPane, BorderLayout.CENTER);
         detailsPanel.add(reservationPreviewPanel);
 
-        JPanel southPanel = new JPanel();
+        StyledPanel southPanel = new StyledPanel();
         southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.X_AXIS));
 
         bookButton = new StyledButton("Book");

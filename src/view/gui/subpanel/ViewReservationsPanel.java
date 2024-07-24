@@ -3,13 +3,13 @@ package src.view.gui.subpanel;
 import java.awt.BorderLayout;
 import java.util.ArrayList;
 
-import javax.swing.JPanel;
+import src.view.gui.component.StyledPanel;
 
 import src.view.gui.component.StyledHTMLPane; 
 import src.controller.gui.ReservationListListener;
 import src.view.gui.component.ReservationListPanel;
 
-public class ViewReservationsPanel extends JPanel {
+public class ViewReservationsPanel extends StyledPanel {
     private ReservationListPanel reservationListPanel;
 
     private StyledHTMLPane reservationDataComponent;
@@ -17,7 +17,7 @@ public class ViewReservationsPanel extends JPanel {
     public ViewReservationsPanel() {
         this.setLayout(new BorderLayout());
 
-        JPanel reservationDataPanel = new JPanel();
+        StyledPanel reservationDataPanel = new StyledPanel();
         reservationDataPanel.setLayout(new BorderLayout());
 
 
