@@ -96,7 +96,8 @@ public class HotelListListener extends ListAddListener {
 
         if (reservationSystem.addHotel(name)) {
             /* Refreshing the view after each update keeps it synchronized */
-            this.view.resetState();
+            view.resetAvailabilityCalendarSelection();
+            view.setHotelAvailabilityDataText("<p></p>");
             this.updateList();
 
             /* Prevents the selection highlight from disappearing */

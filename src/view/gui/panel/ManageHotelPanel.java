@@ -17,7 +17,6 @@ import src.controller.gui.ManageReservationListener;
 import src.controller.gui.ManageRoomListener;
 import src.controller.gui.RenameHotelListener;
 import src.view.gui.component.DecimalDocument;
-import src.view.gui.component.FontCollection;
 import src.view.gui.subpanel.ManagePricesPanel;
 import src.view.gui.subpanel.ManageReservationsPanel;
 import src.view.gui.subpanel.ManageRoomsPanel;
