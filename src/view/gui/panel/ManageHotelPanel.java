@@ -111,6 +111,7 @@ public class ManageHotelPanel extends StyledPanel {
 
     public void setManageRoomListener(ManageRoomListener manageRoomListener) {
         this.manageRoomsSubpanel.setRoomListListener(manageRoomListener);
+        this.manageRoomsSubpanel.setRemoveButtonListener(manageRoomListener);
     }
 
     public void updateRoomData(String data, ArrayList<Integer> availableDates) {
@@ -188,5 +189,13 @@ public class ManageHotelPanel extends StyledPanel {
 
     public void setManageReservationVisible(boolean visible){
         this.manageReservationsSubpanel.setWrapperVisible(visible);
+    }
+
+    public int getManageRoomSelectedIndex() {
+        return this.manageRoomsSubpanel.getViewRoomSelectedIndex();
+    }
+
+    public void setManageRoomPanelVisible(boolean visible) {
+        this.manageRoomsSubpanel.setWrapperVisible(visible);
     }
 }

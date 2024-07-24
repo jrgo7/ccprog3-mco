@@ -3,20 +3,22 @@ package src.view.gui.subpanel;
 import java.awt.BorderLayout;
 import java.util.ArrayList;
 
-import src.view.gui.component.StyledHTMLPane;
-
-import src.view.gui.component.StyledPanel;
+import javax.swing.BoxLayout;
+import javax.swing.JPanel;
 import javax.swing.event.ListSelectionListener;
 
 import src.controller.gui.RoomListListener;
 import src.view.gui.component.RoomAvailabilityCalendar;
 import src.view.gui.component.RoomListPanel;
+import src.view.gui.component.StyledHTMLPane;
+import src.view.gui.component.StyledPanel;
 
 public class ViewRoomPanel extends StyledPanel {
     protected RoomListPanel roomListPanel;
     private StyledHTMLPane roomDataComponent;
     private RoomAvailabilityCalendar roomAvailabilityCalendar;
     private StyledPanel roomDataPanel;
+    protected JPanel outer;
 
     public ViewRoomPanel(boolean addable) {
         this.setLayout(new BorderLayout());
@@ -24,6 +26,9 @@ public class ViewRoomPanel extends StyledPanel {
         this.roomListPanel = new RoomListPanel(200, addable);
 
         this.add(roomListPanel, BorderLayout.WEST);
+
+        this.outer = new JPanel();
+        this.outer.setLayout(new BoxLayout(outer, BoxLayout.Y_AXIS));
 
         roomDataPanel = new StyledPanel();
         roomDataPanel.setLayout(new BorderLayout());
@@ -33,9 +38,11 @@ public class ViewRoomPanel extends StyledPanel {
 
         this.roomAvailabilityCalendar = new RoomAvailabilityCalendar();
         roomDataPanel.add(roomAvailabilityCalendar, BorderLayout.CENTER);
-        this.roomDataPanel.setVisible(false);
 
-        this.add(roomDataPanel, BorderLayout.CENTER);
+        this.outer.add(roomDataPanel);
+        this.outer.setVisible(false);
+
+        this.add(outer, BorderLayout.CENTER);
     }
 
     public ViewRoomPanel() {
@@ -45,7 +52,7 @@ public class ViewRoomPanel extends StyledPanel {
     public void updateRoomData(String data, ArrayList<Integer> availableDates) {
         this.roomDataComponent.setText(data);
         this.roomAvailabilityCalendar.setAvailability(availableDates);
-        this.roomDataPanel.setVisible(true);
+        this.outer.setVisible(true);
     }
 
     public void updateRoomList(ArrayList<String> data) {
@@ -62,6 +69,10 @@ public class ViewRoomPanel extends StyledPanel {
 
     public void resetRoomListSelection() {
         this.roomListPanel.clearSelection();
-        this.roomDataPanel.setVisible(false);
+        this.outer.setVisible(false);
+    }
+
+    public void setWrapperVisible(boolean visible) {
+        this.outer.setVisible(visible);
     }
 }

@@ -262,6 +262,10 @@ public class TopView extends JFrame {
 
     // Manage hotel delegations
 
+    public int getManageRoomSelectedIndex() {
+        return this.manageHotelPanel.getManageRoomSelectedIndex();
+    }
+
     public void setManageHotelReservationData(String data) {
         this.manageHotelPanel.updateReservationData(data);
     }
@@ -324,6 +328,10 @@ public class TopView extends JFrame {
 
     public boolean getIsUpdateBasePriceFieldFocused() {
         return this.manageHotelPanel.getIsUpdateBasePriceFieldFocused();
+    }
+
+    public void setManageRoomVisible(boolean visible) {
+        this.manageHotelPanel.setManageRoomPanelVisible(visible);
     }
 
     // Simulate booking delegations
@@ -511,6 +519,14 @@ public class TopView extends JFrame {
                 this,
                 "Your reservation was not made successfully.\n" + error,
                 "Invalid reservation error",
+                JOptionPane.ERROR_MESSAGE);
+    }
+
+    public void showCantRemoveRoomError() {
+        JOptionPane.showMessageDialog(
+                this,
+                "A hotel must have at least one room.\n",
+                "Cannot remove room",
                 JOptionPane.ERROR_MESSAGE);
     }
 }
