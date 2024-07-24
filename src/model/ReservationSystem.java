@@ -230,8 +230,14 @@ public class ReservationSystem {
         return reservation.toString();
     }
 
+    /**
+     * Reset the {@link ReservationBuilder}'s attributes, except for the
+     * currently-selected hotel and room (those get changed when the user)
+     * selects a new {@link Hotel} or a new {@link Room} from the corresponding
+     * lists.
+     */
     public void resetReservationBuilder() {
-        reservationBuilder = new ReservationBuilder();
+        reservationBuilder.reset();
     }
 
     public String[] getReservationNames(int hotelIndex) {

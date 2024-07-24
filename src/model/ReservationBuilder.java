@@ -9,6 +9,15 @@ public class ReservationBuilder {
     private String discountCode;
 
     public ReservationBuilder() {
+        this.reset();
+    }
+
+    /**
+     * Reset the values of this {@link ReservationBuilder} to their defaults,
+     * except for the hotel index and the room index, which should be modified
+     * only when the user selects a new {@link Hotel} or {@link Room}.
+     */
+    public void reset() {
         this.checkIn = 1;
         this.checkOut = 31;
         this.guestName = "";

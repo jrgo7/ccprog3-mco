@@ -33,7 +33,7 @@ public class RoomAvailabilityCalendarRenderer extends CalendarRenderer {
         int date = Calendar.toDate(row, column);
 
         if (availableDates != null && !availableDates.contains(date) && date <= 31) {
-            super.setForeground(table.getSelectionForeground());
+            super.setForeground(Color.WHITE);
             super.setBackground(ColorCollection.INVALID);
         }
         return this;
