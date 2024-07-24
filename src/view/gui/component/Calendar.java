@@ -4,10 +4,7 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.TableModel;
 
-import org.w3c.dom.events.MouseEvent;
-
 import src.controller.gui.CalendarListener;
-import src.view.gui.TopView;
 
 /**
  * A custom component representing a set of dates.
@@ -34,14 +31,15 @@ public class Calendar extends JTable {
 
         this.setCellSelectionEnabled(true);
         this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        this.setShowGrid(false);
 
         TableModel model = this.getModel();
         for (int i = 1; i <= 31; i++) {
             model.setValueAt(i, (i - 1) / MAX_COLS, (i - 1) % MAX_COLS);
         }
 
-        this.setFont(TopView.ARIAL_PLAIN_FONT);
-        this.setRowHeight(64);
+        this.setFont(FontCollection.SEGOE_UI_BODY);
+        this.setRowHeight(42);
     }
 
     /**

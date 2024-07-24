@@ -4,22 +4,22 @@ import java.awt.GridLayout;
 import java.awt.Point;
 
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JEditorPane;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import src.view.gui.component.StyledHTMLPane;
+import src.view.gui.component.StyledLabel;
+import src.view.gui.component.StyledPanel;
 import javax.swing.JTextField;
 
 import src.controller.gui.ManagePricesListener;
-import src.view.gui.TopView;
 import src.view.gui.component.Calendar;
 import src.view.gui.component.DecimalDocument;
+import src.view.gui.component.FontCollection;
+import src.view.gui.component.StyledButton;
 
-public class ManagePricesPanel extends JPanel {
+public class ManagePricesPanel extends StyledPanel {
     private Calendar calendarComponent;
     private JTextField priceModifierField;
-    private JEditorPane modifiedPriceData;
-    private JButton priceUpdateButton;
+    private StyledHTMLPane modifiedPriceData;
+    private StyledButton priceUpdateButton;
 
     public ManagePricesPanel() {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -27,24 +27,22 @@ public class ManagePricesPanel extends JPanel {
         calendarComponent = new Calendar();
         this.add(calendarComponent);
 
-        JPanel fieldPanel = new JPanel();
+        StyledPanel fieldPanel = new StyledPanel();
         fieldPanel.setLayout(new GridLayout(1, 3));
 
-        JLabel priceModifierLabel = new JLabel("Update price modifier:");
-        priceModifierLabel.setFont(TopView.ARIAL_PLAIN_FONT);
+        StyledLabel priceModifierLabel = new StyledLabel("Update price modifier:");
         fieldPanel.add(priceModifierLabel, 0);
 
         priceModifierField = new JTextField();
         priceModifierField.setDocument(new DecimalDocument());
         fieldPanel.add(priceModifierField, 1);
 
-        priceUpdateButton = new JButton("Update price modifier");
+        priceUpdateButton = new StyledButton("Update price modifier");
         fieldPanel.add(priceUpdateButton, 2);
 
         this.add(fieldPanel);
 
-        modifiedPriceData = new JEditorPane("text/html", "<p></p>");
-        modifiedPriceData.setEditable(false);
+        modifiedPriceData = new StyledHTMLPane();
         this.add(modifiedPriceData);
     }
 

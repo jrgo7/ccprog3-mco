@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import src.view.gui.component.StyledPanel;
 
 import src.controller.gui.RoomListListener;
 

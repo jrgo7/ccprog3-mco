@@ -201,7 +201,7 @@ public class Reservation {
     public String getPriceBreakdown() {
         /* TODO: Rework this method */
         String breakdown = String.format(
-                "<h4>Price breakdown</h4>",
+                "<h2>Price breakdown</h2>",
                 this.checkIn,
                 this.checkOut);
         breakdown += """
@@ -212,8 +212,7 @@ public class Reservation {
                 <th>Price modifier</th>
                 <th>Discount code modifier</th>
                 <th>Computed price for the night</th>
-                </tr>
-                """;
+                </tr>""";
         for (int date = this.checkIn; date < this.checkOut; date++)
             breakdown += String.format(
                     """
@@ -265,16 +264,14 @@ public class Reservation {
     @Override
     public String toString() {
         return String.format("""
-                <div style="font-family: sans-serif">
-                <h3>Reservation by %s</h3>
+                <h2>Reservation by %s</h2>
                 <ul>
                 <li>Room: %s</li>
                 <li>Duration: from %d to %d</li>
                 <li>Total price: %.2f</li>
                 <li>Discount code: %s</li>
                 </ul>
-                %s
-                </div>""",
+                %s""",
                 this.getGuestName(),
                 this.room.toStringMinimal(),
                 this.getCheckIn(),

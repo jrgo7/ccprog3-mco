@@ -6,70 +6,70 @@ import java.awt.Point;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
+import src.view.gui.component.StyledButton;
+import src.view.gui.component.StyledLabel;
+import src.view.gui.component.StyledPanel;
+import src.view.gui.component.StyledTabbedPane;
 import javax.swing.JTextField;
 
 import src.controller.gui.ManagePricesListener;
 import src.controller.gui.ManageReservationListener;
 import src.controller.gui.ManageRoomListener;
 import src.controller.gui.RenameHotelListener;
-import src.view.gui.TopView;
 import src.view.gui.component.DecimalDocument;
+import src.view.gui.component.FontCollection;
 import src.view.gui.subpanel.ManagePricesPanel;
 import src.view.gui.subpanel.ManageReservationsPanel;
 import src.view.gui.subpanel.ManageRoomsPanel;
 
-public class ManageHotelPanel extends JPanel {
-    private JTabbedPane subpanels;
+public class ManageHotelPanel extends StyledPanel {
+    private StyledTabbedPane subpanels;
     private ManageRoomsPanel manageRoomsSubpanel;
     private ManageReservationsPanel manageReservationsSubpanel;
     private ManagePricesPanel managePricesSubpanel;
     private JTextField renameHotelField;
     private JTextField basePriceField;
-    private JButton renameHotelButton;
-    private JButton updateBasePriceButton;
+    private StyledButton renameHotelButton;
+    private StyledButton updateBasePriceButton;
 
     public ManageHotelPanel() {
         this.setLayout(new BorderLayout());
 
-        JPanel infoEditPanel = new JPanel();
+        StyledPanel infoEditPanel = new StyledPanel();
         infoEditPanel.setLayout(new GridLayout(2, 3));
 
-        JLabel renameLabel = new JLabel("Rename hotel:");
-        renameLabel.setFont(TopView.ARIAL_PLAIN_FONT);
-        infoEditPanel.add(renameLabel, 0);
-        renameHotelField = new JTextField();
-        infoEditPanel.add(renameHotelField, 1);
-        renameHotelButton = new JButton("Rename hotel");
-        infoEditPanel.add(renameHotelButton, 2);
+        StyledLabel renameLabel = new StyledLabel("Rename hotel:");
+        infoEditPanel.add(renameLabel);
 
-        JLabel basePriceLabel = new JLabel("Update base price:");
-        basePriceLabel.setFont(TopView.ARIAL_PLAIN_FONT);
-        infoEditPanel.add(basePriceLabel, 3);
+        renameHotelField = new JTextField();
+        infoEditPanel.add(renameHotelField);
+
+        renameHotelButton = new StyledButton("Rename hotel");
+        infoEditPanel.add(renameHotelButton);
+
+        StyledLabel basePriceLabel = new StyledLabel("Update base price:");
+        infoEditPanel.add(basePriceLabel);
 
         basePriceField = new JTextField();
-        basePriceField.setDocument(new DecimalDocument());
-        infoEditPanel.add(basePriceField, 4);
-        updateBasePriceButton = new JButton("Update base price");
-        infoEditPanel.add(updateBasePriceButton, 5);
+        basePriceField.setDocument(new DecimalDocument()); // TODO maybe a spinner; abandon DecimalDocument
+        infoEditPanel.add(basePriceField);
+
+        updateBasePriceButton = new StyledButton("Update base price");
+        infoEditPanel.add(updateBasePriceButton);
 
         this.add(infoEditPanel, BorderLayout.NORTH);
 
-        subpanels = new JTabbedPane();
+        subpanels = new StyledTabbedPane();
 
         manageRoomsSubpanel = new ManageRoomsPanel();
-        subpanels.add("Rooms", manageRoomsSubpanel);
+        subpanels.add("Manage rooms", manageRoomsSubpanel);
 
         manageReservationsSubpanel = new ManageReservationsPanel();
-        subpanels.add("Reservations", manageReservationsSubpanel);
+        subpanels.add("Manage reservations", manageReservationsSubpanel);
 
         managePricesSubpanel = new ManagePricesPanel();
-        subpanels.add("Prices", managePricesSubpanel);
+        subpanels.add("Manage prices", managePricesSubpanel);
 
-        subpanels.setFont(TopView.ARIAL_PLAIN_FONT);
         this.add(subpanels, BorderLayout.CENTER);
     }
 
@@ -93,11 +93,8 @@ public class ManageHotelPanel extends JPanel {
 
     public void setRenameHotelListener(RenameHotelListener listener) {
         this.renameHotelField.addKeyListener(listener);
-
         this.renameHotelButton.addActionListener(listener);
-        this.renameHotelButton.addKeyListener(listener); // * enables "tabbing"
-                                                         // to this button and
-                                                         // pressing enter
+        this.renameHotelButton.addKeyListener(listener);
     }
 
     public void setUpdateBasePriceListener(ManagePricesListener listener) {
@@ -107,6 +104,7 @@ public class ManageHotelPanel extends JPanel {
     }
 
     // Manage rooms subpanel
+
     public void updateRoomList(ArrayList<String> data) {
         this.manageRoomsSubpanel.updateRoomList(data);
     }

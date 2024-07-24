@@ -12,7 +12,7 @@ public class RoomListPanel extends ListPanel {
      * @param width The width of the panel
      */
     public RoomListPanel(int width, boolean addable) {
-        super("Rooms", width);
+        super("Rooms", width, FontCollection.SEGOE_UI_BODY_LARGE);
         this.addable = addable;
     }
 

@@ -7,31 +7,32 @@ import javax.swing.BoxLayout;
 import javax.swing.JEditorPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import src.view.gui.component.StyledPanel;
 
+import src.view.gui.component.StyledHTMLPane; 
 import src.controller.gui.ReservationListListener;
 import src.view.gui.component.ReservationListPanel;
 
-public class ViewReservationsPanel extends JPanel {
+public class ViewReservationsPanel extends StyledPanel {
     private ReservationListPanel reservationListPanel;
 
-    private JEditorPane reservationDataComponent;
+    private StyledHTMLPane reservationDataComponent;
 
-    protected JPanel reservationDataPanel;
+    protected StyledPanel reservationDataPanel;
 
     protected JPanel outer;
 
     public ViewReservationsPanel() {
         this.setLayout(new BorderLayout());
 
-        this.reservationDataPanel = new JPanel();
-        this.reservationDataPanel.setLayout(new BorderLayout());
+         reservationDataPanel = new StyledPanel();
+        reservationDataPanel.setLayout(new BorderLayout());
 
         this.outer = new JPanel();
         this.outer.setLayout(new BoxLayout(outer, BoxLayout.Y_AXIS));
 
         this.reservationListPanel = new ReservationListPanel(200);
-        this.reservationDataComponent = new JEditorPane("text/html", "<p></p>");
-        this.reservationDataComponent.setEditable(false);
+        this.reservationDataComponent = new StyledHTMLPane();
 
         this.reservationDataPanel.add(this.reservationDataComponent,
                 BorderLayout.NORTH);

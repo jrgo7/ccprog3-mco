@@ -12,5 +12,5 @@ cli:
 	java src/view/cli/CLIDriver.java
 
 linux:
-	rm -rf *.class
+	find . -name "*.class" -type f -delete
 	make gui

@@ -1,22 +1,19 @@
 package src.view.gui.component;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
 import java.util.ArrayList;
 
-import javax.swing.JEditorPane;
 import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionListener;
 
-import src.view.gui.TopView;
-
 /**
- * Represents an abstract {@link JPanel} that wraps around a single
+ * Represents an abstract {@link StyledPanel} that wraps around a single
  * {@link JList} component.
  */
-public abstract class ListPanel extends JPanel {
+public abstract class ListPanel extends StyledPanel {
     /** The {@link JList} contained in the panel. */
     private JList<String> listComponent;
 
@@ -27,7 +24,12 @@ public abstract class ListPanel extends JPanel {
     private int fallbackIndex;
 
     /**
-     * Initializes the panel to a given width and with a header.
+     * This header is shown at the top of the list.
+     */
+    private StyledLabel header;
+
+    /**
+     * Initializes the panel to a given header name and width.
      * 
      * @param name  The string to put in the header
      * @param width The width of the panel
@@ -36,17 +38,45 @@ public abstract class ListPanel extends JPanel {
         this.setLayout(new BorderLayout());
         this.fallbackIndex = 0;
 
-        JEditorPane header = new JEditorPane("text/html",
-                "<h2 style=\"font-family: sans-serif\">" + name + "</h2>");
-        header.setEditable(false);
+        this.header = new StyledLabel(name, FontCollection.SEGOE_UI_TITLE);
+
         this.add(header, BorderLayout.NORTH);
 
         this.listComponent = new JList<String>();
-        this.listComponent.setFixedCellWidth(width);
         this.listComponent.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        this.listComponent.setFont(TopView.ARIAL_PLAIN_FONT);
-        
-        this.add(new JScrollPane(listComponent));
+
+        this.listComponent.setFixedCellWidth(width);
+        this.listComponent.setFixedCellHeight(42);
+        this.listComponent.setFont(FontCollection.SEGOE_UI_BODY);
+
+        this.add(new StyledScrollPane(listComponent));
+    }
+
+    /**
+     * Initializes the panel with a given header name, width, and font.
+     * 
+     * @param name
+     * @param width
+     * @param font
+     */
+    public ListPanel(String name, int width, Font headerFont) {
+        this(name, width);
+        this.header.setFont(headerFont);
+    }
+
+    /**
+     * Initializes the panel with a given header name, width, font, and
+     * background color.
+     * 
+     * @param name
+     * @param width
+     * @param font
+     * @param background
+     */
+    public ListPanel(String name, int width, Font headerFont, Color background) {
+        this(name, width, headerFont);
+        this.setBackground(background);
+        this.listComponent.setBackground(background);
     }
 
     /**

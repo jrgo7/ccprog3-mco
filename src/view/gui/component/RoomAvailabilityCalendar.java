@@ -4,17 +4,17 @@ import java.util.ArrayList;
 
 /**
  * This class extends {@link Calendar} by adding functionality to set its
- * internal {@link AvailabilityCalendarRenderer} with a specific list of
+ * internal {@link RoomAvailabilityCalendarRenderer} with a specific list of
  * available dates; dates not in this list will be highlighted red.
  */
-public class AvailabilityCalendar extends Calendar {
+public class RoomAvailabilityCalendar extends Calendar {
     /**
      * Initialize this component with the default renderer.
      */
-    public AvailabilityCalendar() {
+    public RoomAvailabilityCalendar() {
         super();
 
-        this.renderer = new AvailabilityCalendarRenderer();
+        this.renderer = new RoomAvailabilityCalendarRenderer();
         this.setDefaultRenderer(Object.class, renderer);
     }
 
@@ -24,7 +24,7 @@ public class AvailabilityCalendar extends Calendar {
      * @param availableDates
      */
     public void setAvailability(ArrayList<Integer> availableDates) {
-        ((AvailabilityCalendarRenderer) renderer).setAvailableDates(availableDates);
+        ((RoomAvailabilityCalendarRenderer) renderer).setAvailableDates(availableDates);
         for (int date = 1; date <= 31; date++) {
             this.setCalendarText(
                     date,

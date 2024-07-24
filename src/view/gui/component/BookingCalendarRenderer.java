@@ -1,14 +1,16 @@
 package src.view.gui.component;
 
+import java.awt.Color;
 import java.awt.Component;
 import javax.swing.JTable;
 
 /**
- * An extended {@link AvailabilityCalendarRenderer} that adds more highlighting
+ * An extended {@link RoomAvailabilityCalendarRenderer} that adds more
+ * highlighting
  * rules with respect to a check-in and check-out date, wherein the range
  * encompassed therein are highlighted with a selection background.
  */
-public class BookingCalendarRenderer extends AvailabilityCalendarRenderer {
+public class BookingCalendarRenderer extends RoomAvailabilityCalendarRenderer {
     public static final int NONE = -1;
     private int checkIn = NONE;
     private int checkOut = NONE;
@@ -24,7 +26,7 @@ public class BookingCalendarRenderer extends AvailabilityCalendarRenderer {
     public void setCheckIn(int checkIn) {
         this.checkIn = checkIn;
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -35,11 +37,19 @@ public class BookingCalendarRenderer extends AvailabilityCalendarRenderer {
                 table, value, isSelected, hasFocus, row, column);
         int date = Calendar.toDate(row, column);
 
-        if ((checkIn == NONE && checkOut == NONE && isSelected) ||
-                (date >= checkIn && date <= checkOut && date <= 31)) {
-            super.setForeground(table.getSelectionForeground());
-            super.setBackground(table.getSelectionBackground());
+        if (!isSelected && date <= 31 && checkIn != NONE && checkOut != NONE &&
+                date >= checkIn && date <= checkOut) {
+            if (!availableDates.contains(date)) {
+                super.setForeground(Color.WHITE);
+                super.setBackground(ColorCollection.SELECTION_INVALID);
+            } else if (date == checkIn || date == checkOut) {
+                super.setForeground(Color.WHITE);
+                super.setBackground(ColorCollection.SELECTION_BORDER);
+            } else {
+                super.setBackground(ColorCollection.SELECTION_COMPLEMENT);
+            }
         }
+
         return this;
     }
 }

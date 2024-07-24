@@ -10,7 +10,7 @@ public class Controller {
     TopMenuPaneListener topMenuPaneListener;
     HotelListListener hotelListListener;
 
-    AvailabilityCalendarListener availabilityCalendarListener;
+    HotelAvailabilityCalendarListener availabilityCalendarListener;
     RoomListListener viewRoomListListener;
 
     RenameHotelListener renameHotelListener;
@@ -19,7 +19,7 @@ public class Controller {
     ManageReservationListener manageReservationListener;
 
     SimulateBookingRoomListListener simulateBookingRoomListListener;
-    BookingCalendarListener bookingCalendarListener;
+    SimulateBookingCalendarListener bookingCalendarListener;
 
     ReservationListListener viewReservationListListener;
 
@@ -27,10 +27,10 @@ public class Controller {
         this.reservationSystem = reservationSystem;
         this.view = view;
 
-        topMenuPaneListener = new TopMenuPaneListener(reservationSystem, view);
+        topMenuPaneListener = new TopMenuPaneListener(view);
         hotelListListener = new HotelListListener(reservationSystem, view);
 
-        availabilityCalendarListener = new AvailabilityCalendarListener(
+        availabilityCalendarListener = new HotelAvailabilityCalendarListener(
                 reservationSystem, view);
         viewRoomListListener = new RoomListListener(reservationSystem, view);
         
@@ -43,18 +43,20 @@ public class Controller {
         
         simulateBookingRoomListListener = new SimulateBookingRoomListListener(
                 reservationSystem, view);
-        bookingCalendarListener = new BookingCalendarListener(
+        bookingCalendarListener = new SimulateBookingCalendarListener(
                 reservationSystem, view);
 
                 manageReservationListener = new ManageReservationListener(reservationSystem, view);
 
-        viewReservationListListener = new ReservationListListener(reservationSystem, view);
+        viewReservationListListener = new ReservationListListener(
+                reservationSystem, view);
 
         this.view.setTopMenuPaneListener(topMenuPaneListener);
         this.view.setTopViewHotelListListener(hotelListListener);
         
         this.view.setViewHotelListeners(
-                availabilityCalendarListener, viewRoomListListener, viewReservationListListener);
+                availabilityCalendarListener, viewRoomListListener,
+                viewReservationListListener);
 
         this.view.setManageHotelListeners(
                 renameHotelListener, managePricesListener,
