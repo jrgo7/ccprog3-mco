@@ -14,10 +14,20 @@ import javax.swing.JTable;
 public class RoomAvailabilityCalendarRenderer extends CalendarRenderer {
     ArrayList<Integer> availableDates;
 
+    /**
+     * Instantiate this class.
+     */
     public RoomAvailabilityCalendarRenderer() {
         super();
     }
 
+    /**
+     * Set the available dates for this {@link RoomAvailabilityCalendarRenderer}
+     * to reference when highlighting cells corresponding to unavailable dates.
+     * 
+     * @param availableDates an {@link ArrayList} of {@link Integer} values
+     *                       representing available dates
+     */
     public void setAvailableDates(ArrayList<Integer> availableDates) {
         this.availableDates = availableDates;
     }

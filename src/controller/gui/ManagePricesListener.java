@@ -10,6 +10,10 @@ import src.model.ReservationSystem;
 import src.view.gui.TopView;
 import src.view.gui.component.Calendar;
 
+/**
+ * An extended {@link CalendarListener} meant to respond to events
+ * on the Manage Prices Panel.
+ */
 public class ManagePricesListener extends CalendarListener
         implements ActionListener {
 
@@ -19,7 +23,7 @@ public class ManagePricesListener extends CalendarListener
     }
 
     private void setPriceModifierField() {
-        int date = Calendar.toDate(getRow(), getCol());
+        int date = Calendar.toDate(this.getRow(), this.getCol());
         if (date < 1 || date > 31) {
             return;
         }
@@ -68,18 +72,18 @@ public class ManagePricesListener extends CalendarListener
     }
 
     @Override
-    protected void handleReleased(int row, int col) {
-
-    }
-
-    @Override
     protected void handleDragged(int row, int col) {
         setPriceModifierField();
     }
 
     @Override
     protected void handleMoved(int row, int col) {
+        /** No special behavior */
+    }
 
+    @Override
+    protected void handleReleased(int row, int col) {
+        /** No special behavior */
     }
 
     @Override

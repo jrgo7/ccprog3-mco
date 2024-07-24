@@ -127,7 +127,7 @@ public class SimulateBookingCalendarListener extends CalendarListener implements
     /** {@inheritDoc} */
     @Override
     protected void handleMoved(int row, int col) {
-
+        /** No special behavior */
     }
 
     @Override

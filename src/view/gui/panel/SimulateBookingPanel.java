@@ -1,7 +1,6 @@
 package src.view.gui.panel;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Point;
 import java.util.ArrayList;
@@ -9,12 +8,7 @@ import java.util.ArrayList;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
-import src.view.gui.component.StyledHTMLPane; import src.view.gui.component.StyledLabel;
-import src.view.gui.component.StyledPanel;
-import src.view.gui.component.StyledRadioButton;
-import src.view.gui.component.StyledScrollPane;
 
-import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
@@ -24,9 +18,13 @@ import src.controller.gui.SimulateBookingRoomListListener;
 import src.view.gui.component.BookingCalendar;
 import src.view.gui.component.BookingCalendarRenderer;
 import src.view.gui.component.Calendar;
-import src.view.gui.component.FontCollection;
 import src.view.gui.component.RoomListPanel;
 import src.view.gui.component.StyledButton;
+import src.view.gui.component.StyledHTMLPane;
+import src.view.gui.component.StyledLabel;
+import src.view.gui.component.StyledPanel;
+import src.view.gui.component.StyledRadioButton;
+import src.view.gui.component.StyledScrollPane;
 
 public class SimulateBookingPanel extends StyledPanel {
     private JTextField guestNameField;
@@ -56,16 +54,16 @@ public class SimulateBookingPanel extends StyledPanel {
 
         StyledPanel textFieldPanel = new StyledPanel();
         textFieldPanel.setLayout(new GridLayout(2, 2));
-        
+
         StyledLabel guestNameLabel = new StyledLabel("Guest name:");
         textFieldPanel.add(guestNameLabel);
 
         guestNameField = new JTextField();
         textFieldPanel.add(guestNameField);
-        
+
         StyledLabel discountCodeLabel = new StyledLabel("Discount code:");
         textFieldPanel.add(discountCodeLabel);
-        
+
         discountCodeField = new JTextField();
         textFieldPanel.add(discountCodeField);
         textFieldPanel.setSize(WIDTH, HEIGHT);
@@ -79,7 +77,7 @@ public class SimulateBookingPanel extends StyledPanel {
         checkInOutGroup = new ButtonGroup();
 
         checkInOutPanel.add(Box.createHorizontalGlue());
-        
+
         checkInButton = new StyledRadioButton("Set check-in date");
         checkInButton.setSelected(true);
         checkInOutPanel.add(checkInButton);
@@ -99,8 +97,7 @@ public class SimulateBookingPanel extends StyledPanel {
 
         StyledPanel reservationPreviewPanel = new StyledPanel();
         reservationPreviewPanel.setLayout(new BorderLayout());
-        reservationPreview = new StyledHTMLPane();
-        reservationPreview.setText(RESERVATION_PREVIEW_INITIAL_TEXT);
+        reservationPreview = new StyledHTMLPane(RESERVATION_PREVIEW_INITIAL_TEXT);
         StyledScrollPane reservationScrollPane = new StyledScrollPane(
                 reservationPreview,
                 JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
@@ -135,7 +132,7 @@ public class SimulateBookingPanel extends StyledPanel {
     public void setCalendarCheckIn(int date) {
         if (date != BookingCalendarRenderer.NONE) {
             this.bookingCalendar.setCalendarText(
-                date, String.format("%d: Start", date));
+                    date, String.format("%d: Start", date));
         }
         this.bookingCalendar.setCalendarCheckIn(date);
     }
@@ -143,7 +140,7 @@ public class SimulateBookingPanel extends StyledPanel {
     public void setCalendarCheckOut(int date) {
         if (date != BookingCalendarRenderer.NONE) {
             this.bookingCalendar.setCalendarText(
-                date, String.format("%d: End", date));
+                    date, String.format("%d: End", date));
         }
         this.bookingCalendar.setCalendarCheckOut(date);
     }

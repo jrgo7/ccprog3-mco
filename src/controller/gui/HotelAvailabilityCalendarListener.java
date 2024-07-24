@@ -53,7 +53,7 @@ public class HotelAvailabilityCalendarListener extends CalendarListener {
 
     @Override
     protected void handleReleased(int row, int col) {
-
+        /** No special behavior */
     }
 
     protected void handleReleasedOutsideComponent() {
@@ -67,7 +67,7 @@ public class HotelAvailabilityCalendarListener extends CalendarListener {
 
     @Override
     protected void handleMoved(int row, int col) {
-
+        /** No special behavior */
     }
 
     @Override

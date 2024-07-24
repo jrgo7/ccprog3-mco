@@ -10,7 +10,12 @@ import javax.swing.text.html.StyleSheet;
  * 
  * https://learn.microsoft.com/en-us/windows/apps/design/style/xaml-theme-resources#the-xaml-type-ramp
  */
+
+/**
+ * A styled {@JEditorPane} meant for view-only HTML displays.
+ */
 public class StyledHTMLPane extends JEditorPane {
+    /** Instantiate this class. */
     public StyledHTMLPane() {
         super("text/html", "<p></p>");
         StyleSheet sheet = new HTMLEditorKit().getStyleSheet();
@@ -35,6 +40,16 @@ public class StyledHTMLPane extends JEditorPane {
                     font-size: 14;
                 }""");
         this.setEditable(false);
+    }
+
+    /**
+     * Instanatiate this class with some text.
+     * 
+     * @param text the text (in HTML format) to be displayed
+     */
+    public StyledHTMLPane(String text) {
+        super();
+        this.setText(text);
     }
 
 }

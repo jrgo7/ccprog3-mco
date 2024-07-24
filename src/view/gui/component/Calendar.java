@@ -5,7 +5,6 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.TableModel;
 
 import src.controller.gui.CalendarListener;
-import src.view.gui.TopView;
 
 /**
  * A custom component representing a set of dates.
