@@ -46,3 +46,8 @@ javadoc/
 out/*
 .idea/*
 *.iml
+
+# Python venv
+Lib/
+Scripts/
+pyvenv.cfg
