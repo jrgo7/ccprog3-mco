@@ -31,15 +31,17 @@ public class ManageRoomListener extends RoomListListener implements ActionListen
 
         /* A hotel can have at most 50 rooms */
         int limit = 50 - this.getListLength();
-        if (limit <= 0)
+        if (limit <= 0) {
             view.showRoomCountFullError();
-        else {
+        } else {
             /* Result is returned as an integer array `{amount, type}` */
             int[] result = view.promptAddRoom(limit);
-            if (result[0] == -1)
-                return;
-            reservationSystem.addRooms(hotelIndex, result[1], result[0] + 1);
-            updateList();
+            if (result[0] != -1) {
+                reservationSystem.addRooms(hotelIndex, result[1], result[0] + 1);
+                updateList();
+            } else {
+                this.view.removeManageRoomListSelection();
+            }
         }
     }
 
@@ -64,11 +66,10 @@ public class ManageRoomListener extends RoomListListener implements ActionListen
         if (roomIndex < 0 || hotelIndex < 0)
             return;
 
-            System.out.println(roomIndex);
-        
-        
+        System.out.println(roomIndex);
+
         if (!this.reservationSystem.removeRoom(hotelIndex, roomIndex))
-            view.showCantRemoveRoomError();    
+            view.showCantRemoveRoomError();
         this.updateList();
         this.updateDataPanel(-1);
     }

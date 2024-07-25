@@ -20,4 +20,5 @@ public class ManageRoomsPanel extends ViewRoomPanel {
     public void setRemoveButtonListener(ActionListener listener) {
         this.removeButton.addActionListener(listener);
     }
+
 }

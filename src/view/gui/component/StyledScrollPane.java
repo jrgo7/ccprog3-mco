@@ -39,8 +39,8 @@ public class StyledScrollPane extends JScrollPane {
      */
     private void setStyle() {
         this.setBorder(BorderFactory.createEmptyBorder());
-        this.getVerticalScrollBar().setBackground(Color.WHITE);
-        this.getHorizontalScrollBar().setBackground(Color.WHITE);
+        this.getVerticalScrollBar().setBackground(ColorCollection.BACKGROUND_COMPLEMENT);
+        this.getHorizontalScrollBar().setBackground(ColorCollection.BACKGROUND_COMPLEMENT);
         this.getVerticalScrollBar().setUnitIncrement(100);
         this.getHorizontalScrollBar().setUnitIncrement(100);
     }

@@ -298,8 +298,15 @@ public class TopView extends JFrame {
         return this.manageHotelPanel.getIsUpdateBasePriceFieldFocused();
     }
 
+    // TODO we can probably do the same thing we did with
+    // eliminating the setTopMenuPaneVisible method.
     public void setManageRoomVisible(boolean visible) {
         this.manageHotelPanel.setManageRoomPanelVisible(visible);
+    }
+
+    public void removeManageRoomListSelection() {
+        this.manageHotelPanel.clearRoomListSelection();
+        this.setManageRoomVisible(false);
     }
 
     // Simulate booking delegations

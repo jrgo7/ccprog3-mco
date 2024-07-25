@@ -123,6 +123,10 @@ public class ManageHotelPanel extends StyledPanel {
         this.manageRoomsSubpanel.updateRoomData(data, availableDates);
     }
 
+    public void clearRoomListSelection() {
+        this.manageRoomsSubpanel.resetRoomListSelection();
+    }
+
     // Manage reservations subpanel
     // Manage prices subpanel
     public void setManagePricesCalendarText(int date, String text) {
