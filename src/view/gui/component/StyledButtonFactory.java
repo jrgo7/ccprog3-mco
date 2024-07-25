@@ -2,6 +2,12 @@ package src.view.gui.component;
 
 public class StyledButtonFactory {
     /**
+     * This class is not meant to be instantiated.
+     */
+    private StyledButtonFactory() {
+
+    }
+    /**
      * Create a default StyledButton.
      * @param text
      * @return

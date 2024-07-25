@@ -19,6 +19,7 @@ import src.view.gui.component.RoomListPanel;
 import src.view.gui.component.StyledButton;
 import src.view.gui.component.StyledButtonFactory;
 import src.view.gui.component.StyledHTMLPane;
+import src.view.gui.component.StyledHTMLPaneContainerFactory;
 import src.view.gui.component.StyledLabel;
 import src.view.gui.component.StyledPanel;
 import src.view.gui.component.StyledRadioButton;
@@ -67,8 +68,6 @@ public class SimulateBookingPanel extends StyledPanel {
         textFieldPanel.setSize(WIDTH, HEIGHT);
         detailsPanel.add(textFieldPanel);
 
-        detailsPanel.add(new JSeparator());
-
         StyledPanel checkInOutPanel = new StyledPanel();
         checkInOutPanel.setLayout(
                 new BoxLayout(checkInOutPanel, BoxLayout.X_AXIS));
@@ -93,14 +92,8 @@ public class SimulateBookingPanel extends StyledPanel {
         bookingCalendar = new BookingCalendar();
         detailsPanel.add(bookingCalendar);
 
-        StyledPanel reservationPreviewPanel = new StyledPanel();
-        reservationPreviewPanel.setLayout(new BorderLayout());
         reservationPreview = new StyledHTMLPane(RESERVATION_PREVIEW_INITIAL_TEXT);
-        StyledScrollPane reservationScrollPane = new StyledScrollPane(
-                reservationPreview,
-                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        reservationPreviewPanel.add(reservationScrollPane, BorderLayout.CENTER);
+        StyledPanel reservationPreviewPanel = StyledHTMLPaneContainerFactory.createContainer(reservationPreview);
         detailsPanel.add(reservationPreviewPanel);
 
         StyledPanel southPanel = new StyledPanel();
