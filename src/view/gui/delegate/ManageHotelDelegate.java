@@ -40,7 +40,7 @@ public class ManageHotelDelegate {
 
     /* Manage rooms panel */
 
-    public void updateManageRoomData(String data,
+    public void setRoomData(String data,
             ArrayList<Integer> availableDates) {
         this.manageHotelPanel.setRoomData(data, availableDates);
     }

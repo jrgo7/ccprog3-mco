@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import javax.swing.JTextField;
 
+import src.controller.gui.HotelListListener;
 import src.controller.gui.ManagePricesListener;
 import src.controller.gui.ManageReservationListener;
 import src.controller.gui.ManageRoomListener;
@@ -142,6 +143,10 @@ public class ManageHotelPanel extends StyledPanel {
         this.manageReservationsSubpanel.setListener(listener);
         this.manageReservationsSubpanel
                 .setRemoveButtonListener((ActionListener) listener);
+    }
+
+    public void setRemoveHotelButtonListener(HotelListListener listener) {
+        this.removeHotelButton.addActionListener(listener);
     }
 
     /* Edit hotel info panel */

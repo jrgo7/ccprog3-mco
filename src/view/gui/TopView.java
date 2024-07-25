@@ -146,6 +146,7 @@ public class TopView extends JFrame {
     public void setTopViewHotelListListener(
             HotelListListener hotelListListener) {
         this.hotelListPanel.setListener(hotelListListener);
+        this.manageHotelPanel.setRemoveHotelButtonListener(hotelListListener);
     }
 
     public void setTopMenuPaneListener(TopMenuPaneListener listener) {

@@ -59,6 +59,28 @@ public class ManageRoomListener extends RoomListListener
     }
 
     /**
+     * {@inheritDoc} Displays a string representation of the room data.
+     * 
+     * @see ReservationSystem#getRoomString(int, int)
+     */
+    @Override
+    protected void updateDataPanel(int selectedIndex) {
+        /* Exit if selected index is invalid */
+        if (selectedIndex < 0) {
+            this.view.getViewHotelDelegate().setRoomDataVisible(false);
+            return;
+        }
+
+        int hotelIndex = view.getSelectedIndex();
+        this.view.getManageHotelDelegate().setManageRoomVisible(true);
+
+        this.view.getManageHotelDelegate().setRoomData(
+                reservationSystem.getRoomString(hotelIndex, selectedIndex),
+                reservationSystem.getAvailableDatesForRoom(hotelIndex,
+                        selectedIndex));
+    }
+
+    /**
      * {@inheritDoc} If the new selection is the last index, then the
      * {@code Add hotel...} option was selected.
      */
