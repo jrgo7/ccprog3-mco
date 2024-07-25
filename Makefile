@@ -13,4 +13,4 @@ linux:
 ts:
 	del /s /q *.class 1>nul
 	javac src/controller/gui/GUIDriver.java
-	Scripts/python.exe src/recorder/init-test-script.py
+	python.exe src/recorder/init-test-script.py > methods.tsv
