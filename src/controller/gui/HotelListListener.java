@@ -104,7 +104,6 @@ public class HotelListListener extends ListAddListener
             this.updateList();
             // /* Prevents the selection highlight from disappearing */
             this.view.setHotelListSelectedIndex(selectedIndex);
-            this.view.setTabIndex(TopView.VIEW_HOTEL_TAB);
         } else {
             // Did not add a hotel successfully.
             if (name != null) {

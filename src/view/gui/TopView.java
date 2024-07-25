@@ -158,6 +158,7 @@ public class TopView extends JFrame {
     public void setHotelListSelectedIndex(int index) {
         this.hotelListPanel.setSelectedIndex(index);
         this.topMenuPane.setVisible(true);
+        this.topMenuPane.setSelectedIndex(VIEW_HOTEL_TAB);
     }
 
     public void removeHotelListSelection() {
