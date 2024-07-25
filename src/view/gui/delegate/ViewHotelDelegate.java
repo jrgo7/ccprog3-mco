@@ -1,9 +1,9 @@
-package src.view.gui;
+package src.view.gui.delegate;
+
+import java.awt.Point;
+import java.util.ArrayList;
 
 import src.view.gui.panel.ViewHotelPanel;
-
-import java.awt.*;
-import java.util.ArrayList;
 
 public class ViewHotelDelegate {
     private final ViewHotelPanel viewHotelPanel;

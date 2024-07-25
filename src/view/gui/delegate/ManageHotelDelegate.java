@@ -1,10 +1,10 @@
-package src.view.gui;
+package src.view.gui.delegate;
 
-import src.view.gui.panel.ManageHotelPanel;
-
-import java.awt.*;
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import src.view.gui.panel.ManageHotelPanel;
 
 public class ManageHotelDelegate {
     private ManageHotelPanel manageHotelPanel;
@@ -13,7 +13,8 @@ public class ManageHotelDelegate {
         this.manageHotelPanel = manageHotelPanel;
     }
 
-    public void updateManageRoomData(String data, ArrayList<Integer> availableDates) {
+    public void updateManageRoomData(String data,
+            ArrayList<Integer> availableDates) {
         this.manageHotelPanel.setRoomData(data, availableDates);
     }
 

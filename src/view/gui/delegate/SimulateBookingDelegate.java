@@ -1,12 +1,10 @@
-package src.view.gui;
+package src.view.gui.delegate;
 
-import src.controller.gui.SimulateBookingCalendarListener;
-import src.controller.gui.SimulateBookingRoomListListener;
+import java.awt.Point;
+import java.util.ArrayList;
+
 import src.view.gui.component.BookingCalendarRenderer;
 import src.view.gui.panel.SimulateBookingPanel;
-
-import java.awt.*;
-import java.util.ArrayList;
 
 public class SimulateBookingDelegate {
     private SimulateBookingPanel simulateBookingPanel;
@@ -15,7 +13,6 @@ public class SimulateBookingDelegate {
         this.simulateBookingPanel = simulateBookingPanel;
     }
 
-    // Simulate booking delegations
     public void setBookingCalendarAvailability(ArrayList<Integer> dates) {
         this.simulateBookingPanel.setCalendarAvailability(dates);
     }

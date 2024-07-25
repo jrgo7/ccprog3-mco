@@ -1,6 +1,5 @@
 package src.view.gui.component;
 
-import java.awt.Color;
 import java.awt.Component;
 
 import javax.swing.BorderFactory;
@@ -39,8 +38,10 @@ public class StyledScrollPane extends JScrollPane {
      */
     private void setStyle() {
         this.setBorder(BorderFactory.createEmptyBorder());
-        this.getVerticalScrollBar().setBackground(ColorCollection.BACKGROUND_COMPLEMENT);
-        this.getHorizontalScrollBar().setBackground(ColorCollection.BACKGROUND_COMPLEMENT);
+        this.getVerticalScrollBar()
+                .setBackground(ColorCollection.BACKGROUND_COMPLEMENT);
+        this.getHorizontalScrollBar()
+                .setBackground(ColorCollection.BACKGROUND_COMPLEMENT);
         this.getVerticalScrollBar().setUnitIncrement(100);
         this.getHorizontalScrollBar().setUnitIncrement(100);
     }
