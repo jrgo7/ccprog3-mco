@@ -154,9 +154,9 @@ public class Room {
     public String toStringMinimal() {
         return String.format(
                 """
-                %s
+                <li>%s</li>
                 <ul>
-                <li>Base price: %.2f per night</li>
+                  <li>Base price: %.2f per night</li>
                 </ul>""",
                 this.getName(),
                 this.getBasePrice());

@@ -8,6 +8,7 @@ import src.controller.gui.ManagePricesListener;
 import src.view.gui.component.Calendar;
 import src.view.gui.component.DecimalDocument;
 import src.view.gui.component.StyledButton;
+import src.view.gui.component.StyledButtonFactory;
 import src.view.gui.component.StyledHTMLPane;
 import src.view.gui.component.StyledLabel;
 import src.view.gui.component.StyledPanel;
@@ -28,14 +29,14 @@ public class ManagePricesPanel extends StyledPanel {
         fieldPanel.setLayout(new GridLayout(1, 3));
 
         StyledLabel priceModifierLabel = new StyledLabel("Update price modifier:");
-        fieldPanel.add(priceModifierLabel, 0);
+        fieldPanel.add(priceModifierLabel);
 
         priceModifierField = new JTextField();
         priceModifierField.setDocument(new DecimalDocument());
-        fieldPanel.add(priceModifierField, 1);
+        fieldPanel.add(priceModifierField);
 
-        priceUpdateButton = new StyledButton("Update price modifier");
-        fieldPanel.add(priceUpdateButton, 2);
+        priceUpdateButton = StyledButtonFactory.createButton("Update price modifier");
+        fieldPanel.add(priceUpdateButton);
 
         this.add(fieldPanel);
 

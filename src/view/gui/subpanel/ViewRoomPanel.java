@@ -2,11 +2,8 @@ package src.view.gui.subpanel;
 
 import java.awt.BorderLayout;
 import java.util.ArrayList;
-
 import javax.swing.BoxLayout;
-import javax.swing.JPanel;
 import javax.swing.event.ListSelectionListener;
-
 import src.controller.gui.RoomListListener;
 import src.view.gui.component.RoomAvailabilityCalendar;
 import src.view.gui.component.RoomListPanel;
@@ -18,7 +15,7 @@ public class ViewRoomPanel extends StyledPanel {
     private StyledHTMLPane roomDataComponent;
     private RoomAvailabilityCalendar roomAvailabilityCalendar;
     private StyledPanel roomDataPanel;
-    protected JPanel outer;
+    protected StyledPanel outer;
 
     public ViewRoomPanel(boolean addable) {
         this.setLayout(new BorderLayout());
@@ -27,7 +24,7 @@ public class ViewRoomPanel extends StyledPanel {
 
         this.add(roomListPanel, BorderLayout.WEST);
 
-        this.outer = new JPanel();
+        this.outer = new StyledPanel();
         this.outer.setLayout(new BoxLayout(outer, BoxLayout.Y_AXIS));
 
         roomDataPanel = new StyledPanel();

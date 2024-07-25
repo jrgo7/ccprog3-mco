@@ -9,9 +9,7 @@ import src.model.Hotel;
 import src.model.ReservationBuilder;
 import src.model.ReservationSystem;
 import src.view.gui.TopView;
-import src.view.gui.component.BookingCalendarRenderer;
 import src.view.gui.component.Calendar;
-import src.view.gui.panel.SimulateBookingPanel;
 
 /**
  * An extension of {@link CalendarListener} with functionality to handle
@@ -185,9 +183,9 @@ public class SimulateBookingCalendarListener extends CalendarListener implements
             mode = CHECK_IN;
         } else if (command.equals("Set check-out date")) {
             mode = CHECK_OUT;
-        } else if (command.equals("Reset")) {
+        } else if (command.equals("Reset booking fields")) {
             resetBookingScreen();
-        } else if (command.equals("Book")) {
+        } else if (command.equals("Confirm booking")) {
             submitReservation();
         }
     }

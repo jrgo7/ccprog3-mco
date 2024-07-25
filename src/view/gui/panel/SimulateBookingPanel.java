@@ -4,15 +4,12 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.Point;
 import java.util.ArrayList;
-
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
-
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
-
 import src.controller.gui.SimulateBookingCalendarListener;
 import src.controller.gui.SimulateBookingRoomListListener;
 import src.view.gui.component.BookingCalendar;
@@ -20,7 +17,9 @@ import src.view.gui.component.BookingCalendarRenderer;
 import src.view.gui.component.Calendar;
 import src.view.gui.component.RoomListPanel;
 import src.view.gui.component.StyledButton;
+import src.view.gui.component.StyledButtonFactory;
 import src.view.gui.component.StyledHTMLPane;
+import src.view.gui.component.StyledHTMLPaneContainerFactory;
 import src.view.gui.component.StyledLabel;
 import src.view.gui.component.StyledPanel;
 import src.view.gui.component.StyledRadioButton;
@@ -69,8 +68,6 @@ public class SimulateBookingPanel extends StyledPanel {
         textFieldPanel.setSize(WIDTH, HEIGHT);
         detailsPanel.add(textFieldPanel);
 
-        detailsPanel.add(new JSeparator());
-
         StyledPanel checkInOutPanel = new StyledPanel();
         checkInOutPanel.setLayout(
                 new BoxLayout(checkInOutPanel, BoxLayout.X_AXIS));
@@ -95,23 +92,17 @@ public class SimulateBookingPanel extends StyledPanel {
         bookingCalendar = new BookingCalendar();
         detailsPanel.add(bookingCalendar);
 
-        StyledPanel reservationPreviewPanel = new StyledPanel();
-        reservationPreviewPanel.setLayout(new BorderLayout());
         reservationPreview = new StyledHTMLPane(RESERVATION_PREVIEW_INITIAL_TEXT);
-        StyledScrollPane reservationScrollPane = new StyledScrollPane(
-                reservationPreview,
-                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        reservationPreviewPanel.add(reservationScrollPane, BorderLayout.CENTER);
+        StyledPanel reservationPreviewPanel = StyledHTMLPaneContainerFactory.createContainer(reservationPreview);
         detailsPanel.add(reservationPreviewPanel);
 
         StyledPanel southPanel = new StyledPanel();
         southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.X_AXIS));
 
-        bookButton = new StyledButton("Book");
+        bookButton = StyledButtonFactory.createButton("Confirm booking");
         southPanel.add(bookButton);
 
-        resetButton = new StyledButton("Reset");
+        resetButton = StyledButtonFactory.createDestructiveButton("Reset booking fields");
         southPanel.add(resetButton);
 
         detailsPanel.add(southPanel);

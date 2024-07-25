@@ -6,23 +6,23 @@ import java.awt.Point;
 import java.awt.event.ActionListener;
 import java.beans.BeanProperty;
 import java.util.ArrayList;
-
-import src.view.gui.component.StyledButton;
-import src.view.gui.component.StyledLabel;
-import src.view.gui.component.StyledPanel;
-import src.view.gui.component.StyledTabbedPane;
 import javax.swing.JTextField;
-
 import src.controller.gui.ManagePricesListener;
 import src.controller.gui.ManageReservationListener;
 import src.controller.gui.ManageRoomListener;
 import src.controller.gui.RenameHotelListener;
 import src.view.gui.component.DecimalDocument;
+import src.view.gui.component.StyledButton;
+import src.view.gui.component.StyledButtonFactory;
+import src.view.gui.component.StyledLabel;
+import src.view.gui.component.StyledPanel;
+import src.view.gui.component.StyledTabbedPane;
 import src.view.gui.subpanel.ManagePricesPanel;
 import src.view.gui.subpanel.ManageReservationsPanel;
 import src.view.gui.subpanel.ManageRoomsPanel;
 
 public class ManageHotelPanel extends StyledPanel {
+
     private StyledTabbedPane subpanels;
 
     private ManageRoomsPanel manageRoomsSubpanel;
@@ -40,7 +40,7 @@ public class ManageHotelPanel extends StyledPanel {
         this.setLayout(new BorderLayout());
 
         StyledPanel infoEditPanel = new StyledPanel();
-        infoEditPanel.setLayout(new GridLayout(3, 3));
+        infoEditPanel.setLayout(new GridLayout(2, 3));
 
         StyledLabel renameLabel = new StyledLabel("Rename hotel:");
         infoEditPanel.add(renameLabel);
@@ -48,7 +48,7 @@ public class ManageHotelPanel extends StyledPanel {
         renameHotelField = new JTextField();
         infoEditPanel.add(renameHotelField);
 
-        renameHotelButton = new StyledButton("Rename hotel");
+        renameHotelButton = StyledButtonFactory.createButton("Rename hotel");
         infoEditPanel.add(renameHotelButton);
 
         StyledLabel basePriceLabel = new StyledLabel("Update base price:");
@@ -58,11 +58,8 @@ public class ManageHotelPanel extends StyledPanel {
         basePriceField.setDocument(new DecimalDocument()); // TODO maybe a spinner; abandon DecimalDocument
         infoEditPanel.add(basePriceField);
 
-        updateBasePriceButton = new StyledButton("Update base price");
+        updateBasePriceButton = StyledButtonFactory.createButton("Update base price");
         infoEditPanel.add(updateBasePriceButton);
-
-        removeHotelButton = new StyledButton("Remove hotel");
-        infoEditPanel.add(removeHotelButton);
 
         this.add(infoEditPanel, BorderLayout.NORTH);
 
@@ -78,8 +75,14 @@ public class ManageHotelPanel extends StyledPanel {
         subpanels.add("Manage prices", managePricesSubpanel);
 
         this.add(subpanels, BorderLayout.CENTER);
-    }
 
+
+        StyledPanel removeHotelPanel = new StyledPanel();
+        removeHotelPanel.setLayout(new BorderLayout());
+        removeHotelButton = StyledButtonFactory.createDestructiveButton("Remove hotel");
+        removeHotelPanel.add(removeHotelButton, BorderLayout.WEST);
+        this.add(removeHotelPanel, BorderLayout.SOUTH);
+    }
     public String getRenameHotelText() {
         return this.renameHotelField.getText();
     }
@@ -109,7 +112,6 @@ public class ManageHotelPanel extends StyledPanel {
     }
 
     // Manage rooms subpanel
-
     public void updateRoomList(ArrayList<String> data) {
         this.manageRoomsSubpanel.updateRoomList(data);
     }
@@ -123,10 +125,12 @@ public class ManageHotelPanel extends StyledPanel {
         this.manageRoomsSubpanel.updateRoomData(data, availableDates);
     }
 
+    public void clearRoomListSelection() {
+        this.manageRoomsSubpanel.resetRoomListSelection();
+    }
+
     // Manage reservations subpanel
-
     // Manage prices subpanel
-
     public void setManagePricesCalendarText(int date, String text) {
         this.managePricesSubpanel.setCalendarText(date, text);
     }
@@ -192,7 +196,7 @@ public class ManageHotelPanel extends StyledPanel {
         return this.manageReservationsSubpanel.getSelectedIndex();
     }
 
-    public void setManageReservationVisible(boolean visible){
+    public void setManageReservationVisible(boolean visible) {
         this.manageReservationsSubpanel.setWrapperVisible(visible);
     }
 
@@ -203,7 +207,7 @@ public class ManageHotelPanel extends StyledPanel {
     public void setManageRoomPanelVisible(boolean visible) {
         this.manageRoomsSubpanel.setWrapperVisible(visible);
     }
-    
+
     public void setRemoveButtonListener(ActionListener listener) {
         this.removeHotelButton.addActionListener(listener);
     }

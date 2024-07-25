@@ -171,6 +171,10 @@ public class TopView extends JFrame {
             SimulateBookingCalendarListener bookingCalendarListener) {
         this.simulateBookingPanel.setListeners(
                 simulateBookingRoomListListener, bookingCalendarListener);
+            }
+
+    public void setTabIndex(int index) {
+        topMenuPane.setSelectedIndex(index);
     }
 
     public void setList(ArrayList<String> data) {
@@ -183,14 +187,26 @@ public class TopView extends JFrame {
 
     public void setSelectedIndex(int index) {
         this.hotelListPanel.setSelectedIndex(index);
+        this.topMenuPane.setVisible(true);
+        this.topMenuPane.setSelectedIndex(VIEW_HOTEL_TAB);
     }
 
     public void clearSelectedIndex() {
         this.hotelListPanel.clearSelection();
+        this.topMenuPane.setVisible(false);
     }
 
     public void setTopMenuPaneVisible(boolean enable) {
         this.topMenuPane.setVisible(enable);
+    }
+
+    // View hotel delegations
+    public void setHotelDataText(String text) {
+        this.viewHotelPanel.updateHotelData(text);
+    }
+
+    public void setHotelAvailabilityDataText(String text) {
+        this.viewHotelPanel.updateAvailability(text);
     }
 
     public void updateRoomList(String[] data) {
