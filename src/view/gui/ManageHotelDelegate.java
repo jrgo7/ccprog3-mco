@@ -107,4 +107,8 @@ public class ManageHotelDelegate {
     public void setManageRoomVisible(boolean visible) {
         this.manageHotelPanel.setManageRoomPanelVisible(visible);
     }
+
+    public void clearSelectedIndex() {
+        this.manageHotelPanel.clearRoomListSelection();
+    }
 }

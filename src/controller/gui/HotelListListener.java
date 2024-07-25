@@ -31,7 +31,7 @@ public class HotelListListener extends ListAddListener
 
         /* Hide panel when there are no hotels in the system */
         if (reservationSystem.getHotelCount() == 0)
-            this.view.removeHotelListSelection();
+            this.view.clearSelectedIndex();
     }
 
     /** {@inheritDoc} Equal to the number of hotels in the system. */
@@ -78,7 +78,7 @@ public class HotelListListener extends ListAddListener
                                     date)));
 
         // ! Send the new hotel index to every panel/component that needs it
-        view.setHotelListSelectedIndex(selectedIndex);
+        view.setSelectedIndex(selectedIndex);
 
         /* Changes the selected hotel index in Simulate Booking Panel */
         reservationSystem.resetReservationBuilder();
@@ -103,22 +103,22 @@ public class HotelListListener extends ListAddListener
             view.getViewHotelDelegate().setHotelAvailability("<p></p>");
             this.updateList();
             // /* Prevents the selection highlight from disappearing */
-            this.view.setHotelListSelectedIndex(selectedIndex);
+            this.view.setSelectedIndex(selectedIndex);
         } else {
             // Did not add a hotel successfully.
             if (name != null) {
                 /// User did not cancel
                 this.view.showHotelNameExistsError();
             }
-            this.view.removeHotelListSelection();
+            this.view.clearSelectedIndex();
         }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         this.reservationSystem.removeHotel(
-            this.view.getHotelListSelectedIndex());
+            this.view.getSelectedIndex());
         this.updateList();
-        this.view.removeHotelListSelection();
+        this.view.clearSelectedIndex();
     }
 }

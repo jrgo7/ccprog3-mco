@@ -40,7 +40,7 @@ public class ManageRoomListener extends RoomListListener implements ActionListen
                 reservationSystem.addRooms(hotelIndex, result[1], result[0] + 1);
                 updateList();
             } else {
-                this.view.removeManageRoomListSelection();
+                this.view.getManageHotelDelegate().clearSelectedIndex();
             }
         }
     }
@@ -72,5 +72,7 @@ public class ManageRoomListener extends RoomListListener implements ActionListen
             view.showCantRemoveRoomError();
         this.updateList();
         this.updateDataPanel(-1);
+
+        this.view.getManageHotelDelegate().setManageRoomVisible(false);
     }
 }
