@@ -192,6 +192,10 @@ public class ReservationSystem {
         return this.getHotel(hotelIndex).getRoomString(roomIndex);
     }
 
+    public boolean removeRoom(int hotelIndex, int roomIndex) {
+        return this.getHotel(hotelIndex).removeRoom(roomIndex);
+    }
+
     public int addReservation(
             int hotelIndex, String guestName, int checkIn, int checkOut,
             int roomIndex, String discountCode) {

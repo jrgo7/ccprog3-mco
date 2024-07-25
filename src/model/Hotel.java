@@ -326,7 +326,8 @@ public class Hotel {
     public boolean removeRoom(int roomIndex) {
         if (this.rooms.get(roomIndex).getReservationCount() > 0
                 || roomIndex < 0
-                || roomIndex >= this.rooms.size())
+                || roomIndex >= this.rooms.size()
+                || this.rooms.size() <= 1)
             return false;
 
         this.rooms.remove(roomIndex);

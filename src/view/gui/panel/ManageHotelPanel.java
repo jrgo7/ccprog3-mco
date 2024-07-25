@@ -30,12 +30,13 @@ public class ManageHotelPanel extends StyledPanel {
     private JTextField basePriceField;
     private StyledButton renameHotelButton;
     private StyledButton updateBasePriceButton;
+    private StyledButton removeHotelButton;
 
     public ManageHotelPanel() {
         this.setLayout(new BorderLayout());
 
         StyledPanel infoEditPanel = new StyledPanel();
-        infoEditPanel.setLayout(new GridLayout(2, 3));
+        infoEditPanel.setLayout(new GridLayout(3, 3));
 
         StyledLabel renameLabel = new StyledLabel("Rename hotel:");
         infoEditPanel.add(renameLabel);
@@ -55,6 +56,9 @@ public class ManageHotelPanel extends StyledPanel {
 
         updateBasePriceButton = new StyledButton("Update base price");
         infoEditPanel.add(updateBasePriceButton);
+
+        removeHotelButton = new StyledButton("Remove hotel");
+        infoEditPanel.add(removeHotelButton);
 
         this.add(infoEditPanel, BorderLayout.NORTH);
 
@@ -110,6 +114,7 @@ public class ManageHotelPanel extends StyledPanel {
 
     public void setManageRoomListener(ManageRoomListener manageRoomListener) {
         this.manageRoomsSubpanel.setRoomListListener(manageRoomListener);
+        this.manageRoomsSubpanel.setRemoveButtonListener(manageRoomListener);
     }
 
     public void updateRoomData(String data, ArrayList<Integer> availableDates) {
@@ -187,5 +192,17 @@ public class ManageHotelPanel extends StyledPanel {
 
     public void setManageReservationVisible(boolean visible){
         this.manageReservationsSubpanel.setWrapperVisible(visible);
+    }
+
+    public int getManageRoomSelectedIndex() {
+        return this.manageRoomsSubpanel.getViewRoomSelectedIndex();
+    }
+
+    public void setManageRoomPanelVisible(boolean visible) {
+        this.manageRoomsSubpanel.setWrapperVisible(visible);
+    }
+    
+    public void setRemoveButtonListener(ActionListener listener) {
+        this.removeHotelButton.addActionListener(listener);
     }
 }

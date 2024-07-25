@@ -1,10 +1,12 @@
 package src.controller.gui;
 
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+
 import src.model.ReservationSystem;
 import src.view.gui.TopView;
 import src.view.gui.subpanel.ManageRoomsPanel;
-
-import java.util.ArrayList;
 
 /**
  * Represents an event listener that handles actions received by a
@@ -12,7 +14,7 @@ import java.util.ArrayList;
  * 
  * @see ListAddListener
  */
-public class ManageRoomListener extends RoomListListener {
+public class ManageRoomListener extends RoomListListener implements ActionListener {
     /** Initializes the listener and updates the list */
     public ManageRoomListener(ReservationSystem reservationSystem,
             TopView view) {
@@ -53,4 +55,21 @@ public class ManageRoomListener extends RoomListListener {
         else if (selectedIndex >= 0)
             this.updateDataPanel(selectedIndex);
     };
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        int roomIndex = view.getManageRoomSelectedIndex();
+        int hotelIndex = view.getHotelListSelectedIndex();
+
+        if (roomIndex < 0 || hotelIndex < 0)
+            return;
+
+            System.out.println(roomIndex);
+        
+        
+        if (!this.reservationSystem.removeRoom(hotelIndex, roomIndex))
+            view.showCantRemoveRoomError();    
+        this.updateList();
+        this.updateDataPanel(-1);
+    }
 }

@@ -43,8 +43,10 @@ public class RoomListListener extends ListAddListener {
     @Override
     protected void updateDataPanel(int selectedIndex) {
         /* Exit if selected index is invalid */
-        if (selectedIndex < 0)
+        if (selectedIndex < 0) {
+            this.view.setManageRoomVisible(false);
             return;
+        }
 
         int hotelIndex = view.getHotelListSelectedIndex();
 
