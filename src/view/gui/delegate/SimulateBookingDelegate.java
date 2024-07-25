@@ -6,6 +6,10 @@ import java.util.ArrayList;
 import src.view.gui.component.BookingCalendarRenderer;
 import src.view.gui.panel.SimulateBookingPanel;
 
+/**
+ * Represents a delegate class that assists {@link TopView} in passing data to
+ * its composite {@link SimulateBookingPanel}.
+ */
 public class SimulateBookingDelegate {
     private SimulateBookingPanel simulateBookingPanel;
 

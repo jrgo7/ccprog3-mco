@@ -1,6 +1,7 @@
 package src.controller.gui;
 
 import java.awt.event.MouseEvent;
+
 import src.model.ReservationSystem;
 import src.view.gui.TopView;
 import src.view.gui.component.Calendar;
@@ -13,7 +14,8 @@ import src.view.gui.component.Calendar;
 public class HotelAvailabilityCalendarListener extends CalendarListener {
 
     /** Initialize this listener. */
-    public HotelAvailabilityCalendarListener(ReservationSystem reservationSystem,
+    public HotelAvailabilityCalendarListener(
+            ReservationSystem reservationSystem,
             TopView view) {
         super(reservationSystem, view);
     }
@@ -26,7 +28,8 @@ public class HotelAvailabilityCalendarListener extends CalendarListener {
             return; // Block invalid input
         }
 
-        boolean isOneRoom = reservationSystem.getAvailableRoomCount(index, date) == 1;
+        boolean isOneRoom = reservationSystem.getAvailableRoomCount(index,
+                date) == 1;
         view.getViewHotelDelegate().setHotelAvailability(
                 String.format("""
                         <h2>Day %d</h2>
@@ -35,7 +38,8 @@ public class HotelAvailabilityCalendarListener extends CalendarListener {
                         <li>Rooms available: %d room%s.</li>
                         </ul>""",
                         date,
-                        reservationSystem.getReservationCountOnDate(index, date, false),
+                        reservationSystem.getReservationCountOnDate(index, date,
+                                false),
                         reservationSystem.getAvailableRoomCount(index, date),
                         isOneRoom ? "" : "s"));
     }
@@ -72,8 +76,10 @@ public class HotelAvailabilityCalendarListener extends CalendarListener {
 
     @Override
     protected void setRowAndCol(MouseEvent e) {
-        this.setRow(view.getViewHotelDelegate().getAvailabilityCalendarRowFromMouse(e.getPoint()));
-        this.setCol(view.getViewHotelDelegate().getAvailabilityCalendarColFromMouse(e.getPoint()));
+        this.setRow(view.getViewHotelDelegate()
+                .getAvailabilityCalendarRowFromMouse(e.getPoint()));
+        this.setCol(view.getViewHotelDelegate()
+                .getAvailabilityCalendarColFromMouse(e.getPoint()));
     }
 
 }

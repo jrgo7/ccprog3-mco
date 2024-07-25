@@ -90,8 +90,8 @@ public abstract class CalendarListener
     protected abstract void setRowAndCol(MouseEvent e);
 
     /**
-     * Handle selecting a cell in {@code (row, col)} of the {@link Calendar}
-     * via a keyboard event (arrow key selection)
+     * Handle selecting a cell in {@code (row, col)} of the {@link Calendar} via
+     * a keyboard event (arrow key selection)
      * 
      * @param row the {@link Calendar} row associated with the current action
      * @param col the {@link Calendar} column associated with the current action
@@ -99,8 +99,8 @@ public abstract class CalendarListener
     protected abstract void handleSelected(int row, int col);
 
     /**
-     * Handle selecting a cell in {@code (row, col)} of the {@link Calendar}
-     * via a mouse click.
+     * Handle selecting a cell in {@code (row, col)} of the {@link Calendar} via
+     * a mouse click.
      * 
      * @param row the {@link Calendar} row associated with the current action
      * @param col the {@link Calendar} column associated with the current action
@@ -108,8 +108,8 @@ public abstract class CalendarListener
     protected abstract void handleClicked(int row, int col);
 
     /**
-     * Handle selecting a cell in {@code (row, col)} of the {@link Calendar}
-     * via a mouse release
+     * Handle selecting a cell in {@code (row, col)} of the {@link Calendar} via
+     * a mouse release
      * 
      * @param row the {@link Calendar} row associated with the current action
      * @param col the {@link Calendar} column associated with the current action
@@ -117,8 +117,8 @@ public abstract class CalendarListener
     protected abstract void handleReleased(int row, int col);
 
     /**
-     * Handle selecting a cell in {@code (row, col)} of the {@link Calendar}
-     * via a mouse drag.
+     * Handle selecting a cell in {@code (row, col)} of the {@link Calendar} via
+     * a mouse drag.
      * 
      * @param row the {@link Calendar} row associated with the current action
      * @param col the {@link Calendar} column associated with the current action
@@ -126,8 +126,8 @@ public abstract class CalendarListener
     protected abstract void handleDragged(int row, int col);
 
     /**
-     * Handle selecting a cell in {@code (row, col)} of the {@link Calendar}
-     * via a mouse move.
+     * Handle selecting a cell in {@code (row, col)} of the {@link Calendar} via
+     * a mouse move.
      * 
      * @param row the {@link Calendar} row associated with the current action
      * @param col the {@link Calendar} column associated with the current action
@@ -135,8 +135,7 @@ public abstract class CalendarListener
     protected abstract void handleMoved(int row, int col);
 
     /**
-     * Handle what happens when a mouse drags from the Calendar
-     * to outside it.
+     * Handle what happens when a mouse drags from the Calendar to outside it.
      * 
      * @param row the {@link Calendar} row associated with the current action
      * @param col the {@link Calendar} column associated with the current action
@@ -144,8 +143,8 @@ public abstract class CalendarListener
     protected abstract void handleReleasedOutsideComponent();
 
     /**
-     * When a key is pressed, adjust the current selection position.
-     * Enter and Tab keys are ignored for simplicity.
+     * When a key is pressed, adjust the current selection position. Enter and
+     * Tab keys are ignored for simplicity.
      */
     @Override
     public void keyPressed(KeyEvent e) {
@@ -154,26 +153,26 @@ public abstract class CalendarListener
             e.consume(); // prevent ENTER, TAB keys
         } else {
             switch (e.getKeyCode()) {
-                case KeyEvent.VK_LEFT:
-                case KeyEvent.VK_KP_LEFT:
-                    col = Math.max(col - 1, 0);
-                    handleSelected(row, col);
-                    break;
-                case KeyEvent.VK_RIGHT:
-                case KeyEvent.VK_KP_RIGHT:
-                    col = Math.min(col + 1, Calendar.MAX_COLS - 1);
-                    handleSelected(row, col);
-                    break;
-                case KeyEvent.VK_UP:
-                case KeyEvent.VK_KP_UP:
-                    row = Math.max(row - 1, 0);
-                    handleSelected(row, col);
-                    break;
-                case KeyEvent.VK_DOWN:
-                case KeyEvent.VK_KP_DOWN:
-                    row = Math.min(row + 1, Calendar.MAX_ROWS - 1);
-                    handleSelected(row, col);
-                    break;
+            case KeyEvent.VK_LEFT:
+            case KeyEvent.VK_KP_LEFT:
+                col = Math.max(col - 1, 0);
+                handleSelected(row, col);
+                break;
+            case KeyEvent.VK_RIGHT:
+            case KeyEvent.VK_KP_RIGHT:
+                col = Math.min(col + 1, Calendar.MAX_COLS - 1);
+                handleSelected(row, col);
+                break;
+            case KeyEvent.VK_UP:
+            case KeyEvent.VK_KP_UP:
+                row = Math.max(row - 1, 0);
+                handleSelected(row, col);
+                break;
+            case KeyEvent.VK_DOWN:
+            case KeyEvent.VK_KP_DOWN:
+                row = Math.min(row + 1, Calendar.MAX_ROWS - 1);
+                handleSelected(row, col);
+                break;
             }
         }
     }

@@ -20,8 +20,9 @@ public class SimulateBookingRoomListListener extends RoomListListener {
         view.getSimulateBookingDelegate().setBookingCalendarAvailability(
                 reservationSystem.getAvailableDatesForRoom(hotelIndex, index));
         view.getSimulateBookingDelegate().setBookingDetailsVisible(true);
-        view.setReservationList(reservationSystem.getReservationNames(hotelIndex));
-        
+        view.setReservationList(
+                reservationSystem.getReservationNames(hotelIndex));
+
         /* Changes the selected room index in Simulate Booking Panel */
         reservationSystem.getReservationBuilder().setRoomIndex(index);
     }

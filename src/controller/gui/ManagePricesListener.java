@@ -11,8 +11,8 @@ import src.view.gui.TopView;
 import src.view.gui.component.Calendar;
 
 /**
- * An extended {@link CalendarListener} meant to respond to events
- * on the Manage Prices Panel.
+ * An extended {@link CalendarListener} meant to respond to events on the Manage
+ * Prices Panel.
  */
 public class ManagePricesListener extends CalendarListener
         implements ActionListener {
@@ -59,9 +59,11 @@ public class ManagePricesListener extends CalendarListener
     }
 
     private void handlePressEnterKey(int row, int col) {
-        if (view.getManageHotelDelegate().getIsUpdatePriceModifierFieldFocused()) {
+        if (view.getManageHotelDelegate()
+                .getIsUpdatePriceModifierFieldFocused()) {
             updatePriceModifier();
-        } else if (view.getManageHotelDelegate().getIsUpdateBasePriceFieldFocused()) {
+        } else if (view.getManageHotelDelegate()
+                .getIsUpdateBasePriceFieldFocused()) {
             updateBasePrice();
         }
     }
@@ -103,36 +105,38 @@ public class ManagePricesListener extends CalendarListener
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
-            case "Update base price":
-                updateBasePrice();
-                break;
-            case "Update price modifier":
-                updatePriceModifier();
-                break;
+        case "Update base price":
+            updateBasePrice();
+            break;
+        case "Update price modifier":
+            updatePriceModifier();
+            break;
         }
     }
 
     public void updateBasePrice() {
         int index = view.getSelectedIndex();
-        double newBasePrice = Double.parseDouble(view.getManageHotelDelegate().getUpdateBasePriceFieldText());
+        double newBasePrice = Double.parseDouble(
+                view.getManageHotelDelegate().getUpdateBasePriceFieldText());
         int result = reservationSystem.setBasePrice(index, newBasePrice);
         switch (result) {
-            case Hotel.SET_BASE_PRICE_SUCCESS:
-                setModifiedPriceText();
-                break;
-            case Hotel.SET_BASE_PRICE_ERROR_LESS_THAN_MIN:
-                view.basePriceUpdateLessThanMinimumError();
-                break;
-            case Hotel.SET_BASE_PRICE_ERROR_RESERVATIONS_EXIST:
-                view.basePriceUpdateReservationsExistError();
-                break;
+        case Hotel.SET_BASE_PRICE_SUCCESS:
+            setModifiedPriceText();
+            break;
+        case Hotel.SET_BASE_PRICE_ERROR_LESS_THAN_MIN:
+            view.basePriceUpdateLessThanMinimumError();
+            break;
+        case Hotel.SET_BASE_PRICE_ERROR_RESERVATIONS_EXIST:
+            view.basePriceUpdateReservationsExistError();
+            break;
         }
     }
 
     public void updatePriceModifier() {
         int date = this.getDate();
         int index = view.getSelectedIndex();
-        double newModifier = Double.parseDouble(view.getManageHotelDelegate().getPriceModifierFieldText());
+        double newModifier = Double.parseDouble(
+                view.getManageHotelDelegate().getPriceModifierFieldText());
         if (reservationSystem.setPriceModifier(index, date, newModifier)) {
             view.getManageHotelDelegate().setManagePricesCalendarText(
                     date, String.format("%d: %.2f", date, newModifier));
@@ -145,7 +149,9 @@ public class ManagePricesListener extends CalendarListener
 
     @Override
     protected void setRowAndCol(MouseEvent e) {
-        setRow(view.getManageHotelDelegate().getPriceModifierCalendarRowFromMouse(e.getPoint()));
-        setCol(view.getManageHotelDelegate().getPriceModifierCalendarColFromMouse(e.getPoint()));
+        setRow(view.getManageHotelDelegate()
+                .getPriceModifierCalendarRowFromMouse(e.getPoint()));
+        setCol(view.getManageHotelDelegate()
+                .getPriceModifierCalendarColFromMouse(e.getPoint()));
     }
 }

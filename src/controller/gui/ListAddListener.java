@@ -64,10 +64,13 @@ public abstract class ListAddListener implements ListSelectionListener {
         if (e.getValueIsAdjusting())
             return;
 
+        /*
+         * TODO: Unsure if ListSelectionModel does funny stuff with the
+         * selection index. Might be better to fetch it from the view
+         */
         ListSelectionModel lsm = (ListSelectionModel) e.getSource();
         int selectedIndex = lsm.getMinSelectionIndex();
 
         this.handleValueChanged(selectedIndex);
-        //this.updateList();
     }
 }

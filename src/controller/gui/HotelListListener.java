@@ -117,7 +117,7 @@ public class HotelListListener extends ListAddListener
     @Override
     public void actionPerformed(ActionEvent e) {
         this.reservationSystem.removeHotel(
-            this.view.getSelectedIndex());
+                this.view.getSelectedIndex());
         this.updateList();
         this.view.clearSelectedIndex();
     }

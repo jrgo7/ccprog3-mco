@@ -15,7 +15,8 @@ import src.view.gui.component.Calendar;
  * An extension of {@link CalendarListener} with functionality to handle
  * selecting check-in and check-out dates.
  */
-public class SimulateBookingCalendarListener extends CalendarListener implements ActionListener {
+public class SimulateBookingCalendarListener extends CalendarListener
+        implements ActionListener {
     static final private int CHECK_IN = 0;
     static final private int CHECK_OUT = 1;
     private int mode = CHECK_IN;
@@ -30,17 +31,21 @@ public class SimulateBookingCalendarListener extends CalendarListener implements
      * Update the reservation preview.
      */
     public void updateReservationPreview() {
-        view.getSimulateBookingDelegate().updateSimulateBookingReservationPreview(
-                reservationSystem.getReservationBuilderString());
+        view.getSimulateBookingDelegate()
+                .updateSimulateBookingReservationPreview(
+                        reservationSystem.getReservationBuilderString());
 
         view.getSimulateBookingDelegate().setBookingCalendarAvailability(
                 reservationSystem.getAvailableDatesForRoom(
                         view.getSelectedIndex(),
-                        view.getSimulateBookingDelegate().getBookingRoomIndex()));
+                        view.getSimulateBookingDelegate()
+                                .getBookingRoomIndex()));
 
         ReservationBuilder builder = reservationSystem.getReservationBuilder();
-        view.getSimulateBookingDelegate().setBookingCalendarCheckIn(builder.getCheckIn());
-        view.getSimulateBookingDelegate().setBookingCalendarCheckOut(builder.getCheckOut());
+        view.getSimulateBookingDelegate()
+                .setBookingCalendarCheckIn(builder.getCheckIn());
+        view.getSimulateBookingDelegate()
+                .setBookingCalendarCheckOut(builder.getCheckOut());
     }
 
     private void resetBookingScreen() {
@@ -68,37 +73,39 @@ public class SimulateBookingCalendarListener extends CalendarListener implements
         int result = reservationSystem.addReservation(
                 reservationSystem.getReservationBuilder());
         switch (result) {
-            case Hotel.RESERVATION_SUCCESS:
-                view.showReservationSuccess();
-                view.setReservationList(
-                        reservationSystem.getReservationNames(hotelIndex));
-                resetBookingScreen();
-                break;
-            case Hotel.RESERVATION_ERROR_INVALID_TIME:
-                view.showReservationError("Invalid time chosen.");
-                break;
-            case Hotel.RESERVATION_ERROR_INVALID_ROOM:
-                view.showReservationError("Invalid room chosen.");
-                break;
-            case Hotel.RESERVATION_ERROR_UNAVAILABLE_ROOM:
-                view.showReservationError("Room chosen is unavailable.");
-                break;
-            case Hotel.RESERVATION_ERROR_INVALID_DISCOUNT_CODE:
-                view.showReservationError(
-                        "Discount code \"" +
-                                reservationSystem
-                                        .getReservationBuilder().getDiscountCode()
-                                +
-                                "\" is invalid.");
-                break;
+        case Hotel.RESERVATION_SUCCESS:
+            view.showReservationSuccess();
+            view.setReservationList(
+                    reservationSystem.getReservationNames(hotelIndex));
+            resetBookingScreen();
+            break;
+        case Hotel.RESERVATION_ERROR_INVALID_TIME:
+            view.showReservationError("Invalid time chosen.");
+            break;
+        case Hotel.RESERVATION_ERROR_INVALID_ROOM:
+            view.showReservationError("Invalid room chosen.");
+            break;
+        case Hotel.RESERVATION_ERROR_UNAVAILABLE_ROOM:
+            view.showReservationError("Room chosen is unavailable.");
+            break;
+        case Hotel.RESERVATION_ERROR_INVALID_DISCOUNT_CODE:
+            view.showReservationError(
+                    "Discount code \"" +
+                            reservationSystem
+                                    .getReservationBuilder().getDiscountCode()
+                            +
+                            "\" is invalid.");
+            break;
         }
     }
 
     /** {@inheritDoc} */
     @Override
     protected void setRowAndCol(MouseEvent e) {
-        this.setRow(view.getSimulateBookingDelegate().getBookingCalendarRowFromMouse(e.getPoint()));
-        this.setCol(view.getSimulateBookingDelegate().getBookingCalendarColFromMouse(e.getPoint()));
+        this.setRow(view.getSimulateBookingDelegate()
+                .getBookingCalendarRowFromMouse(e.getPoint()));
+        this.setCol(view.getSimulateBookingDelegate()
+                .getBookingCalendarColFromMouse(e.getPoint()));
     }
 
     /** {@inheritDoc} */
@@ -165,8 +172,10 @@ public class SimulateBookingCalendarListener extends CalendarListener implements
     public void keyReleased(KeyEvent e) {
         ReservationBuilder builder = reservationSystem.getReservationBuilder();
         if (!view.getSimulateBookingDelegate().getIsBookingCalendarFocused()) {
-            builder.setGuestName(view.getSimulateBookingDelegate().getBookingGuestName());
-            builder.setDiscountCode(view.getSimulateBookingDelegate().getBookingDiscountCode());
+            builder.setGuestName(
+                    view.getSimulateBookingDelegate().getBookingGuestName());
+            builder.setDiscountCode(
+                    view.getSimulateBookingDelegate().getBookingDiscountCode());
             this.updateReservationPreview();
         }
     }

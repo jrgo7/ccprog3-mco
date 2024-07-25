@@ -1,29 +1,40 @@
 package src.controller.gui;
 
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.util.ArrayList;
+import java.awt.event.ActionListener;
 
+import src.model.Hotel;
 import src.model.ReservationSystem;
 import src.view.gui.TopView;
-import src.view.gui.subpanel.ManageRoomsPanel;
+import src.view.gui.panel.ManageHotelPanel;
 
 /**
- * Represents an event listener that handles actions received by a
- * {@link ManageRoomsPanel}.
- * 
- * @see ListAddListener
+ * Extends the functions of {@link RoomListListener} to listen to events from a
+ * {@link ManageHotelPanel}.
  */
-public class ManageRoomListener extends RoomListListener implements ActionListener {
+public class ManageRoomListener extends RoomListListener
+        implements ActionListener {
     /** Initializes the listener and updates the list */
     public ManageRoomListener(ReservationSystem reservationSystem,
             TopView view) {
         super(reservationSystem, view);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc} Adds a room to the selected hotel. Note that a hotel can
+     * only have a maximum of 50 rooms at once.
+     * 
+     * @see ReservationSystem#addRooms(int, int, int)
+     * @see Hotel#addRooms(int, int)
+     * @see TopView#promptAddRoom(int)
+     */
     @Override
     protected void addToList(int selectedIndex) {
+        /*
+         * TODO: Maybe remove selectedIndex parameter here and instead fetch it
+         * from View? Not sure if ListSelectionModel does some funny things with
+         * the selection index
+         */
         /* Exit if selected index is invalid */
         int hotelIndex = this.view.getSelectedIndex();
         if (hotelIndex < 0)
@@ -37,19 +48,20 @@ public class ManageRoomListener extends RoomListListener implements ActionListen
             /* Result is returned as an integer array `{amount, type}` */
             int[] result = view.promptAddRoom(limit);
             if (result[0] != -1) {
-                reservationSystem.addRooms(hotelIndex, result[1], result[0] + 1);
+                reservationSystem.addRooms(hotelIndex, result[1],
+                        result[0] + 1);
                 updateList();
             } else {
-                this.view.getManageHotelDelegate().clearSelectedIndex();
+                /* The user cancelled */
+                this.view.getManageHotelDelegate().clearSelectedRoomIndex();
             }
         }
     }
 
-    @Override
-    protected void updateDataPanelData(String data, ArrayList<Integer> availableDates) {
-        this.view.getManageHotelDelegate().updateManageRoomData(data, availableDates);
-    }
-
+    /**
+     * {@inheritDoc} If the new selection is the last index, then the
+     * {@code Add hotel...} option was selected.
+     */
     @Override
     protected void handleValueChanged(int selectedIndex) {
         if (selectedIndex == this.getListLength())
@@ -58,11 +70,21 @@ public class ManageRoomListener extends RoomListListener implements ActionListen
             this.updateDataPanel(selectedIndex);
     };
 
+    /**
+     * {@inheritDoc} Corresponds to the button for removing a room being
+     * clicked. Note that a hotel is required to always have at least one room.
+     * 
+     * @see ReservationSystem#removeRoom(int, int)
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         int roomIndex = view.getManageHotelDelegate().getSelectedRoomIndex();
         int hotelIndex = view.getSelectedIndex();
 
+        /*
+         * This normally cannot happen as the panel is hidden when there is no
+         * selection. TODO: Remove?
+         */
         if (roomIndex < 0 || hotelIndex < 0)
             return;
 
@@ -70,9 +92,11 @@ public class ManageRoomListener extends RoomListListener implements ActionListen
 
         if (!this.reservationSystem.removeRoom(hotelIndex, roomIndex))
             view.showCantRemoveRoomError();
-        this.updateList();
-        this.updateDataPanel(-1);
 
+        this.updateList();
+
+        /* Always clear selection and hide panel afterwards */
+        this.view.getManageHotelDelegate().clearSelectedRoomIndex();
         this.view.getManageHotelDelegate().setManageRoomVisible(false);
     }
 }

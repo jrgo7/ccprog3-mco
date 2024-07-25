@@ -6,6 +6,13 @@ import java.util.Arrays;
 
 import src.view.gui.panel.ManageHotelPanel;
 
+/* TODO: Javadoc. めんどくさい。したくない。 */
+/* TODO: Should this be split into more delegate classes lmfao */
+
+/**
+ * Represents a delegate class that assists {@link TopView} in passing data to
+ * its composite {@link ManageHotelPanel}.
+ */
 public class ManageHotelDelegate {
     private ManageHotelPanel manageHotelPanel;
 
@@ -13,10 +20,44 @@ public class ManageHotelDelegate {
         this.manageHotelPanel = manageHotelPanel;
     }
 
+    /* Edit hotel data panel */
+
+    public String getRenameHotelFieldText() {
+        return this.manageHotelPanel.getRenameHotelFieldText();
+    }
+
+    public void setRenameHotelFieldText(String name) {
+        this.manageHotelPanel.setRenameHotelFieldText(name);
+    }
+
+    public String getUpdateBasePriceFieldText() {
+        return this.manageHotelPanel.getUpdateBasePriceFieldText();
+    }
+
+    public void setUpdateBasePriceFieldText(String basePrice) {
+        this.manageHotelPanel.setUpdateBasePriceFieldText(basePrice);
+    }
+
+    /* Manage rooms panel */
+
     public void updateManageRoomData(String data,
             ArrayList<Integer> availableDates) {
         this.manageHotelPanel.setRoomData(data, availableDates);
     }
+
+    public int getSelectedRoomIndex() {
+        return this.manageHotelPanel.getSelectedRoomIndex();
+    }
+
+    public void setManageRoomVisible(boolean visible) {
+        this.manageHotelPanel.setRoomDataVisible(visible);
+    }
+
+    public void clearSelectedRoomIndex() {
+        this.manageHotelPanel.clearRoomListSelection();
+    }
+
+    /* Manage reservations subpanel */
 
     public void setReservationList(String[] data) {
         ArrayList<String> dataAsList = new ArrayList<>(Arrays.asList(data));
@@ -35,31 +76,7 @@ public class ManageHotelDelegate {
         this.manageHotelPanel.setReservationDataVisible(visible);
     }
 
-    // Manage hotel delegations
-
-    public int getSelectedRoomIndex() {
-        return this.manageHotelPanel.getSelectedRoomIndex();
-    }
-
-    public void setManageHotelReservationData(String data) {
-        this.manageHotelPanel.setReservationData(data);
-    }
-
-    public String getRenameHotelFieldText() {
-        return this.manageHotelPanel.getRenameHotelFieldText();
-    }
-
-    public void setRenameHotelFieldText(String name) {
-        this.manageHotelPanel.setRenameHotelFieldText(name);
-    }
-
-    public String getUpdateBasePriceFieldText() {
-        return this.manageHotelPanel.getUpdateBasePriceFieldText();
-    }
-
-    public void setUpdateBasePriceFieldText(String basePrice) {
-        this.manageHotelPanel.setUpdateBasePriceFieldText(basePrice);
-    }
+    /* Manage prices subpanel */
 
     public void setManagePricesCalendarText(int date, String text) {
         this.manageHotelPanel.setManagePricesCalendarText(date, text);
@@ -103,13 +120,5 @@ public class ManageHotelDelegate {
 
     public boolean getIsUpdateBasePriceFieldFocused() {
         return this.manageHotelPanel.getIsUpdateBasePriceFieldFocused();
-    }
-
-    public void setManageRoomVisible(boolean visible) {
-        this.manageHotelPanel.setRoomDataVisible(visible);
-    }
-
-    public void clearSelectedIndex() {
-        this.manageHotelPanel.clearRoomListSelection();
     }
 }

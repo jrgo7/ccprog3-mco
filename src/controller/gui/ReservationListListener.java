@@ -20,11 +20,11 @@ public class ReservationListListener extends ListAddListener {
 
         view.setReservationList(
                 reservationSystem.getReservationNames(hotelIndex));
-
-        this.view.getManageHotelDelegate().setReservationDataVisible(reservationSystem.getReservationCount(hotelIndex) > 0);
     }
 
-    /** {@inheritDoc} Equal to the number of rooms in the selected hotel. */
+    /**
+     * {@inheritDoc} Equal to the number of reservations in the selected hotel.
+     */
     @Override
     protected int getListLength() {
         /* Exit if selected index is invalid */
@@ -35,25 +35,34 @@ public class ReservationListListener extends ListAddListener {
         return reservationSystem.getReservationCount(hotelIndex);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc} Always updates the data panel as there is no option to add
+     * a reservation embedded within the list.
+     */
     @Override
     protected void handleValueChanged(int selectedIndex) {
         this.updateDataPanel(selectedIndex);
-        this.updateList();
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc} Displays a string representation of the reservation data.
+     * 
+     * @see ReservationSystem#getReservationString(int, int)
+     */
     @Override
     protected void updateDataPanel(int selectedIndex) {
-        /* Exit if selected index is invalid */
-        if (selectedIndex < 0)
+        /* Exit and hide the panel if there is no selection */
+        if (selectedIndex < 0) {
+            this.view.getManageHotelDelegate().setReservationDataVisible(false);
             return;
+        }
 
+        /* Show the panel */
+        this.view.getManageHotelDelegate().setReservationDataVisible(true);
+
+        /* TODO: Is a check for < 0 necessary here? */
         int hotelIndex = view.getSelectedIndex();
-
-        if (hotelIndex < 0)
-            hotelIndex = 0;
-        this.view.getViewHotelDelegate().setReservationData(
+        this.view.getManageHotelDelegate().setManageReservationData(
                 reservationSystem.getReservationString(hotelIndex,
                         selectedIndex));
     }

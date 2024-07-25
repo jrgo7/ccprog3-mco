@@ -34,15 +34,15 @@ import src.view.gui.component.HotelListPanel;
 import src.view.gui.component.StyledLabel;
 import src.view.gui.component.StyledPanel;
 import src.view.gui.component.StyledTabbedPane;
+import src.view.gui.delegate.ManageHotelDelegate;
+import src.view.gui.delegate.SimulateBookingDelegate;
+import src.view.gui.delegate.ViewHotelDelegate;
 import src.view.gui.panel.ManageHotelPanel;
 import src.view.gui.panel.SimulateBookingPanel;
 import src.view.gui.panel.ViewHotelPanel;
 
-/**
- * Represents the top menu in the application's GUI.
- */
+/** Represents the top menu in the application's GUI. */
 public class TopView extends JFrame {
-
     static public final int VIEW_HOTEL_TAB = 0;
     static public final int MANAGE_HOTEL_TAB = 1;
     static public final int SIMULATE_BOOKING_TAB = 2;
@@ -57,53 +57,17 @@ public class TopView extends JFrame {
     private SimulateBookingDelegate simulateBookingDelegate;
     private ViewHotelDelegate viewHotelDelegate;
 
-    public ManageHotelDelegate getManageHotelDelegate() {
-        return manageHotelDelegate;
-    }
-    
-    public SimulateBookingDelegate getSimulateBookingDelegate()  {
-        return simulateBookingDelegate;
-    }
-
-    public ViewHotelDelegate getViewHotelDelegate() {
-        return viewHotelDelegate;
-    }
-    public int getTabIndex() {
-        return topMenuPane.getSelectedIndex();
-    }
-
     public TopView() {
         super("Hotel Reservation System");
+        this.initializeWindow();
 
-        // Global styling
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (ClassNotFoundException | IllegalAccessException
-                | InstantiationException | UnsupportedLookAndFeelException e) {
-            System.err.println("Unable to configure look and feel.");
-        }
-        UIManager.put(
-                "TabbedPane.contentBorderInsets",
-                new Insets(0, 0, 0, 0));
-
-        // Window manager
-        this.setLocationByPlatform(true);
-        Dimension systemResolution = Toolkit.getDefaultToolkit()
-                .getScreenSize();
-        this.setMinimumSize(new Dimension(
-                (int) (systemResolution.getWidth() / 2),
-                (int) (systemResolution.getHeight() / 1.1)));
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        // Component building
         this.setLayout(new BorderLayout());
 
         StyledPanel paddingPanel = new StyledPanel();
         paddingPanel.setLayout(new BorderLayout());
         paddingPanel.setBorder(BorderFactory.createEmptyBorder());
 
-        topMenuPane = new StyledTabbedPane();
-
-        // Hotel list panel
+        /* Hotel list panel */
         hotelListPanel = new HotelListPanel(this.getWidth() / 4);
         hotelListPanel.setBackground(ColorCollection.BACKGROUND_COMPLEMENT);
         hotelListPanel
@@ -111,13 +75,19 @@ public class TopView extends JFrame {
 
         paddingPanel.add(hotelListPanel, BorderLayout.WEST);
 
+        /* Subpanels */
+        topMenuPane = new StyledTabbedPane();
+
+        /* View hotel subpanel */
         viewHotelPanel = new ViewHotelPanel();
         topMenuPane.addTab("View hotel", viewHotelPanel);
         topMenuPane.setBackgroundAt(0, Color.RED);
 
+        /* Manage hotel subpanel */
         manageHotelPanel = new ManageHotelPanel();
         topMenuPane.addTab("Manage hotel", manageHotelPanel);
 
+        /* Simulate booking subpanel */
         simulateBookingPanel = new SimulateBookingPanel();
         topMenuPane.addTab("Simulate booking", simulateBookingPanel);
 
@@ -131,6 +101,46 @@ public class TopView extends JFrame {
         viewHotelDelegate = new ViewHotelDelegate(viewHotelPanel);
         simulateBookingDelegate = new SimulateBookingDelegate(
                 simulateBookingPanel);
+    }
+
+    public void setGlobalLookAndFeel() {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException | IllegalAccessException
+                | InstantiationException | UnsupportedLookAndFeelException e) {
+            System.err.println("Unable to configure look and feel.");
+        }
+        UIManager.put(
+                "TabbedPane.contentBorderInsets",
+                new Insets(0, 0, 0, 0));
+    }
+
+    public void initializeWindow() {
+        this.setGlobalLookAndFeel();
+        this.setLocationByPlatform(true);
+
+        Dimension systemResolution = Toolkit.getDefaultToolkit()
+                .getScreenSize();
+        this.setMinimumSize(new Dimension(
+                (int) (systemResolution.getWidth() / 2),
+                (int) (systemResolution.getHeight() / 1.1)));
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+    }
+
+    public int getTabIndex() {
+        return topMenuPane.getSelectedIndex();
+    }
+
+    public ManageHotelDelegate getManageHotelDelegate() {
+        return manageHotelDelegate;
+    }
+
+    public SimulateBookingDelegate getSimulateBookingDelegate() {
+        return simulateBookingDelegate;
+    }
+
+    public ViewHotelDelegate getViewHotelDelegate() {
+        return viewHotelDelegate;
     }
 
     public void setTopViewHotelListListener(
@@ -161,7 +171,6 @@ public class TopView extends JFrame {
         this.manageHotelPanel.setManageRoomsListener(manageRoomListener);
         this.manageHotelPanel
                 .setManageReservationsListener(manageReservationListener);
-
     }
 
     public void setSimulateBookingListeners(
@@ -169,7 +178,7 @@ public class TopView extends JFrame {
             SimulateBookingCalendarListener bookingCalendarListener) {
         this.simulateBookingPanel.setListeners(
                 simulateBookingRoomListListener, bookingCalendarListener);
-            }
+    }
 
     public void setTabIndex(int index) {
         topMenuPane.setSelectedIndex(index);
@@ -196,15 +205,6 @@ public class TopView extends JFrame {
 
     public void setTopMenuPaneVisible(boolean enable) {
         this.topMenuPane.setVisible(enable);
-    }
-
-    // View hotel delegations
-    public void setHotelDataText(String text) {
-        this.viewHotelPanel.setHotelData(text);
-    }
-
-    public void setHotelAvailabilityDataText(String text) {
-        this.viewHotelPanel.setAvailabilityData(text);
     }
 
     public void setRoomList(String[] data) {

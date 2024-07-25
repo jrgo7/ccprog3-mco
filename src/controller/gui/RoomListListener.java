@@ -1,6 +1,5 @@
 package src.controller.gui;
 
-import java.util.ArrayList;
 import src.model.ReservationSystem;
 import src.view.gui.TopView;
 import src.view.gui.subpanel.ViewRoomPanel;
@@ -17,7 +16,10 @@ public class RoomListListener extends ListAddListener {
         super(reservationSystem, view);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc} Always updates the data panel as there is no option to add
+     * a room embedded within the list.
+     */
     @Override
     protected void handleValueChanged(int selectedIndex) {
         this.updateDataPanel(selectedIndex);
@@ -35,11 +37,11 @@ public class RoomListListener extends ListAddListener {
                 reservationSystem.getRoomNames(hotelIndex));
     }
 
-    protected void updateDataPanelData(String data, ArrayList<Integer> availableDates) {
-        this.view.getViewHotelDelegate().setRoomData(data, availableDates);
-    }
-
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc} Displays a string representation of the room data.
+     * 
+     * @see ReservationSystem#getRoomString(int, int)
+     */
     @Override
     protected void updateDataPanel(int selectedIndex) {
         /* Exit if selected index is invalid */
@@ -49,13 +51,12 @@ public class RoomListListener extends ListAddListener {
         }
 
         int hotelIndex = view.getSelectedIndex();
+        this.view.getViewHotelDelegate().setRoomDataVisible(true);
 
-        if (hotelIndex < 0)
-            hotelIndex = 0;
-        this.updateDataPanelData(
+        this.view.getViewHotelDelegate().setRoomData(
                 reservationSystem.getRoomString(hotelIndex, selectedIndex),
-                reservationSystem.getAvailableDatesForRoom(hotelIndex, selectedIndex));
-
+                reservationSystem.getAvailableDatesForRoom(hotelIndex,
+                        selectedIndex));
     }
 
     /** {@inheritDoc} */

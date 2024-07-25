@@ -33,27 +33,28 @@ public class Controller {
         availabilityCalendarListener = new HotelAvailabilityCalendarListener(
                 reservationSystem, view);
         viewRoomListListener = new RoomListListener(reservationSystem, view);
-        
+
         renameHotelListener = new RenameHotelListener(
                 reservationSystem, view);
         managePricesListener = new ManagePricesListener(
                 reservationSystem, view);
         manageRoomListListener = new ManageRoomListener(
                 reservationSystem, view);
-        
+
         simulateBookingRoomListListener = new SimulateBookingRoomListListener(
                 reservationSystem, view);
         bookingCalendarListener = new SimulateBookingCalendarListener(
                 reservationSystem, view);
 
-                manageReservationListener = new ManageReservationListener(reservationSystem, view);
+        manageReservationListener = new ManageReservationListener(
+                reservationSystem, view);
 
         viewReservationListListener = new ReservationListListener(
                 reservationSystem, view);
 
         this.view.setTopMenuPaneListener(topMenuPaneListener);
         this.view.setTopViewHotelListListener(hotelListListener);
-        
+
         this.view.setViewHotelListeners(
                 availabilityCalendarListener, viewRoomListListener,
                 viewReservationListListener);

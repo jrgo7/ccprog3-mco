@@ -5,6 +5,10 @@ import java.util.ArrayList;
 
 import src.view.gui.panel.ViewHotelPanel;
 
+/**
+ * Represents a delegate class that assists {@link TopView} in passing data to
+ * its composite {@link ViewHotelPanel}.
+ */
 public class ViewHotelDelegate {
     private final ViewHotelPanel viewHotelPanel;
 
