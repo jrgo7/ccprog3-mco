@@ -70,7 +70,7 @@ public class SimulateBookingCalendarListener extends CalendarListener implements
         switch (result) {
             case Hotel.RESERVATION_SUCCESS:
                 view.showReservationSuccess();
-                view.updateReservationList(
+                view.setReservationList(
                         reservationSystem.getReservationNames(hotelIndex));
                 resetBookingScreen();
                 break;

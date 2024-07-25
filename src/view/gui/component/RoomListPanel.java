@@ -16,6 +16,10 @@ public class RoomListPanel extends ListPanel {
         this.addable = addable;
     }
 
+    public RoomListPanel(int width) {
+        this(width, false);
+    }
+
     /**
      * {@inheritDoc} The last element of the list will be a string containing
      * {@code Add room...} if rooms may be added through this panel.
@@ -27,8 +31,7 @@ public class RoomListPanel extends ListPanel {
             dataAppended.addAll(data);
             dataAppended.add("Add room...");
             super.setList(dataAppended);
-        } else {
+        } else
             super.setList(data);
-        }
     }
 }

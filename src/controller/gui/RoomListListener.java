@@ -31,7 +31,7 @@ public class RoomListListener extends ListAddListener {
         if (hotelIndex < 0)
             return;
 
-        view.updateRoomList(
+        view.setRoomList(
                 reservationSystem.getRoomNames(hotelIndex));
     }
 

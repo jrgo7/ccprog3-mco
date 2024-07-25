@@ -650,10 +650,10 @@ setHotelDataText(java.lang.String)	1					P
 setHotelAvailabilityDataText(java.lang.String)	1					P
 	2					P
 	3					P
-updateRoomList(java.lang.String[])	1					P
+setRoomList(java.lang.String[])	1					P
 	2					P
 	3					P
-updateRoomData(java.lang.String, java.util.ArrayList<java.lang.Integer>)	1					P
+setRoomData(java.lang.String, java.util.ArrayList<java.lang.Integer>)	1					P
 	2					P
 	3					P
 updateManageRoomData(java.lang.String, java.util.ArrayList<java.lang.Integer>)	1					P
@@ -665,16 +665,16 @@ getAvailabilityCalendarRowFromMouse(java.awt.Point)	1					P
 getAvailabilityCalendarColFromMouse(java.awt.Point)	1					P
 	2					P
 	3					P
-resetAvailabilityCalendarSelection()	1					P
+clearAvailabilityCalendarSelection()	1					P
 	2					P
 	3					P
 resetViewRoomListSelection()	1					P
 	2					P
 	3					P
-updateReservationList(java.lang.String[])	1					P
+setReservationList(java.lang.String[])	1					P
 	2					P
 	3					P
-getManageReservationSelectedIndex()	1					P
+getSelectedReservationIndex()	1					P
 	2					P
 	3					P
 setReservationData(java.lang.String)	1					P
@@ -683,34 +683,34 @@ setReservationData(java.lang.String)	1					P
 setManageReservationData(java.lang.String)	1					P
 	2					P
 	3					P
-setManageReservationVisible(boolean)	1					P
+setReservationDataVisible(boolean)	1					P
 	2					P
 	3					P
-getManageRoomSelectedIndex()	1					P
+getSelectedRoomIndex()	1					P
 	2					P
 	3					P
 setManageHotelReservationData(java.lang.String)	1					P
 	2					P
 	3					P
-getRenameHotelText()	1					P
+getRenameHotelFieldText()	1					P
 	2					P
 	3					P
-setRenameHotelText(java.lang.String)	1					P
+setRenameHotelFieldText(java.lang.String)	1					P
 	2					P
 	3					P
-getUpdateBasePriceText()	1					P
+getUpdateBasePriceFieldText()	1					P
 	2					P
 	3					P
-setUpdateBasePriceText(java.lang.String)	1					P
+setUpdateBasePriceFieldText(java.lang.String)	1					P
 	2					P
 	3					P
 setManagePricesCalendarText(int, java.lang.String)	1					P
 	2					P
 	3					P
-getPriceModifierField()	1					P
+getPriceModifierFieldText()	1					P
 	2					P
 	3					P
-setPriceModifierField(java.lang.String)	1					P
+setPriceModifierFieldText(java.lang.String)	1					P
 	2					P
 	3					P
 setModifiedPriceText(java.lang.String)	1					P
@@ -725,10 +725,10 @@ getPriceModifierCalendarRowFromMouse(java.awt.Point)	1					P
 getPriceModifierCalendarColFromMouse(java.awt.Point)	1					P
 	2					P
 	3					P
-getIsPriceModifierCalendarFocused()	1					P
+getIsManagePricesCalendarFocused()	1					P
 	2					P
 	3					P
-resetPriceModifierCalendarSelection()	1					P
+clearManagePricesCalendarSelection()	1					P
 	2					P
 	3					P
 getIsUpdatePriceModifierFieldFocused()	1					P
@@ -932,52 +932,52 @@ StyledTabbedPane.class
 Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
 ManageHotelPanel.class
 Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
-getRenameHotelText()	1					P
+getRenameHotelFieldText()	1					P
 	2					P
 	3					P
-setRenameHotelText(java.lang.String)	1					P
+setRenameHotelFieldText(java.lang.String)	1					P
 	2					P
 	3					P
-getUpdateBasePriceText()	1					P
+getUpdateBasePriceFieldText()	1					P
 	2					P
 	3					P
-setUpdateBasePriceText(java.lang.String)	1					P
+setUpdateBasePriceFieldText(java.lang.String)	1					P
 	2					P
 	3					P
 setRenameHotelListener(src.controller.gui.RenameHotelListener)	1					P
 	2					P
 	3					P
-setUpdateBasePriceListener(src.controller.gui.ManagePricesListener)	1					P
+setManagePricesListener(src.controller.gui.ManagePricesListener)	1					P
 	2					P
 	3					P
-updateRoomList(java.util.ArrayList<java.lang.String>)	1					P
+setRoomList(java.util.ArrayList<java.lang.String>)	1					P
 	2					P
 	3					P
-setManageRoomListener(src.controller.gui.ManageRoomListener)	1					P
+setManageRoomsListener(src.controller.gui.ManageRoomListener)	1					P
 	2					P
 	3					P
-updateRoomData(java.lang.String, java.util.ArrayList<java.lang.Integer>)	1					P
+setRoomData(java.lang.String, java.util.ArrayList<java.lang.Integer>)	1					P
 	2					P
 	3					P
 setManagePricesCalendarText(int, java.lang.String)	1					P
 	2					P
 	3					P
-getPriceModifierField()	1					P
+getPriceModifierFieldText()	1					P
 	2					P
 	3					P
-setPriceModifierField(java.lang.String)	1					P
+setPriceModifierFieldText(java.lang.String)	1					P
 	2					P
 	3					P
 setModifiedPriceText(java.lang.String)	1					P
 	2					P
 	3					P
-setPriceModiferCalendarDate(int)	1					P
+setManagePricesCalendarSelection(int)	1					P
 	2					P
 	3					P
-getIsPriceModifierCalendarFocused()	1					P
+getIsManagePricesCalendarFocused()	1					P
 	2					P
 	3					P
-resetPriceModifierCalendarSelection()	1					P
+clearManagePricesCalendarSelection()	1					P
 	2					P
 	3					P
 getIsUpdatePriceModifierFieldFocused()	1					P
@@ -998,22 +998,22 @@ getCalendarColAtPoint(java.awt.Point)	1					P
 setManageReservationsListener(src.controller.gui.ManageReservationListener)	1					P
 	2					P
 	3					P
-updateReservationList(java.util.ArrayList<java.lang.String>)	1					P
+setReservationList(java.util.ArrayList<java.lang.String>)	1					P
 	2					P
 	3					P
-updateReservationData(java.lang.String)	1					P
+setReservationData(java.lang.String)	1					P
 	2					P
 	3					P
-getManageReservationSelectedIndex()	1					P
+getSelectedReservationIndex()	1					P
 	2					P
 	3					P
-setManageReservationVisible(boolean)	1					P
+setReservationDataVisible(boolean)	1					P
 	2					P
 	3					P
-getManageRoomSelectedIndex()	1					P
+getSelectedRoomIndex()	1					P
 	2					P
 	3					P
-setManageRoomPanelVisible(boolean)	1					P
+setRoomDataVisible(boolean)	1					P
 	2					P
 	3					P
 setRemoveButtonListener(java.awt.event.ActionListener)	1					P
@@ -1021,7 +1021,7 @@ setRemoveButtonListener(java.awt.event.ActionListener)	1					P
 	3					P
 SimulateBookingPanel.class
 Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
-updateRoomList(java.util.ArrayList<java.lang.String>)	1					P
+setRoomList(java.util.ArrayList<java.lang.String>)	1					P
 	2					P
 	3					P
 setCalendarAvailability(java.util.ArrayList<java.lang.Integer>)	1					P
@@ -1057,7 +1057,7 @@ getBookingCalendarRowFromMouse(java.awt.Point)	1					P
 getBookingCalendarColFromMouse(java.awt.Point)	1					P
 	2					P
 	3					P
-resetRoomListSelection()	1					P
+clearRoomListSelection()	1					P
 	2					P
 	3					P
 setDiscountCodeFieldText(java.lang.String)	1					P
@@ -1072,7 +1072,7 @@ setDetailsVisible(boolean)	1					P
 enableCheckInButton()	1					P
 	2					P
 	3					P
-resetCalendarSelection()	1					P
+clearCalendarSelection()	1					P
 	2					P
 	3					P
 setListeners(src.controller.gui.SimulateBookingRoomListListener, src.controller.gui.SimulateBookingCalendarListener)	1					P
@@ -1083,13 +1083,13 @@ Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
 setRoomListListener(src.controller.gui.RoomListListener)	1					P
 	2					P
 	3					P
-updateRoomData(java.lang.String, java.util.ArrayList<java.lang.Integer>)	1					P
+setRoomData(java.lang.String, java.util.ArrayList<java.lang.Integer>)	1					P
 	2					P
 	3					P
-updateHotelData(java.lang.String)	1					P
+setHotelData(java.lang.String)	1					P
 	2					P
 	3					P
-updateAvailability(java.lang.String)	1					P
+setAvailabilityData(java.lang.String)	1					P
 	2					P
 	3					P
 getCalendarRowAtPoint(java.awt.Point)	1					P
@@ -1098,7 +1098,7 @@ getCalendarRowAtPoint(java.awt.Point)	1					P
 getCalendarColAtPoint(java.awt.Point)	1					P
 	2					P
 	3					P
-resetCalendarSelection()	1					P
+clearCalendarSelection()	1					P
 	2					P
 	3					P
 setCalendarListener(src.controller.gui.HotelAvailabilityCalendarListener)	1					P
@@ -1107,28 +1107,28 @@ setCalendarListener(src.controller.gui.HotelAvailabilityCalendarListener)	1					
 getSelectedSubpanelIndex()	1					P
 	2					P
 	3					P
-updateRoomList(java.util.ArrayList<java.lang.String>)	1					P
+setRoomList(java.util.ArrayList<java.lang.String>)	1					P
 	2					P
 	3					P
-getViewRoomSelectedIndex()	1					P
+getSelectedRoomIndex()	1					P
 	2					P
 	3					P
-resetRoomListSelection()	1					P
+clearRoomListSelection()	1					P
 	2					P
 	3					P
-updateReservationList(java.util.ArrayList<java.lang.String>)	1					P
+setReservationList(java.util.ArrayList<java.lang.String>)	1					P
 	2					P
 	3					P
-getViewReservationSelectedIndex()	1					P
+getSelectedReservationIndex()	1					P
 	2					P
 	3					P
-updateReservationData(java.lang.String)	1					P
+setReservationData(java.lang.String)	1					P
 	2					P
 	3					P
 setReservationListener(src.controller.gui.ReservationListListener)	1					P
 	2					P
 	3					P
-setReservationVisible(boolean)	1					P
+setReservationDataVisible(boolean)	1					P
 	2					P
 	3					P
 ManagePricesPanel.class
@@ -1139,19 +1139,19 @@ setCalendarText(int, java.lang.String)	1					P
 setModifiedPriceText(java.lang.String)	1					P
 	2					P
 	3					P
-getPriceModifierField()	1					P
+getPriceModifierFieldText()	1					P
 	2					P
 	3					P
-setPriceModifierField(java.lang.String)	1					P
+setPriceModifierFieldText(java.lang.String)	1					P
 	2					P
 	3					P
-selectCalendarDate(int)	1					P
+setCalendarDate(int)	1					P
 	2					P
 	3					P
 getIsCalendarFocused()	1					P
 	2					P
 	3					P
-resetCalendarSelection()	1					P
+clearCalendarSelection()	1					P
 	2					P
 	3					P
 getIsUpdatePriceModifierFieldFocused()	1					P
@@ -1178,7 +1178,7 @@ setRemoveButtonListener(java.awt.event.ActionListener)	1					P
 	3					P
 ViewAvailabilityPanel.class
 Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
-updateAvailability(java.lang.String)	1					P
+setAvailabilityData(java.lang.String)	1					P
 	2					P
 	3					P
 getCalendarRowAtPoint(java.awt.Point)	1					P
@@ -1187,7 +1187,7 @@ getCalendarRowAtPoint(java.awt.Point)	1					P
 getCalendarColAtPoint(java.awt.Point)	1					P
 	2					P
 	3					P
-resetCalendarSelection()	1					P
+clearCalendarSelection()	1					P
 	2					P
 	3					P
 setListener(src.controller.gui.HotelAvailabilityCalendarListener)	1					P
@@ -1195,10 +1195,10 @@ setListener(src.controller.gui.HotelAvailabilityCalendarListener)	1					P
 	3					P
 ViewReservationsPanel.class
 Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
-updateReservationList(java.util.ArrayList<java.lang.String>)	1					P
+setReservationList(java.util.ArrayList<java.lang.String>)	1					P
 	2					P
 	3					P
-updateReservationData(java.lang.String)	1					P
+setReservationData(java.lang.String)	1					P
 	2					P
 	3					P
 getSelectedIndex()	1					P
@@ -1212,19 +1212,19 @@ setWrapperVisible(boolean)	1					P
 	3					P
 ViewRoomPanel.class
 Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
-updateRoomData(java.lang.String, java.util.ArrayList<java.lang.Integer>)	1					P
+setRoomData(java.lang.String, java.util.ArrayList<java.lang.Integer>)	1					P
 	2					P
 	3					P
-updateRoomList(java.util.ArrayList<java.lang.String>)	1					P
+setRoomList(java.util.ArrayList<java.lang.String>)	1					P
 	2					P
 	3					P
 setRoomListListener(src.controller.gui.RoomListListener)	1					P
 	2					P
 	3					P
-getViewRoomSelectedIndex()	1					P
+getSelectedRoomIndex()	1					P
 	2					P
 	3					P
-resetRoomListSelection()	1					P
+clearRoomListSelection()	1					P
 	2					P
 	3					P
 setWrapperVisible(boolean)	1					P

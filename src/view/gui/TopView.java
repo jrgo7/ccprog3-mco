@@ -136,7 +136,6 @@ public class TopView extends JFrame {
     public void setTopViewHotelListListener(
             HotelListListener hotelListListener) {
         this.hotelListPanel.setListener(hotelListListener);
-        this.manageHotelPanel.setRemoveButtonListener(hotelListListener);
     }
 
     public void setTopMenuPaneListener(TopMenuPaneListener listener) {
@@ -158,9 +157,8 @@ public class TopView extends JFrame {
             ManageRoomListener manageRoomListener,
             ManageReservationListener manageReservationListener) {
         this.manageHotelPanel.setRenameHotelListener(renameHotelListener);
-        this.manageHotelPanel.setUpdateBasePriceListener(managePricesListener);
         this.manageHotelPanel.setManagePricesListener(managePricesListener);
-        this.manageHotelPanel.setManageRoomListener(manageRoomListener);
+        this.manageHotelPanel.setManageRoomsListener(manageRoomListener);
         this.manageHotelPanel
                 .setManageReservationsListener(manageReservationListener);
 
@@ -202,24 +200,24 @@ public class TopView extends JFrame {
 
     // View hotel delegations
     public void setHotelDataText(String text) {
-        this.viewHotelPanel.updateHotelData(text);
+        this.viewHotelPanel.setHotelData(text);
     }
 
     public void setHotelAvailabilityDataText(String text) {
-        this.viewHotelPanel.updateAvailability(text);
+        this.viewHotelPanel.setAvailabilityData(text);
     }
 
-    public void updateRoomList(String[] data) {
+    public void setRoomList(String[] data) {
         ArrayList<String> dataAsList = new ArrayList<>(Arrays.asList(data));
-        this.viewHotelPanel.updateRoomList(dataAsList);
-        this.manageHotelPanel.updateRoomList(dataAsList);
-        this.simulateBookingPanel.updateRoomList(dataAsList);
+        this.viewHotelPanel.setRoomList(dataAsList);
+        this.manageHotelPanel.setRoomList(dataAsList);
+        this.simulateBookingPanel.setRoomList(dataAsList);
     }
 
-    public void updateReservationList(String[] data) {
+    public void setReservationList(String[] data) {
         ArrayList<String> dataAsList = new ArrayList<>(Arrays.asList(data));
-        this.viewHotelPanel.updateReservationList(dataAsList);
-        this.manageHotelPanel.updateReservationList(dataAsList);
+        this.viewHotelPanel.setReservationList(dataAsList);
+        this.manageHotelPanel.setReservationList(dataAsList);
     }
 
     public String promptAddHotel() {

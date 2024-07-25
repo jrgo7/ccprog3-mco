@@ -4,9 +4,10 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.event.ActionListener;
-import java.beans.BeanProperty;
 import java.util.ArrayList;
+
 import javax.swing.JTextField;
+
 import src.controller.gui.ManagePricesListener;
 import src.controller.gui.ManageReservationListener;
 import src.controller.gui.ManageRoomListener;
@@ -22,7 +23,6 @@ import src.view.gui.subpanel.ManageReservationsPanel;
 import src.view.gui.subpanel.ManageRoomsPanel;
 
 public class ManageHotelPanel extends StyledPanel {
-
     private StyledTabbedPane subpanels;
 
     private ManageRoomsPanel manageRoomsSubpanel;
@@ -39,124 +39,179 @@ public class ManageHotelPanel extends StyledPanel {
     public ManageHotelPanel() {
         this.setLayout(new BorderLayout());
 
-        StyledPanel infoEditPanel = new StyledPanel();
-        infoEditPanel.setLayout(new GridLayout(2, 3));
-
-        StyledLabel renameLabel = new StyledLabel("Rename hotel:");
-        infoEditPanel.add(renameLabel);
-
-        renameHotelField = new JTextField();
-        infoEditPanel.add(renameHotelField);
-
-        renameHotelButton = StyledButtonFactory.createButton("Rename hotel");
-        infoEditPanel.add(renameHotelButton);
-
-        StyledLabel basePriceLabel = new StyledLabel("Update base price:");
-        infoEditPanel.add(basePriceLabel);
-
-        basePriceField = new JTextField();
-        basePriceField.setDocument(new DecimalDocument()); // TODO maybe a spinner; abandon DecimalDocument
-        infoEditPanel.add(basePriceField);
-
-        updateBasePriceButton = StyledButtonFactory.createButton("Update base price");
-        infoEditPanel.add(updateBasePriceButton);
-
-        this.add(infoEditPanel, BorderLayout.NORTH);
-
-        subpanels = new StyledTabbedPane();
-
-        manageRoomsSubpanel = new ManageRoomsPanel();
-        subpanels.add("Manage rooms", manageRoomsSubpanel);
-
-        manageReservationsSubpanel = new ManageReservationsPanel();
-        subpanels.add("Manage reservations", manageReservationsSubpanel);
-
-        managePricesSubpanel = new ManagePricesPanel();
-        subpanels.add("Manage prices", managePricesSubpanel);
-
-        this.add(subpanels, BorderLayout.CENTER);
-
+        this.initializeEditInfoPanel();
+        this.initializeSubpanels();
 
         StyledPanel removeHotelPanel = new StyledPanel();
+
         removeHotelPanel.setLayout(new BorderLayout());
-        removeHotelButton = StyledButtonFactory.createDestructiveButton("Remove hotel");
+        removeHotelButton = StyledButtonFactory
+                .createDestructiveButton("Remove hotel");
         removeHotelPanel.add(removeHotelButton, BorderLayout.WEST);
+
         this.add(removeHotelPanel, BorderLayout.SOUTH);
     }
-    public String getRenameHotelText() {
-        return this.renameHotelField.getText();
+
+    /** Initializes the subpanels. */
+    public void initializeSubpanels() {
+        subpanels = new StyledTabbedPane();
+
+        this.manageRoomsSubpanel = new ManageRoomsPanel();
+        subpanels.add("Manage rooms", this.manageRoomsSubpanel);
+
+        this.manageReservationsSubpanel = new ManageReservationsPanel();
+        subpanels.add("Manage reservations", this.manageReservationsSubpanel);
+
+        this.managePricesSubpanel = new ManagePricesPanel();
+        subpanels.add("Manage prices", this.managePricesSubpanel);
+
+        this.add(subpanels, BorderLayout.CENTER);
     }
 
-    public void setRenameHotelText(String text) {
-        this.renameHotelField.setText(text);
+    /** Initializes the panel that contains options for editing hotel data. */
+    public void initializeEditInfoPanel() {
+        StyledPanel editInfoPanel = new StyledPanel();
+        editInfoPanel.setLayout(new GridLayout(2, 3));
+
+        StyledLabel renameLabel = new StyledLabel("Rename hotel:");
+        editInfoPanel.add(renameLabel);
+
+        this.renameHotelField = new JTextField();
+        editInfoPanel.add(this.renameHotelField);
+
+        this.renameHotelButton = StyledButtonFactory
+                .createButton("Rename hotel");
+        editInfoPanel.add(this.renameHotelButton);
+
+        StyledLabel basePriceLabel = new StyledLabel("Update base price:");
+        editInfoPanel.add(basePriceLabel);
+
+        /* TODO: Maybe abandon DecimalDocument for JSpinner */
+        this.basePriceField = new JTextField();
+        this.basePriceField.setDocument(new DecimalDocument());
+
+        editInfoPanel.add(this.basePriceField);
+
+        this.updateBasePriceButton = StyledButtonFactory
+                .createButton("Update base price");
+        editInfoPanel.add(this.updateBasePriceButton);
+
+        this.add(editInfoPanel, BorderLayout.NORTH);
     }
 
-    public String getUpdateBasePriceText() {
-        return this.basePriceField.getText();
-    }
-
-    public void setUpdateBasePriceText(String text) {
-        this.basePriceField.setText(text);
-    }
-
+    /**
+     * Sets a listener for renaming the hotel.
+     * 
+     * @param listener
+     */
     public void setRenameHotelListener(RenameHotelListener listener) {
         this.renameHotelField.addKeyListener(listener);
         this.renameHotelButton.addActionListener(listener);
         this.renameHotelButton.addKeyListener(listener);
     }
 
-    public void setUpdateBasePriceListener(ManagePricesListener listener) {
+    /**
+     * Sets a listener for managing hotel prices.
+     * 
+     * @param listener
+     */
+    public void setManagePricesListener(ManagePricesListener listener) {
         this.basePriceField.addKeyListener(listener);
         this.updateBasePriceButton.addActionListener(listener);
         this.updateBasePriceButton.addKeyListener(listener);
+        this.managePricesSubpanel.setListener(listener);
     }
 
-    // Manage rooms subpanel
-    public void updateRoomList(ArrayList<String> data) {
-        this.manageRoomsSubpanel.updateRoomList(data);
+    /**
+     * Sets a listener for managing rooms.
+     * 
+     * @param listener
+     */
+    public void setManageRoomsListener(ManageRoomListener listener) {
+        this.manageRoomsSubpanel.setRoomListListener(listener);
+        this.manageRoomsSubpanel.setRemoveButtonListener(listener);
     }
 
-    public void setManageRoomListener(ManageRoomListener manageRoomListener) {
-        this.manageRoomsSubpanel.setRoomListListener(manageRoomListener);
-        this.manageRoomsSubpanel.setRemoveButtonListener(manageRoomListener);
+    /**
+     * Sets a listener for managing reservations.
+     * 
+     * @param listener
+     */
+    public void setManageReservationsListener(
+            ManageReservationListener listener) {
+        this.manageReservationsSubpanel.setListener(listener);
+        this.manageReservationsSubpanel
+                .setRemoveButtonListener((ActionListener) listener);
     }
 
-    public void updateRoomData(String data, ArrayList<Integer> availableDates) {
-        this.manageRoomsSubpanel.updateRoomData(data, availableDates);
+    /* Edit hotel info panel */
+
+    public String getRenameHotelFieldText() {
+        return this.renameHotelField.getText();
+    }
+
+    public void setRenameHotelFieldText(String text) {
+        this.renameHotelField.setText(text);
+    }
+
+    public String getUpdateBasePriceFieldText() {
+        return this.basePriceField.getText();
+    }
+
+    public void setUpdateBasePriceFieldText(String text) {
+        this.basePriceField.setText(text);
+    }
+
+    /* Manage rooms subpanel */
+
+    public void setRoomList(ArrayList<String> data) {
+        this.manageRoomsSubpanel.setRoomList(data);
+    }
+
+    public void setRoomData(String data, ArrayList<Integer> availableDates) {
+        this.manageRoomsSubpanel.setRoomData(data, availableDates);
     }
 
     public void clearRoomListSelection() {
-        this.manageRoomsSubpanel.resetRoomListSelection();
+        this.manageRoomsSubpanel.clearRoomListSelection();
     }
 
-    // Manage reservations subpanel
-    // Manage prices subpanel
+    public int getSelectedRoomIndex() {
+        return this.manageRoomsSubpanel.getSelectedRoomIndex();
+    }
+
+    public void setRoomDataVisible(boolean visible) {
+        this.manageRoomsSubpanel.setWrapperVisible(visible);
+    }
+
+    /* Manage prices subpanel */
+
     public void setManagePricesCalendarText(int date, String text) {
         this.managePricesSubpanel.setCalendarText(date, text);
     }
 
-    public String getPriceModifierField() {
-        return this.managePricesSubpanel.getPriceModifierField();
+    public void setManagePricesCalendarSelection(int date) {
+        this.managePricesSubpanel.setCalendarDate(date);
     }
 
-    public void setPriceModifierField(String text) {
-        this.managePricesSubpanel.setPriceModifierField(text);
+    public String getPriceModifierFieldText() {
+        return this.managePricesSubpanel.getPriceModifierFieldText();
+    }
+
+    public void setPriceModifierFieldText(String text) {
+        this.managePricesSubpanel.setPriceModifierFieldText(text);
     }
 
     public void setModifiedPriceText(String text) {
         this.managePricesSubpanel.setModifiedPriceText(text);
     }
 
-    public void setPriceModiferCalendarDate(int date) {
-        this.managePricesSubpanel.selectCalendarDate(date);
-    }
-
-    public boolean getIsPriceModifierCalendarFocused() {
+    public boolean getIsManagePricesCalendarFocused() {
         return this.managePricesSubpanel.getIsCalendarFocused();
     }
 
-    public void resetPriceModifierCalendarSelection() {
-        this.managePricesSubpanel.resetCalendarSelection();
+    public void clearManagePricesCalendarSelection() {
+        this.managePricesSubpanel.clearCalendarSelection();
     }
 
     public boolean getIsUpdatePriceModifierFieldFocused() {
@@ -167,10 +222,6 @@ public class ManageHotelPanel extends StyledPanel {
         return this.basePriceField.isFocusOwner();
     }
 
-    public void setManagePricesListener(ManagePricesListener listener) {
-        this.managePricesSubpanel.setListener(listener);
-    }
-
     public int getCalendarRowAtPoint(Point point) {
         return this.managePricesSubpanel.getCalendarRowAtPoint(point);
     }
@@ -179,36 +230,21 @@ public class ManageHotelPanel extends StyledPanel {
         return this.managePricesSubpanel.getCalendarColAtPoint(point);
     }
 
-    public void setManageReservationsListener(ManageReservationListener listener) {
-        this.manageReservationsSubpanel.setListener(listener);
-        this.manageReservationsSubpanel.setRemoveButtonListener((ActionListener) listener);
+    /* Manage reservations subpanel */
+
+    public void setReservationList(ArrayList<String> list) {
+        this.manageReservationsSubpanel.setReservationList(list);
     }
 
-    public void updateReservationList(ArrayList<String> list) {
-        this.manageReservationsSubpanel.updateReservationList(list);
+    public void setReservationData(String data) {
+        this.manageReservationsSubpanel.setReservationData(data);
     }
 
-    public void updateReservationData(String data) {
-        this.manageReservationsSubpanel.updateReservationData(data);
-    }
-
-    public int getManageReservationSelectedIndex() {
+    public int getSelectedReservationIndex() {
         return this.manageReservationsSubpanel.getSelectedIndex();
     }
 
-    public void setManageReservationVisible(boolean visible) {
+    public void setReservationDataVisible(boolean visible) {
         this.manageReservationsSubpanel.setWrapperVisible(visible);
-    }
-
-    public int getManageRoomSelectedIndex() {
-        return this.manageRoomsSubpanel.getViewRoomSelectedIndex();
-    }
-
-    public void setManageRoomPanelVisible(boolean visible) {
-        this.manageRoomsSubpanel.setWrapperVisible(visible);
-    }
-
-    public void setRemoveButtonListener(ActionListener listener) {
-        this.removeHotelButton.addActionListener(listener);
     }
 }

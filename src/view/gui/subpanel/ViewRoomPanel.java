@@ -46,13 +46,13 @@ public class ViewRoomPanel extends StyledPanel {
         this(false);
     }
 
-    public void updateRoomData(String data, ArrayList<Integer> availableDates) {
+    public void setRoomData(String data, ArrayList<Integer> availableDates) {
         this.roomDataComponent.setText(data);
-        this.roomAvailabilityCalendar.setAvailability(availableDates);
+        this.roomAvailabilityCalendar.setAvailabilityData(availableDates);
         this.outer.setVisible(true);
     }
 
-    public void updateRoomList(ArrayList<String> data) {
+    public void setRoomList(ArrayList<String> data) {
         this.roomListPanel.setList(data);
     }
 
@@ -60,11 +60,11 @@ public class ViewRoomPanel extends StyledPanel {
         this.roomListPanel.setListener((ListSelectionListener) roomListListener);
     }
 
-    public int getViewRoomSelectedIndex() {
+    public int getSelectedRoomIndex() {
         return this.roomListPanel.getSelectedIndex();
     }
 
-    public void resetRoomListSelection() {
+    public void clearRoomListSelection() {
         this.roomListPanel.clearSelection();
         this.outer.setVisible(false);
     }

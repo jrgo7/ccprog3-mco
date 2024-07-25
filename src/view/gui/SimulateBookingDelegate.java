@@ -37,7 +37,7 @@ public class SimulateBookingDelegate {
     }
 
     public void resetBookingRoomListSelection() {
-        this.simulateBookingPanel.resetRoomListSelection();
+        this.simulateBookingPanel.clearRoomListSelection();
     }
 
     public String getBookingDiscountCode() {
@@ -67,7 +67,7 @@ public class SimulateBookingDelegate {
     }
 
     public void resetBookingCalendarSelection() {
-        this.simulateBookingPanel.resetCalendarSelection();
+        this.simulateBookingPanel.clearCalendarSelection();
     }
 
     public void setBookingDetailsVisible(boolean visible) {

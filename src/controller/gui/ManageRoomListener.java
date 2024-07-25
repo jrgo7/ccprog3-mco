@@ -60,7 +60,7 @@ public class ManageRoomListener extends RoomListListener implements ActionListen
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        int roomIndex = view.getManageHotelDelegate().getManageRoomSelectedIndex();
+        int roomIndex = view.getManageHotelDelegate().getSelectedRoomIndex();
         int hotelIndex = view.getSelectedIndex();
 
         if (roomIndex < 0 || hotelIndex < 0)

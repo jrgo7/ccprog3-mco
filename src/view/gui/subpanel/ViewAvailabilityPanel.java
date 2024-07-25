@@ -39,7 +39,7 @@ public class ViewAvailabilityPanel extends StyledPanel {
      * 
      * @param text The availability data string to set
      */
-    public void updateAvailability(String text) {
+    public void setAvailabilityData(String text) {
         this.availabilityComponent.setText(text);
     }
 
@@ -65,7 +65,7 @@ public class ViewAvailabilityPanel extends StyledPanel {
         return this.calendarComponent.columnAtPoint(point);
     }
 
-    public void resetCalendarSelection() {
+    public void clearCalendarSelection() {
         this.calendarComponent.resetSelection();
     }
 

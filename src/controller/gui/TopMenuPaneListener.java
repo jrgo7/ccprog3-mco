@@ -28,7 +28,7 @@ public class TopMenuPaneListener implements ChangeListener {
     public void stateChanged(ChangeEvent e) {
         switch (view.getTabIndex()) {
             case TopView.VIEW_HOTEL_TAB:
-                view.getViewHotelDelegate().resetAvailabilityCalendarSelection();
+                view.getViewHotelDelegate().clearAvailabilityCalendarSelection();
                 view.getViewHotelDelegate().clearRoomSelectedIndex();
                 break;
             case TopView.MANAGE_HOTEL_TAB:

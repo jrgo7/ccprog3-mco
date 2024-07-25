@@ -57,7 +57,7 @@ public class HotelAvailabilityCalendarListener extends CalendarListener {
 
     @Override
     protected void handleReleasedOutsideComponent() {
-        view.getViewHotelDelegate().resetAvailabilityCalendarSelection();
+        view.getViewHotelDelegate().clearAvailabilityCalendarSelection();
     }
 
     @Override

@@ -27,7 +27,7 @@ public class RenameHotelListener implements ActionListener, KeyListener {
         int index = view.getSelectedIndex(); // saved as setting the
                                                       // hotel list removes the
                                                       // selection
-        if (reservationSystem.renameHotel(index, view.getManageHotelDelegate().getRenameHotelText())) {
+        if (reservationSystem.renameHotel(index, view.getManageHotelDelegate().getRenameHotelFieldText())) {
             view.setList(reservationSystem.getHotelNamesAsList());
             view.setSelectedIndex(index);
         } else {

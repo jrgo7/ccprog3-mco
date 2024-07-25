@@ -2,8 +2,10 @@ package src.view.gui.subpanel;
 
 import java.awt.GridLayout;
 import java.awt.Point;
+
 import javax.swing.BoxLayout;
 import javax.swing.JTextField;
+
 import src.controller.gui.ManagePricesListener;
 import src.view.gui.component.Calendar;
 import src.view.gui.component.DecimalDocument;
@@ -28,14 +30,16 @@ public class ManagePricesPanel extends StyledPanel {
         StyledPanel fieldPanel = new StyledPanel();
         fieldPanel.setLayout(new GridLayout(1, 3));
 
-        StyledLabel priceModifierLabel = new StyledLabel("Update price modifier:");
+        StyledLabel priceModifierLabel = new StyledLabel(
+                "Update price modifier:");
         fieldPanel.add(priceModifierLabel);
 
         priceModifierField = new JTextField();
         priceModifierField.setDocument(new DecimalDocument());
         fieldPanel.add(priceModifierField);
 
-        priceUpdateButton = StyledButtonFactory.createButton("Update price modifier");
+        priceUpdateButton = StyledButtonFactory
+                .createButton("Update price modifier");
         fieldPanel.add(priceUpdateButton);
 
         this.add(fieldPanel);
@@ -57,15 +61,15 @@ public class ManagePricesPanel extends StyledPanel {
         this.modifiedPriceData.setText(text);
     }
 
-    public String getPriceModifierField() {
+    public String getPriceModifierFieldText() {
         return this.priceModifierField.getText();
     }
 
-    public void setPriceModifierField(String text) {
+    public void setPriceModifierFieldText(String text) {
         this.priceModifierField.setText(text);
     }
 
-    public void selectCalendarDate(int date) {
+    public void setCalendarDate(int date) {
         this.calendarComponent.selectDate(date);
     }
 
@@ -73,7 +77,7 @@ public class ManagePricesPanel extends StyledPanel {
         return this.calendarComponent.isFocusOwner();
     }
 
-    public void resetCalendarSelection() {
+    public void clearCalendarSelection() {
         this.calendarComponent.resetSelection();
     }
 
@@ -95,6 +99,5 @@ public class ManagePricesPanel extends StyledPanel {
         this.priceUpdateButton.addActionListener(listener);
         this.priceUpdateButton.addKeyListener(listener);
     }
-
 
 }

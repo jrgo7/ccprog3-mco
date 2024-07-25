@@ -39,11 +39,11 @@ public class ViewReservationsPanel extends StyledPanel {
 
     }
 
-    public void updateReservationList(ArrayList<String> data) {
+    public void setReservationList(ArrayList<String> data) {
         this.reservationListPanel.setList(data);
     }
 
-    public void updateReservationData(String data) {
+    public void setReservationData(String data) {
         this.reservationDataComponent.setText(data);
     }
 

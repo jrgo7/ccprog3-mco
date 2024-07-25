@@ -18,10 +18,10 @@ public class ReservationListListener extends ListAddListener {
         if (hotelIndex < 0)
             return;
 
-        view.updateReservationList(
+        view.setReservationList(
                 reservationSystem.getReservationNames(hotelIndex));
 
-        this.view.getManageHotelDelegate().setManageReservationVisible(reservationSystem.getReservationCount(hotelIndex) > 0);
+        this.view.getManageHotelDelegate().setReservationDataVisible(reservationSystem.getReservationCount(hotelIndex) > 0);
     }
 
     /** {@inheritDoc} Equal to the number of rooms in the selected hotel. */

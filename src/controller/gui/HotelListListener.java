@@ -59,13 +59,13 @@ public class HotelListListener extends ListAddListener
         /* Updates View Hotel panels */
         this.view.getViewHotelDelegate().setHotelData(
                 reservationSystem.getHotelString(selectedIndex));
-        this.view.updateRoomList(
+        this.view.setRoomList(
                 reservationSystem.getRoomNames(selectedIndex));
 
         /* Updates Manage Hotel panels */
-        this.view.getManageHotelDelegate().setRenameHotelText(
+        this.view.getManageHotelDelegate().setRenameHotelFieldText(
                 reservationSystem.getHotelName(selectedIndex));
-        this.view.getManageHotelDelegate().setUpdateBasePriceText(
+        this.view.getManageHotelDelegate().setUpdateBasePriceFieldText(
                 String.valueOf(
                         reservationSystem.getBasePrice(selectedIndex)));
         for (int date = 1; date <= 31; date++)
@@ -99,7 +99,7 @@ public class HotelListListener extends ListAddListener
 
         if (reservationSystem.addHotel(name)) {
             /* Refreshing the view after each update keeps it synchronized */
-            view.getViewHotelDelegate().resetAvailabilityCalendarSelection();
+            view.getViewHotelDelegate().clearAvailabilityCalendarSelection();
             view.getViewHotelDelegate().setHotelAvailability("<p></p>");
             this.updateList();
             // /* Prevents the selection highlight from disappearing */

@@ -4,12 +4,12 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.Point;
 import java.util.ArrayList;
+
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
-import javax.swing.JScrollPane;
-import javax.swing.JSeparator;
 import javax.swing.JTextField;
+
 import src.controller.gui.SimulateBookingCalendarListener;
 import src.controller.gui.SimulateBookingRoomListListener;
 import src.view.gui.component.BookingCalendar;
@@ -23,8 +23,8 @@ import src.view.gui.component.StyledHTMLPaneContainerFactory;
 import src.view.gui.component.StyledLabel;
 import src.view.gui.component.StyledPanel;
 import src.view.gui.component.StyledRadioButton;
-import src.view.gui.component.StyledScrollPane;
 
+/* TODO */
 public class SimulateBookingPanel extends StyledPanel {
     private JTextField guestNameField;
     private JTextField discountCodeField;
@@ -92,8 +92,10 @@ public class SimulateBookingPanel extends StyledPanel {
         bookingCalendar = new BookingCalendar();
         detailsPanel.add(bookingCalendar);
 
-        reservationPreview = new StyledHTMLPane(RESERVATION_PREVIEW_INITIAL_TEXT);
-        StyledPanel reservationPreviewPanel = StyledHTMLPaneContainerFactory.createContainer(reservationPreview);
+        reservationPreview = new StyledHTMLPane(
+                RESERVATION_PREVIEW_INITIAL_TEXT);
+        StyledPanel reservationPreviewPanel = StyledHTMLPaneContainerFactory
+                .createContainer(reservationPreview);
         detailsPanel.add(reservationPreviewPanel);
 
         StyledPanel southPanel = new StyledPanel();
@@ -102,7 +104,8 @@ public class SimulateBookingPanel extends StyledPanel {
         bookButton = StyledButtonFactory.createButton("Confirm booking");
         southPanel.add(bookButton);
 
-        resetButton = StyledButtonFactory.createDestructiveButton("Reset booking fields");
+        resetButton = StyledButtonFactory
+                .createDestructiveButton("Reset booking fields");
         southPanel.add(resetButton);
 
         detailsPanel.add(southPanel);
@@ -112,12 +115,12 @@ public class SimulateBookingPanel extends StyledPanel {
         detailsPanel.setVisible(false);
     }
 
-    public void updateRoomList(ArrayList<String> data) {
+    public void setRoomList(ArrayList<String> data) {
         this.roomListPanel.setList(data);
     }
 
     public void setCalendarAvailability(ArrayList<Integer> dates) {
-        this.bookingCalendar.setAvailability(dates);
+        this.bookingCalendar.setAvailabilityData(dates);
     }
 
     public void setCalendarCheckIn(int date) {
@@ -170,7 +173,7 @@ public class SimulateBookingPanel extends StyledPanel {
         return this.bookingCalendar.columnAtPoint(point);
     }
 
-    public void resetRoomListSelection() {
+    public void clearRoomListSelection() {
         this.roomListPanel.clearSelection();
         this.detailsPanel.setVisible(false);
     }
@@ -191,7 +194,7 @@ public class SimulateBookingPanel extends StyledPanel {
         this.checkInButton.setSelected(true);
     }
 
-    public void resetCalendarSelection() {
+    public void clearCalendarSelection() {
         this.bookingCalendar.resetSelection();
     }
 

@@ -15,7 +15,7 @@ public class ViewHotelDelegate {
     /* Hotel data panel */
 
     public void setHotelData(String data) {
-        this.viewHotelPanel.updateHotelData(data);
+        this.viewHotelPanel.setHotelData(data);
     }
 
     public void setRoomDataVisible(boolean visible) {
@@ -23,13 +23,13 @@ public class ViewHotelDelegate {
     }
 
     public void setHotelAvailability(String data) {
-        this.viewHotelPanel.updateAvailability(data);
+        this.viewHotelPanel.setAvailabilityData(data);
     }
 
     /* View rooms subpanel */
 
     public void setRoomData(String data, ArrayList<Integer> availableDates) {
-        this.viewHotelPanel.updateRoomData(data, availableDates);
+        this.viewHotelPanel.setRoomData(data, availableDates);
     }
 
     public void setSelectedRoomIndex(int index) {
@@ -37,27 +37,27 @@ public class ViewHotelDelegate {
     }
 
     public void clearRoomSelectedIndex() {
-        this.viewHotelPanel.resetRoomListSelection();
+        this.viewHotelPanel.clearRoomListSelection();
     }
 
     /* TODO */
     public int getAvailabilityCalendarRowFromMouse(Point point) {
-        return this.viewHotelPanel.getCalendarRowAtPoint(point);
+        return this.viewHotelPanel.getAvailabilityCalendarRowAtPoint(point);
     }
 
     /* TODO */
     public int getAvailabilityCalendarColFromMouse(Point point) {
-        return this.viewHotelPanel.getCalendarColAtPoint(point);
+        return this.viewHotelPanel.getAvailabilityCalendarColAtPoint(point);
     }
 
-    public void resetAvailabilityCalendarSelection() {
-        this.viewHotelPanel.resetCalendarSelection();
+    public void clearAvailabilityCalendarSelection() {
+        this.viewHotelPanel.clearAvailabilityCalendarSelection();
     }
 
     /* View reservations subpanel */
 
     public void setReservationData(String data) {
-        this.viewHotelPanel.updateReservationData(data);
+        this.viewHotelPanel.setReservationData(data);
     }
 
     public void setSelectedReservationIndex(int index) {
@@ -65,6 +65,6 @@ public class ViewHotelDelegate {
     }
 
     public void setReservationDataVisible(boolean visible) {
-        this.viewHotelPanel.setReservationDataVisibile(visible);
+        this.viewHotelPanel.setReservationDataVisible(visible);
     }
 }

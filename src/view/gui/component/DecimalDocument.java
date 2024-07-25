@@ -9,6 +9,7 @@ public class DecimalDocument extends PlainDocument {
         super();
     }
 
+    /** {@inheritDoc} */
     @Override
     public void insertString(int offs, String str, AttributeSet a)
             throws BadLocationException {

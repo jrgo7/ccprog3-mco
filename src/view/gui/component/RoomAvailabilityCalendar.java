@@ -23,7 +23,7 @@ public class RoomAvailabilityCalendar extends Calendar {
      * 
      * @param availableDates
      */
-    public void setAvailability(ArrayList<Integer> availableDates) {
+    public void setAvailabilityData(ArrayList<Integer> availableDates) {
         ((RoomAvailabilityCalendarRenderer) renderer).setAvailableDates(availableDates);
         for (int date = 1; date <= 31; date++) {
             this.setCalendarText(

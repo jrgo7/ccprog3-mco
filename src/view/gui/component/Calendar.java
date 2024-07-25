@@ -6,9 +6,7 @@ import javax.swing.table.TableModel;
 
 import src.controller.gui.CalendarListener;
 
-/**
- * A custom component representing a set of dates.
- */
+/** A custom component representing a set of dates. */
 public class Calendar extends JTable {
     /** Columns in {@link Calendar} objects */
     public final static int MAX_COLS = 7;
@@ -78,8 +76,8 @@ public class Calendar extends JTable {
     }
 
     /**
-     * Place text on a cell corresponding to a certain date in this object.
-     * This wraps {@link #setCalendarText(row, col, text)}.
+     * Place text on a cell corresponding to a certain date in this object. This
+     * wraps {@link #setCalendarText(row, col, text)}.
      * 
      * @param date
      * @param text

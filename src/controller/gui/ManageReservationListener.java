@@ -21,11 +21,11 @@ public class ManageReservationListener extends ReservationListListener implement
    protected void updateDataPanel(int selectedIndex) {
        /* Exit if selected index is invalid */
        if (selectedIndex < 0) {
-           this.view.getManageHotelDelegate().setManageReservationVisible(false);
+           this.view.getManageHotelDelegate().setReservationDataVisible(false);
            return;
        }
            
-       this.view.getManageHotelDelegate().setManageReservationVisible(true);
+       this.view.getManageHotelDelegate().setReservationDataVisible(true);
        int hotelIndex = view.getSelectedIndex();
 
        if (hotelIndex < 0)
@@ -37,7 +37,7 @@ public class ManageReservationListener extends ReservationListListener implement
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        int reservationIndex = view.getManageHotelDelegate().getManageReservationSelectedIndex();
+        int reservationIndex = view.getManageHotelDelegate().getSelectedReservationIndex();
         int hotelIndex = view.getSelectedIndex();
 
         if (reservationIndex < 0 || hotelIndex < 0)

@@ -13,11 +13,10 @@ public class HotelListPanel extends ListPanel {
      * @param width The width of the panel
      */
     public HotelListPanel(int width) {
-        super(
-            "Hotels",
-            width,
-            FontCollection.SEGOE_UI_TITLE,
-            ColorCollection.BACKGROUND_COMPLEMENT);
+        super("Hotels",
+                width,
+                FontCollection.SEGOE_UI_TITLE,
+                ColorCollection.BACKGROUND_COMPLEMENT);
     }
 
     /**

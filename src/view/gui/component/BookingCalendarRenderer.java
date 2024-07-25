@@ -2,13 +2,13 @@ package src.view.gui.component;
 
 import java.awt.Color;
 import java.awt.Component;
+
 import javax.swing.JTable;
 
 /**
  * An extended {@link RoomAvailabilityCalendarRenderer} that adds more
- * highlighting
- * rules with respect to a check-in and check-out date, wherein the range
- * encompassed therein are highlighted with a selection background.
+ * highlighting rules with respect to a check-in and check-out date, wherein the
+ * range encompassed therein are highlighted with a selection background.
  */
 public class BookingCalendarRenderer extends RoomAvailabilityCalendarRenderer {
     public static final int NONE = -1;
@@ -27,9 +27,7 @@ public class BookingCalendarRenderer extends RoomAvailabilityCalendarRenderer {
         this.checkIn = checkIn;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value,
             boolean isSelected, boolean hasFocus, int row, int column) {

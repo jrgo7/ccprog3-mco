@@ -14,62 +14,62 @@ public class ManageHotelDelegate {
     }
 
     public void updateManageRoomData(String data, ArrayList<Integer> availableDates) {
-        this.manageHotelPanel.updateRoomData(data, availableDates);
+        this.manageHotelPanel.setRoomData(data, availableDates);
     }
 
-    public void updateReservationList(String[] data) {
+    public void setReservationList(String[] data) {
         ArrayList<String> dataAsList = new ArrayList<>(Arrays.asList(data));
-        this.manageHotelPanel.updateReservationList(dataAsList);
+        this.manageHotelPanel.setReservationList(dataAsList);
     }
 
-    public int getManageReservationSelectedIndex() {
-        return this.manageHotelPanel.getManageReservationSelectedIndex();
+    public int getSelectedReservationIndex() {
+        return this.manageHotelPanel.getSelectedReservationIndex();
     }
 
     public void setManageReservationData(String data) {
-        this.manageHotelPanel.updateReservationData(data);
+        this.manageHotelPanel.setReservationData(data);
     }
 
-    public void setManageReservationVisible(boolean visible) {
-        this.manageHotelPanel.setManageReservationVisible(visible);
+    public void setReservationDataVisible(boolean visible) {
+        this.manageHotelPanel.setReservationDataVisible(visible);
     }
 
     // Manage hotel delegations
 
-    public int getManageRoomSelectedIndex() {
-        return this.manageHotelPanel.getManageRoomSelectedIndex();
+    public int getSelectedRoomIndex() {
+        return this.manageHotelPanel.getSelectedRoomIndex();
     }
 
     public void setManageHotelReservationData(String data) {
-        this.manageHotelPanel.updateReservationData(data);
+        this.manageHotelPanel.setReservationData(data);
     }
 
-    public String getRenameHotelText() {
-        return this.manageHotelPanel.getRenameHotelText();
+    public String getRenameHotelFieldText() {
+        return this.manageHotelPanel.getRenameHotelFieldText();
     }
 
-    public void setRenameHotelText(String name) {
-        this.manageHotelPanel.setRenameHotelText(name);
+    public void setRenameHotelFieldText(String name) {
+        this.manageHotelPanel.setRenameHotelFieldText(name);
     }
 
-    public String getUpdateBasePriceText() {
-        return this.manageHotelPanel.getUpdateBasePriceText();
+    public String getUpdateBasePriceFieldText() {
+        return this.manageHotelPanel.getUpdateBasePriceFieldText();
     }
 
-    public void setUpdateBasePriceText(String basePrice) {
-        this.manageHotelPanel.setUpdateBasePriceText(basePrice);
+    public void setUpdateBasePriceFieldText(String basePrice) {
+        this.manageHotelPanel.setUpdateBasePriceFieldText(basePrice);
     }
 
     public void setManagePricesCalendarText(int date, String text) {
         this.manageHotelPanel.setManagePricesCalendarText(date, text);
     }
 
-    public String getPriceModifierField() {
-        return this.manageHotelPanel.getPriceModifierField();
+    public String getPriceModifierFieldText() {
+        return this.manageHotelPanel.getPriceModifierFieldText();
     }
 
-    public void setPriceModifierField(String text) {
-        this.manageHotelPanel.setPriceModifierField(text);
+    public void setPriceModifierFieldText(String text) {
+        this.manageHotelPanel.setPriceModifierFieldText(text);
     }
 
     public void setModifiedPriceText(String text) {
@@ -77,7 +77,7 @@ public class ManageHotelDelegate {
     }
 
     public void setPriceModifierCalendarDate(int date) {
-        this.manageHotelPanel.setPriceModiferCalendarDate(date);
+        this.manageHotelPanel.setManagePricesCalendarSelection(date);
     }
 
     public int getPriceModifierCalendarRowFromMouse(Point point) {
@@ -88,12 +88,12 @@ public class ManageHotelDelegate {
         return this.manageHotelPanel.getCalendarColAtPoint(point);
     }
 
-    public boolean getIsPriceModifierCalendarFocused() {
-        return this.manageHotelPanel.getIsPriceModifierCalendarFocused();
+    public boolean getIsManagePricesCalendarFocused() {
+        return this.manageHotelPanel.getIsManagePricesCalendarFocused();
     }
 
-    public void resetPriceModifierCalendarSelection() {
-        this.manageHotelPanel.resetPriceModifierCalendarSelection();
+    public void clearManagePricesCalendarSelection() {
+        this.manageHotelPanel.clearManagePricesCalendarSelection();
     }
 
     public boolean getIsUpdatePriceModifierFieldFocused() {
@@ -105,7 +105,7 @@ public class ManageHotelDelegate {
     }
 
     public void setManageRoomVisible(boolean visible) {
-        this.manageHotelPanel.setManageRoomPanelVisible(visible);
+        this.manageHotelPanel.setRoomDataVisible(visible);
     }
 
     public void clearSelectedIndex() {

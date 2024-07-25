@@ -18,12 +18,6 @@ public abstract class ListPanel extends StyledPanel {
     private JList<String> listComponent;
 
     /**
-     * When cancelling certain actions that interact with the list, the list
-     * selection will revert to this index.
-     */
-    private int fallbackIndex;
-
-    /**
      * This header is shown at the top of the list.
      */
     private StyledLabel header;
@@ -36,14 +30,14 @@ public abstract class ListPanel extends StyledPanel {
      */
     public ListPanel(String name, int width) {
         this.setLayout(new BorderLayout());
-        this.fallbackIndex = 0;
 
         this.header = new StyledLabel(name, FontCollection.SEGOE_UI_TITLE);
 
         this.add(header, BorderLayout.NORTH);
 
         this.listComponent = new JList<String>();
-        this.listComponent.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        this.listComponent
+                .setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         this.listComponent.setFixedCellWidth(width);
         this.listComponent.setFixedCellHeight(42);
@@ -73,7 +67,8 @@ public abstract class ListPanel extends StyledPanel {
      * @param font
      * @param background
      */
-    public ListPanel(String name, int width, Font headerFont, Color background) {
+    public ListPanel(String name, int width, Font headerFont,
+            Color background) {
         this(name, width, headerFont);
         this.setBackground(background);
         this.listComponent.setBackground(background);
@@ -109,11 +104,6 @@ public abstract class ListPanel extends StyledPanel {
         return this.listComponent.getSelectedIndex();
     }
 
-    /** {@return the current fallback index of the list} */
-    public int getFallbackIndex() {
-        return this.fallbackIndex;
-    }
-
     /**
      * Sets the list selection to a given index.
      * 
@@ -125,22 +115,13 @@ public abstract class ListPanel extends StyledPanel {
     }
 
     /**
-     * Sets the fallback index for the list.
-     * 
-     * @param index The index to set
-     */
-    public void setFallbackIndex(int index) {
-        this.fallbackIndex = index;
-    }
-
-    /**
      * Clears the list selection.
      * 
      * @see JList#removeSelectionInterval(int, int)
      */
     public void clearSelection() {
         this.listComponent.removeSelectionInterval(
-            this.listComponent.getSelectedIndex(),
-            this.listComponent.getSelectionModel().getMaxSelectionIndex());
+                this.listComponent.getSelectedIndex(),
+                this.listComponent.getSelectionModel().getMaxSelectionIndex());
     }
 }

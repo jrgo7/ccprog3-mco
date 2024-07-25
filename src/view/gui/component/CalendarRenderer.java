@@ -12,29 +12,24 @@ import javax.swing.table.DefaultTableCellRenderer;
  * checkerboard pattern, and sets invalid cells past day 31 with a white
  * background.
  * 
- * TODO: A potential HotelAvailabilityCalendarRenderer
- * TODO: that shades in (availableRooms/totalRooms) red?
+ * TODO: A potential HotelAvailabilityCalendarRenderer TODO: that shades in
+ * (availableRooms/totalRooms) red?
  * 
  */
 public class CalendarRenderer extends DefaultTableCellRenderer {
-
-    /**
-     * Creates a default instance of this class.
-     */
+    /** Creates a default instance of this class. */
     public CalendarRenderer() {
         super();
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value,
             boolean isSelected, boolean hasFocus, int row, int column) {
         super.getTableCellRendererComponent(
                 table, value, isSelected, hasFocus, row, column);
         int date = Calendar.toDate(row, column);
-        
+
         super.setHorizontalAlignment(SwingConstants.CENTER);
         super.setForeground(Color.BLACK);
         if (date > 31) {
