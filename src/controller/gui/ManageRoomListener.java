@@ -70,8 +70,6 @@ public class ManageRoomListener extends RoomListListener implements ActionListen
         if (!this.reservationSystem.removeRoom(hotelIndex, roomIndex))
             view.showCantRemoveRoomError();    
         this.updateList();
-        this.updateDataPanel(roomIndex);
-        
-        this.updateDataPanel(view.getManageRoomSelectedIndex());
+        this.updateDataPanel(-1);
     }
 }

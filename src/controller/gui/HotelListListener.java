@@ -1,5 +1,8 @@
 package src.controller.gui;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import src.model.ReservationSystem;
 import src.view.gui.TopView;
 import src.view.gui.component.HotelListPanel;
@@ -10,7 +13,8 @@ import src.view.gui.component.HotelListPanel;
  * 
  * @see ListAddListener
  */
-public class HotelListListener extends ListAddListener {
+public class HotelListListener extends ListAddListener
+        implements ActionListener {
     /** Initializes the listener and updates the list */
     public HotelListListener(ReservationSystem reservationSystem,
             TopView view) {
@@ -47,44 +51,46 @@ public class HotelListListener extends ListAddListener {
             this.updateDataPanel(selectedIndex);
     };
 
-     /** {@inheritDoc} Updates panel to display hotel information. */
-     @Override
-     protected void updateDataPanel(int selectedIndex) {
-         /* Exit if selected index is invalid */
-         if (selectedIndex < 0)
-             return;
- 
-         /* Updates the list's fallback index */
-         this.view.setHotelListPrevSelectedIndex(selectedIndex);
- 
-         /* Updates View Hotel panels */
-         this.view.setHotelDataText(
-                 reservationSystem.getHotelString(selectedIndex));
-         this.view.updateRoomList(
-                 reservationSystem.getRoomNames(selectedIndex));
- 
-         /* Updates Manage Hotel panels */
-         this.view.setRenameHotelText(
-                 reservationSystem.getHotelName(selectedIndex));
-         this.view.setUpdateBasePriceText(
-                 String.valueOf(
-                         reservationSystem.getBasePrice(selectedIndex)));
-         for (int date = 1; date <= 31; date++)
-             this.view.setManagePricesCalendarText(
-                     date,
-                     String.format(
-                             "%d: %.2f",
-                             date,
-                             reservationSystem.getPriceModifier(selectedIndex,
-                                     date)));
-         
-         // ! Send the new hotel index to every panel/component that needs it
+    /** {@inheritDoc} Updates panel to display hotel information. */
+    @Override
+    protected void updateDataPanel(int selectedIndex) {
+        /* Exit if selected index is invalid */
+        if (selectedIndex < 0)
+            return;
 
-         /* Changes the selected hotel index in Simulate Booking Panel */
-         reservationSystem.resetReservationBuilder();
-         reservationSystem.getReservationBuilder().setHotelIndex(selectedIndex);
-         view.resetBookingScreen();
-     }
+        this.view.setTopMenuPaneVisible(true);
+
+        /* Updates the list's fallback index */
+        this.view.setHotelListPrevSelectedIndex(selectedIndex);
+
+        /* Updates View Hotel panels */
+        this.view.setHotelDataText(
+                reservationSystem.getHotelString(selectedIndex));
+        this.view.updateRoomList(
+                reservationSystem.getRoomNames(selectedIndex));
+
+        /* Updates Manage Hotel panels */
+        this.view.setRenameHotelText(
+                reservationSystem.getHotelName(selectedIndex));
+        this.view.setUpdateBasePriceText(
+                String.valueOf(
+                        reservationSystem.getBasePrice(selectedIndex)));
+        for (int date = 1; date <= 31; date++)
+            this.view.setManagePricesCalendarText(
+                    date,
+                    String.format(
+                            "%d: %.2f",
+                            date,
+                            reservationSystem.getPriceModifier(selectedIndex,
+                                    date)));
+
+        // ! Send the new hotel index to every panel/component that needs it
+
+        /* Changes the selected hotel index in Simulate Booking Panel */
+        reservationSystem.resetReservationBuilder();
+        reservationSystem.getReservationBuilder().setHotelIndex(selectedIndex);
+        view.resetBookingScreen();
+    }
 
     /** {@inheritDoc} Prompts the user to add a hotel to the list. */
     @Override
@@ -115,5 +121,12 @@ public class HotelListListener extends ListAddListener {
             this.view.removeHotelListSelection();
     }
 
-   
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        this.reservationSystem
+                .removeHotel(this.view.getHotelListSelectedIndex());
+        this.updateList();
+        this.view.removeHotelListSelection();
+        this.view.setTopMenuPaneVisible(false);
+    }
 }

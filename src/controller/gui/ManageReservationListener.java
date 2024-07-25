@@ -45,8 +45,6 @@ public class ManageReservationListener extends ReservationListListener implement
 
         this.reservationSystem.removeReservation(hotelIndex, reservationIndex);
         this.updateList();
-        this.updateDataPanel(reservationIndex);
-        
-        this.updateDataPanel(view.getManageReservationSelectedIndex());
+        this.updateDataPanel(-1);
     }
 }
