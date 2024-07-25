@@ -140,7 +140,7 @@ public class ManagePricesListener extends CalendarListener
             view.showPriceModifierError();
         }
         this.setPriceModifierField();
-        view.setPriceModiferCalendarDate(date);
+        view.setPriceModifierCalendarDate(date);
     }
 
     @Override

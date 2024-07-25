@@ -1,7 +1,6 @@
 package src.controller.gui;
 
 import java.awt.event.MouseEvent;
-
 import src.model.ReservationSystem;
 import src.view.gui.TopView;
 import src.view.gui.component.Calendar;
@@ -56,6 +55,7 @@ public class HotelAvailabilityCalendarListener extends CalendarListener {
         /** No special behavior */
     }
 
+    @Override
     protected void handleReleasedOutsideComponent() {
         view.resetAvailabilityCalendarSelection();
     }

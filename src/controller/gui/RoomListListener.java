@@ -1,9 +1,6 @@
 package src.controller.gui;
 
 import java.util.ArrayList;
-
-import javax.swing.event.ListSelectionEvent;
-
 import src.model.ReservationSystem;
 import src.view.gui.TopView;
 import src.view.gui.subpanel.ViewRoomPanel;

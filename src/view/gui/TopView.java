@@ -8,18 +8,15 @@ import java.awt.Point;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.Arrays;
-
 import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
-import src.view.gui.component.StyledLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.UIManager;
-
+import javax.swing.UnsupportedLookAndFeelException;
 import src.controller.gui.HotelAvailabilityCalendarListener;
-import src.controller.gui.SimulateBookingCalendarListener;
 import src.controller.gui.HotelListListener;
 import src.controller.gui.ManagePricesListener;
 import src.controller.gui.ManageReservationListener;
@@ -27,44 +24,48 @@ import src.controller.gui.ManageRoomListener;
 import src.controller.gui.RenameHotelListener;
 import src.controller.gui.ReservationListListener;
 import src.controller.gui.RoomListListener;
+import src.controller.gui.SimulateBookingCalendarListener;
 import src.controller.gui.SimulateBookingRoomListListener;
 import src.controller.gui.TopMenuPaneListener;
 import src.view.gui.component.BookingCalendarRenderer;
 import src.view.gui.component.ColorCollection;
 import src.view.gui.component.FontCollection;
 import src.view.gui.component.HotelListPanel;
+import src.view.gui.component.StyledLabel;
 import src.view.gui.component.StyledPanel;
+import src.view.gui.component.StyledTabbedPane;
 import src.view.gui.panel.ManageHotelPanel;
 import src.view.gui.panel.SimulateBookingPanel;
 import src.view.gui.panel.ViewHotelPanel;
-import src.view.gui.component.StyledTabbedPane;
 
-/** Represents the top menu in the application's GUI. */
+/**
+ * Represents the top menu in the application's GUI.
+ */
 public class TopView extends JFrame {
+
     static public final int VIEW_HOTEL_TAB = 0;
     static public final int MANAGE_HOTEL_TAB = 1;
     static public final int SIMULATE_BOOKING_TAB = 2;
 
-    private HotelListPanel hotelListPanel;
-
-    private StyledTabbedPane topMenuPane;
-    private ViewHotelPanel viewHotelPanel;
-    private ManageHotelPanel manageHotelPanel;
-    private SimulateBookingPanel simulateBookingPanel;
+    private final HotelListPanel hotelListPanel;
+    private final StyledTabbedPane topMenuPane;
+    private final ViewHotelPanel viewHotelPanel;
+    private final ManageHotelPanel manageHotelPanel;
+    private final SimulateBookingPanel simulateBookingPanel;
 
     public TopView() {
         super("Hotel Reservation System");
-        
+
         // Global styling
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception e) {
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException e) {
             System.err.println("Unable to configure look and feel.");
         }
         UIManager.put(
-            "TabbedPane.contentBorderInsets",
-            new Insets(0, 0, 0, 0));
-        
+                "TabbedPane.contentBorderInsets",
+                new Insets(0, 0, 0, 0));
+
         // Window manager
         this.setLocationByPlatform(true);
         Dimension systemResolution = Toolkit.getDefaultToolkit()
@@ -73,14 +74,7 @@ public class TopView extends JFrame {
                 (int) (systemResolution.getWidth() / 2),
                 (int) (systemResolution.getHeight() / 1.1)));
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-
         // Component building
-        this.init();
-        
-        this.setVisible(true);
-    }
-
-    public void init() {
         this.setLayout(new BorderLayout());
 
         StyledPanel paddingPanel = new StyledPanel();
@@ -110,10 +104,10 @@ public class TopView extends JFrame {
         paddingPanel.add(topMenuPane, BorderLayout.CENTER);
 
         this.add(paddingPanel, BorderLayout.CENTER);
+        this.setVisible(true);
     }
 
     // Global / "Top menu" methods
-
     public void setTopViewHotelListListener(
             HotelListListener hotelListListener) {
         this.hotelListPanel.setListener(hotelListListener);
@@ -177,7 +171,6 @@ public class TopView extends JFrame {
     }
 
     // View hotel delegations
-
     public void setHotelDataText(String text) {
         this.viewHotelPanel.updateHotelData(text);
     }
@@ -217,18 +210,10 @@ public class TopView extends JFrame {
         this.viewHotelPanel.resetRoomListSelection();
     }
 
-    public int getViewRoomSelectedIndex() {
-        return this.viewHotelPanel.getViewRoomSelectedIndex();
-    }
-
     public void updateReservationList(String[] data) {
         ArrayList<String> dataAsList = new ArrayList<>(Arrays.asList(data));
         this.viewHotelPanel.updateReservationList(dataAsList);
         this.manageHotelPanel.updateReservationList(dataAsList);
-    }
-
-    public int getViewReservationSelectedIndex() {
-        return this.viewHotelPanel.getViewReservationSelectedIndex();
     }
 
     public int getManageReservationSelectedIndex() {
@@ -238,12 +223,12 @@ public class TopView extends JFrame {
     public void setReservationData(String data) {
         this.viewHotelPanel.updateReservationData(data);
     }
-    
+
     public void setManageReservationData(String data) {
         this.manageHotelPanel.updateReservationData(data);
     }
 
-    public void setManageReservationVisible(boolean visible){
+    public void setManageReservationVisible(boolean visible) {
         this.viewHotelPanel.setReservationVisible(visible);
         this.manageHotelPanel.setManageReservationVisible(visible);
     }
@@ -290,7 +275,7 @@ public class TopView extends JFrame {
         this.manageHotelPanel.setModifiedPriceText(text);
     }
 
-    public void setPriceModiferCalendarDate(int date) {
+    public void setPriceModifierCalendarDate(int date) {
         this.manageHotelPanel.setPriceModiferCalendarDate(date);
     }
 
@@ -323,7 +308,6 @@ public class TopView extends JFrame {
     }
 
     // Simulate booking delegations
-
     public void setBookingCalendarAvailability(ArrayList<Integer> dates) {
         this.simulateBookingPanel.setCalendarAvailability(dates);
     }
@@ -340,10 +324,6 @@ public class TopView extends JFrame {
         return this.simulateBookingPanel.getGuestNameFieldText();
     }
 
-    public int getBookingCalendarDay() {
-        return this.simulateBookingPanel.getBookingCalendarDay();
-    }
-
     public int getBookingRoomIndex() {
         return this.simulateBookingPanel.getRoomIndex();
     }
@@ -354,14 +334,6 @@ public class TopView extends JFrame {
 
     public String getBookingDiscountCode() {
         return this.simulateBookingPanel.getDiscountCodeFieldText();
-    }
-
-    public void setBookingDiscountCode(String discountCode) {
-        this.simulateBookingPanel.setDiscountCodeFieldText(discountCode);
-    }
-
-    public void setBookingGuestName(String guestName) {
-        this.simulateBookingPanel.setGuestNameFieldText(guestName);
     }
 
     public void updateSimulateBookingReservationPreview(String text) {
@@ -405,13 +377,12 @@ public class TopView extends JFrame {
         this.resetBookingFields();
         this.resetBookingRoomListSelection();
         this.updateSimulateBookingReservationPreview(
-            SimulateBookingPanel.RESERVATION_PREVIEW_INITIAL_TEXT);
+                SimulateBookingPanel.RESERVATION_PREVIEW_INITIAL_TEXT);
         this.setBookingCalendarCheckIn(BookingCalendarRenderer.NONE);
         this.setBookingCalendarCheckOut(BookingCalendarRenderer.NONE);
     }
 
     // Prompts and dialogs
-
     public String promptAddHotel() {
         return JOptionPane.showInputDialog("Hotel name");
     }
@@ -425,12 +396,12 @@ public class TopView extends JFrame {
         promptPanel.add(prompt, BorderLayout.NORTH);
 
         JSpinner spinner = new JSpinner(
-            new SpinnerNumberModel(1, 1, limit, 1));
+                new SpinnerNumberModel(1, 1, limit, 1));
         promptPanel.add(spinner, BorderLayout.WEST);
         spinner.setFont(FontCollection.SEGOE_UI_BODY);
 
-        JComboBox<String> options = new JComboBox<>(new String[] {
-                "Regular", "Deluxe", "Executive"
+        JComboBox<String> options = new JComboBox<>(new String[]{
+            "Regular", "Deluxe", "Executive"
         });
         options.setFont(FontCollection.SEGOE_UI_BODY);
         promptPanel.add(options, BorderLayout.CENTER);
@@ -439,18 +410,10 @@ public class TopView extends JFrame {
                 promptPanel, "Add rooms", JOptionPane.OK_CANCEL_OPTION,
                 JOptionPane.QUESTION_MESSAGE);
 
-        return new int[] {
-                (response == 0) ? options.getSelectedIndex() : -1,
-                (Integer) spinner.getValue()
+        return new int[]{
+            (response == 0) ? options.getSelectedIndex() : -1,
+            (Integer) spinner.getValue()
         };
-    }
-
-    public void noHotelNameProvidedError() {
-        JOptionPane.showMessageDialog(
-                this,
-                "Please provide a non-empty hotel name.",
-                "No hotel name provided error",
-                JOptionPane.ERROR_MESSAGE);
     }
 
     public void showHotelNameExistsError() {
@@ -472,8 +435,8 @@ public class TopView extends JFrame {
     public void basePriceUpdateReservationsExistError() {
         JOptionPane.showMessageDialog(
                 this,
-                "The base price cannot be updated while reservations exist " +
-                        "in the current hotel.",
+                "The base price cannot be updated while reservations exist "
+                + "in the current hotel.",
                 "Invalid base price update error: reservations exist",
                 JOptionPane.ERROR_MESSAGE);
     }

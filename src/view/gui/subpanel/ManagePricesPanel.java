@@ -2,18 +2,15 @@ package src.view.gui.subpanel;
 
 import java.awt.GridLayout;
 import java.awt.Point;
-
 import javax.swing.BoxLayout;
-import src.view.gui.component.StyledHTMLPane;
-import src.view.gui.component.StyledLabel;
-import src.view.gui.component.StyledPanel;
 import javax.swing.JTextField;
-
 import src.controller.gui.ManagePricesListener;
 import src.view.gui.component.Calendar;
 import src.view.gui.component.DecimalDocument;
-import src.view.gui.component.FontCollection;
 import src.view.gui.component.StyledButton;
+import src.view.gui.component.StyledHTMLPane;
+import src.view.gui.component.StyledLabel;
+import src.view.gui.component.StyledPanel;
 
 public class ManagePricesPanel extends StyledPanel {
     private Calendar calendarComponent;

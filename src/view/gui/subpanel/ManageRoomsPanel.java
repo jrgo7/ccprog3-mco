@@ -5,9 +5,6 @@ import java.awt.event.ActionListener;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import src.view.gui.component.StyledPanel;
-
-import src.controller.gui.RoomListListener;
 
 public class ManageRoomsPanel extends ViewRoomPanel {
     private JButton removeButton = new JButton("Remove room");

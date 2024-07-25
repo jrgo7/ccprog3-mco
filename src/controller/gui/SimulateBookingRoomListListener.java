@@ -1,7 +1,5 @@
 package src.controller.gui;
 
-import javax.swing.event.ListSelectionEvent;
-
 import src.model.ReservationSystem;
 import src.view.gui.TopView;
 
