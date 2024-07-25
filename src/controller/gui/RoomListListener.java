@@ -27,7 +27,7 @@ public class RoomListListener extends ListAddListener {
     @Override
     public void updateList() {
         /* Exit if selected index is invalid */
-        int hotelIndex = this.view.getHotelListSelectedIndex();
+        int hotelIndex = this.view.getSelectedIndex();
         if (hotelIndex < 0)
             return;
 
@@ -36,7 +36,7 @@ public class RoomListListener extends ListAddListener {
     }
 
     protected void updateDataPanelData(String data, ArrayList<Integer> availableDates) {
-        this.view.updateRoomData(data, availableDates);
+        this.view.getViewHotelDelegate().setRoomData(data, availableDates);
     }
 
     /** {@inheritDoc} */
@@ -44,11 +44,11 @@ public class RoomListListener extends ListAddListener {
     protected void updateDataPanel(int selectedIndex) {
         /* Exit if selected index is invalid */
         if (selectedIndex < 0) {
-            this.view.setManageRoomVisible(false);
+            this.view.getViewHotelDelegate().setRoomDataVisible(false);
             return;
         }
 
-        int hotelIndex = view.getHotelListSelectedIndex();
+        int hotelIndex = view.getSelectedIndex();
 
         if (hotelIndex < 0)
             hotelIndex = 0;
@@ -71,10 +71,10 @@ public class RoomListListener extends ListAddListener {
     @Override
     protected int getListLength() {
         /* Exit if selected index is invalid */
-        int hotelIndex = this.view.getHotelListSelectedIndex();
+        int hotelIndex = this.view.getSelectedIndex();
         if (hotelIndex < 0)
             return 0;
 
-        return reservationSystem.getRoomCount(view.getHotelListSelectedIndex());
+        return reservationSystem.getRoomCount(view.getSelectedIndex());
     }
 }

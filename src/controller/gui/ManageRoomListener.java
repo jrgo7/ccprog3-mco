@@ -25,7 +25,7 @@ public class ManageRoomListener extends RoomListListener implements ActionListen
     @Override
     protected void addToList(int selectedIndex) {
         /* Exit if selected index is invalid */
-        int hotelIndex = this.view.getHotelListSelectedIndex();
+        int hotelIndex = this.view.getSelectedIndex();
         if (hotelIndex < 0)
             return;
 
@@ -45,7 +45,7 @@ public class ManageRoomListener extends RoomListListener implements ActionListen
 
     @Override
     protected void updateDataPanelData(String data, ArrayList<Integer> availableDates) {
-        this.view.updateManageRoomData(data, availableDates);
+        this.view.getManageHotelDelegate().updateManageRoomData(data, availableDates);
     }
 
     @Override
@@ -58,8 +58,8 @@ public class ManageRoomListener extends RoomListListener implements ActionListen
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        int roomIndex = view.getManageRoomSelectedIndex();
-        int hotelIndex = view.getHotelListSelectedIndex();
+        int roomIndex = view.getManageHotelDelegate().getManageRoomSelectedIndex();
+        int hotelIndex = view.getSelectedIndex();
 
         if (roomIndex < 0 || hotelIndex < 0)
             return;

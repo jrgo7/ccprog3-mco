@@ -21,24 +21,24 @@ public class ManageReservationListener extends ReservationListListener implement
    protected void updateDataPanel(int selectedIndex) {
        /* Exit if selected index is invalid */
        if (selectedIndex < 0) {
-           this.view.setManageReservationVisible(false);
+           this.view.getManageHotelDelegate().setManageReservationVisible(false);
            return;
        }
            
-       this.view.setManageReservationVisible(true);
-       int hotelIndex = view.getHotelListSelectedIndex();
+       this.view.getManageHotelDelegate().setManageReservationVisible(true);
+       int hotelIndex = view.getSelectedIndex();
 
        if (hotelIndex < 0)
            hotelIndex = 0;
-       this.view.setManageReservationData(
+       this.view.getManageHotelDelegate().setManageReservationData(
                reservationSystem.getReservationString(hotelIndex,
                        selectedIndex));
    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        int reservationIndex = view.getManageReservationSelectedIndex();
-        int hotelIndex = view.getHotelListSelectedIndex();
+        int reservationIndex = view.getManageHotelDelegate().getManageReservationSelectedIndex();
+        int hotelIndex = view.getSelectedIndex();
 
         if (reservationIndex < 0 || hotelIndex < 0)
             return;

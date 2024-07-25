@@ -75,4 +75,8 @@ public class ViewRoomPanel extends StyledPanel {
     public void setWrapperVisible(boolean visible) {
         this.outer.setVisible(visible);
     }
+
+    public void setSelectedIndex(int index) {
+        this.roomListPanel.setSelectedIndex(index);
+    }
 }

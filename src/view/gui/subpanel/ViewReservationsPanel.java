@@ -60,4 +60,8 @@ public class ViewReservationsPanel extends StyledPanel {
     public void setWrapperVisible(boolean visible) {
         this.outer.setVisible(visible);
     }
+
+    public void setSelectedIndex(int index) {
+        this.reservationListPanel.setSelectedIndex(index);
+    }
 }

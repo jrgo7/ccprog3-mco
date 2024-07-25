@@ -27,10 +27,10 @@ public class ManagePricesListener extends CalendarListener
         if (date < 1 || date > 31) {
             return;
         }
-        view.setPriceModifierField(
+        view.getManageHotelDelegate().setPriceModifierField(
                 String.valueOf(
                         reservationSystem.getPriceModifier(
-                                view.getHotelListSelectedIndex(), date)));
+                                view.getSelectedIndex(), date)));
         setModifiedPriceText();
     }
 
@@ -40,11 +40,11 @@ public class ManagePricesListener extends CalendarListener
             return;
         }
 
-        int index = view.getHotelListSelectedIndex();
+        int index = view.getSelectedIndex();
         double basePrice = reservationSystem.getBasePrice(index);
         double priceModifier = reservationSystem.getPriceModifier(index, date);
 
-        view.setModifiedPriceText(String.format("""
+        view.getManageHotelDelegate().setModifiedPriceText(String.format("""
                 <h2>Day %d</h2>
                 %.2f * %.2f = %.2f""",
                 this.getDate(),
@@ -59,9 +59,9 @@ public class ManagePricesListener extends CalendarListener
     }
 
     private void handlePressEnterKey(int row, int col) {
-        if (view.getIsUpdatePriceModifierFieldFocused()) {
+        if (view.getManageHotelDelegate().getIsUpdatePriceModifierFieldFocused()) {
             updatePriceModifier();
-        } else if (view.getIsUpdateBasePriceFieldFocused()) {
+        } else if (view.getManageHotelDelegate().getIsUpdateBasePriceFieldFocused()) {
             updateBasePrice();
         }
     }
@@ -88,12 +88,12 @@ public class ManagePricesListener extends CalendarListener
 
     @Override
     protected void handleReleasedOutsideComponent() {
-        view.resetPriceModifierCalendarSelection();
+        view.getManageHotelDelegate().resetPriceModifierCalendarSelection();
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (view.getIsPriceModifierCalendarFocused()) {
+        if (view.getManageHotelDelegate().getIsPriceModifierCalendarFocused()) {
             super.keyPressed(e);
         } else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
             handlePressEnterKey(this.getRow(), this.getCol());
@@ -113,8 +113,8 @@ public class ManagePricesListener extends CalendarListener
     }
 
     public void updateBasePrice() {
-        int index = view.getHotelListSelectedIndex();
-        double newBasePrice = Double.parseDouble(view.getUpdateBasePriceText());
+        int index = view.getSelectedIndex();
+        double newBasePrice = Double.parseDouble(view.getManageHotelDelegate().getUpdateBasePriceText());
         int result = reservationSystem.setBasePrice(index, newBasePrice);
         switch (result) {
             case Hotel.SET_BASE_PRICE_SUCCESS:
@@ -131,21 +131,21 @@ public class ManagePricesListener extends CalendarListener
 
     public void updatePriceModifier() {
         int date = this.getDate();
-        int index = view.getHotelListSelectedIndex();
-        double newModifier = Double.parseDouble(view.getPriceModifierField());
+        int index = view.getSelectedIndex();
+        double newModifier = Double.parseDouble(view.getManageHotelDelegate().getPriceModifierField());
         if (reservationSystem.setPriceModifier(index, date, newModifier)) {
-            view.setManagePricesCalendarText(
+            view.getManageHotelDelegate().setManagePricesCalendarText(
                     date, String.format("%d: %.2f", date, newModifier));
         } else {
             view.showPriceModifierError();
         }
         this.setPriceModifierField();
-        view.setPriceModifierCalendarDate(date);
+        view.getManageHotelDelegate().setPriceModifierCalendarDate(date);
     }
 
     @Override
     protected void setRowAndCol(MouseEvent e) {
-        setRow(view.getPriceModifierCalendarRowFromMouse(e.getPoint()));
-        setCol(view.getPriceModifierCalendarColFromMouse(e.getPoint()));
+        setRow(view.getManageHotelDelegate().getPriceModifierCalendarRowFromMouse(e.getPoint()));
+        setCol(view.getManageHotelDelegate().getPriceModifierCalendarColFromMouse(e.getPoint()));
     }
 }

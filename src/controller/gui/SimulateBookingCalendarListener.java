@@ -32,22 +32,22 @@ public class SimulateBookingCalendarListener extends CalendarListener implements
      * Update the reservation preview.
      */
     public void updateReservationPreview() {
-        view.updateSimulateBookingReservationPreview(
+        view.getSimulateBookingDelegate().updateSimulateBookingReservationPreview(
                 reservationSystem.getReservationBuilderString());
 
-        view.setBookingCalendarAvailability(
+        view.getSimulateBookingDelegate().setBookingCalendarAvailability(
                 reservationSystem.getAvailableDatesForRoom(
-                        view.getHotelListSelectedIndex(),
-                        view.getBookingRoomIndex()));
+                        view.getSelectedIndex(),
+                        view.getSimulateBookingDelegate().getBookingRoomIndex()));
 
         ReservationBuilder builder = reservationSystem.getReservationBuilder();
-        view.setBookingCalendarCheckIn(builder.getCheckIn());
-        view.setBookingCalendarCheckOut(builder.getCheckOut());
+        view.getSimulateBookingDelegate().setBookingCalendarCheckIn(builder.getCheckIn());
+        view.getSimulateBookingDelegate().setBookingCalendarCheckOut(builder.getCheckOut());
     }
 
     private void resetBookingScreen() {
         this.mode = CHECK_IN;
-        view.resetBookingScreen();
+        view.getSimulateBookingDelegate().resetBookingScreen();
         reservationSystem.resetReservationBuilder();
     }
 
@@ -62,7 +62,7 @@ public class SimulateBookingCalendarListener extends CalendarListener implements
     }
 
     public void submitReservation() {
-        int hotelIndex = view.getHotelListSelectedIndex();
+        int hotelIndex = view.getSelectedIndex();
 
         if (hotelIndex < 0)
             return;
@@ -99,8 +99,8 @@ public class SimulateBookingCalendarListener extends CalendarListener implements
     /** {@inheritDoc} */
     @Override
     protected void setRowAndCol(MouseEvent e) {
-        this.setRow(view.getBookingCalendarRowFromMouse(e.getPoint()));
-        this.setCol(view.getBookingCalendarColFromMouse(e.getPoint()));
+        this.setRow(view.getSimulateBookingDelegate().getBookingCalendarRowFromMouse(e.getPoint()));
+        this.setCol(view.getSimulateBookingDelegate().getBookingCalendarColFromMouse(e.getPoint()));
     }
 
     /** {@inheritDoc} */
@@ -139,7 +139,7 @@ public class SimulateBookingCalendarListener extends CalendarListener implements
     /** {@inheritDoc} */
     @Override
     protected void handleReleasedOutsideComponent() {
-        view.resetBookingCalendarSelection();
+        view.getSimulateBookingDelegate().resetBookingCalendarSelection();
         this.updateReservationPreview();
     }
 
@@ -149,7 +149,7 @@ public class SimulateBookingCalendarListener extends CalendarListener implements
      */
     @Override
     public void keyPressed(KeyEvent e) {
-        if (view.getIsBookingCalendarFocused()) {
+        if (view.getSimulateBookingDelegate().getIsBookingCalendarFocused()) {
             super.keyPressed(e);
         }
     }
@@ -166,9 +166,9 @@ public class SimulateBookingCalendarListener extends CalendarListener implements
     @Override
     public void keyReleased(KeyEvent e) {
         ReservationBuilder builder = reservationSystem.getReservationBuilder();
-        if (!view.getIsBookingCalendarFocused()) {
-            builder.setGuestName(view.getBookingGuestName());
-            builder.setDiscountCode(view.getBookingDiscountCode());
+        if (!view.getSimulateBookingDelegate().getIsBookingCalendarFocused()) {
+            builder.setGuestName(view.getSimulateBookingDelegate().getBookingGuestName());
+            builder.setDiscountCode(view.getSimulateBookingDelegate().getBookingDiscountCode());
             this.updateReservationPreview();
         }
     }

@@ -19,15 +19,15 @@ public class HotelAvailabilityCalendarListener extends CalendarListener {
     }
 
     public void handleCheckAvailability(int row, int col) {
-        int index = view.getHotelListSelectedIndex();
+        int index = view.getSelectedIndex();
         int date = Calendar.toDate(row, col);
         if (date > 31 || date < 1) {
-            view.setHotelAvailabilityDataText("<p></p>");
+            view.getViewHotelDelegate().setHotelAvailability("<p></p>");
             return; // Block invalid input
         }
 
         boolean isOneRoom = reservationSystem.getAvailableRoomCount(index, date) == 1;
-        view.setHotelAvailabilityDataText(
+        view.getViewHotelDelegate().setHotelAvailability(
                 String.format("""
                         <h2>Day %d</h2>
                         <ul>
@@ -57,7 +57,7 @@ public class HotelAvailabilityCalendarListener extends CalendarListener {
 
     @Override
     protected void handleReleasedOutsideComponent() {
-        view.resetAvailabilityCalendarSelection();
+        view.getViewHotelDelegate().resetAvailabilityCalendarSelection();
     }
 
     @Override
@@ -72,8 +72,8 @@ public class HotelAvailabilityCalendarListener extends CalendarListener {
 
     @Override
     protected void setRowAndCol(MouseEvent e) {
-        this.setRow(view.getAvailabilityCalendarRowFromMouse(e.getPoint()));
-        this.setCol(view.getAvailabilityCalendarColFromMouse(e.getPoint()));
+        this.setRow(view.getViewHotelDelegate().getAvailabilityCalendarRowFromMouse(e.getPoint()));
+        this.setCol(view.getViewHotelDelegate().getAvailabilityCalendarColFromMouse(e.getPoint()));
     }
 
 }

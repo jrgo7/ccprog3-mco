@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.event.ActionListener;
+import java.beans.BeanProperty;
 import java.util.ArrayList;
 
 import src.view.gui.component.StyledButton;
@@ -23,11 +24,14 @@ import src.view.gui.subpanel.ManageRoomsPanel;
 
 public class ManageHotelPanel extends StyledPanel {
     private StyledTabbedPane subpanels;
+
     private ManageRoomsPanel manageRoomsSubpanel;
     private ManageReservationsPanel manageReservationsSubpanel;
     private ManagePricesPanel managePricesSubpanel;
+
     private JTextField renameHotelField;
     private JTextField basePriceField;
+
     private StyledButton renameHotelButton;
     private StyledButton updateBasePriceButton;
     private StyledButton removeHotelButton;
@@ -75,8 +79,6 @@ public class ManageHotelPanel extends StyledPanel {
 
         this.add(subpanels, BorderLayout.CENTER);
     }
-
-    // Info edit panel
 
     public String getRenameHotelText() {
         return this.renameHotelField.getText();

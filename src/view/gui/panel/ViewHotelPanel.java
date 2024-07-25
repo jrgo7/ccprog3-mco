@@ -159,4 +159,20 @@ public class ViewHotelPanel extends StyledPanel {
     public void setReservationVisible(boolean visible){
         this.viewReservationsSubPanel.setWrapperVisible(visible);
     }
+
+    public void setSelectedRoomIndex(int index) {
+        this.viewRoomSubPanel.setSelectedIndex(index);
+    }
+
+    public void setSelectedReservationIndex(int index) {
+        this.viewReservationsSubPanel.setSelectedIndex(index);
+    } 
+
+    public void setReservationDataVisibile(boolean visible) {
+        this.viewReservationsSubPanel.setWrapperVisible(visible);
+    }
+
+    public void setRoomDataVisible(boolean visible) {
+        this.viewRoomSubPanel.setWrapperVisible(visible);
+    }
 }
