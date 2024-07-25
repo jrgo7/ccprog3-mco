@@ -143,16 +143,12 @@ public class TopView extends JFrame {
         return topMenuPane.getSelectedIndex();
     }
 
+    public void setTabIndex(int index) {
+        topMenuPane.setSelectedIndex(index);
+    }
+
     public void setHotelListData(ArrayList<String> data) {
         this.hotelListPanel.setList(data);
-    }
-
-    public int getHotelListPrevSelectedIndex() {
-        return this.hotelListPanel.getFallbackIndex();
-    }
-
-    public void setHotelListPrevSelectedIndex(int index) {
-        this.hotelListPanel.setFallbackIndex(index);
     }
 
     public int getHotelListSelectedIndex() {
@@ -161,14 +157,12 @@ public class TopView extends JFrame {
 
     public void setHotelListSelectedIndex(int index) {
         this.hotelListPanel.setSelectedIndex(index);
+        this.topMenuPane.setVisible(true);
     }
 
     public void removeHotelListSelection() {
         this.hotelListPanel.clearSelection();
-    }
-
-    public void setTopMenuPaneVisible(boolean enable) {
-        this.topMenuPane.setVisible(enable);
+        this.topMenuPane.setVisible(false);
     }
 
     // View hotel delegations

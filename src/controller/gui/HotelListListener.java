@@ -31,9 +31,7 @@ public class HotelListListener extends ListAddListener
 
         /* Hide panel when there are no hotels in the system */
         if (reservationSystem.getHotelCount() == 0)
-            this.view.setTopMenuPaneVisible(false);
-        else
-            this.view.setTopMenuPaneVisible(true);
+            this.view.removeHotelListSelection();
     }
 
     /** {@inheritDoc} Equal to the number of hotels in the system. */
@@ -58,11 +56,6 @@ public class HotelListListener extends ListAddListener
         if (selectedIndex < 0)
             return;
 
-        this.view.setTopMenuPaneVisible(true);
-
-        /* Updates the list's fallback index */
-        this.view.setHotelListPrevSelectedIndex(selectedIndex);
-
         /* Updates View Hotel panels */
         this.view.setHotelDataText(
                 reservationSystem.getHotelString(selectedIndex));
@@ -85,6 +78,7 @@ public class HotelListListener extends ListAddListener
                                     date)));
 
         // ! Send the new hotel index to every panel/component that needs it
+        view.setHotelListSelectedIndex(selectedIndex);
 
         /* Changes the selected hotel index in Simulate Booking Panel */
         reservationSystem.resetReservationBuilder();
@@ -99,6 +93,7 @@ public class HotelListListener extends ListAddListener
         if (selectedIndex < 0)
             return;
 
+        System.out.println("Index " + selectedIndex);
         /* Prompts the user to enter a hotel name */
         String name = this.view.promptAddHotel();
 
@@ -107,26 +102,24 @@ public class HotelListListener extends ListAddListener
             view.resetAvailabilityCalendarSelection();
             view.setHotelAvailabilityDataText("<p></p>");
             this.updateList();
-
-            /* Prevents the selection highlight from disappearing */
+            // /* Prevents the selection highlight from disappearing */
             this.view.setHotelListSelectedIndex(selectedIndex);
-        } else if (reservationSystem.getHotelCount() > 0) {
-            this.view.setHotelListSelectedIndex(
-                    this.view.getHotelListPrevSelectedIndex());
-
-            /* The user did not cancel */
-            if (name != null)
+            this.view.setTabIndex(TopView.VIEW_HOTEL_TAB);
+        } else {
+            // Did not add a hotel successfully.
+            if (name != null) {
+                /// User did not cancel
                 this.view.showHotelNameExistsError();
-        } else
+            }
             this.view.removeHotelListSelection();
+        }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        this.reservationSystem
-                .removeHotel(this.view.getHotelListSelectedIndex());
+        this.reservationSystem.removeHotel(
+            this.view.getHotelListSelectedIndex());
         this.updateList();
         this.view.removeHotelListSelection();
-        this.view.setTopMenuPaneVisible(false);
     }
 }

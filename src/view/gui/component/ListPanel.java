@@ -139,7 +139,8 @@ public abstract class ListPanel extends StyledPanel {
      * @see JList#removeSelectionInterval(int, int)
      */
     public void clearSelection() {
-        this.listComponent.removeSelectionInterval(0,
-                this.listComponent.getComponentCount());
+        this.listComponent.removeSelectionInterval(
+            this.listComponent.getSelectedIndex(),
+            this.listComponent.getSelectionModel().getMaxSelectionIndex());
     }
 }

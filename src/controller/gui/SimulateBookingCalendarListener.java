@@ -9,9 +9,7 @@ import src.model.Hotel;
 import src.model.ReservationBuilder;
 import src.model.ReservationSystem;
 import src.view.gui.TopView;
-import src.view.gui.component.BookingCalendarRenderer;
 import src.view.gui.component.Calendar;
-import src.view.gui.panel.SimulateBookingPanel;
 
 /**
  * An extension of {@link CalendarListener} with functionality to handle
