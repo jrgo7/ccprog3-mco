@@ -1,17 +1,17 @@
 package src.view.gui.subpanel;
 
 import java.awt.event.ActionListener;
-
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JPanel;
+import src.view.gui.component.StyledButton;
+import src.view.gui.component.StyledButtonFactory;
+import src.view.gui.component.StyledPanel;
 
 public class ManageRoomsPanel extends ViewRoomPanel {
-    private JButton removeButton = new JButton("Remove room");
+    private StyledButton removeButton = StyledButtonFactory.createDestructiveButton("Remove room");
 
     public ManageRoomsPanel() {
         super(true);
-        JPanel wrapper = new JPanel();
+        StyledPanel wrapper = new StyledPanel();
         wrapper.setLayout(new BoxLayout(wrapper, BoxLayout.X_AXIS));
         wrapper.add(removeButton);
         this.outer.add(wrapper);

@@ -3,16 +3,14 @@ package src.view.gui.panel;
 import java.awt.BorderLayout;
 import java.awt.Point;
 import java.util.ArrayList;
-
-import src.view.gui.component.StyledHTMLPane; import src.view.gui.component.StyledTabbedPane;
-
-import src.view.gui.component.StyledPanel;
 import javax.swing.JTable;
-
-import src.controller.gui.HotelAvailabilityCalendarListener;
+ import src.controller.gui.HotelAvailabilityCalendarListener;
 import src.controller.gui.ReservationListListener;
 import src.controller.gui.RoomListListener;
 import src.model.Hotel;
+import src.view.gui.component.StyledHTMLPane;
+import src.view.gui.component.StyledPanel;
+import src.view.gui.component.StyledTabbedPane;
 import src.view.gui.subpanel.ViewAvailabilityPanel;
 import src.view.gui.subpanel.ViewReservationsPanel;
 import src.view.gui.subpanel.ViewRoomPanel;

@@ -35,10 +35,22 @@ public class StyledHTMLPane extends JEditorPane {
 
                 h3 {
                     font-size: 18;
+                }
 
                 h4 {
                     font-size: 14;
-                }""");
+                }
+
+                ul {
+                    list-style-type: none;
+                    border-left: 4px solid #f0f0f0;
+                    padding: 4px;
+                }
+
+                // ul:last-child {
+                //     border-bottom: none;
+                // }
+                """);
         this.setEditable(false);
     }
 

@@ -266,7 +266,7 @@ public class Reservation {
         return String.format("""
                 <h2>Reservation by %s</h2>
                 <ul>
-                <li>Room: %s</li>
+                %s
                 <li>Duration: from %d to %d</li>
                 <li>Total price: %.2f</li>
                 <li>Discount code: %s</li>
