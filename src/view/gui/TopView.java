@@ -144,10 +144,6 @@ public class TopView extends JFrame {
         this.manageHotelPanel.setManageReservationsListener(manageReservationListener);
     }
 
-    public void setTabIndex(int index) {
-        topMenuPane.setSelectedIndex(index);
-    }
-
     public int getTabIndex() {
         return topMenuPane.getSelectedIndex();
     }
@@ -178,14 +174,6 @@ public class TopView extends JFrame {
 
     public void setTopMenuPaneVisible(boolean enable) {
         this.topMenuPane.setVisible(enable);
-    }
-
-    /**
-     * To be triggered when a hotel gets added
-     */
-    public void resetState() {
-        this.resetAvailabilityCalendarSelection();
-        this.setHotelAvailabilityDataText("<p></p>");
     }
 
     // View hotel delegations

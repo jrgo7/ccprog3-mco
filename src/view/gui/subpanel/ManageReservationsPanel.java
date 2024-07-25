@@ -3,15 +3,14 @@ package src.view.gui.subpanel;
 import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JPanel;
-import src.view.gui.component.StyledPanel;
 
-import src.controller.gui.RoomListListener;
+import src.view.gui.component.StyledButton;
+
 
 public class ManageReservationsPanel extends ViewReservationsPanel {
 
-    private JButton removeButton = new JButton("Remove reservation");
+    private StyledButton removeButton = new StyledButton("Remove reservation");
 
     public ManageReservationsPanel() {
         JPanel wrapper = new JPanel();
