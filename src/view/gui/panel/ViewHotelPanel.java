@@ -4,12 +4,12 @@ import java.awt.BorderLayout;
 import java.awt.Point;
 import java.util.ArrayList;
 
-import javax.swing.JTable;
-
 import src.controller.gui.HotelAvailabilityCalendarListener;
 import src.controller.gui.ReservationListListener;
 import src.controller.gui.RoomListListener;
 import src.model.Hotel;
+import src.model.ReservationSystem;
+import src.model.Room;
 import src.view.gui.component.StyledHTMLPane;
 import src.view.gui.component.StyledPanel;
 import src.view.gui.component.StyledTabbedPane;
@@ -97,11 +97,10 @@ public class ViewHotelPanel extends StyledPanel {
     }
 
     /**
-     * {@return the index of the row on where a given point lies on the
-     * availability calendar}
-     * 
-     * @param point The point to capture in the table
-     * @see JTable#rowAtPoint(Point)
+     * {@return the row index within the availability calendar given a point
+     * position}
+     *
+     * @param point the point to check, usually representing the mouse location
      * @see ViewAvailabilityPanel#getCalendarRowAtPoint(Point)
      */
     public int getAvailabilityCalendarRowAtPoint(Point point) {
@@ -109,66 +108,137 @@ public class ViewHotelPanel extends StyledPanel {
     }
 
     /**
-     * {@return the index of the column on where a given point lies on the
-     * availability calendar}
-     * 
-     * @param point The point to capture in the table
-     * @see JTable#columnAtPoint(Point)
-     * @see ViewAvailabilityPanel#getCalendarRowAtPoint(Point)
+     * {@return the column index within the availability calendar given a point
+     * position}
+     *
+     * @param point the point to check, usually representing the mouse location
+     * @see ViewAvailabilityPanel#getCalendarColAtPoint(Point)
      */
     public int getAvailabilityCalendarColAtPoint(Point point) {
         return this.viewAvailabilitySubpanel.getCalendarColAtPoint(point);
     }
 
+    /**
+     * Clears the availability calendar selection.
+     * 
+     * @see ViewAvailabilityPanel#clearCalendarSelection
+     */
     public void clearAvailabilityCalendarSelection() {
         this.viewAvailabilitySubpanel.clearCalendarSelection();
     }
 
     /* View rooms subpanel */
 
+    /**
+     * Sets the room data panel with the given data and available dates.
+     *
+     * @param data           the room data string to set
+     * @param availableDates an {@link ArrayList} of available dates. Usually
+     *                       obtained with {@link Room#getAvailableDates()}
+     * @see ViewRoomSubPanel#setRoomData
+     */
     public void setRoomData(String data, ArrayList<Integer> availableDates) {
         this.viewRoomSubPanel.setRoomData(data, availableDates);
     }
 
+    /**
+     * Sets the room list with the given data.
+     *
+     * @param data an {@link ArrayList} of room names to set
+     * @see ViewRoomSubPanel#setRoomList
+     */
     public void setRoomList(ArrayList<String> data) {
         this.viewRoomSubPanel.setRoomList(data);
     }
 
+    /**
+     * {@return the index of the selected room}
+     * 
+     * @see ViewRoomSubPanel#getSelectedRoomIndex
+     */
     public int getSelectedRoomIndex() {
         return this.viewRoomSubPanel.getSelectedRoomIndex();
     }
 
+    /**
+     * Clears the room list selection.
+     *
+     * @see ViewRoomSubPanel#clearRoomListSelection
+     */
     public void clearRoomListSelection() {
         this.viewRoomSubPanel.clearRoomListSelection();
     }
 
+    /**
+     * Sets the selected room index.
+     *
+     * @param index the index of the selected room
+     * @see ViewRoomSubPanel#setSelectedIndex
+     */
     public void setSelectedRoomIndex(int index) {
         this.viewRoomSubPanel.setSelectedIndex(index);
     }
 
+    /**
+     * Sets the visibility of the room data panel.
+     *
+     * @param visible {@code true} to display the panel, {@code false} otherwise
+     * @see ViewRoomSubPanel#setWrapperVisible
+     */
+    public void setRoomDataVisible(boolean visible) {
+        this.viewRoomSubPanel.setWrapperVisible(visible);
+    }
+
     /* View reservations subpanel */
 
+    /**
+     * Sets the reservation list with the given data.
+     *
+     * @param data the array containing string representations of active
+     *             reservations. Usually obtained through
+     *             {@link ReservationSystem#getReservationNames(int)}
+     * @see ViewReservationsSubPanel#setReservationList
+     */
     public void setReservationList(ArrayList<String> data) {
         this.viewReservationsSubPanel.setReservationList(data);
     }
 
+    /**
+     * {@return the index of the selected reservation}
+     * 
+     * @see ViewReservationsSubPanel#getSelectedIndex
+     */
     public int getSelectedReservationIndex() {
         return this.viewReservationsSubPanel.getSelectedIndex();
     }
 
+    /**
+     * Sets the text in the reservation data panel.
+     *
+     * @param data the text to set
+     * @see ViewReservationsSubPanel#setReservationData
+     */
     public void setReservationData(String data) {
         this.viewReservationsSubPanel.setReservationData(data);
     }
 
+    /**
+     * Sets the visibility of the reservation data panel.
+     *
+     * @param visible {@code true} to display the panel, {@code false} otherwise
+     * @see ViewReservationsSubPanel#setWrapperVisible
+     */
     public void setReservationDataVisible(boolean visible) {
         this.viewReservationsSubPanel.setWrapperVisible(visible);
     }
 
+    /**
+     * Sets the selected reservation index.
+     *
+     * @param index the index of the selected reservation
+     * @see ViewReservationsSubPanel#setSelectedIndex
+     */
     public void setSelectedReservationIndex(int index) {
         this.viewReservationsSubPanel.setSelectedIndex(index);
-    }
-
-    public void setRoomDataVisible(boolean visible) {
-        this.viewRoomSubPanel.setWrapperVisible(visible);
     }
 }
