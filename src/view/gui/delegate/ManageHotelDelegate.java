@@ -227,7 +227,7 @@ public class ManageHotelDelegate {
     }
 
     /**
-     * Checks if the Managae Prices calendar is under mouse focus.
+     * Checks if the Manage Prices calendar is under mouse focus.
      *
      * @return {@code true} if the calendar is under mouse focus, {@code false}
      *         otherwise
