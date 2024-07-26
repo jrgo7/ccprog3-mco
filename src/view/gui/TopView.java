@@ -70,8 +70,9 @@ public class TopView extends JFrame {
         /* Hotel list panel */
         hotelListPanel = new HotelListPanel(this.getWidth() / 4);
         hotelListPanel.setBackground(ColorCollection.BACKGROUND_COMPLEMENT);
-        hotelListPanel
-                .setBorder(BorderFactory.createEmptyBorder(28, 28, 28, 28));
+        hotelListPanel.setBorder(
+                BorderFactory.createEmptyBorder(
+                    28, 28, 28, 28));
 
         paddingPanel.add(hotelListPanel, BorderLayout.WEST);
 
@@ -91,7 +92,9 @@ public class TopView extends JFrame {
         simulateBookingPanel = new SimulateBookingPanel();
         topMenuPane.addTab("Simulate booking", simulateBookingPanel);
 
-        topMenuPane.setBorder(BorderFactory.createEmptyBorder(28, 28, 28, 28));
+        topMenuPane.setBorder(
+                BorderFactory.createEmptyBorder(
+                        28, 28, 28, 28));
         paddingPanel.add(topMenuPane, BorderLayout.CENTER);
 
         this.add(paddingPanel, BorderLayout.CENTER);
@@ -123,7 +126,7 @@ public class TopView extends JFrame {
                 .getScreenSize();
         this.setMinimumSize(new Dimension(
                 (int) (systemResolution.getWidth() / 2),
-                (int) (systemResolution.getHeight() / 1.1)));
+                (int) (systemResolution.getHeight() / 1.2)));
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
@@ -318,5 +321,21 @@ public class TopView extends JFrame {
                 "A hotel must have at least one room.\n",
                 "Cannot remove room",
                 JOptionPane.ERROR_MESSAGE);
+    }
+
+    /**
+     * Confirm a certain action.
+     * 
+     * @param prompt
+     * @param title
+     * 
+     * @returns {@code true} if the user chose "Yes", else returns {@code false}
+     */
+    public boolean confirmAction(String prompt, String title) {
+        return JOptionPane.showConfirmDialog(
+                this,
+                "Are you sure you want to " + prompt,
+                title,
+                JOptionPane.YES_NO_OPTION) == 0;
     }
 }

@@ -60,11 +60,10 @@ public class ReservationListListener extends ListAddListener {
         /* Show the panel */
         this.view.getManageHotelDelegate().setReservationDataVisible(true);
 
-        /* TODO: Is a check for < 0 necessary here? */
         int hotelIndex = view.getSelectedIndex();
         this.view.getManageHotelDelegate().setManageReservationData(
-                reservationSystem.getReservationString(hotelIndex,
-                        selectedIndex));
+                reservationSystem.getReservationString(
+                        hotelIndex, selectedIndex));
     }
 
     /**

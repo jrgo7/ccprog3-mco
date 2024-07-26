@@ -100,21 +100,16 @@ public class ManageRoomListener extends RoomListListener
      */
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (!view.confirmAction("remove this room?", "Remove room")) {
+            return;
+        }
+
         int roomIndex = view.getManageHotelDelegate().getSelectedRoomIndex();
         int hotelIndex = view.getSelectedIndex();
 
-        /*
-         * This normally cannot happen as the panel is hidden when there is no
-         * selection. TODO: Remove?
-         */
-        if (roomIndex < 0 || hotelIndex < 0)
-            return;
-
-        System.out.println(roomIndex);
-
-        if (!this.reservationSystem.removeRoom(hotelIndex, roomIndex))
+        if (!this.reservationSystem.removeRoom(hotelIndex, roomIndex)) {
             view.showCantRemoveRoomError();
-
+        }
         this.updateList();
 
         /* Always clear selection and hide panel afterwards */

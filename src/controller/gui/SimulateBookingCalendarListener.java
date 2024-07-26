@@ -48,7 +48,12 @@ public class SimulateBookingCalendarListener extends CalendarListener
                 .setBookingCalendarCheckOut(builder.getCheckOut());
     }
 
-    private void resetBookingScreen() {
+    private void resetBookingScreen(boolean doPrompt) {
+        if (doPrompt && !view.confirmAction(
+                "reset the booking screen?",
+                "Reset booking screen")) {
+            return;
+        }
         this.mode = CHECK_IN;
         view.getSimulateBookingDelegate().resetBookingScreen();
         reservationSystem.resetReservationBuilder();
@@ -65,6 +70,9 @@ public class SimulateBookingCalendarListener extends CalendarListener
     }
 
     public void submitReservation() {
+        if (!view.confirmAction("submit this reservation?", "Submit reservation")) {
+            return;
+        }
         int hotelIndex = view.getSelectedIndex();
 
         if (hotelIndex < 0)
@@ -77,7 +85,7 @@ public class SimulateBookingCalendarListener extends CalendarListener
                 view.showReservationSuccess();
                 view.setReservationList(
                         reservationSystem.getReservationNames(hotelIndex));
-                resetBookingScreen();
+                resetBookingScreen(false);
                 break;
             case Hotel.RESERVATION_ERROR_INVALID_TIME:
                 view.showReservationError("Invalid time chosen.");
@@ -194,7 +202,7 @@ public class SimulateBookingCalendarListener extends CalendarListener
         } else if (command.equals("Set check-out date")) {
             mode = CHECK_OUT;
         } else if (command.equals("Reset booking fields")) {
-            resetBookingScreen();
+            resetBookingScreen(true);
         } else if (command.equals("Confirm booking")) {
             submitReservation();
         }

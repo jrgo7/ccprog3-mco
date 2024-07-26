@@ -259,4 +259,13 @@ public class ReservationSystem {
     public int getReservationCount(int hotelIndex) {
         return  this.getHotel(hotelIndex).getReservationCount();
     }
+
+    /**
+     * Validate a date, i.e., check if a date is within 1-31.
+     * @param date
+     * @return {@code true} if the date is within 1-31, else {@code false}
+     */
+    public static boolean validateDate(int date) {
+        return (date >= 1 && date <= 31);
+    }
 }

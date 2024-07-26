@@ -118,6 +118,9 @@ public class ManagePricesListener extends CalendarListener
         int index = view.getSelectedIndex();
         double newBasePrice = Double.parseDouble(
                 view.getManageHotelDelegate().getUpdateBasePriceFieldText());
+        if (!view.confirmAction("update the base price to " + newBasePrice + "?", null)) {
+            return;
+        }
         int result = reservationSystem.setBasePrice(index, newBasePrice);
         switch (result) {
             case Hotel.SET_BASE_PRICE_SUCCESS:
@@ -137,6 +140,14 @@ public class ManagePricesListener extends CalendarListener
         int index = view.getSelectedIndex();
         double newModifier = Double.parseDouble(
                 view.getManageHotelDelegate().getPriceModifierFieldText());
+        if (ReservationSystem.validateDate(date) &&
+                !view.confirmAction(
+                        "update the price modifier for day  " + date + " to "
+                                + newModifier + "?",
+                        "Update price modifier - " + date)) {
+            return;
+        }
+
         if (reservationSystem.setPriceModifier(index, date, newModifier)) {
             view.getManageHotelDelegate().setManagePricesCalendarText(
                     date, String.format("%d: %.2f", date, newModifier));
