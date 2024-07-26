@@ -143,14 +143,15 @@ public abstract class CalendarListener
     protected abstract void handleReleasedOutsideComponent();
 
     /**
-     * When a key is pressed, adjust the current selection position. Enter and
-     * Tab keys are ignored for simplicity.
+     * {@inheritDoc} When a key is pressed, adjust the current selection
+     * position. Enter and tab keys are ignored for simplicity.
      */
     @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_ENTER ||
                 e.getKeyCode() == KeyEvent.VK_TAB) {
-            e.consume(); // prevent ENTER, TAB keys
+            /* Prevent the use of ENTER and TAB */
+            e.consume();
         } else {
             switch (e.getKeyCode()) {
                 case KeyEvent.VK_LEFT:
@@ -177,32 +178,40 @@ public abstract class CalendarListener
         }
     }
 
+    /** No behavior is defined for this implementation. {@inheritDoc} */
     @Override
     public void keyTyped(KeyEvent e) {
-        /** No special behavior */
+        /* Implementation left blank */
     }
 
+    /** No behavior is defined for this implementation. {@inheritDoc} */
     @Override
     public void keyReleased(KeyEvent e) {
-        /** No special behavior */
+        /* Implementation left blank */
     }
 
+    /** {@inheritDoc} Sets the calendar selection to where the mouse clicked. */
     @Override
     public void mouseClicked(MouseEvent e) {
         setRowAndCol(e);
         handleClicked(row, col);
     }
 
+    /** {@inheritDoc} Treated as if the mouse was clicked. */
     @Override
     public void mousePressed(MouseEvent e) {
-        setRowAndCol(e);
-        handleClicked(row, col);
+        this.mouseClicked(e);
     }
 
+    /** {@inheritDoc} Removes the calendar selection. */
     @Override
     public void mouseReleased(MouseEvent e) {
         setRowAndCol(e);
         handleReleased(row, col);
+        /*
+         * Ensure the selection cannot be out of bounds by forcing it to the
+         * first index
+         */
         if (row == -1 || col == -1) {
             row = 0;
             col = 0;
@@ -210,24 +219,27 @@ public abstract class CalendarListener
         }
     }
 
+    /** No behavior is defined for this implementation. {@inheritDoc} */
     @Override
     public void mouseEntered(MouseEvent e) {
-        /** No special behavior */
+        /* Implementation left blank */
     }
 
+    /** No behavior is defined for this implementation. {@inheritDoc} */
     @Override
     public void mouseExited(MouseEvent e) {
-        /** No special behavior */
+        /* Implementation left blank */
     }
 
+    /** {@inheritDoc} Treated as if the mouse was clicked. */
     @Override
     public void mouseDragged(MouseEvent e) {
-        setRowAndCol(e);
-        handleDragged(row, col);
+        this.mouseClicked(e);
     }
 
+    /** No behavior is defined for this implementation. {@inheritDoc} */
     @Override
     public void mouseMoved(MouseEvent e) {
-        /** No special behavior */
+        /* Implementation left blank */
     }
 }

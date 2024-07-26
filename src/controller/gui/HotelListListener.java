@@ -30,6 +30,7 @@ public class HotelListListener extends ListAddListener
         this.view.setList(reservationSystem.getHotelNamesAsList());
 
         /* Hide panel when there are no hotels in the system */
+        /* TODO: Is this needed */
         if (reservationSystem.getHotelCount() == 0)
             this.view.clearSelectedIndex();
     }
@@ -114,6 +115,7 @@ public class HotelListListener extends ListAddListener
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public void actionPerformed(ActionEvent e) {
         this.reservationSystem.removeHotel(

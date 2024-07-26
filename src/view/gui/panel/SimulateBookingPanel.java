@@ -131,6 +131,9 @@ public class SimulateBookingPanel extends StyledPanel {
         this.bookingCalendar.setCalendarCheckIn(date);
     }
 
+    /**
+     * @param date 
+     */
     public void setCalendarCheckOut(int date) {
         if (date != BookingCalendarRenderer.NONE) {
             this.bookingCalendar.setCalendarText(
