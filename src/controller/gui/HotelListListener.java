@@ -57,13 +57,18 @@ public class HotelListListener extends ListAddListener
         if (selectedIndex < 0)
             return;
 
-        /* Updates View Hotel panels */
-        this.view.getViewHotelDelegate().setHotelData(
-                reservationSystem.getHotelString(selectedIndex));
+        // * Global updates
+        this.view.setSelectedIndex(selectedIndex);
         this.view.setRoomList(
                 reservationSystem.getRoomNames(selectedIndex));
+        this.view.setReservationList(
+                reservationSystem.getReservationNames(selectedIndex));
 
-        /* Updates Manage Hotel panels */
+        // * View hotel-specific updates
+        this.view.getViewHotelDelegate().setHotelData(
+                reservationSystem.getHotelString(selectedIndex));
+
+        // * Manage hotel-specific updates
         this.view.getManageHotelDelegate().setRenameHotelFieldText(
                 reservationSystem.getHotelName(selectedIndex));
         this.view.getManageHotelDelegate().setUpdateBasePriceFieldText(
@@ -75,16 +80,14 @@ public class HotelListListener extends ListAddListener
                     String.format(
                             "%d: %.2f",
                             date,
-                            reservationSystem.getPriceModifier(selectedIndex,
+                            reservationSystem.getPriceModifier(
+                                    selectedIndex,
                                     date)));
 
-        // ! Send the new hotel index to every panel/component that needs it
-        view.setSelectedIndex(selectedIndex);
-
-        /* Changes the selected hotel index in Simulate Booking Panel */
+        // * Simulate booking-specific updates
+        view.getSimulateBookingDelegate().resetBookingScreen();
         reservationSystem.resetReservationBuilder();
         reservationSystem.getReservationBuilder().setHotelIndex(selectedIndex);
-        view.getSimulateBookingDelegate().resetBookingScreen();
     }
 
     /** {@inheritDoc} Prompts the user to add a hotel to the list. */
