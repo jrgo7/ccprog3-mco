@@ -9,8 +9,8 @@ import src.model.ReservationSystem;
 import src.view.gui.TopView;
 
 public class RenameHotelListener implements ActionListener, KeyListener {
-    ReservationSystem reservationSystem;
-    TopView view;
+    private ReservationSystem reservationSystem;
+    private TopView view;
 
     public RenameHotelListener(ReservationSystem reservationSystem,
             TopView view) {
@@ -18,11 +18,17 @@ public class RenameHotelListener implements ActionListener, KeyListener {
         this.view = view;
     }
 
+    /** {@inheritDoc} Renames the hotel when the button is clicked. */
     @Override
     public void actionPerformed(ActionEvent e) {
         renameHotel();
     }
 
+    /**
+     * Renames the hotel.
+     * 
+     * @see ReservationSystem#renameHotel(int, String)
+     */
     public void renameHotel() {
         String newName = view.getManageHotelDelegate()
                 .getRenameHotelFieldText();
@@ -40,11 +46,7 @@ public class RenameHotelListener implements ActionListener, KeyListener {
         }
     }
 
-    @Override
-    public void keyTyped(KeyEvent e) {
-
-    }
-
+    /** {@inheritDoc} Renames the hotel when enter is pressed. */
     @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -52,8 +54,15 @@ public class RenameHotelListener implements ActionListener, KeyListener {
         }
     }
 
+    /** No behavior is defined for this implementation. {@inheritDoc} */
+    @Override
+    public void keyTyped(KeyEvent e) {
+        /* Implementation left blank */
+    }
+
+    /** No behavior is defined for this implementation. {@inheritDoc} */
     @Override
     public void keyReleased(KeyEvent e) {
-
+        /* Implementation left blank */
     }
 }

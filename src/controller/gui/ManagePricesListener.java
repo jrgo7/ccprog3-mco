@@ -9,6 +9,7 @@ import src.model.Hotel;
 import src.model.ReservationSystem;
 import src.view.gui.TopView;
 import src.view.gui.component.Calendar;
+import src.view.gui.delegate.ManageHotelDelegate;
 
 /**
  * An extended {@link CalendarListener} meant to respond to events on the Manage
@@ -16,12 +17,19 @@ import src.view.gui.component.Calendar;
  */
 public class ManagePricesListener extends CalendarListener
         implements ActionListener {
-
+    /** Initialize this listener. */
     public ManagePricesListener(ReservationSystem reservationSystem,
             TopView view) {
         super(reservationSystem, view);
     }
 
+    /**
+     * Sets the content of the price modifier field, then updates the data
+     * panel.
+     * 
+     * @see ManageHotelDelegate#setPriceModifierFieldText(String)
+     * @see #setModifiedPriceText()
+     */
     private void setPriceModifierFieldText() {
         int date = Calendar.toDate(this.getRow(), this.getCol());
         if (date < 1 || date > 31) {
@@ -34,6 +42,11 @@ public class ManagePricesListener extends CalendarListener
         setModifiedPriceText();
     }
 
+    /**
+     * Sets the content of the price modifier panel.
+     * 
+     * @see ManageHotelDelegate#setModifiedPriceText(String)
+     */
     private void setModifiedPriceText() {
         int date = this.getDate();
         if (date < 1 || date > 31) {
@@ -53,46 +66,57 @@ public class ManagePricesListener extends CalendarListener
                 basePrice * priceModifier));
     }
 
+    /** {@inheritDoc} Sets the price modifier field text. */
     @Override
     protected void handleSelected(int row, int col) {
         setPriceModifierFieldText();
     }
 
+    /** Accepts the enter key as a confirmation input. */
     private void handlePressEnterKey(int row, int col) {
+        /* The price modifer was changed */
         if (view.getManageHotelDelegate()
                 .getIsUpdatePriceModifierFieldFocused()) {
             updatePriceModifier();
-        } else if (view.getManageHotelDelegate()
+        }
+        /* The base price was changed */
+        else if (view.getManageHotelDelegate()
                 .getIsUpdateBasePriceFieldFocused()) {
             updateBasePrice();
         }
     }
 
+    /** {@inheritDoc} Treated as if the selection was updated. */
     @Override
     protected void handleClicked(int row, int col) {
         setPriceModifierFieldText();
     }
 
+    /** {@inheritDoc} Treated as if the selection was updated. */
     @Override
     protected void handleDragged(int row, int col) {
         setPriceModifierFieldText();
     }
 
+    /** No behavior is defined for this implementation. {@inheritDoc} */
     @Override
     protected void handleMoved(int row, int col) {
-        /** No special behavior */
+        /* Implementation left blank */
     }
 
+    /** No behavior is defined for this implementation. {@inheritDoc} */
     @Override
     protected void handleReleased(int row, int col) {
-        /** No special behavior */
+        /* Implementation left blank */
     }
 
+    /** {@inheritDoc} Clears the calendar selection. */
     @Override
     protected void handleReleasedOutsideComponent() {
         view.getManageHotelDelegate().clearManagePricesCalendarSelection();
     }
 
+    /** {@inheritDoc} Accept an enter key input. */
     @Override
     public void keyPressed(KeyEvent e) {
         if (view.getManageHotelDelegate().getIsManagePricesCalendarFocused()) {
@@ -102,6 +126,10 @@ public class ManagePricesListener extends CalendarListener
         }
     }
 
+    /**
+     * {@inheritDoc} Handles receiving a click on the update base price or
+     * update price modifier buttons.
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
@@ -114,7 +142,12 @@ public class ManagePricesListener extends CalendarListener
         }
     }
 
-    public void updateBasePrice() {
+    /**
+     * Updates the base price for a night.
+     * 
+     * @see ReservationSystem#setBasePrice(int, int)
+     */
+    private void updateBasePrice() {
         int index = view.getSelectedIndex();
         double newBasePrice = Double.parseDouble(
                 view.getManageHotelDelegate().getUpdateBasePriceFieldText());
@@ -122,6 +155,8 @@ public class ManagePricesListener extends CalendarListener
             return;
         }
         int result = reservationSystem.setBasePrice(index, newBasePrice);
+
+        /* Handle result */
         switch (result) {
             case Hotel.SET_BASE_PRICE_SUCCESS:
                 setModifiedPriceText();
@@ -135,7 +170,12 @@ public class ManagePricesListener extends CalendarListener
         }
     }
 
-    public void updatePriceModifier() {
+    /**
+     * Updates the price modifier for a night.
+     * 
+     * @see ReservationSystem#setPriceModifier(int, int, double)
+     */
+    private void updatePriceModifier() {
         int date = this.getDate();
         int index = view.getSelectedIndex();
         double newModifier = Double.parseDouble(
@@ -154,10 +194,12 @@ public class ManagePricesListener extends CalendarListener
         } else {
             view.showPriceModifierError();
         }
+
         this.setPriceModifierFieldText();
         view.getManageHotelDelegate().setPriceModifierCalendarDate(date);
     }
 
+    /** {@inheritDoc} Sets the calendar selection. */
     @Override
     protected void setRowAndCol(MouseEvent e) {
         setRow(view.getManageHotelDelegate()

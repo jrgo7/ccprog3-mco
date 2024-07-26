@@ -66,14 +66,9 @@ public class ReservationListListener extends ListAddListener {
                         hotelIndex, selectedIndex));
     }
 
-    /**
-     * {@inheritDoc} Method implementation left blank as no special behavior is
-     * defined.
-     */
+    /** No behavior is defined for this implementation. {@inheritDoc} */
     @Override
     protected void addToList(int selectedIndex) {
-        /*
-         * Method implementation left blank as no special behavior is defined.
-         */
+        /* Implementation left blank */
     }
 }
