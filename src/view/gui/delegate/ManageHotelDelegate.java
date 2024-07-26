@@ -17,7 +17,7 @@ public class ManageHotelDelegate {
     /** The panel that this delegate communicates with. */
     private ManageHotelPanel manageHotelPanel;
 
-    /** Initialies the panel. */
+    /** Initializes the panel. */
     public ManageHotelDelegate(ManageHotelPanel manageHotelPanel) {
         this.manageHotelPanel = manageHotelPanel;
     }
@@ -65,7 +65,7 @@ public class ManageHotelDelegate {
     /* Manage rooms panel */
 
     /**
-     * Sets the room data with the given data and available dates.
+     * Sets the room data panel with the given data and available dates.
      *
      * @param data           the room data string to set
      * @param availableDates an {@link ArrayList} of available dates. Usually
@@ -238,7 +238,7 @@ public class ManageHotelDelegate {
     }
 
     /**
-     * Clears the Managae Prices calendar selection.
+     * Clears the Manage Prices calendar selection.
      *
      * @see ManageHotelPanel#clearManagePricesCalendarSelection
      */
