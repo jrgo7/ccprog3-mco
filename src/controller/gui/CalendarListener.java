@@ -153,26 +153,26 @@ public abstract class CalendarListener
             e.consume(); // prevent ENTER, TAB keys
         } else {
             switch (e.getKeyCode()) {
-            case KeyEvent.VK_LEFT:
-            case KeyEvent.VK_KP_LEFT:
-                col = Math.max(col - 1, 0);
-                handleSelected(row, col);
-                break;
-            case KeyEvent.VK_RIGHT:
-            case KeyEvent.VK_KP_RIGHT:
-                col = Math.min(col + 1, Calendar.MAX_COLS - 1);
-                handleSelected(row, col);
-                break;
-            case KeyEvent.VK_UP:
-            case KeyEvent.VK_KP_UP:
-                row = Math.max(row - 1, 0);
-                handleSelected(row, col);
-                break;
-            case KeyEvent.VK_DOWN:
-            case KeyEvent.VK_KP_DOWN:
-                row = Math.min(row + 1, Calendar.MAX_ROWS - 1);
-                handleSelected(row, col);
-                break;
+                case KeyEvent.VK_LEFT:
+                case KeyEvent.VK_KP_LEFT:
+                    col = Math.max(col - 1, 0);
+                    handleSelected(row, col);
+                    break;
+                case KeyEvent.VK_RIGHT:
+                case KeyEvent.VK_KP_RIGHT:
+                    col = Math.min(col + 1, Calendar.MAX_COLS - 1);
+                    handleSelected(row, col);
+                    break;
+                case KeyEvent.VK_UP:
+                case KeyEvent.VK_KP_UP:
+                    row = Math.max(row - 1, 0);
+                    handleSelected(row, col);
+                    break;
+                case KeyEvent.VK_DOWN:
+                case KeyEvent.VK_KP_DOWN:
+                    row = Math.min(row + 1, Calendar.MAX_ROWS - 1);
+                    handleSelected(row, col);
+                    break;
             }
         }
     }

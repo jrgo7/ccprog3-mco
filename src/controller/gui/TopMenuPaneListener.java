@@ -27,14 +27,15 @@ public class TopMenuPaneListener implements ChangeListener {
     @Override
     public void stateChanged(ChangeEvent e) {
         switch (view.getTabIndex()) {
-        case TopView.VIEW_HOTEL_TAB:
-            view.getViewHotelDelegate().clearAvailabilityCalendarSelection();
-            view.getViewHotelDelegate().clearRoomSelectedIndex();
-            break;
-        case TopView.MANAGE_HOTEL_TAB:
-            break;
-        case TopView.SIMULATE_BOOKING_TAB:
-            break;
+            case TopView.VIEW_HOTEL_TAB:
+                view.getViewHotelDelegate()
+                        .clearAvailabilityCalendarSelection();
+                view.getViewHotelDelegate().clearRoomSelectedIndex();
+                break;
+            case TopView.MANAGE_HOTEL_TAB:
+                break;
+            case TopView.SIMULATE_BOOKING_TAB:
+                break;
         }
     }
 

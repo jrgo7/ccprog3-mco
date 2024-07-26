@@ -105,12 +105,12 @@ public class ManagePricesListener extends CalendarListener
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
-        case "Update base price":
-            updateBasePrice();
-            break;
-        case "Update price modifier":
-            updatePriceModifier();
-            break;
+            case "Update base price":
+                updateBasePrice();
+                break;
+            case "Update price modifier":
+                updatePriceModifier();
+                break;
         }
     }
 
@@ -120,15 +120,15 @@ public class ManagePricesListener extends CalendarListener
                 view.getManageHotelDelegate().getUpdateBasePriceFieldText());
         int result = reservationSystem.setBasePrice(index, newBasePrice);
         switch (result) {
-        case Hotel.SET_BASE_PRICE_SUCCESS:
-            setModifiedPriceText();
-            break;
-        case Hotel.SET_BASE_PRICE_ERROR_LESS_THAN_MIN:
-            view.basePriceUpdateLessThanMinimumError();
-            break;
-        case Hotel.SET_BASE_PRICE_ERROR_RESERVATIONS_EXIST:
-            view.basePriceUpdateReservationsExistError();
-            break;
+            case Hotel.SET_BASE_PRICE_SUCCESS:
+                setModifiedPriceText();
+                break;
+            case Hotel.SET_BASE_PRICE_ERROR_LESS_THAN_MIN:
+                view.basePriceUpdateLessThanMinimumError();
+                break;
+            case Hotel.SET_BASE_PRICE_ERROR_RESERVATIONS_EXIST:
+                view.basePriceUpdateReservationsExistError();
+                break;
         }
     }
 

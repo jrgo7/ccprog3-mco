@@ -177,8 +177,8 @@ public class Hotel {
     }
 
     /**
-     * Returns a calendar string indicating the dates during which a {@link Room}
-     * instance at a given index is available.
+     * Returns a calendar string indicating the dates during which a
+     * {@link Room} instance at a given index is available.
      * 
      * @param roomIndex The index of the room to inspect
      * @return a formatted calendar string showing the dates on which a room is

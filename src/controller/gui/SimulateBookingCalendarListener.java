@@ -73,29 +73,30 @@ public class SimulateBookingCalendarListener extends CalendarListener
         int result = reservationSystem.addReservation(
                 reservationSystem.getReservationBuilder());
         switch (result) {
-        case Hotel.RESERVATION_SUCCESS:
-            view.showReservationSuccess();
-            view.setReservationList(
-                    reservationSystem.getReservationNames(hotelIndex));
-            resetBookingScreen();
-            break;
-        case Hotel.RESERVATION_ERROR_INVALID_TIME:
-            view.showReservationError("Invalid time chosen.");
-            break;
-        case Hotel.RESERVATION_ERROR_INVALID_ROOM:
-            view.showReservationError("Invalid room chosen.");
-            break;
-        case Hotel.RESERVATION_ERROR_UNAVAILABLE_ROOM:
-            view.showReservationError("Room chosen is unavailable.");
-            break;
-        case Hotel.RESERVATION_ERROR_INVALID_DISCOUNT_CODE:
-            view.showReservationError(
-                    "Discount code \"" +
-                            reservationSystem
-                                    .getReservationBuilder().getDiscountCode()
-                            +
-                            "\" is invalid.");
-            break;
+            case Hotel.RESERVATION_SUCCESS:
+                view.showReservationSuccess();
+                view.setReservationList(
+                        reservationSystem.getReservationNames(hotelIndex));
+                resetBookingScreen();
+                break;
+            case Hotel.RESERVATION_ERROR_INVALID_TIME:
+                view.showReservationError("Invalid time chosen.");
+                break;
+            case Hotel.RESERVATION_ERROR_INVALID_ROOM:
+                view.showReservationError("Invalid room chosen.");
+                break;
+            case Hotel.RESERVATION_ERROR_UNAVAILABLE_ROOM:
+                view.showReservationError("Room chosen is unavailable.");
+                break;
+            case Hotel.RESERVATION_ERROR_INVALID_DISCOUNT_CODE:
+                view.showReservationError(
+                        "Discount code \"" +
+                                reservationSystem
+                                        .getReservationBuilder()
+                                        .getDiscountCode()
+                                +
+                                "\" is invalid.");
+                break;
         }
     }
 
