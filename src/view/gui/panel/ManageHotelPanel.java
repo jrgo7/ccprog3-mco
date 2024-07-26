@@ -26,20 +26,39 @@ import src.view.gui.subpanel.ManagePricesPanel;
 import src.view.gui.subpanel.ManageReservationsPanel;
 import src.view.gui.subpanel.ManageRoomsPanel;
 
+/** Represents the Manage Hotel panel. */
 public class ManageHotelPanel extends StyledPanel {
+    /** A {@link StyledTabbedPane} containing subpanels. */
     private StyledTabbedPane subpanels;
 
+    /** Represents the Manage Rooms subpanel. */
     private ManageRoomsPanel manageRoomsSubpanel;
+
+    /** Represents the Manage Reservations subpanel. */
     private ManageReservationsPanel manageReservationsSubpanel;
+
+    /** Represents the Manage Prices subpanel. */
     private ManagePricesPanel managePricesSubpanel;
 
+    /** Text field for renaming the hotel. */
     private JTextField renameHotelField;
+
+    /** Text field for updating the base price. */
     private JTextField basePriceField;
 
+    /** Button for renaming the hotel. */
     private StyledButton renameHotelButton;
+
+    /** Button for updating the base price. */
     private StyledButton updateBasePriceButton;
+
+    /** Button for removing the hotel. */
     private StyledButton removeHotelButton;
 
+    /**
+     * Initializes the hotel info subpanel, the subpanel tabs, and the remove
+     * hotel button.
+     */
     public ManageHotelPanel() {
         this.setLayout(new BorderLayout());
 

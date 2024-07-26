@@ -24,7 +24,7 @@ import src.view.gui.component.StyledLabel;
 import src.view.gui.component.StyledPanel;
 import src.view.gui.component.StyledRadioButton;
 
-/* TODO */
+/** Represents the Simulate Booking panel. */
 public class SimulateBookingPanel extends StyledPanel {
     private JTextField guestNameField;
     private JTextField discountCodeField;

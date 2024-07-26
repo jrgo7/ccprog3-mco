@@ -25,13 +25,16 @@ public class ViewHotelPanel extends StyledPanel {
     /** A {@link StyledTabbedPane} containing subpanels. */
     private StyledTabbedPane subpanels;
 
-    /** The View Availability subpanel tied to this panel. */
+    /** Represents the View Availability subpanel. */
     private ViewAvailabilityPanel viewAvailabilitySubpanel;
 
+    /** Represents the View Room subpanel. */
     private ViewRoomPanel viewRoomSubPanel;
 
+    /** Represents the View Reservations subpanel. */
     private ViewReservationsPanel viewReservationsSubPanel;
 
+    /** Initialies the hotel data pane and the subpanels. */
     public ViewHotelPanel() {
         this.setLayout(new BorderLayout());
 
@@ -59,8 +62,7 @@ public class ViewHotelPanel extends StyledPanel {
     /**
      * Sets a listener for the calendar in the View Availability subpanel.
      * 
-     * @param availabilityCalendarListener The listener to assign to the
-     *                                     calendar
+     * @param availabilityCalendarListener the listener to set
      * @see ViewAvailabilityPanel#setListener(HotelAvailabilityCalendarListener)
      */
     public void setCalendarListener(
@@ -68,6 +70,12 @@ public class ViewHotelPanel extends StyledPanel {
         this.viewAvailabilitySubpanel.setListener(availabilityCalendarListener);
     }
 
+    /**
+     * Sets a listener for the reservation list in the View Reservations
+     * subpanel.
+     * 
+     * @param listener the listener to set
+     */
     public void setReservationListener(ReservationListListener listener) {
         this.viewReservationsSubPanel.setListener(listener);
     }
