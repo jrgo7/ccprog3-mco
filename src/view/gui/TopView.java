@@ -71,7 +71,7 @@ public class TopView extends JFrame {
         hotelListPanel.setBackground(ColorCollection.BACKGROUND_COMPLEMENT);
         hotelListPanel.setBorder(
                 BorderFactory.createEmptyBorder(
-                    28, 28, 28, 28));
+                        28, 28, 28, 28));
 
         paddingPanel.add(hotelListPanel, BorderLayout.WEST);
 
@@ -236,7 +236,7 @@ public class TopView extends JFrame {
         promptPanel.add(prompt, BorderLayout.NORTH);
 
         JSpinner spinner = new JSpinner(
-                new SpinnerNumberModel(1, 1, limit, 1));
+                new SpinnerNumberModel(1, null, null, 1));
         promptPanel.add(spinner, BorderLayout.WEST);
         spinner.setFont(FontCollection.SEGOE_UI_BODY);
 
@@ -249,6 +249,17 @@ public class TopView extends JFrame {
         int response = JOptionPane.showConfirmDialog(null,
                 promptPanel, "Add rooms", JOptionPane.OK_CANCEL_OPTION,
                 JOptionPane.QUESTION_MESSAGE);
+
+        if ((Integer) spinner.getValue() > limit) {
+            this.showRoomCountFullError();
+            return new int[] {
+                    -1, 0
+            };
+        } else if ((Integer) spinner.getValue() < 0) {
+            return new int[] {
+                    -1, 0
+            };
+        }
 
         return new int[] {
                 (response == 0) ? options.getSelectedIndex() : -1,
