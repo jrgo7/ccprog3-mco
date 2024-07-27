@@ -10,7 +10,9 @@ import java.util.Arrays;
 import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.UIManager;
@@ -227,11 +229,11 @@ public class TopView extends JFrame {
     }
 
     public int[] promptAddRoom(int limit) {
-        StyledPanel promptPanel = new StyledPanel();
+        JPanel promptPanel = new JPanel();
 
         promptPanel.setLayout(new BorderLayout());
 
-        StyledLabel prompt = new StyledLabel(
+        JLabel prompt = new StyledLabel(
                 "Select the number and type of rooms to add:");
         promptPanel.add(prompt, BorderLayout.NORTH);
 
@@ -239,6 +241,8 @@ public class TopView extends JFrame {
                 new SpinnerNumberModel(1, null, null, 1));
         promptPanel.add(spinner, BorderLayout.WEST);
         spinner.setFont(FontCollection.SEGOE_UI_BODY);
+        ((JSpinner.DefaultEditor) spinner.getEditor()).getTextField()
+                .setColumns(2);
 
         JComboBox<String> options = new JComboBox<>(new String[] {
                 "Regular", "Deluxe", "Executive"
