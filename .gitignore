@@ -59,3 +59,4 @@ Lib/site-packages/et_xmlfile-1.1.0.dist-info/AUTHORS.txt
 lib/
 lib64/
 bin/
+/lib64
