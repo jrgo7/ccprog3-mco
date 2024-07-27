@@ -3,7 +3,8 @@ package src.controller.gui;
 import src.model.ReservationSystem;
 import src.view.gui.TopView;
 
-public class SimulateBookingRoomListListener extends RoomListListener {
+public class SimulateBookingRoomListListener extends RoomListListener
+        implements ReservationPreviewUpdatable {
     public SimulateBookingRoomListListener(ReservationSystem reservationSystem,
             TopView view) {
         super(reservationSystem, view);
@@ -25,5 +26,7 @@ public class SimulateBookingRoomListListener extends RoomListListener {
 
         /* Changes the selected room index in Simulate Booking Panel */
         reservationSystem.getReservationBuilder().setRoomIndex(index);
+
+        this.updateReservationPreview(reservationSystem, view);
     }
 }

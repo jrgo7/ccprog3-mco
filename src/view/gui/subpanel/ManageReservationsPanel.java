@@ -6,7 +6,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
 import src.view.gui.component.StyledButton;
-import src.view.gui.component.StyledButtonFactory;
+import src.view.gui.component.GUIFactory;
 
 /**
  * Represents the Manage Reservations subpanel under Manage Rooms. Extends the
@@ -14,10 +14,8 @@ import src.view.gui.component.StyledButtonFactory;
  */
 public class ManageReservationsPanel extends ViewReservationsPanel {
     /** Button for removing a reservation. */
-    private StyledButton removeButton = StyledButtonFactory
-            .createDestructiveButton("Remove reservation");
+    private StyledButton removeButton = GUIFactory.createDestructiveButton("Remove reservation");
 
-    /** Initializes the panel along with a button for removing reservations. */
     public ManageReservationsPanel() {
         JPanel wrapper = new JPanel();
         wrapper.setLayout(new BoxLayout(wrapper, BoxLayout.X_AXIS));

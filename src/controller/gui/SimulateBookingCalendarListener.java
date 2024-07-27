@@ -16,7 +16,7 @@ import src.view.gui.component.Calendar;
  * selecting check-in and check-out dates.
  */
 public class SimulateBookingCalendarListener extends CalendarListener
-        implements ActionListener {
+        implements ActionListener, ReservationPreviewUpdatable {
     static final private int CHECK_IN = 0;
     static final private int CHECK_OUT = 1;
     private int mode = CHECK_IN;
@@ -25,27 +25,6 @@ public class SimulateBookingCalendarListener extends CalendarListener
     public SimulateBookingCalendarListener(
             ReservationSystem reservationSystem, TopView view) {
         super(reservationSystem, view);
-    }
-
-    /**
-     * Update the reservation preview.
-     */
-    public void updateReservationPreview() {
-        view.getSimulateBookingDelegate()
-                .updateSimulateBookingReservationPreview(
-                        reservationSystem.getReservationBuilderString());
-
-        view.getSimulateBookingDelegate().setBookingCalendarAvailability(
-                reservationSystem.getAvailableDatesForRoom(
-                        view.getSelectedIndex(),
-                        view.getSimulateBookingDelegate()
-                                .getBookingRoomIndex()));
-
-        ReservationBuilder builder = reservationSystem.getReservationBuilder();
-        view.getSimulateBookingDelegate()
-                .setBookingCalendarCheckIn(builder.getCheckIn());
-        view.getSimulateBookingDelegate()
-                .setBookingCalendarCheckOut(builder.getCheckOut());
     }
 
     private void resetBookingScreen(boolean doPrompt) {
@@ -70,7 +49,8 @@ public class SimulateBookingCalendarListener extends CalendarListener
     }
 
     public void submitReservation() {
-        if (!view.confirmAction("submit this reservation?", "Submit reservation")) {
+        if (!view.confirmAction("submit this reservation?",
+                "Submit reservation")) {
             return;
         }
         int hotelIndex = view.getSelectedIndex();
@@ -121,21 +101,21 @@ public class SimulateBookingCalendarListener extends CalendarListener
     @Override
     protected void handleSelected(int row, int col) {
         this.selectedDate(row, col);
-        this.updateReservationPreview();
+        this.updateReservationPreview(reservationSystem, view);
     }
 
     /** {@inheritDoc} */
     @Override
     protected void handleClicked(int row, int col) {
         this.selectedDate(row, col);
-        this.updateReservationPreview();
+        this.updateReservationPreview(reservationSystem, view);
     }
 
     /** {@inheritDoc} */
     @Override
     protected void handleDragged(int row, int col) {
         this.selectedDate(row, col);
-        this.updateReservationPreview();
+        this.updateReservationPreview(reservationSystem, view);
     }
 
     /** {@inheritDoc} */
@@ -147,14 +127,14 @@ public class SimulateBookingCalendarListener extends CalendarListener
     @Override
     protected void handleReleased(int row, int col) {
         this.selectedDate(row, col);
-        this.updateReservationPreview();
+        this.updateReservationPreview(reservationSystem, view);
     }
 
     /** {@inheritDoc} */
     @Override
     protected void handleReleasedOutsideComponent() {
         view.getSimulateBookingDelegate().resetBookingCalendarSelection();
-        this.updateReservationPreview();
+        this.updateReservationPreview(reservationSystem, view);
     }
 
     /**
@@ -185,7 +165,7 @@ public class SimulateBookingCalendarListener extends CalendarListener
                     view.getSimulateBookingDelegate().getBookingGuestName());
             builder.setDiscountCode(
                     view.getSimulateBookingDelegate().getBookingDiscountCode());
-            this.updateReservationPreview();
+            this.updateReservationPreview(reservationSystem, view);
         }
     }
 

@@ -41,6 +41,7 @@ public class StyledLabel extends JLabel {
      */
     private void setStyle(Font font) {
         this.setFont(font);
-        this.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        int padding = font.getSize() / 2;
+        this.setBorder(BorderFactory.createEmptyBorder(padding, 0, padding, padding));
     }
 }

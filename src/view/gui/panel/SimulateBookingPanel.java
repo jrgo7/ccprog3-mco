@@ -17,9 +17,8 @@ import src.view.gui.component.BookingCalendarRenderer;
 import src.view.gui.component.Calendar;
 import src.view.gui.component.RoomListPanel;
 import src.view.gui.component.StyledButton;
-import src.view.gui.component.StyledButtonFactory;
+import src.view.gui.component.GUIFactory;
 import src.view.gui.component.StyledHTMLPane;
-import src.view.gui.component.StyledHTMLPaneContainerFactory;
 import src.view.gui.component.StyledLabel;
 import src.view.gui.component.StyledPanel;
 import src.view.gui.component.StyledRadioButton;
@@ -94,21 +93,27 @@ public class SimulateBookingPanel extends StyledPanel {
 
         reservationPreview = new StyledHTMLPane(
                 RESERVATION_PREVIEW_INITIAL_TEXT);
-        StyledPanel reservationPreviewPanel = StyledHTMLPaneContainerFactory
-                .createContainer(reservationPreview);
+        StyledPanel reservationPreviewPanel = GUIFactory
+                .createStyledHTMLPaneContainer(reservationPreview);
         detailsPanel.add(reservationPreviewPanel);
 
-        StyledPanel southPanel = new StyledPanel();
-        southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.X_AXIS));
+        StyledPanel buttonsPanel = new StyledPanel();
+        buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.X_AXIS));
+        
+        buttonsPanel.add(Box.createHorizontalGlue());
+        
+        bookButton = GUIFactory.createButton("Confirm booking");
+        buttonsPanel.add(bookButton);
+        
+        buttonsPanel.add(Box.createHorizontalGlue());
 
-        bookButton = StyledButtonFactory.createButton("Confirm booking");
-        southPanel.add(bookButton);
-
-        resetButton = StyledButtonFactory
+        resetButton = GUIFactory
                 .createDestructiveButton("Reset booking fields");
-        southPanel.add(resetButton);
+        buttonsPanel.add(resetButton);
+        
+        buttonsPanel.add(Box.createHorizontalGlue());
 
-        detailsPanel.add(southPanel);
+        detailsPanel.add(buttonsPanel);
 
         this.add(detailsPanel, BorderLayout.CENTER);
 

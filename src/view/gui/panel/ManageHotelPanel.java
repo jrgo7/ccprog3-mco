@@ -18,7 +18,7 @@ import src.model.Room;
 import src.view.gui.TopView;
 import src.view.gui.component.DecimalDocument;
 import src.view.gui.component.StyledButton;
-import src.view.gui.component.StyledButtonFactory;
+import src.view.gui.component.GUIFactory;
 import src.view.gui.component.StyledLabel;
 import src.view.gui.component.StyledPanel;
 import src.view.gui.component.StyledTabbedPane;
@@ -68,8 +68,8 @@ public class ManageHotelPanel extends StyledPanel {
         StyledPanel removeHotelPanel = new StyledPanel();
 
         removeHotelPanel.setLayout(new BorderLayout());
-        removeHotelButton = StyledButtonFactory
-                .createDestructiveButton("Remove hotel");
+        removeHotelButton = GUIFactory.createDestructiveButton(
+            "Remove hotel");
         removeHotelPanel.add(removeHotelButton, BorderLayout.WEST);
 
         this.add(removeHotelPanel, BorderLayout.SOUTH);
@@ -80,13 +80,13 @@ public class ManageHotelPanel extends StyledPanel {
         subpanels = new StyledTabbedPane();
 
         this.manageRoomsSubpanel = new ManageRoomsPanel();
-        subpanels.add("Manage rooms", this.manageRoomsSubpanel);
+        subpanels.addTab("Manage rooms", this.manageRoomsSubpanel);
 
         this.manageReservationsSubpanel = new ManageReservationsPanel();
-        subpanels.add("Manage reservations", this.manageReservationsSubpanel);
+        subpanels.addTab("Manage reservations", this.manageReservationsSubpanel);
 
         this.managePricesSubpanel = new ManagePricesPanel();
-        subpanels.add("Manage prices", this.managePricesSubpanel);
+        subpanels.addTab("Manage prices", this.managePricesSubpanel);
 
         this.add(subpanels, BorderLayout.CENTER);
     }
@@ -102,7 +102,7 @@ public class ManageHotelPanel extends StyledPanel {
         this.renameHotelField = new JTextField();
         editInfoPanel.add(this.renameHotelField);
 
-        this.renameHotelButton = StyledButtonFactory
+        this.renameHotelButton = GUIFactory
                 .createButton("Rename hotel");
         editInfoPanel.add(this.renameHotelButton);
 
@@ -115,7 +115,7 @@ public class ManageHotelPanel extends StyledPanel {
 
         editInfoPanel.add(this.basePriceField);
 
-        this.updateBasePriceButton = StyledButtonFactory
+        this.updateBasePriceButton = GUIFactory
                 .createButton("Update base price");
         editInfoPanel.add(this.updateBasePriceButton);
 

@@ -10,7 +10,7 @@ import src.controller.gui.ManagePricesListener;
 import src.view.gui.component.Calendar;
 import src.view.gui.component.DecimalDocument;
 import src.view.gui.component.StyledButton;
-import src.view.gui.component.StyledButtonFactory;
+import src.view.gui.component.GUIFactory;
 import src.view.gui.component.StyledHTMLPane;
 import src.view.gui.component.StyledLabel;
 import src.view.gui.component.StyledPanel;
@@ -38,7 +38,7 @@ public class ManagePricesPanel extends StyledPanel {
         priceModifierField.setDocument(new DecimalDocument());
         fieldPanel.add(priceModifierField);
 
-        priceUpdateButton = StyledButtonFactory
+        priceUpdateButton = GUIFactory
                 .createButton("Update price modifier");
         fieldPanel.add(priceUpdateButton);
 

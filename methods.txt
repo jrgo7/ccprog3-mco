@@ -189,7 +189,7 @@ RoomListListener.class
 	 5 addToList(int)
 	 6 getListLength()
 SimulateBookingCalendarListener.class
-	 1 updateReservationPreview()
+	 1 updateReservationPreview(reservationSystem, view)
 	 2 submitReservation()
 	 3 setRowAndCol(java.awt.event.MouseEvent)
 	 4 handleSelected(int, int)

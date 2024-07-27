@@ -1,181 +1,3 @@
-DeluxeRoom.class
-Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
-getBasePrice()	1					P
-	2					P
-	3					P
-ExecutiveRoom.class
-Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
-getBasePrice()	1					P
-	2					P
-	3					P
-Hotel.class
-Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
-getName()	1					P
-	2					P
-	3					P
-getBasePrice()	1					P
-	2					P
-	3					P
-getPriceModifier(int)	1					P
-	2					P
-	3					P
-getRoomCount()	1					P
-	2					P
-	3					P
-getDeluxeRoomCount()	1					P
-	2					P
-	3					P
-getExecutiveRoomCount()	1					P
-	2					P
-	3					P
-getEarnings()	1					P
-	2					P
-	3					P
-getReservationCount()	1					P
-	2					P
-	3					P
-getReservationCountOnDate(int, boolean)	1					P
-	2					P
-	3					P
-getAvailableDatesForRoom(int)	1					P
-	2					P
-	3					P
-getCalendarStringForRoom(int)	1					P
-	2					P
-	3					P
-getRoomString(int)	1					P
-	2					P
-	3					P
-getReservationString(int)	1					P
-	2					P
-	3					P
-setName(java.lang.String)	1					P
-	2					P
-	3					P
-setBasePrice(double)	1					P
-	2					P
-	3					P
-setPriceModifier(int, double)	1					P
-	2					P
-	3					P
-addRooms(int, int)	1					P
-	2					P
-	3					P
-removeRoom(int)	1					P
-	2					P
-	3					P
-addReservation(java.lang.String, int, int, int, java.lang.String)	1					P
-	2					P
-	3					P
-removeReservation(int)	1					P
-	2					P
-	3					P
-getRoomNames()	1					P
-	2					P
-	3					P
-getReservationNames()	1					P
-	2					P
-	3					P
-getAvailableRoomCount(int)	1					P
-	2					P
-	3					P
-toString()	1					P
-	2					P
-	3					P
-getRoom(int)	1					P
-	2					P
-	3					P
-Reservation.class
-Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
-setHotel(src.model.Hotel)	1					P
-	2					P
-	3					P
-getGuestName()	1					P
-	2					P
-	3					P
-setGuestName(java.lang.String)	1					P
-	2					P
-	3					P
-getCheckIn()	1					P
-	2					P
-	3					P
-setCheckIn(int)	1					P
-	2					P
-	3					P
-getCheckOut()	1					P
-	2					P
-	3					P
-setCheckOut(int)	1					P
-	2					P
-	3					P
-setRoom(src.model.Room)	1					P
-	2					P
-	3					P
-getNightCount()	1					P
-	2					P
-	3					P
-getTotalPrice()	1					P
-	2					P
-	3					P
-setDiscountCode(java.lang.String)	1					P
-	2					P
-	3					P
-getPriceBreakdown()	1					P
-	2					P
-	3					P
-getRoomName()	1					P
-	2					P
-	3					P
-removeFromRoom()	1					P
-	2					P
-	3					P
-toString()	1					P
-	2					P
-	3					P
-ReservationBuilder.class
-Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
-reset()	1					P
-	2					P
-	3					P
-setHotelIndex(int)	1					P
-	2					P
-	3					P
-setGuestName(java.lang.String)	1					P
-	2					P
-	3					P
-validateDates(int, int)	1					P
-	2					P
-	3					P
-setCheckIn(int)	1					P
-	2					P
-	3					P
-setCheckOut(int)	1					P
-	2					P
-	3					P
-setRoomIndex(int)	1					P
-	2					P
-	3					P
-setDiscountCode(java.lang.String)	1					P
-	2					P
-	3					P
-getHotelIndex()	1					P
-	2					P
-	3					P
-getGuestName()	1					P
-	2					P
-	3					P
-getCheckIn()	1					P
-	2					P
-	3					P
-getCheckOut()	1					P
-	2					P
-	3					P
-getRoomIndex()	1					P
-	2					P
-	3					P
-getDiscountCode()	1					P
-	2					P
-	3					P
 ReservationSystem.class
 Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
 hasHotels()	1					P
@@ -268,6 +90,9 @@ getReservationString(int, int)	1					P
 getReservationCount(int)	1					P
 	2					P
 	3					P
+validateDate(int)	1					P
+	2					P
+	3					P
 Room.class
 Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
 getName()	1					P
@@ -301,6 +126,943 @@ toString()	1					P
 	2					P
 	3					P
 toStringMinimal()	1					P
+	2					P
+	3					P
+Reservation.class
+Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
+setHotel(src.model.Hotel)	1					P
+	2					P
+	3					P
+getGuestName()	1					P
+	2					P
+	3					P
+setGuestName(java.lang.String)	1					P
+	2					P
+	3					P
+getCheckIn()	1					P
+	2					P
+	3					P
+setCheckIn(int)	1					P
+	2					P
+	3					P
+getCheckOut()	1					P
+	2					P
+	3					P
+setCheckOut(int)	1					P
+	2					P
+	3					P
+setRoom(src.model.Room)	1					P
+	2					P
+	3					P
+getNightCount()	1					P
+	2					P
+	3					P
+getTotalPrice()	1					P
+	2					P
+	3					P
+setDiscountCode(java.lang.String)	1					P
+	2					P
+	3					P
+getPriceBreakdown()	1					P
+	2					P
+	3					P
+getRoomName()	1					P
+	2					P
+	3					P
+removeFromRoom()	1					P
+	2					P
+	3					P
+toString()	1					P
+	2					P
+	3					P
+Hotel.class
+Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
+getName()	1					P
+	2					P
+	3					P
+getBasePrice()	1					P
+	2					P
+	3					P
+getPriceModifier(int)	1					P
+	2					P
+	3					P
+getRoomCount()	1					P
+	2					P
+	3					P
+getDeluxeRoomCount()	1					P
+	2					P
+	3					P
+getExecutiveRoomCount()	1					P
+	2					P
+	3					P
+getEarnings()	1					P
+	2					P
+	3					P
+getReservationCount()	1					P
+	2					P
+	3					P
+getReservationCountOnDate(int, boolean)	1					P
+	2					P
+	3					P
+getAvailableDatesForRoom(int)	1					P
+	2					P
+	3					P
+getCalendarStringForRoom(int)	1					P
+	2					P
+	3					P
+getRoomString(int)	1					P
+	2					P
+	3					P
+getReservationString(int)	1					P
+	2					P
+	3					P
+setName(java.lang.String)	1					P
+	2					P
+	3					P
+setBasePrice(double)	1					P
+	2					P
+	3					P
+setPriceModifier(int, double)	1					P
+	2					P
+	3					P
+addRooms(int, int)	1					P
+	2					P
+	3					P
+removeRoom(int)	1					P
+	2					P
+	3					P
+addReservation(java.lang.String, int, int, int, java.lang.String)	1					P
+	2					P
+	3					P
+removeReservation(int)	1					P
+	2					P
+	3					P
+getRoomNames()	1					P
+	2					P
+	3					P
+getReservationNames()	1					P
+	2					P
+	3					P
+getAvailableRoomCount(int)	1					P
+	2					P
+	3					P
+toString()	1					P
+	2					P
+	3					P
+getRoom(int)	1					P
+	2					P
+	3					P
+ReservationBuilder.class
+Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
+reset()	1					P
+	2					P
+	3					P
+setHotelIndex(int)	1					P
+	2					P
+	3					P
+setGuestName(java.lang.String)	1					P
+	2					P
+	3					P
+validateDates(int, int)	1					P
+	2					P
+	3					P
+setCheckIn(int)	1					P
+	2					P
+	3					P
+setCheckOut(int)	1					P
+	2					P
+	3					P
+setRoomIndex(int)	1					P
+	2					P
+	3					P
+setDiscountCode(java.lang.String)	1					P
+	2					P
+	3					P
+getHotelIndex()	1					P
+	2					P
+	3					P
+getGuestName()	1					P
+	2					P
+	3					P
+getCheckIn()	1					P
+	2					P
+	3					P
+getCheckOut()	1					P
+	2					P
+	3					P
+getRoomIndex()	1					P
+	2					P
+	3					P
+getDiscountCode()	1					P
+	2					P
+	3					P
+DeluxeRoom.class
+Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
+getBasePrice()	1					P
+	2					P
+	3					P
+ExecutiveRoom.class
+Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
+getBasePrice()	1					P
+	2					P
+	3					P
+TopView.class
+Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
+setGlobalLookAndFeel()	1					P
+	2					P
+	3					P
+initializeWindow()	1					P
+	2					P
+	3					P
+getTabIndex()	1					P
+	2					P
+	3					P
+getManageHotelDelegate()	1					P
+	2					P
+	3					P
+getSimulateBookingDelegate()	1					P
+	2					P
+	3					P
+getViewHotelDelegate()	1					P
+	2					P
+	3					P
+setTopViewHotelListListener(src.controller.gui.HotelListListener)	1					P
+	2					P
+	3					P
+setTopMenuPaneListener(src.controller.gui.TopMenuPaneListener)	1					P
+	2					P
+	3					P
+setViewHotelListeners(src.controller.gui.HotelAvailabilityCalendarListener, src.controller.gui.RoomListListener, src.controller.gui.ReservationListListener)	1					P
+	2					P
+	3					P
+setManageHotelListeners(src.controller.gui.RenameHotelListener, src.controller.gui.ManagePricesListener, src.controller.gui.ManageRoomListener, src.controller.gui.ManageReservationListener)	1					P
+	2					P
+	3					P
+setSimulateBookingListeners(src.controller.gui.SimulateBookingRoomListListener, src.controller.gui.SimulateBookingCalendarListener)	1					P
+	2					P
+	3					P
+setTabIndex(int)	1					P
+	2					P
+	3					P
+setList(java.util.ArrayList<java.lang.String>)	1					P
+	2					P
+	3					P
+getSelectedIndex()	1					P
+	2					P
+	3					P
+setSelectedIndex(int)	1					P
+	2					P
+	3					P
+clearSelectedIndex()	1					P
+	2					P
+	3					P
+setTopMenuPaneVisible(boolean)	1					P
+	2					P
+	3					P
+setRoomList(java.lang.String[])	1					P
+	2					P
+	3					P
+setReservationList(java.lang.String[])	1					P
+	2					P
+	3					P
+promptAddHotel()	1					P
+	2					P
+	3					P
+promptAddRoom(int)	1					P
+	2					P
+	3					P
+showHotelNameExistsError()	1					P
+	2					P
+	3					P
+basePriceUpdateLessThanMinimumError()	1					P
+	2					P
+	3					P
+basePriceUpdateReservationsExistError()	1					P
+	2					P
+	3					P
+showPriceModifierError()	1					P
+	2					P
+	3					P
+showRoomCountFullError()	1					P
+	2					P
+	3					P
+showReservationSuccess()	1					P
+	2					P
+	3					P
+showReservationError(java.lang.String)	1					P
+	2					P
+	3					P
+showCantRemoveRoomError()	1					P
+	2					P
+	3					P
+confirmAction(java.lang.String, java.lang.String)	1					P
+	2					P
+	3					P
+ViewHotelDelegate.class
+Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
+setHotelData(java.lang.String)	1					P
+	2					P
+	3					P
+setRoomDataVisible(boolean)	1					P
+	2					P
+	3					P
+setHotelAvailability(java.lang.String)	1					P
+	2					P
+	3					P
+setRoomData(java.lang.String, java.util.ArrayList<java.lang.Integer>)	1					P
+	2					P
+	3					P
+setSelectedRoomIndex(int)	1					P
+	2					P
+	3					P
+clearRoomSelectedIndex()	1					P
+	2					P
+	3					P
+getAvailabilityCalendarRowFromMouse(java.awt.Point)	1					P
+	2					P
+	3					P
+getAvailabilityCalendarColFromMouse(java.awt.Point)	1					P
+	2					P
+	3					P
+clearAvailabilityCalendarSelection()	1					P
+	2					P
+	3					P
+setReservationData(java.lang.String)	1					P
+	2					P
+	3					P
+setSelectedReservationIndex(int)	1					P
+	2					P
+	3					P
+setReservationDataVisible(boolean)	1					P
+	2					P
+	3					P
+SimulateBookingDelegate.class
+Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
+setBookingCalendarAvailability(java.util.ArrayList<java.lang.Integer>)	1					P
+	2					P
+	3					P
+setBookingCalendarCheckIn(int)	1					P
+	2					P
+	3					P
+setBookingCalendarCheckOut(int)	1					P
+	2					P
+	3					P
+getBookingGuestName()	1					P
+	2					P
+	3					P
+getBookingRoomIndex()	1					P
+	2					P
+	3					P
+resetBookingRoomListSelection()	1					P
+	2					P
+	3					P
+getBookingDiscountCode()	1					P
+	2					P
+	3					P
+updateSimulateBookingReservationPreview(java.lang.String)	1					P
+	2					P
+	3					P
+getIsBookingCalendarFocused()	1					P
+	2					P
+	3					P
+getBookingCalendarRowFromMouse(java.awt.Point)	1					P
+	2					P
+	3					P
+getBookingCalendarColFromMouse(java.awt.Point)	1					P
+	2					P
+	3					P
+resetBookingFields()	1					P
+	2					P
+	3					P
+resetBookingCalendarSelection()	1					P
+	2					P
+	3					P
+setBookingDetailsVisible(boolean)	1					P
+	2					P
+	3					P
+resetBookingScreen()	1					P
+	2					P
+	3					P
+ManageHotelDelegate.class
+Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
+getRenameHotelFieldText()	1					P
+	2					P
+	3					P
+setRenameHotelFieldText(java.lang.String)	1					P
+	2					P
+	3					P
+getUpdateBasePriceFieldText()	1					P
+	2					P
+	3					P
+setUpdateBasePriceFieldText(java.lang.String)	1					P
+	2					P
+	3					P
+setRoomData(java.lang.String, java.util.ArrayList<java.lang.Integer>)	1					P
+	2					P
+	3					P
+getSelectedRoomIndex()	1					P
+	2					P
+	3					P
+setManageRoomVisible(boolean)	1					P
+	2					P
+	3					P
+clearSelectedRoomIndex()	1					P
+	2					P
+	3					P
+setReservationList(java.lang.String[])	1					P
+	2					P
+	3					P
+getSelectedReservationIndex()	1					P
+	2					P
+	3					P
+setManageReservationData(java.lang.String)	1					P
+	2					P
+	3					P
+setReservationDataVisible(boolean)	1					P
+	2					P
+	3					P
+setManagePricesCalendarText(int, java.lang.String)	1					P
+	2					P
+	3					P
+getPriceModifierFieldText()	1					P
+	2					P
+	3					P
+setPriceModifierFieldText(java.lang.String)	1					P
+	2					P
+	3					P
+setModifiedPriceText(java.lang.String)	1					P
+	2					P
+	3					P
+setPriceModifierCalendarDate(int)	1					P
+	2					P
+	3					P
+getPriceModifierCalendarRowFromMouse(java.awt.Point)	1					P
+	2					P
+	3					P
+getPriceModifierCalendarColFromMouse(java.awt.Point)	1					P
+	2					P
+	3					P
+getIsManagePricesCalendarFocused()	1					P
+	2					P
+	3					P
+clearManagePricesCalendarSelection()	1					P
+	2					P
+	3					P
+getIsUpdatePriceModifierFieldFocused()	1					P
+	2					P
+	3					P
+getIsUpdateBasePriceFieldFocused()	1					P
+	2					P
+	3					P
+ViewReservationsPanel.class
+Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
+setReservationList(java.util.ArrayList<java.lang.String>)	1					P
+	2					P
+	3					P
+setReservationData(java.lang.String)	1					P
+	2					P
+	3					P
+getSelectedIndex()	1					P
+	2					P
+	3					P
+setListener(src.controller.gui.ReservationListListener)	1					P
+	2					P
+	3					P
+setWrapperVisible(boolean)	1					P
+	2					P
+	3					P
+setSelectedIndex(int)	1					P
+	2					P
+	3					P
+ViewRoomPanel.class
+Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
+setRoomData(java.lang.String, java.util.ArrayList<java.lang.Integer>)	1					P
+	2					P
+	3					P
+setRoomList(java.util.ArrayList<java.lang.String>)	1					P
+	2					P
+	3					P
+setRoomListListener(src.controller.gui.RoomListListener)	1					P
+	2					P
+	3					P
+getSelectedRoomIndex()	1					P
+	2					P
+	3					P
+clearRoomListSelection()	1					P
+	2					P
+	3					P
+setWrapperVisible(boolean)	1					P
+	2					P
+	3					P
+setSelectedIndex(int)	1					P
+	2					P
+	3					P
+ManagePricesPanel.class
+Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
+setCalendarText(int, java.lang.String)	1					P
+	2					P
+	3					P
+setModifiedPriceText(java.lang.String)	1					P
+	2					P
+	3					P
+getPriceModifierFieldText()	1					P
+	2					P
+	3					P
+setPriceModifierFieldText(java.lang.String)	1					P
+	2					P
+	3					P
+setCalendarDate(int)	1					P
+	2					P
+	3					P
+getIsCalendarFocused()	1					P
+	2					P
+	3					P
+clearCalendarSelection()	1					P
+	2					P
+	3					P
+getIsUpdatePriceModifierFieldFocused()	1					P
+	2					P
+	3					P
+getCalendarRowAtPoint(java.awt.Point)	1					P
+	2					P
+	3					P
+getCalendarColAtPoint(java.awt.Point)	1					P
+	2					P
+	3					P
+setListener(src.controller.gui.ManagePricesListener)	1					P
+	2					P
+	3					P
+ManageRoomsPanel.class
+Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
+setRemoveButtonListener(java.awt.event.ActionListener)	1					P
+	2					P
+	3					P
+ViewAvailabilityPanel.class
+Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
+setAvailabilityData(java.lang.String)	1					P
+	2					P
+	3					P
+getCalendarRowAtPoint(java.awt.Point)	1					P
+	2					P
+	3					P
+getCalendarColAtPoint(java.awt.Point)	1					P
+	2					P
+	3					P
+clearCalendarSelection()	1					P
+	2					P
+	3					P
+setListener(src.controller.gui.HotelAvailabilityCalendarListener)	1					P
+	2					P
+	3					P
+ManageReservationsPanel.class
+Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
+setRemoveButtonListener(java.awt.event.ActionListener)	1					P
+	2					P
+	3					P
+ViewHotelPanel.class
+Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
+setRoomListListener(src.controller.gui.RoomListListener)	1					P
+	2					P
+	3					P
+setCalendarListener(src.controller.gui.HotelAvailabilityCalendarListener)	1					P
+	2					P
+	3					P
+setReservationListener(src.controller.gui.ReservationListListener)	1					P
+	2					P
+	3					P
+getSelectedSubpanelIndex()	1					P
+	2					P
+	3					P
+setHotelData(java.lang.String)	1					P
+	2					P
+	3					P
+setAvailabilityData(java.lang.String)	1					P
+	2					P
+	3					P
+getAvailabilityCalendarRowAtPoint(java.awt.Point)	1					P
+	2					P
+	3					P
+getAvailabilityCalendarColAtPoint(java.awt.Point)	1					P
+	2					P
+	3					P
+clearAvailabilityCalendarSelection()	1					P
+	2					P
+	3					P
+setRoomData(java.lang.String, java.util.ArrayList<java.lang.Integer>)	1					P
+	2					P
+	3					P
+setRoomList(java.util.ArrayList<java.lang.String>)	1					P
+	2					P
+	3					P
+getSelectedRoomIndex()	1					P
+	2					P
+	3					P
+clearRoomListSelection()	1					P
+	2					P
+	3					P
+setSelectedRoomIndex(int)	1					P
+	2					P
+	3					P
+setReservationList(java.util.ArrayList<java.lang.String>)	1					P
+	2					P
+	3					P
+getSelectedReservationIndex()	1					P
+	2					P
+	3					P
+setReservationData(java.lang.String)	1					P
+	2					P
+	3					P
+setReservationDataVisible(boolean)	1					P
+	2					P
+	3					P
+setSelectedReservationIndex(int)	1					P
+	2					P
+	3					P
+setRoomDataVisible(boolean)	1					P
+	2					P
+	3					P
+SimulateBookingPanel.class
+Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
+setRoomList(java.util.ArrayList<java.lang.String>)	1					P
+	2					P
+	3					P
+setCalendarAvailability(java.util.ArrayList<java.lang.Integer>)	1					P
+	2					P
+	3					P
+setCalendarCheckIn(int)	1					P
+	2					P
+	3					P
+setCalendarCheckOut(int)	1					P
+	2					P
+	3					P
+getGuestNameFieldText()	1					P
+	2					P
+	3					P
+getDiscountCodeFieldText()	1					P
+	2					P
+	3					P
+getIsCalendarFocused()	1					P
+	2					P
+	3					P
+getBookingCalendarDay()	1					P
+	2					P
+	3					P
+getRoomIndex()	1					P
+	2					P
+	3					P
+setPreview(java.lang.String)	1					P
+	2					P
+	3					P
+getBookingCalendarRowFromMouse(java.awt.Point)	1					P
+	2					P
+	3					P
+getBookingCalendarColFromMouse(java.awt.Point)	1					P
+	2					P
+	3					P
+clearRoomListSelection()	1					P
+	2					P
+	3					P
+setDiscountCodeFieldText(java.lang.String)	1					P
+	2					P
+	3					P
+setGuestNameFieldText(java.lang.String)	1					P
+	2					P
+	3					P
+setDetailsVisible(boolean)	1					P
+	2					P
+	3					P
+enableCheckInButton()	1					P
+	2					P
+	3					P
+clearCalendarSelection()	1					P
+	2					P
+	3					P
+setListeners(src.controller.gui.SimulateBookingRoomListListener, src.controller.gui.SimulateBookingCalendarListener)	1					P
+	2					P
+	3					P
+ManageHotelPanel.class
+Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
+initializeSubpanels()	1					P
+	2					P
+	3					P
+initializeEditInfoPanel()	1					P
+	2					P
+	3					P
+setRenameHotelListener(src.controller.gui.RenameHotelListener)	1					P
+	2					P
+	3					P
+setManagePricesListener(src.controller.gui.ManagePricesListener)	1					P
+	2					P
+	3					P
+setManageRoomsListener(src.controller.gui.ManageRoomListener)	1					P
+	2					P
+	3					P
+setManageReservationsListener(src.controller.gui.ManageReservationListener)	1					P
+	2					P
+	3					P
+setRemoveHotelButtonListener(src.controller.gui.HotelListListener)	1					P
+	2					P
+	3					P
+getRenameHotelFieldText()	1					P
+	2					P
+	3					P
+setRenameHotelFieldText(java.lang.String)	1					P
+	2					P
+	3					P
+getUpdateBasePriceFieldText()	1					P
+	2					P
+	3					P
+setUpdateBasePriceFieldText(java.lang.String)	1					P
+	2					P
+	3					P
+setRoomList(java.util.ArrayList<java.lang.String>)	1					P
+	2					P
+	3					P
+setRoomData(java.lang.String, java.util.ArrayList<java.lang.Integer>)	1					P
+	2					P
+	3					P
+clearRoomListSelection()	1					P
+	2					P
+	3					P
+getSelectedRoomIndex()	1					P
+	2					P
+	3					P
+setRoomDataVisible(boolean)	1					P
+	2					P
+	3					P
+setManagePricesCalendarText(int, java.lang.String)	1					P
+	2					P
+	3					P
+setManagePricesCalendarSelection(int)	1					P
+	2					P
+	3					P
+getPriceModifierFieldText()	1					P
+	2					P
+	3					P
+setPriceModifierFieldText(java.lang.String)	1					P
+	2					P
+	3					P
+setModifiedPriceText(java.lang.String)	1					P
+	2					P
+	3					P
+getIsManagePricesCalendarFocused()	1					P
+	2					P
+	3					P
+clearManagePricesCalendarSelection()	1					P
+	2					P
+	3					P
+getIsUpdatePriceModifierFieldFocused()	1					P
+	2					P
+	3					P
+getIsUpdateBasePriceFieldFocused()	1					P
+	2					P
+	3					P
+getCalendarRowAtPoint(java.awt.Point)	1					P
+	2					P
+	3					P
+getCalendarColAtPoint(java.awt.Point)	1					P
+	2					P
+	3					P
+setReservationList(java.util.ArrayList<java.lang.String>)	1					P
+	2					P
+	3					P
+setReservationData(java.lang.String)	1					P
+	2					P
+	3					P
+getSelectedReservationIndex()	1					P
+	2					P
+	3					P
+setReservationDataVisible(boolean)	1					P
+	2					P
+	3					P
+StyledRadioButton.class
+Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
+StyledButton.class
+Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
+setStyle(java.awt.Font, java.awt.Color)	1					P
+	2					P
+	3					P
+StyledPanel.class
+Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
+BookingCalendar.class
+Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
+setCalendarCheckIn(int)	1					P
+	2					P
+	3					P
+setCalendarCheckOut(int)	1					P
+	2					P
+	3					P
+HotelListPanel.class
+Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
+setList(java.util.ArrayList<java.lang.String>)	1					P
+	2					P
+	3					P
+RoomListPanel.class
+Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
+setList(java.util.ArrayList<java.lang.String>)	1					P
+	2					P
+	3					P
+RoomAvailabilityCalendarRenderer.class
+Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
+setAvailableDates(java.util.ArrayList<java.lang.Integer>)	1					P
+	2					P
+	3					P
+getTableCellRendererComponent(javax.swing.JTable, java.lang.Object, boolean, boolean, int, int)	1					P
+	2					P
+	3					P
+GUIFactory.class
+Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
+createButton(java.lang.String)	1					P
+	2					P
+	3					P
+createDestructiveButton(java.lang.String)	1					P
+	2					P
+	3					P
+StyledTabbedPane.class
+Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
+ColorCollection.class
+Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
+BookingCalendarRenderer.class
+Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
+setCheckOut(int)	1					P
+	2					P
+	3					P
+setCheckIn(int)	1					P
+	2					P
+	3					P
+getTableCellRendererComponent(javax.swing.JTable, java.lang.Object, boolean, boolean, int, int)	1					P
+	2					P
+	3					P
+CalendarRenderer.class
+Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
+getTableCellRendererComponent(javax.swing.JTable, java.lang.Object, boolean, boolean, int, int)	1					P
+	2					P
+	3					P
+DecimalDocument.class
+Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
+insertString(int, java.lang.String, javax.swing.text.AttributeSet) throws javax	1					P
+	2					P
+	3					P
+Calendar.class
+Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
+toDate(int, int)	1					P
+	2					P
+	3					P
+getRowFromDate(int)	1					P
+	2					P
+	3					P
+getColFromDate(int)	1					P
+	2					P
+	3					P
+setCalendarText(int, java.lang.String)	1					P
+	2					P
+	3					P
+setCalendarText(int, int, java.lang.String)	1					P
+	2					P
+	3					P
+isCellEditable(int, int)	1					P
+	2					P
+	3					P
+selectDate(int)	1					P
+	2					P
+	3					P
+resetSelection()	1					P
+	2					P
+	3					P
+setListener(src.controller.gui.CalendarListener)	1					P
+	2					P
+	3					P
+StyledScrollPane.class
+Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
+StyledHTMLPane.class
+Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
+StyledLabel.class
+Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
+ListPanel.class
+Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
+setList(java.util.ArrayList<java.lang.String>)	1					P
+	2					P
+	3					P
+setListener(javax.swing.event.ListSelectionListener)	1					P
+	2					P
+	3					P
+getSelectedIndex()	1					P
+	2					P
+	3					P
+setSelectedIndex(int)	1					P
+	2					P
+	3					P
+clearSelection()	1					P
+	2					P
+	3					P
+RoomAvailabilityCalendar.class
+Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
+setAvailabilityData(java.util.ArrayList<java.lang.Integer>)	1					P
+	2					P
+	3					P
+FontCollection.class
+Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
+ReservationListPanel.class
+Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
+StyledHTMLPaneContainerFactory.class
+Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
+createStyledHTMLPaneContainer(src.view.gui.component.StyledHTMLPane)	1					P
+	2					P
+	3					P
+ManagePricesListener.class
+Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
+handleSelected(int, int)	1					P
+	2					P
+	3					P
+handleClicked(int, int)	1					P
+	2					P
+	3					P
+handleDragged(int, int)	1					P
+	2					P
+	3					P
+handleMoved(int, int)	1					P
+	2					P
+	3					P
+handleReleased(int, int)	1					P
+	2					P
+	3					P
+handleReleasedOutsideComponent()	1					P
+	2					P
+	3					P
+keyPressed(java.awt.event.KeyEvent)	1					P
+	2					P
+	3					P
+actionPerformed(java.awt.event.ActionEvent)	1					P
+	2					P
+	3					P
+setRowAndCol(java.awt.event.MouseEvent)	1					P
+	2					P
+	3					P
+RenameHotelListener.class
+Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
+actionPerformed(java.awt.event.ActionEvent)	1					P
+	2					P
+	3					P
+renameHotel()	1					P
+	2					P
+	3					P
+keyPressed(java.awt.event.KeyEvent)	1					P
+	2					P
+	3					P
+keyTyped(java.awt.event.KeyEvent)	1					P
+	2					P
+	3					P
+keyReleased(java.awt.event.KeyEvent)	1					P
+	2					P
+	3					P
+GUIDriver.class
+Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
+main(java.lang.String[])	1					P
+	2					P
+	3					P
+SimulateBookingRoomListListener.class
+Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
+updateDataPanel(int)	1					P
 	2					P
 	3					P
 CalendarListener.class
@@ -371,131 +1133,12 @@ mouseDragged(java.awt.event.MouseEvent)	1					P
 mouseMoved(java.awt.event.MouseEvent)	1					P
 	2					P
 	3					P
-Controller.class
-Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
-GUIDriver.class
-Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
-main(java.lang.String[])	1					P
-	2					P
-	3					P
-HotelAvailabilityCalendarListener.class
-Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
-handleCheckAvailability(int, int)	1					P
-	2					P
-	3					P
-handleSelected(int, int)	1					P
-	2					P
-	3					P
-handleClicked(int, int)	1					P
-	2					P
-	3					P
-handleReleased(int, int)	1					P
-	2					P
-	3					P
-handleReleasedOutsideComponent()	1					P
-	2					P
-	3					P
-handleDragged(int, int)	1					P
-	2					P
-	3					P
-handleMoved(int, int)	1					P
-	2					P
-	3					P
-setRowAndCol(java.awt.event.MouseEvent)	1					P
-	2					P
-	3					P
-HotelListListener.class
-Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
-updateList()	1					P
-	2					P
-	3					P
-getListLength()	1					P
-	2					P
-	3					P
-handleValueChanged(int)	1					P
-	2					P
-	3					P
-updateDataPanel(int)	1					P
-	2					P
-	3					P
-addToList(int)	1					P
-	2					P
-	3					P
-actionPerformed(java.awt.event.ActionEvent)	1					P
-	2					P
-	3					P
-ListAddListener.class
-Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
-updateList()	1					P
-	2					P
-	3					P
-getListLength()	1					P
-	2					P
-	3					P
-handleValueChanged(int)	1					P
-	2					P
-	3					P
-updateDataPanel(int)	1					P
-	2					P
-	3					P
-addToList(int)	1					P
-	2					P
-	3					P
-valueChanged(javax.swing.event.ListSelectionEvent)	1					P
-	2					P
-	3					P
-ManagePricesListener.class
-Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
-handleSelected(int, int)	1					P
-	2					P
-	3					P
-handleClicked(int, int)	1					P
-	2					P
-	3					P
-handleDragged(int, int)	1					P
-	2					P
-	3					P
-handleMoved(int, int)	1					P
-	2					P
-	3					P
-handleReleased(int, int)	1					P
-	2					P
-	3					P
-handleReleasedOutsideComponent()	1					P
-	2					P
-	3					P
-keyPressed(java.awt.event.KeyEvent)	1					P
-	2					P
-	3					P
-actionPerformed(java.awt.event.ActionEvent)	1					P
-	2					P
-	3					P
-updateBasePrice()	1					P
-	2					P
-	3					P
-updatePriceModifier()	1					P
-	2					P
-	3					P
-setRowAndCol(java.awt.event.MouseEvent)	1					P
-	2					P
-	3					P
-ManageReservationListener.class
-Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
-handleValueChanged(int)	1					P
-	2					P
-	3					P
-updateDataPanel(int)	1					P
-	2					P
-	3					P
-actionPerformed(java.awt.event.ActionEvent)	1					P
-	2					P
-	3					P
 ManageRoomListener.class
 Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
 addToList(int)	1					P
 	2					P
 	3					P
-updateDataPanelData(java.lang.String, java.util.ArrayList<java.lang.Integer>)	1					P
+updateDataPanel(int)	1					P
 	2					P
 	3					P
 handleValueChanged(int)	1					P
@@ -504,63 +1147,14 @@ handleValueChanged(int)	1					P
 actionPerformed(java.awt.event.ActionEvent)	1					P
 	2					P
 	3					P
-RenameHotelListener.class
+TopMenuPaneListener.class
 Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
-actionPerformed(java.awt.event.ActionEvent)	1					P
-	2					P
-	3					P
-renameHotel()	1					P
-	2					P
-	3					P
-keyTyped(java.awt.event.KeyEvent)	1					P
-	2					P
-	3					P
-keyPressed(java.awt.event.KeyEvent)	1					P
-	2					P
-	3					P
-keyReleased(java.awt.event.KeyEvent)	1					P
-	2					P
-	3					P
-ReservationListListener.class
-Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
-updateList()	1					P
-	2					P
-	3					P
-getListLength()	1					P
-	2					P
-	3					P
-handleValueChanged(int)	1					P
-	2					P
-	3					P
-updateDataPanel(int)	1					P
-	2					P
-	3					P
-addToList(int)	1					P
-	2					P
-	3					P
-RoomListListener.class
-Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
-handleValueChanged(int)	1					P
-	2					P
-	3					P
-updateList()	1					P
-	2					P
-	3					P
-updateDataPanelData(java.lang.String, java.util.ArrayList<java.lang.Integer>)	1					P
-	2					P
-	3					P
-updateDataPanel(int)	1					P
-	2					P
-	3					P
-addToList(int)	1					P
-	2					P
-	3					P
-getListLength()	1					P
+stateChanged(javax.swing.event.ChangeEvent)	1					P
 	2					P
 	3					P
 SimulateBookingCalendarListener.class
 Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
-updateReservationPreview()	1					P
+updateReservationPreview(reservationSystem, view)	1					P
 	2					P
 	3					P
 submitReservation()	1					P
@@ -596,637 +1190,110 @@ keyReleased(java.awt.event.KeyEvent)	1					P
 actionPerformed(java.awt.event.ActionEvent)	1					P
 	2					P
 	3					P
-SimulateBookingRoomListListener.class
+ReservationListListener.class
 Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
+updateList()	1					P
+	2					P
+	3					P
+getListLength()	1					P
+	2					P
+	3					P
+handleValueChanged(int)	1					P
+	2					P
+	3					P
 updateDataPanel(int)	1					P
 	2					P
 	3					P
-TopMenuPaneListener.class
+addToList(int)	1					P
+	2					P
+	3					P
+Controller.class
 Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
-stateChanged(javax.swing.event.ChangeEvent)	1					P
-	2					P
-	3					P
-TopView.class
+HotelListListener.class
 Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
-setTopViewHotelListListener(src.controller.gui.HotelListListener)	1					P
+updateList()	1					P
 	2					P
 	3					P
-setTopMenuPaneListener(src.controller.gui.TopMenuPaneListener)	1					P
+getListLength()	1					P
 	2					P
 	3					P
-setViewHotelListeners(src.controller.gui.HotelAvailabilityCalendarListener, src.controller.gui.RoomListListener, src.controller.gui.ReservationListListener)	1					P
+handleValueChanged(int)	1					P
 	2					P
 	3					P
-setManageHotelListeners(src.controller.gui.RenameHotelListener, src.controller.gui.ManagePricesListener, src.controller.gui.ManageRoomListener, src.controller.gui.ManageReservationListener)	1					P
+updateDataPanel(int)	1					P
 	2					P
 	3					P
-getTabIndex()	1					P
+addToList(int)	1					P
 	2					P
 	3					P
-setHotelListData(java.util.ArrayList<java.lang.String>)	1					P
+actionPerformed(java.awt.event.ActionEvent)	1					P
 	2					P
 	3					P
-getHotelListPrevSelectedIndex()	1					P
-	2					P
-	3					P
-setHotelListPrevSelectedIndex(int)	1					P
-	2					P
-	3					P
-getHotelListSelectedIndex()	1					P
-	2					P
-	3					P
-setHotelListSelectedIndex(int)	1					P
-	2					P
-	3					P
-removeHotelListSelection()	1					P
-	2					P
-	3					P
-setTopMenuPaneVisible(boolean)	1					P
-	2					P
-	3					P
-setHotelDataText(java.lang.String)	1					P
-	2					P
-	3					P
-setHotelAvailabilityDataText(java.lang.String)	1					P
-	2					P
-	3					P
-setRoomList(java.lang.String[])	1					P
-	2					P
-	3					P
-setRoomData(java.lang.String, java.util.ArrayList<java.lang.Integer>)	1					P
-	2					P
-	3					P
-updateManageRoomData(java.lang.String, java.util.ArrayList<java.lang.Integer>)	1					P
-	2					P
-	3					P
-getAvailabilityCalendarRowFromMouse(java.awt.Point)	1					P
-	2					P
-	3					P
-getAvailabilityCalendarColFromMouse(java.awt.Point)	1					P
-	2					P
-	3					P
-clearAvailabilityCalendarSelection()	1					P
-	2					P
-	3					P
-resetViewRoomListSelection()	1					P
-	2					P
-	3					P
-setReservationList(java.lang.String[])	1					P
-	2					P
-	3					P
-getSelectedReservationIndex()	1					P
-	2					P
-	3					P
-setReservationData(java.lang.String)	1					P
-	2					P
-	3					P
-setManageReservationData(java.lang.String)	1					P
-	2					P
-	3					P
-setReservationDataVisible(boolean)	1					P
-	2					P
-	3					P
-getSelectedRoomIndex()	1					P
-	2					P
-	3					P
-setManageHotelReservationData(java.lang.String)	1					P
-	2					P
-	3					P
-getRenameHotelFieldText()	1					P
-	2					P
-	3					P
-setRenameHotelFieldText(java.lang.String)	1					P
-	2					P
-	3					P
-getUpdateBasePriceFieldText()	1					P
-	2					P
-	3					P
-setUpdateBasePriceFieldText(java.lang.String)	1					P
-	2					P
-	3					P
-setManagePricesCalendarText(int, java.lang.String)	1					P
-	2					P
-	3					P
-getPriceModifierFieldText()	1					P
-	2					P
-	3					P
-setPriceModifierFieldText(java.lang.String)	1					P
-	2					P
-	3					P
-setModifiedPriceText(java.lang.String)	1					P
-	2					P
-	3					P
-setPriceModifierCalendarDate(int)	1					P
-	2					P
-	3					P
-getPriceModifierCalendarRowFromMouse(java.awt.Point)	1					P
-	2					P
-	3					P
-getPriceModifierCalendarColFromMouse(java.awt.Point)	1					P
-	2					P
-	3					P
-getIsManagePricesCalendarFocused()	1					P
-	2					P
-	3					P
-clearManagePricesCalendarSelection()	1					P
-	2					P
-	3					P
-getIsUpdatePriceModifierFieldFocused()	1					P
-	2					P
-	3					P
-getIsUpdateBasePriceFieldFocused()	1					P
-	2					P
-	3					P
-setManageRoomVisible(boolean)	1					P
-	2					P
-	3					P
-setBookingCalendarAvailability(java.util.ArrayList<java.lang.Integer>)	1					P
-	2					P
-	3					P
-setBookingCalendarCheckIn(int)	1					P
-	2					P
-	3					P
-setBookingCalendarCheckOut(int)	1					P
-	2					P
-	3					P
-getBookingGuestName()	1					P
-	2					P
-	3					P
-getBookingRoomIndex()	1					P
-	2					P
-	3					P
-resetBookingRoomListSelection()	1					P
-	2					P
-	3					P
-getBookingDiscountCode()	1					P
-	2					P
-	3					P
-updateSimulateBookingReservationPreview(java.lang.String)	1					P
-	2					P
-	3					P
-getIsBookingCalendarFocused()	1					P
-	2					P
-	3					P
-getBookingCalendarRowFromMouse(java.awt.Point)	1					P
-	2					P
-	3					P
-getBookingCalendarColFromMouse(java.awt.Point)	1					P
-	2					P
-	3					P
-setSimulateBookingListeners(src.controller.gui.SimulateBookingRoomListListener, src.controller.gui.SimulateBookingCalendarListener)	1					P
-	2					P
-	3					P
-resetBookingFields()	1					P
-	2					P
-	3					P
-resetBookingCalendarSelection()	1					P
-	2					P
-	3					P
-setBookingDetailsVisible(boolean)	1					P
-	2					P
-	3					P
-resetBookingScreen()	1					P
-	2					P
-	3					P
-promptAddHotel()	1					P
-	2					P
-	3					P
-promptAddRoom(int)	1					P
-	2					P
-	3					P
-showHotelNameExistsError()	1					P
-	2					P
-	3					P
-basePriceUpdateLessThanMinimumError()	1					P
-	2					P
-	3					P
-basePriceUpdateReservationsExistError()	1					P
-	2					P
-	3					P
-showPriceModifierError()	1					P
-	2					P
-	3					P
-showRoomCountFullError()	1					P
-	2					P
-	3					P
-showReservationSuccess()	1					P
-	2					P
-	3					P
-showReservationError(java.lang.String)	1					P
-	2					P
-	3					P
-showCantRemoveRoomError()	1					P
-	2					P
-	3					P
-BookingCalendar.class
+ManageReservationListener.class
 Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
-setCalendarCheckIn(int)	1					P
+actionPerformed(java.awt.event.ActionEvent)	1					P
 	2					P
 	3					P
-setCalendarCheckOut(int)	1					P
-	2					P
-	3					P
-BookingCalendarRenderer.class
+RoomListListener.class
 Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
-setCheckOut(int)	1					P
+handleValueChanged(int)	1					P
 	2					P
 	3					P
-setCheckIn(int)	1					P
+updateList()	1					P
 	2					P
 	3					P
-getTableCellRendererComponent(javax.swing.JTable, java.lang.Object, boolean, boolean, int, int)	1					P
+updateDataPanel(int)	1					P
 	2					P
 	3					P
-Calendar.class
+addToList(int)	1					P
+	2					P
+	3					P
+getListLength()	1					P
+	2					P
+	3					P
+ListAddListener.class
 Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
-toDate(int, int)	1					P
+updateList()	1					P
 	2					P
 	3					P
-getRowFromDate(int)	1					P
+getListLength()	1					P
 	2					P
 	3					P
-getColFromDate(int)	1					P
+handleValueChanged(int)	1					P
 	2					P
 	3					P
-setCalendarText(int, java.lang.String)	1					P
+updateDataPanel(int)	1					P
 	2					P
 	3					P
-setCalendarText(int, int, java.lang.String)	1					P
+addToList(int)	1					P
 	2					P
 	3					P
-isCellEditable(int, int)	1					P
+valueChanged(javax.swing.event.ListSelectionEvent)	1					P
 	2					P
 	3					P
-selectDate(int)	1					P
-	2					P
-	3					P
-resetSelection()	1					P
-	2					P
-	3					P
-setListener(src.controller.gui.CalendarListener)	1					P
-	2					P
-	3					P
-CalendarRenderer.class
+HotelAvailabilityCalendarListener.class
 Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
-getTableCellRendererComponent(javax.swing.JTable, java.lang.Object, boolean, boolean, int, int)	1					P
+handleCheckAvailability(int, int)	1					P
 	2					P
 	3					P
-ColorCollection.class
-Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
-DecimalDocument.class
-Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
-insertString(int, java.lang.String, javax.swing.text.AttributeSet) throws javax	1					P
+handleSelected(int, int)	1					P
 	2					P
 	3					P
-FontCollection.class
-Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
-HotelListPanel.class
-Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
-setList(java.util.ArrayList<java.lang.String>)	1					P
+handleClicked(int, int)	1					P
 	2					P
 	3					P
-ListPanel.class
-Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
-setList(java.util.ArrayList<java.lang.String>)	1					P
+handleReleased(int, int)	1					P
 	2					P
 	3					P
-setListener(javax.swing.event.ListSelectionListener)	1					P
+handleReleasedOutsideComponent()	1					P
 	2					P
 	3					P
-getSelectedIndex()	1					P
+handleDragged(int, int)	1					P
 	2					P
 	3					P
-getFallbackIndex()	1					P
+handleMoved(int, int)	1					P
 	2					P
 	3					P
-setSelectedIndex(int)	1					P
-	2					P
-	3					P
-setFallbackIndex(int)	1					P
-	2					P
-	3					P
-clearSelection()	1					P
-	2					P
-	3					P
-ReservationListPanel.class
-Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
-RoomAvailabilityCalendar.class
-Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
-RoomAvailabilityCalendarRenderer.class
-Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
-RoomListPanel.class
-Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
-StyledButton.class
-Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
-StyledHTMLPane.class
-Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
-StyledLabel.class
-Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
-StyledPanel.class
-Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
-StyledRadioButton.class
-Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
-StyledScrollPane.class
-Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
-StyledTabbedPane.class
-Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
-ManageHotelPanel.class
-Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
-getRenameHotelFieldText()	1					P
-	2					P
-	3					P
-setRenameHotelFieldText(java.lang.String)	1					P
-	2					P
-	3					P
-getUpdateBasePriceFieldText()	1					P
-	2					P
-	3					P
-setUpdateBasePriceFieldText(java.lang.String)	1					P
-	2					P
-	3					P
-setRenameHotelListener(src.controller.gui.RenameHotelListener)	1					P
-	2					P
-	3					P
-setManagePricesListener(src.controller.gui.ManagePricesListener)	1					P
-	2					P
-	3					P
-setRoomList(java.util.ArrayList<java.lang.String>)	1					P
-	2					P
-	3					P
-setManageRoomsListener(src.controller.gui.ManageRoomListener)	1					P
-	2					P
-	3					P
-setRoomData(java.lang.String, java.util.ArrayList<java.lang.Integer>)	1					P
-	2					P
-	3					P
-setManagePricesCalendarText(int, java.lang.String)	1					P
-	2					P
-	3					P
-getPriceModifierFieldText()	1					P
-	2					P
-	3					P
-setPriceModifierFieldText(java.lang.String)	1					P
-	2					P
-	3					P
-setModifiedPriceText(java.lang.String)	1					P
-	2					P
-	3					P
-setManagePricesCalendarSelection(int)	1					P
-	2					P
-	3					P
-getIsManagePricesCalendarFocused()	1					P
-	2					P
-	3					P
-clearManagePricesCalendarSelection()	1					P
-	2					P
-	3					P
-getIsUpdatePriceModifierFieldFocused()	1					P
-	2					P
-	3					P
-getIsUpdateBasePriceFieldFocused()	1					P
-	2					P
-	3					P
-setManagePricesListener(src.controller.gui.ManagePricesListener)	1					P
-	2					P
-	3					P
-getCalendarRowAtPoint(java.awt.Point)	1					P
-	2					P
-	3					P
-getCalendarColAtPoint(java.awt.Point)	1					P
-	2					P
-	3					P
-setManageReservationsListener(src.controller.gui.ManageReservationListener)	1					P
-	2					P
-	3					P
-setReservationList(java.util.ArrayList<java.lang.String>)	1					P
-	2					P
-	3					P
-setReservationData(java.lang.String)	1					P
-	2					P
-	3					P
-getSelectedReservationIndex()	1					P
-	2					P
-	3					P
-setReservationDataVisible(boolean)	1					P
-	2					P
-	3					P
-getSelectedRoomIndex()	1					P
-	2					P
-	3					P
-setRoomDataVisible(boolean)	1					P
-	2					P
-	3					P
-setRemoveButtonListener(java.awt.event.ActionListener)	1					P
-	2					P
-	3					P
-SimulateBookingPanel.class
-Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
-setRoomList(java.util.ArrayList<java.lang.String>)	1					P
-	2					P
-	3					P
-setCalendarAvailability(java.util.ArrayList<java.lang.Integer>)	1					P
-	2					P
-	3					P
-setCalendarCheckIn(int)	1					P
-	2					P
-	3					P
-setCalendarCheckOut(int)	1					P
-	2					P
-	3					P
-getGuestNameFieldText()	1					P
-	2					P
-	3					P
-getDiscountCodeFieldText()	1					P
-	2					P
-	3					P
-getIsCalendarFocused()	1					P
-	2					P
-	3					P
-getBookingCalendarDay()	1					P
-	2					P
-	3					P
-getRoomIndex()	1					P
-	2					P
-	3					P
-setPreview(java.lang.String)	1					P
-	2					P
-	3					P
-getBookingCalendarRowFromMouse(java.awt.Point)	1					P
-	2					P
-	3					P
-getBookingCalendarColFromMouse(java.awt.Point)	1					P
-	2					P
-	3					P
-clearRoomListSelection()	1					P
-	2					P
-	3					P
-setDiscountCodeFieldText(java.lang.String)	1					P
-	2					P
-	3					P
-setGuestNameFieldText(java.lang.String)	1					P
-	2					P
-	3					P
-setDetailsVisible(boolean)	1					P
-	2					P
-	3					P
-enableCheckInButton()	1					P
-	2					P
-	3					P
-clearCalendarSelection()	1					P
-	2					P
-	3					P
-setListeners(src.controller.gui.SimulateBookingRoomListListener, src.controller.gui.SimulateBookingCalendarListener)	1					P
-	2					P
-	3					P
-ViewHotelPanel.class
-Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
-setRoomListListener(src.controller.gui.RoomListListener)	1					P
-	2					P
-	3					P
-setRoomData(java.lang.String, java.util.ArrayList<java.lang.Integer>)	1					P
-	2					P
-	3					P
-setHotelData(java.lang.String)	1					P
-	2					P
-	3					P
-setAvailabilityData(java.lang.String)	1					P
-	2					P
-	3					P
-getCalendarRowAtPoint(java.awt.Point)	1					P
-	2					P
-	3					P
-getCalendarColAtPoint(java.awt.Point)	1					P
-	2					P
-	3					P
-clearCalendarSelection()	1					P
-	2					P
-	3					P
-setCalendarListener(src.controller.gui.HotelAvailabilityCalendarListener)	1					P
-	2					P
-	3					P
-getSelectedSubpanelIndex()	1					P
-	2					P
-	3					P
-setRoomList(java.util.ArrayList<java.lang.String>)	1					P
-	2					P
-	3					P
-getSelectedRoomIndex()	1					P
-	2					P
-	3					P
-clearRoomListSelection()	1					P
-	2					P
-	3					P
-setReservationList(java.util.ArrayList<java.lang.String>)	1					P
-	2					P
-	3					P
-getSelectedReservationIndex()	1					P
-	2					P
-	3					P
-setReservationData(java.lang.String)	1					P
-	2					P
-	3					P
-setReservationListener(src.controller.gui.ReservationListListener)	1					P
-	2					P
-	3					P
-setReservationDataVisible(boolean)	1					P
-	2					P
-	3					P
-ManagePricesPanel.class
-Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
-setCalendarText(int, java.lang.String)	1					P
-	2					P
-	3					P
-setModifiedPriceText(java.lang.String)	1					P
-	2					P
-	3					P
-getPriceModifierFieldText()	1					P
-	2					P
-	3					P
-setPriceModifierFieldText(java.lang.String)	1					P
-	2					P
-	3					P
-setCalendarDate(int)	1					P
-	2					P
-	3					P
-getIsCalendarFocused()	1					P
-	2					P
-	3					P
-clearCalendarSelection()	1					P
-	2					P
-	3					P
-getIsUpdatePriceModifierFieldFocused()	1					P
-	2					P
-	3					P
-getCalendarRowAtPoint(java.awt.Point)	1					P
-	2					P
-	3					P
-getCalendarColAtPoint(java.awt.Point)	1					P
-	2					P
-	3					P
-setListener(src.controller.gui.ManagePricesListener)	1					P
-	2					P
-	3					P
-ManageReservationsPanel.class
-Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
-setRemoveButtonListener(java.awt.event.ActionListener)	1					P
-	2					P
-	3					P
-ManageRoomsPanel.class
-Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
-setRemoveButtonListener(java.awt.event.ActionListener)	1					P
-	2					P
-	3					P
-ViewAvailabilityPanel.class
-Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
-setAvailabilityData(java.lang.String)	1					P
-	2					P
-	3					P
-getCalendarRowAtPoint(java.awt.Point)	1					P
-	2					P
-	3					P
-getCalendarColAtPoint(java.awt.Point)	1					P
-	2					P
-	3					P
-clearCalendarSelection()	1					P
-	2					P
-	3					P
-setListener(src.controller.gui.HotelAvailabilityCalendarListener)	1					P
-	2					P
-	3					P
-ViewReservationsPanel.class
-Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
-setReservationList(java.util.ArrayList<java.lang.String>)	1					P
-	2					P
-	3					P
-setReservationData(java.lang.String)	1					P
-	2					P
-	3					P
-getSelectedIndex()	1					P
-	2					P
-	3					P
-setListener(src.controller.gui.ReservationListListener)	1					P
-	2					P
-	3					P
-setWrapperVisible(boolean)	1					P
-	2					P
-	3					P
-ViewRoomPanel.class
-Method	#	Test Description	Sample Input Data	Expected Output	Actual Output	P/F
-setRoomData(java.lang.String, java.util.ArrayList<java.lang.Integer>)	1					P
-	2					P
-	3					P
-setRoomList(java.util.ArrayList<java.lang.String>)	1					P
-	2					P
-	3					P
-setRoomListListener(src.controller.gui.RoomListListener)	1					P
-	2					P
-	3					P
-getSelectedRoomIndex()	1					P
-	2					P
-	3					P
-clearRoomListSelection()	1					P
-	2					P
-	3					P
-setWrapperVisible(boolean)	1					P
+setRowAndCol(java.awt.event.MouseEvent)	1					P
 	2					P
 	3					P

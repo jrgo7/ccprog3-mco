@@ -1,7 +1,6 @@
 package src.view.gui;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Insets;
 import java.awt.Toolkit;
@@ -82,7 +81,6 @@ public class TopView extends JFrame {
         /* View hotel subpanel */
         viewHotelPanel = new ViewHotelPanel();
         topMenuPane.addTab("View hotel", viewHotelPanel);
-        topMenuPane.setBackgroundAt(0, Color.RED);
 
         /* Manage hotel subpanel */
         manageHotelPanel = new ManageHotelPanel();
