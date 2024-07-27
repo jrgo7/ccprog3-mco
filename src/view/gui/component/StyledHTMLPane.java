@@ -21,36 +21,35 @@ public class StyledHTMLPane extends JEditorPane {
         StyleSheet sheet = new HTMLEditorKit().getStyleSheet();
         sheet.addRule("""
                 body {
-                    font-family: 'Segoe UI';
+                    font-family: 'Segoe UI', sans-serif;
                     font-size: 14;
                 }
 
                 h1 {
                     font-size: 28;
+                    font-weight: normal;
                 }
 
                 h2 {
                     font-size: 20;
+                    font-weight: normal;
                 }
 
                 h3 {
                     font-size: 18;
+                    font-weight: normal;
                 }
 
                 h4 {
                     font-size: 14;
+                    font-weight: normal;
                 }
 
                 ul {
                     list-style-type: none;
                     border-left: 4px solid #f0f0f0;
                     padding: 4px;
-                }
-
-                // ul:last-child {
-                //     border-bottom: none;
-                // }
-                """);
+                }""");
         this.setEditable(false);
     }
 

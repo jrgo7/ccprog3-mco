@@ -35,19 +35,19 @@ public class ViewHotelPanel extends StyledPanel {
     public ViewHotelPanel() {
         this.setLayout(new BorderLayout());
 
-        this.hotelDataComponent = new StyledHTMLPane("<h1>Hotels</h1>");
+        this.hotelDataComponent = new StyledHTMLPane();
         this.add(this.hotelDataComponent, BorderLayout.NORTH);
 
         this.subpanels = new StyledTabbedPane();
 
         this.viewAvailabilitySubpanel = new ViewAvailabilityPanel();
-        this.subpanels.add("Check availability", this.viewAvailabilitySubpanel);
+        this.subpanels.addTab("Check availability", this.viewAvailabilitySubpanel);
 
         this.viewRoomSubPanel = new ViewRoomPanel();
-        this.subpanels.add("Check rooms", viewRoomSubPanel);
+        this.subpanels.addTab("Check rooms", viewRoomSubPanel);
 
         this.viewReservationsSubPanel = new ViewReservationsPanel();
-        this.subpanels.add("Check reservations", viewReservationsSubPanel);
+        this.subpanels.addTab("Check reservations", viewReservationsSubPanel);
 
         this.add(subpanels, BorderLayout.CENTER);
     }

@@ -8,7 +8,7 @@ import javax.swing.BoxLayout;
 import src.controller.gui.ReservationListListener;
 import src.view.gui.component.ReservationListPanel;
 import src.view.gui.component.StyledHTMLPane;
-import src.view.gui.component.StyledHTMLPaneContainerFactory;
+import src.view.gui.component.GUIFactory;
 import src.view.gui.component.StyledPanel;
 
 public class ViewReservationsPanel extends StyledPanel {
@@ -27,8 +27,8 @@ public class ViewReservationsPanel extends StyledPanel {
         this.reservationListPanel = new ReservationListPanel(200);
         this.reservationDataComponent = new StyledHTMLPane();
 
-        reservationDataPanel = StyledHTMLPaneContainerFactory
-                .createContainer(reservationDataComponent);
+        reservationDataPanel = GUIFactory
+                .createStyledHTMLPaneContainer(reservationDataComponent);
         this.outer.add(reservationDataPanel);
 
         this.add(this.reservationListPanel, BorderLayout.WEST);
