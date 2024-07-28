@@ -180,7 +180,7 @@ public class ReservationSystem {
         return this.getHotel(hotelIndex).getPriceModifier(date);
     }
 
-    public boolean setPriceModifier(int hotelIndex, int date, double priceModifier) {
+    public int setPriceModifier(int hotelIndex, int date, double priceModifier) {
         return this.getHotel(hotelIndex).setPriceModifier(date, priceModifier);
     }
 
@@ -192,7 +192,7 @@ public class ReservationSystem {
         return this.getHotel(hotelIndex).getRoomString(roomIndex);
     }
 
-    public boolean removeRoom(int hotelIndex, int roomIndex) {
+    public int removeRoom(int hotelIndex, int roomIndex) {
         return this.getHotel(hotelIndex).removeRoom(roomIndex);
     }
 

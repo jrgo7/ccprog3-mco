@@ -298,11 +298,19 @@ public class TopView extends JFrame {
                 JOptionPane.ERROR_MESSAGE);
     }
 
-    public void showPriceModifierError() {
+    public void showPriceModifierOutOfBoundsError() {
         JOptionPane.showMessageDialog(
                 this,
-                "The price modifier must be within 0.50-1.50 and there must be no reservations for that date.",
-                "Invalid price modifier error",
+                "The price modifier must be within 0.50-1.50.",
+                "Invalid price modifier update error: out of bounds",
+                JOptionPane.ERROR_MESSAGE);
+    }
+
+    public void showPriceModifierReservationsExistError() {
+        JOptionPane.showMessageDialog(
+                this,
+                "TThe base price cannot be updated while reservations exist.",
+                "Invalid price modifier update error: out of bounds",
                 JOptionPane.ERROR_MESSAGE);
     }
 
@@ -330,11 +338,19 @@ public class TopView extends JFrame {
                 JOptionPane.ERROR_MESSAGE);
     }
 
-    public void showCantRemoveRoomError() {
+    public void showCantRemoveRoomWithReservationsError() {
         JOptionPane.showMessageDialog(
                 this,
-                "A room cannot be removed if it has reservations or is the only room in the hotel.\n",
-                "Cannot remove room",
+                "A room cannot be removed if it has reservations.\n",
+                "Cannot remove room error: reservations exist",
+                JOptionPane.ERROR_MESSAGE);
+    }
+
+    public void showCantRemoveOnlyRoomError() {
+        JOptionPane.showMessageDialog(
+                this,
+                "A room cannot be removed if it is the only room in the hotel.\n",
+                "Cannot remove room error: no other rooms exist",
                 JOptionPane.ERROR_MESSAGE);
     }
 

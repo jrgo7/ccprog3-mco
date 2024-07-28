@@ -151,7 +151,8 @@ public class ManagePricesListener extends CalendarListener
         int index = view.getSelectedIndex();
         double newBasePrice = Double.parseDouble(
                 view.getManageHotelDelegate().getUpdateBasePriceFieldText());
-        if (!view.confirmAction("update the base price to " + newBasePrice + "?", null)) {
+        if (!view.confirmAction(
+                "update the base price to " + newBasePrice + "?", null)) {
             return;
         }
         int result = reservationSystem.setBasePrice(index, newBasePrice);
@@ -188,11 +189,20 @@ public class ManagePricesListener extends CalendarListener
             return;
         }
 
-        if (reservationSystem.setPriceModifier(index, date, newModifier)) {
-            view.getManageHotelDelegate().setManagePricesCalendarText(
-                    date, String.format("%d: %.2f", date, newModifier));
-        } else {
-            view.showPriceModifierError();
+        int status = reservationSystem.setPriceModifier(index, date,
+                newModifier);
+
+        switch (status) {
+            case Hotel.SET_PRICE_MODIFIER_SUCCESS:
+                view.getManageHotelDelegate().setManagePricesCalendarText(
+                        date, String.format("%d: %.2f", date, newModifier));
+                break;
+            case Hotel.SET_PRICE_MODIFIER_RESERVATIONS_EXIST:
+                view.showPriceModifierReservationsExistError();
+                break;
+            case Hotel.SET_PRICE_MODIFIER_OUT_OF_BOUNDS:
+                view.showPriceModifierOutOfBoundsError();
+                break;
         }
 
         this.setPriceModifierFieldText();

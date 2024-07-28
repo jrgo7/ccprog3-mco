@@ -38,6 +38,14 @@ public class Hotel {
     public static final int SET_BASE_PRICE_ERROR_LESS_THAN_MIN = 1;
     public static final int SET_BASE_PRICE_ERROR_RESERVATIONS_EXIST = 2;
 
+    public static final int SET_PRICE_MODIFIER_SUCCESS = 0;
+    public static final int SET_PRICE_MODIFIER_OUT_OF_BOUNDS = 1;
+    public static final int SET_PRICE_MODIFIER_RESERVATIONS_EXIST = 2;
+
+    public static final int REMOVE_ROOM_SUCCESS = 0;
+    public static final int REMOVE_ROOM_ONLY_ROOM = 1;
+    public static final int REMOVE_ROOM_RESERVATIONS_EXIST = 2;
+
     /**
      * Initializes a new hotel instance given a name. The created hotel begins
      * with zero reservations, a base price of 1299.00, and one room.
@@ -255,18 +263,18 @@ public class Hotel {
      * @return {@code true} if the price modifier for the date was set
      *         successfully, {@code false} otherwise.
      */
-    public boolean setPriceModifier(int date, double modifier) {
+    public int setPriceModifier(int date, double modifier) {
         if (modifier < 0.5 || modifier > 1.5)
-            return false;
+            return SET_PRICE_MODIFIER_OUT_OF_BOUNDS;
         else if (date < 1 || date > 31)
-            return false;
+            return SET_PRICE_MODIFIER_OUT_OF_BOUNDS;
         
         for (Room i : rooms)
             if (!i.isAvailableOn(date))
-                return false;
+                return SET_BASE_PRICE_ERROR_RESERVATIONS_EXIST;
 
         this.priceModifiers[date - 1] = modifier;
-        return true;
+        return SET_PRICE_MODIFIER_SUCCESS;
     }
 
     /**
@@ -327,15 +335,16 @@ public class Hotel {
      * @return {@code true} if the room was removed successfully, {@code false}
      *         otherwise
      */
-    public boolean removeRoom(int roomIndex) {
-        if (this.rooms.get(roomIndex).getReservationCount() > 0
-                || roomIndex < 0
+    public int removeRoom(int roomIndex) {
+        if (this.rooms.get(roomIndex).getReservationCount() > 0)
+            return REMOVE_ROOM_RESERVATIONS_EXIST;
+        else if (roomIndex < 0
                 || roomIndex >= this.rooms.size()
                 || this.rooms.size() <= 1)
-            return false;
+            return REMOVE_ROOM_ONLY_ROOM;
 
         this.rooms.remove(roomIndex);
-        return true;
+        return REMOVE_ROOM_SUCCESS;
     }
 
     /**

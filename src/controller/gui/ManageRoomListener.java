@@ -107,9 +107,15 @@ public class ManageRoomListener extends RoomListListener
         int roomIndex = view.getManageHotelDelegate().getSelectedRoomIndex();
         int hotelIndex = view.getSelectedIndex();
 
-        if (!this.reservationSystem.removeRoom(hotelIndex, roomIndex)) {
-            view.showCantRemoveRoomError();
+        switch(this.reservationSystem.removeRoom(hotelIndex, roomIndex)) {
+            case Hotel.REMOVE_ROOM_ONLY_ROOM:
+            view.showCantRemoveOnlyRoomError();
+            break;
+            case Hotel.REMOVE_ROOM_RESERVATIONS_EXIST:
+            view.showCantRemoveRoomWithReservationsError();
+            break;
         }
+        
         this.updateList();
 
         /* Always clear selection and hide panel afterwards */
