@@ -11,7 +11,13 @@ import src.view.gui.component.Calendar;
  * availability of a hotel (i.e., number of available rooms) on selected dates.
  */
 public class HotelAvailabilityCalendarListener extends CalendarListener {
-    /** Initialize this listener. */
+    /**
+     * Initialize this listener.
+     * 
+     * @param reservationSystem the {@link ReservationSystem} to bind to this
+     *                          listener
+     * @param view              the {@link TopView} to bind to this listener
+     */
     public HotelAvailabilityCalendarListener(
             ReservationSystem reservationSystem,
             TopView view) {

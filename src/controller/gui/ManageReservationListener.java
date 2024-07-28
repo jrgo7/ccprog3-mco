@@ -13,7 +13,13 @@ import src.view.gui.subpanel.ManageReservationsPanel;
  */
 public class ManageReservationListener extends ReservationListListener
         implements ActionListener {
-    /** Initializes the listener and updates the list */
+    /**
+     * Initialize this listener.
+     * 
+     * @param reservationSystem the {@link ReservationSystem} to bind to this
+     *                          listener
+     * @param view              the {@link TopView} to bind to this listener
+     */
     public ManageReservationListener(ReservationSystem reservationSystem,
             TopView view) {
         super(reservationSystem, view);
@@ -31,7 +37,7 @@ public class ManageReservationListener extends ReservationListListener
                 "Remove reservation")) {
             return;
         }
-        
+
         int reservationIndex = view.getManageHotelDelegate()
                 .getSelectedReservationIndex();
         int hotelIndex = view.getSelectedIndex();

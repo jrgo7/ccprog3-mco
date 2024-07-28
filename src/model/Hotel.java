@@ -28,22 +28,60 @@ public class Hotel {
 
     // Status codes
 
+    /** Represents a successful reservation. */
     public static final int RESERVATION_SUCCESS = 0;
+
+    /** Represents an error due to an invalid date range. */
     public static final int RESERVATION_ERROR_INVALID_TIME = 1;
+
+    /** Represents an error due to an invalid room (does not exist). */
     public static final int RESERVATION_ERROR_INVALID_ROOM = 2;
+
+    /** Represents an error due to the room being unavailable on the date. */
     public static final int RESERVATION_ERROR_UNAVAILABLE_ROOM = 3;
+
+    /** Represents an error due to an invalid discount code. */
     public static final int RESERVATION_ERROR_INVALID_DISCOUNT_CODE = 4;
 
+    /** Represents a successful base price update. */
     public static final int SET_BASE_PRICE_SUCCESS = 0;
+
+    /** Represents an error where the base price is is lower than 100. */
     public static final int SET_BASE_PRICE_ERROR_LESS_THAN_MIN = 1;
+
+    /**
+     * Represents an error when attempting to update the base price for a room
+     * with active reservations.
+     */
     public static final int SET_BASE_PRICE_ERROR_RESERVATIONS_EXIST = 2;
 
+    /** Represents a successful price modifier update */
     public static final int SET_PRICE_MODIFIER_SUCCESS = 0;
+
+    /**
+     * Represents an error where the price modifier is less than {@code 0.5} or
+     * greater than {@code 1.5}
+     */
     public static final int SET_PRICE_MODIFIER_OUT_OF_BOUNDS = 1;
+
+    /**
+     * Represents an error when attempting to update the price modifier for a
+     * date with active reservations.
+     */
     public static final int SET_PRICE_MODIFIER_RESERVATIONS_EXIST = 2;
 
+    /** Represents a successful room removal */
     public static final int REMOVE_ROOM_SUCCESS = 0;
+
+    /**
+     * Represents an error when attempting to remove the only room in a hotel.
+     */
     public static final int REMOVE_ROOM_ONLY_ROOM = 1;
+
+    /**
+     * Represents an error when attempting to remove a room that has active
+     * reservations.
+     */
     public static final int REMOVE_ROOM_RESERVATIONS_EXIST = 2;
 
     /**
@@ -79,7 +117,11 @@ public class Hotel {
         return this.basePrice;
     }
 
-    /** {@return the price modifier for a given night} */
+    /**
+     * {@return the price modifier for a given night}
+     * 
+     * @param night the night to get the price modifier for
+     */
     public double getPriceModifier(int night) {
         return this.priceModifiers[night - 1];
     }
@@ -363,10 +405,11 @@ public class Hotel {
      * marked as available on a date even if there exist reservations that check
      * out on that date.
      * 
-     * @param guestName The name of the guest
-     * @param checkIn   The check-in date
-     * @param checkOut  The check-out date
-     * @param roomIndex The index of the room to book a reservation for
+     * @param guestName    The name of the guest
+     * @param checkIn      The check-in date
+     * @param checkOut     The check-out date
+     * @param roomIndex    The index of the room to book a reservation for
+     * @param discountCode The discount code used in the reservation
      * @return {@code RESERVATION_SUCCESS} if a reservation was made
      *         successfully, {@code RESERVATION_ERROR_UNAVAILABLE_ROOM},
      *         {@code RESERVATION_ERROR_INVALID_ROOM}, or
@@ -503,6 +546,11 @@ public class Hotel {
     }
 
     /* TODO: Remove somehow */
+    /**
+     * {@return a room at a given index}
+     * 
+     * @param roomIndex the index of the room to get
+     */
     public Room getRoom(int roomIndex) {
         return this.rooms.get(roomIndex);
     }

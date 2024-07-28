@@ -14,8 +14,10 @@ import src.view.gui.component.GUIFactory;
  */
 public class ManageReservationsPanel extends ViewReservationsPanel {
     /** Button for removing a reservation. */
-    private StyledButton removeButton = GUIFactory.createDestructiveButton("Remove reservation");
+    private StyledButton removeButton = GUIFactory
+            .createDestructiveButton("Remove reservation");
 
+    /** Initializes the subpanel */
     public ManageReservationsPanel() {
         JPanel wrapper = new JPanel();
         wrapper.setLayout(new BoxLayout(wrapper, BoxLayout.X_AXIS));

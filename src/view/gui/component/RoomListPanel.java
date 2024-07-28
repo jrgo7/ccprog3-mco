@@ -5,8 +5,7 @@ import java.util.ArrayList;
 /** Represents the {@link ListPanel} containing the list of rooms in a hotel. */
 public class RoomListPanel extends ListPanel {
     /**
-     * {@code true} if items can be added to the panel, {@code false}
-     * otherwise.
+     * {@code true} if items can be added to the panel, {@code false} otherwise.
      */
     private boolean addable;
 
@@ -24,6 +23,8 @@ public class RoomListPanel extends ListPanel {
 
     /**
      * Initializes the panel to a given width. Set to not be addable by default.
+     * 
+     * @param width The width of the panel
      */
     public RoomListPanel(int width) {
         this(width, false);

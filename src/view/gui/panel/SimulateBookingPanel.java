@@ -156,8 +156,8 @@ public class SimulateBookingPanel extends StyledPanel {
     /**
      * Sets the calendar availability with the given dates.
      *
-     * @param availableDates an {@link ArrayList} of available dates. Usually
-     *                       obtained with {@link Room#getAvailableDates()}
+     * @param dates an {@link ArrayList} of available dates. Usually obtained
+     *              with {@link Room#getAvailableDates()}
      */
     public void setCalendarAvailability(ArrayList<Integer> dates) {
         this.bookingCalendar.setAvailabilityData(dates);

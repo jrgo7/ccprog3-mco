@@ -10,7 +10,13 @@ import src.view.gui.panel.SimulateBookingPanel;
  */
 public class SimulateBookingRoomListListener extends RoomListListener
         implements ReservationPreviewUpdatable {
-    /* Initializes the listener. */
+    /**
+     * Initialize this listener.
+     * 
+     * @param reservationSystem the {@link ReservationSystem} to bind to this
+     *                          listener
+     * @param view              the {@link TopView} to bind to this listener
+     */
     public SimulateBookingRoomListListener(ReservationSystem reservationSystem,
             TopView view) {
         super(reservationSystem, view);

@@ -29,10 +29,10 @@ public class ViewHotelPanel extends StyledPanel {
     private ViewAvailabilityPanel viewAvailabilitySubpanel;
 
     /** Represents the View Room subpanel. */
-    private ViewRoomPanel viewRoomSubPanel;
+    private ViewRoomPanel ViewRoomPanel;
 
     /** Represents the View Reservations subpanel. */
-    private ViewReservationsPanel viewReservationsSubPanel;
+    private ViewReservationsPanel ViewReservationsPanel;
 
     /** Initialies the hotel data pane and the subpanels. */
     public ViewHotelPanel() {
@@ -47,11 +47,11 @@ public class ViewHotelPanel extends StyledPanel {
         this.subpanels.addTab("Check availability",
                 this.viewAvailabilitySubpanel);
 
-        this.viewRoomSubPanel = new ViewRoomPanel();
-        this.subpanels.addTab("Check rooms", viewRoomSubPanel);
+        this.ViewRoomPanel = new ViewRoomPanel();
+        this.subpanels.addTab("Check rooms", ViewRoomPanel);
 
-        this.viewReservationsSubPanel = new ViewReservationsPanel();
-        this.subpanels.addTab("Check reservations", viewReservationsSubPanel);
+        this.ViewReservationsPanel = new ViewReservationsPanel();
+        this.subpanels.addTab("Check reservations", ViewReservationsPanel);
 
         this.add(subpanels, BorderLayout.CENTER);
     }
@@ -62,7 +62,7 @@ public class ViewHotelPanel extends StyledPanel {
      * @param roomListListener the listener to set.
      */
     public void setRoomListListener(RoomListListener roomListListener) {
-        this.viewRoomSubPanel.setRoomListListener(roomListListener);
+        this.ViewRoomPanel.setRoomListListener(roomListListener);
     }
 
     /**
@@ -83,7 +83,7 @@ public class ViewHotelPanel extends StyledPanel {
      * @param listener the listener to set
      */
     public void setReservationListener(ReservationListListener listener) {
-        this.viewReservationsSubPanel.setListener(listener);
+        this.ViewReservationsPanel.setListener(listener);
     }
 
     /** {@return the index of the selected subpanel} */
@@ -149,58 +149,58 @@ public class ViewHotelPanel extends StyledPanel {
      * @param data           the room data string to set
      * @param availableDates an {@link ArrayList} of available dates. Usually
      *                       obtained with {@link Room#getAvailableDates()}
-     * @see ViewRoomSubPanel#setRoomData
+     * @see ViewRoomPanel#setRoomData
      */
     public void setRoomData(String data, ArrayList<Integer> availableDates) {
-        this.viewRoomSubPanel.setRoomData(data, availableDates);
+        this.ViewRoomPanel.setRoomData(data, availableDates);
     }
 
     /**
      * Sets the room list with the given data.
      *
      * @param data an {@link ArrayList} of room names to set
-     * @see ViewRoomSubPanel#setRoomList
+     * @see ViewRoomPanel#setRoomList
      */
     public void setRoomList(ArrayList<String> data) {
-        this.viewRoomSubPanel.setRoomList(data);
+        this.ViewRoomPanel.setRoomList(data);
     }
 
     /**
      * {@return the index of the selected room}
      * 
-     * @see ViewRoomSubPanel#getSelectedRoomIndex
+     * @see ViewRoomPanel#getSelectedRoomIndex
      */
     public int getSelectedRoomIndex() {
-        return this.viewRoomSubPanel.getSelectedRoomIndex();
+        return this.ViewRoomPanel.getSelectedRoomIndex();
     }
 
     /**
      * Clears the room list selection.
      *
-     * @see ViewRoomSubPanel#clearRoomListSelection
+     * @see ViewRoomPanel#clearRoomListSelection
      */
     public void clearRoomListSelection() {
-        this.viewRoomSubPanel.clearRoomListSelection();
+        this.ViewRoomPanel.clearRoomListSelection();
     }
 
     /**
      * Sets the selected room index.
      *
      * @param index the index of the selected room
-     * @see ViewRoomSubPanel#setSelectedIndex
+     * @see ViewRoomPanel#setSelectedIndex
      */
     public void setSelectedRoomIndex(int index) {
-        this.viewRoomSubPanel.setSelectedIndex(index);
+        this.ViewRoomPanel.setSelectedIndex(index);
     }
 
     /**
      * Sets the visibility of the room data panel.
      *
      * @param visible {@code true} to display the panel, {@code false} otherwise
-     * @see ViewRoomSubPanel#setWrapperVisible
+     * @see ViewRoomPanel#setWrapperVisible
      */
     public void setRoomDataVisible(boolean visible) {
-        this.viewRoomSubPanel.setWrapperVisible(visible);
+        this.ViewRoomPanel.setWrapperVisible(visible);
     }
 
     /* View reservations subpanel */
@@ -211,48 +211,48 @@ public class ViewHotelPanel extends StyledPanel {
      * @param data the array containing string representations of active
      *             reservations. Usually obtained through
      *             {@link ReservationSystem#getReservationNames(int)}
-     * @see ViewReservationsSubPanel#setReservationList
+     * @see ViewReservationsPanel#setReservationList
      */
     public void setReservationList(ArrayList<String> data) {
-        this.viewReservationsSubPanel.setReservationList(data);
+        this.ViewReservationsPanel.setReservationList(data);
     }
 
     /**
      * {@return the index of the selected reservation}
      * 
-     * @see ViewReservationsSubPanel#getSelectedIndex
+     * @see ViewReservationsPanel#getSelectedIndex
      */
     public int getSelectedReservationIndex() {
-        return this.viewReservationsSubPanel.getSelectedIndex();
+        return this.ViewReservationsPanel.getSelectedIndex();
     }
 
     /**
      * Sets the text in the reservation data panel.
      *
      * @param data the text to set
-     * @see ViewReservationsSubPanel#setReservationData
+     * @see ViewReservationsPanel#setReservationData
      */
     public void setReservationData(String data) {
-        this.viewReservationsSubPanel.setReservationData(data);
+        this.ViewReservationsPanel.setReservationData(data);
     }
 
     /**
      * Sets the visibility of the reservation data panel.
      *
      * @param visible {@code true} to display the panel, {@code false} otherwise
-     * @see ViewReservationsSubPanel#setWrapperVisible
+     * @see ViewReservationsPanel#setWrapperVisible
      */
     public void setReservationDataVisible(boolean visible) {
-        this.viewReservationsSubPanel.setWrapperVisible(visible);
+        this.ViewReservationsPanel.setWrapperVisible(visible);
     }
 
     /**
      * Sets the selected reservation index.
      *
      * @param index the index of the selected reservation
-     * @see ViewReservationsSubPanel#setSelectedIndex
+     * @see ViewReservationsPanel#setSelectedIndex
      */
     public void setSelectedReservationIndex(int index) {
-        this.viewReservationsSubPanel.setSelectedIndex(index);
+        this.ViewReservationsPanel.setSelectedIndex(index);
     }
 }

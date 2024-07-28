@@ -19,7 +19,8 @@ public class RoomAvailabilityCalendar extends Calendar {
     /**
      * "White-out" unavailable dates, showing only the available dates
      * 
-     * @param availableDates
+     * @param availableDates an {@link ArrayList} of {@link Integer} values
+     *                       representing available dates
      */
     public void setAvailabilityData(ArrayList<Integer> availableDates) {
         ((RoomAvailabilityCalendarRenderer) renderer)

@@ -49,9 +49,9 @@ public abstract class ListPanel extends StyledPanel {
     /**
      * Initializes the panel with a given header name, width, and font.
      * 
-     * @param name
-     * @param width
-     * @param font
+     * @param name  The string to put in the header
+     * @param width The width of the panel
+     * @param headerFont  The font to use
      */
     public ListPanel(String name, int width, Font headerFont) {
         this(name, width);
@@ -62,10 +62,10 @@ public abstract class ListPanel extends StyledPanel {
      * Initializes the panel with a given header name, width, font, and
      * background color.
      * 
-     * @param name
-     * @param width
-     * @param font
-     * @param background
+     * @param name       The string to put in the header
+     * @param width      The width of the panel
+     * @param headerFont       The font to use
+     * @param background The background color
      */
     public ListPanel(String name, int width, Font headerFont,
             Color background) {

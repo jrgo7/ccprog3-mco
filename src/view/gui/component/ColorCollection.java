@@ -3,7 +3,15 @@ package src.view.gui.component;
 import java.awt.Color;
 
 /** A static list of colors for use in components. */
-public class ColorCollection {
+public final class ColorCollection {
+    /**
+     * This class is not meant to be instantiated, so a private empty
+     * constructor is provided.
+     */
+    private ColorCollection() {
+        /* Implementation left blank */
+    }
+
     /** Represents the ... */ /* TODO */
     public static final Color SELECTION_COMPLEMENT = Color.decode("#BFDBF7");
 
@@ -18,5 +26,4 @@ public class ColorCollection {
 
     /** Represents the ... */ /* TODO */
     public static final Color BACKGROUND_COMPLEMENT = Color.decode("#f0f0f0");
-
 }

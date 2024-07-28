@@ -22,7 +22,7 @@ public class TopMenuPaneListener implements ChangeListener {
      * with the underlying {@link ReservationSystem} model, and is simply used
      * to refresh the {@link ViewHotelPanel} inside {@link TopView}.
      * 
-     * @param view
+     * @param view The {@link TopView} tied to this listener
      */
     public TopMenuPaneListener(TopView view) {
         this.view = view;

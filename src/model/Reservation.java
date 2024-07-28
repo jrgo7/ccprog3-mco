@@ -30,11 +30,12 @@ public class Reservation {
     /**
      * Initializes a new reservation instance given booking information.
      * 
+     * @param hotel     The hotel to add a reservation to
      * @param guestName The name of the guest
      * @param checkIn   The check-in date
      * @param checkOut  The check-out date
      * @param room      The room instance to book a reservation for
-     * @see Hotel#addReservation(String, int, int, int)
+     * @see Hotel#addReservation(String, int, int, int, String)
      */
     public Reservation(Hotel hotel, String guestName, int checkIn, int checkOut,
             Room room) {

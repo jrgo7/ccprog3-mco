@@ -16,7 +16,11 @@ public class ViewHotelDelegate {
     /** The panel that this delegate communicates with. */
     private final ViewHotelPanel viewHotelPanel;
 
-    /** Initializes the panel. */
+    /**
+     * Initializes the panel.
+     * 
+     * @param viewHotelPanel the panel tied to this delegate
+     */
     public ViewHotelDelegate(ViewHotelPanel viewHotelPanel) {
         this.viewHotelPanel = viewHotelPanel;
     }

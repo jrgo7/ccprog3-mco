@@ -5,7 +5,12 @@ package src.model;
  * {@link Room}.
  */
 public class ExecutiveRoom extends Room {
-    /** Initializes a ExecutiveRoom instance as an instance of {@link Room}. */
+    /**
+     * Initializes a ExecutiveRoom instance as an instance of {@link Room}. *
+     * 
+     * @param name      the name of the room
+     * @param basePrice the base price of the room
+     */
     public ExecutiveRoom(String name, double basePrice) {
         super(name, basePrice);
     }

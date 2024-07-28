@@ -12,7 +12,7 @@ import src.controller.gui.HotelAvailabilityCalendarListener;
 import src.view.gui.component.RoomAvailabilityCalendar;
 import src.view.gui.component.Calendar;
 
-/** Represents the View  Availability subpanel under View Hotel. */
+/** Represents the View Availability subpanel under View Hotel. */
 public class ViewAvailabilityPanel extends StyledPanel {
     /** The {@link Calendar} showing available dates. */
     private RoomAvailabilityCalendar calendarComponent;
@@ -65,6 +65,7 @@ public class ViewAvailabilityPanel extends StyledPanel {
         return this.calendarComponent.columnAtPoint(point);
     }
 
+    /** Clears the calendar selection. */
     public void clearCalendarSelection() {
         this.calendarComponent.resetSelection();
     }

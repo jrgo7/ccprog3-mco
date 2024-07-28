@@ -57,6 +57,15 @@ public class ReservationSystem {
         return true;
     }
 
+    /**
+     * Removes a reservation from a given hotel.
+     * 
+     * @param hotelIndex       The index of the hotel to remove a reservation
+     *                         from
+     * @param reservationIndex The index of the reservation to remove
+     * @return {@code true} if the reservation was removed successfully,
+     *         {@code false} otherwise
+     */
     public boolean removeReservation(int hotelIndex, int reservationIndex) {
         return this.getHotel(hotelIndex).removeReservation(reservationIndex);
     }
@@ -130,6 +139,10 @@ public class ReservationSystem {
         return names;
     }
 
+    /**
+     * {@return the list of hotel names in the system} Name strings are stored
+     * in a new {@link ArrayList}.
+     */
     public ArrayList<String> getHotelNamesAsList() {
         ArrayList<String> hotelNames = new ArrayList<String>();
         for (Hotel h : hotels) {
@@ -413,7 +426,7 @@ public class ReservationSystem {
     /**
      * Validate a date, i.e., check if a date is within 1-31.
      * 
-     * @param date
+     * @param date the date to validate
      * @return {@code true} if the date is within 1-31, else {@code false}
      */
     public static boolean validateDate(int date) {

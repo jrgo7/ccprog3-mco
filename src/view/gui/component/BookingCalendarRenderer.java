@@ -25,12 +25,20 @@ public class BookingCalendarRenderer extends RoomAvailabilityCalendarRenderer {
         super();
     }
 
-    /** Sets the check-out date. */
+    /**
+     * Sets the check-out date.
+     * 
+     * @param checkOut the date to set
+     */
     public void setCheckOut(int checkOut) {
         this.checkOut = checkOut;
     }
 
-    /** Sets the check-in date. */
+    /**
+     * Sets the check-in date.
+     * 
+     * @param checkIn the date to set
+     */
     public void setCheckIn(int checkIn) {
         this.checkIn = checkIn;
     }

@@ -8,6 +8,9 @@ import src.view.gui.TopView;
 public interface ReservationPreviewUpdatable {
     /**
      * Update the reservation preview.
+     * 
+     * @param reservationSystem the {@link ReservationSystem} tied to the tab
+     * @param view              the {@link TopView} tied to the tab
      */
     public default void updateReservationPreview(
             ReservationSystem reservationSystem, TopView view) {

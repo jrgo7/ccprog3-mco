@@ -41,7 +41,13 @@ public class Controller {
     /** The listener for the booking calendar in the Simulate Booking tab. */
     private SimulateBookingCalendarListener bookingCalendarListener;
 
-    /** Initializes the listeners in the view. */
+    /**
+     * Initializes the listeners in the view.
+     * 
+     * @param reservationSystem the {@link ReservationSystem} tied to the
+     *                          controller
+     * @param view              the {@link TopView} tied to the controller
+     */
     public Controller(ReservationSystem reservationSystem, TopView view) {
         this.topMenuPaneListener = new TopMenuPaneListener(view);
         this.hotelListListener = new HotelListListener(reservationSystem, view);

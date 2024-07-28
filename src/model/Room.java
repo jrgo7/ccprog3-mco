@@ -55,7 +55,7 @@ public class Room {
      * Adds a {@link Reservation} to the room.
      * 
      * @param reservation the reservation instance to add
-     * @see Hotel#addReservation(String, int, int, int)
+     * @see Hotel#addReservation
      */
     public void addReservation(Reservation reservation) {
         this.reservations.add(reservation);
@@ -112,8 +112,8 @@ public class Room {
 
     /**
      * {@return a string representation of available dates formatted as a
-     * calendar} Unavailable dates are marked with {@code --} instead of the date
-     * number.
+     * calendar} Unavailable dates are marked with {@code --} instead of the
+     * date number.
      */
     public String getAvailableDatesAsCalendarString() {
         int date;
@@ -132,10 +132,11 @@ public class Room {
     }
 
     /**
-     * {@inheritDoc} Includes its name and base price. A calendar containing
-     * the dates on which the room is available is also shown separately in
-     * the View rooms screen.
+     * {@inheritDoc} Includes its name and base price. A calendar containing the
+     * dates on which the room is available is also shown separately in the View
+     * rooms screen.
      * 
+     * @return the formatted string
      */
     @Override
     public String toString() {
@@ -147,17 +148,18 @@ public class Room {
     }
 
     /**
-     * Same as toString, but meant for Reservation.toString where the room
-     * string representation is part of the reservation's.
-     * @return
+     * Same as toString, but meant for {@link Reservation#toString()} where the
+     * room string representation is part of the reservation's.
+     * 
+     * @return the formatted string
      */
     public String toStringMinimal() {
         return String.format(
                 """
-                <li>%s</li>
-                <ul>
-                  <li>Base price: %.2f per night</li>
-                </ul>""",
+                        <li>%s</li>
+                        <ul>
+                          <li>Base price: %.2f per night</li>
+                        </ul>""",
                 this.getName(),
                 this.getBasePrice());
     }

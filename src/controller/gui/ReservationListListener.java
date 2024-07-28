@@ -5,7 +5,13 @@ import src.view.gui.TopView;
 
 /** Represents an event listener that handles actions on a reservation list. */
 public class ReservationListListener extends ListAddListener {
-    /** Initializes the listener and updates the list */
+    /**
+     * Initialize this listener.
+     * 
+     * @param reservationSystem the {@link ReservationSystem} to bind to this
+     *                          listener
+     * @param view              the {@link TopView} to bind to this listener
+     */
     public ReservationListListener(ReservationSystem reservationSystem,
             TopView view) {
         super(reservationSystem, view);

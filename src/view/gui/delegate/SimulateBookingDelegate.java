@@ -16,7 +16,11 @@ public class SimulateBookingDelegate {
     /** The panel that this delegate communicates with. */
     private SimulateBookingPanel simulateBookingPanel;
 
-    /** Initializes the panel. */
+    /**
+     * Initializes the panel.
+     * 
+     * @param simulateBookingPanel the panel tied to this delegate
+     */
     public SimulateBookingDelegate(SimulateBookingPanel simulateBookingPanel) {
         this.simulateBookingPanel = simulateBookingPanel;
     }

@@ -14,7 +14,13 @@ import src.view.gui.panel.ManageHotelPanel;
  */
 public class ManageRoomListener extends RoomListListener
         implements ActionListener {
-    /** Initializes the listener and updates the list */
+    /**
+     * Initialize this listener.
+     * 
+     * @param reservationSystem the {@link ReservationSystem} to bind to this
+     *                          listener
+     * @param view              the {@link TopView} to bind to this listener
+     */
     public ManageRoomListener(ReservationSystem reservationSystem,
             TopView view) {
         super(reservationSystem, view);
@@ -107,15 +113,15 @@ public class ManageRoomListener extends RoomListListener
         int roomIndex = view.getManageHotelDelegate().getSelectedRoomIndex();
         int hotelIndex = view.getSelectedIndex();
 
-        switch(this.reservationSystem.removeRoom(hotelIndex, roomIndex)) {
+        switch (this.reservationSystem.removeRoom(hotelIndex, roomIndex)) {
             case Hotel.REMOVE_ROOM_ONLY_ROOM:
-            view.showCantRemoveOnlyRoomError();
-            break;
+                view.showCantRemoveOnlyRoomError();
+                break;
             case Hotel.REMOVE_ROOM_RESERVATIONS_EXIST:
-            view.showCantRemoveRoomWithReservationsError();
-            break;
+                view.showCantRemoveRoomWithReservationsError();
+                break;
         }
-        
+
         this.updateList();
 
         /* Always clear selection and hide panel afterwards */

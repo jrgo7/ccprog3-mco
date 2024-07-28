@@ -16,6 +16,13 @@ public abstract class ListAddListener implements ListSelectionListener {
     /** The {@link TopView} used to communicate with the GUI. */
     protected TopView view;
 
+    /**
+     * Initialize this listener.
+     * 
+     * @param reservationSystem the {@link ReservationSystem} to bind to this
+     *                          listener
+     * @param view              the {@link TopView} to bind to this listener
+     */
     public ListAddListener(ReservationSystem reservationSystem,
             TopView view) {
         this.reservationSystem = reservationSystem;
@@ -34,7 +41,7 @@ public abstract class ListAddListener implements ListSelectionListener {
      * 
      * @param selectedIndex The index of the new selection. Obtained through
      *                      {@link ListSelectionModel#getMinSelectionIndex()}.
-     * @see #value
+     * @see #valueChanged(ListSelectionEvent)
      */
     protected abstract void handleValueChanged(int selectedIndex);
 

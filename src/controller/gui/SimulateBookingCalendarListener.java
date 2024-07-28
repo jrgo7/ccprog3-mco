@@ -26,12 +26,24 @@ public class SimulateBookingCalendarListener extends CalendarListener
     /* The mode currently set. */
     private int mode = CHECK_IN;
 
-    /** Initialize this listener. */
+    /**
+     * Initialize this listener.
+     * 
+     * @param reservationSystem the {@link ReservationSystem} to bind to this
+     *                          listener
+     * @param view              the {@link TopView} to bind to this listener
+     */
     public SimulateBookingCalendarListener(
             ReservationSystem reservationSystem, TopView view) {
         super(reservationSystem, view);
     }
 
+    /**
+     * Resets the Simulate Booking panel.
+     * 
+     * @param doPrompt {@code true} to show the confirmation prompt,
+     *                 {@code false} otherwise
+     */
     private void resetBookingScreen(boolean doPrompt) {
         if (doPrompt && !view.confirmAction(
                 "reset the booking screen?",
@@ -43,6 +55,13 @@ public class SimulateBookingCalendarListener extends CalendarListener
         reservationSystem.resetReservationBuilder();
     }
 
+    /**
+     * Sets the selected date based on the row and column of the calendar
+     * selection.
+     * 
+     * @param row The row of the selected date in the calendar
+     * @param col The column of the selected date in the calendar
+     */
     private void selectedDate(int row, int col) {
         ReservationBuilder builder = reservationSystem.getReservationBuilder();
         int date = Calendar.toDate(row, col);
@@ -53,6 +72,7 @@ public class SimulateBookingCalendarListener extends CalendarListener
         }
     }
 
+    /** Submits the reservation. */
     public void submitReservation() {
         if (!view.confirmAction("submit this reservation?",
                 "Submit reservation")) {
@@ -157,8 +177,8 @@ public class SimulateBookingCalendarListener extends CalendarListener
      * Automatically update the reservation preview when the user types outside
      * the booking calendar, e.g. in the guest name and discount code fields.
      * 
-     * ({@link #selectedDate()} and its callers deal with updating the
-     * reservation preview when the booking calendar is focused.)
+     * ({@link #selectedDate} and its callers deal with updating the reservation
+     * preview when the booking calendar is focused.)
      * 
      * @param e {@link KeyEvent}, actual value ignored
      */

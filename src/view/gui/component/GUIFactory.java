@@ -5,7 +5,7 @@ import java.awt.BorderLayout;
 import javax.swing.JScrollPane;
 
 /** Represents a factory for instantiating GUI elements. */
-public class GUIFactory {
+public final class GUIFactory {
     /**
      * This class is not meant to be instantiated, so a private empty
      * constructor is provided.
@@ -56,9 +56,12 @@ public class GUIFactory {
     }
 
     /**
-     * Create a {@link StyledPanel} container for a {@StyledPanel} panel meant
-     * to act as a tab page. The container appends a title label at the top.
+     * Create a {@link StyledPanel} container for a {@link StyledPanel} panel
+     * meant to act as a tab page. The container appends a title label at the
+     * top.
      * 
+     * @param title the title of the panel
+     * @param panel the panel to wrap in the container
      * @return the created StyledPanel container
      */
     public static StyledPanel createTabContainer(

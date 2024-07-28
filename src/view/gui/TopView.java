@@ -490,7 +490,7 @@ public class TopView extends JFrame {
      * @param prompt the dialogue prompt to display
      * @param title  the title of the pop-up window
      * 
-     * @returns {@code true} if the user chose "Yes", else returns {@code false}
+     * @return {@code true} if the user chose "Yes", else returns {@code false}
      */
     public boolean confirmAction(String prompt, String title) {
         return JOptionPane.showConfirmDialog(

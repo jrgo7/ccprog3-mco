@@ -27,7 +27,13 @@ public abstract class CalendarListener
     /** The last selected column as heard by this instance. */
     private int col;
 
-    /** Initialize this listener. */
+    /**
+     * Initialize this listener.
+     * 
+     * @param reservationSystem the {@link ReservationSystem} to bind to this
+     *                          listener
+     * @param view              the {@link TopView} to bind to this listener
+     */
     public CalendarListener(ReservationSystem reservationSystem, TopView view) {
         this.reservationSystem = reservationSystem;
         this.view = view;
@@ -80,10 +86,10 @@ public abstract class CalendarListener
 
     /**
      * Set the row and column based on a mouse event. Standard implementation
-     * for this method is to call {@link JTable#rowAtPoint()} and
-     * {@link JTable#columnAtPoint()} (perhaps by delegation), passing in
+     * for this method is to call {@link JTable#rowAtPoint(Point)} and
+     * {@link JTable#columnAtPoint(Point)} (perhaps by delegation), passing in
      * {@link MouseEvent#getPoint()}, and setting appropriate attributes via
-     * {@link #setRow()} and {@link #CalendarListener.setCol()}.
+     * {@link #setRow(int)} and {@link #setCol(int)}.
      * 
      * @param e the mouse event
      */
@@ -136,9 +142,6 @@ public abstract class CalendarListener
 
     /**
      * Handle what happens when a mouse drags from the Calendar to outside it.
-     * 
-     * @param row the {@link Calendar} row associated with the current action
-     * @param col the {@link Calendar} column associated with the current action
      */
     protected abstract void handleReleasedOutsideComponent();
 

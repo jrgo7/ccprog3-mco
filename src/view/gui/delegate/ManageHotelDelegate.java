@@ -17,7 +17,11 @@ public class ManageHotelDelegate {
     /** The panel that this delegate communicates with. */
     private ManageHotelPanel manageHotelPanel;
 
-    /** Initializes the panel. */
+    /**
+     * Initializes the panel.
+     * 
+     * @param manageHotelPanel the panel tied to this delegate.
+     */
     public ManageHotelDelegate(ManageHotelPanel manageHotelPanel) {
         this.manageHotelPanel = manageHotelPanel;
     }

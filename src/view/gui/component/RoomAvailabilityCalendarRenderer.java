@@ -8,10 +8,11 @@ import javax.swing.JTable;
 
 /**
  * An extended {@link CalendarRenderer} that adds highlighting rules with
- * respect to a list of available dates of a certain room, wherein
- * unavailable dates are colored red.
+ * respect to a list of available dates of a certain room, wherein unavailable
+ * dates are colored red.
  */
 public class RoomAvailabilityCalendarRenderer extends CalendarRenderer {
+    /** The list of available dates. */
     protected ArrayList<Integer> availableDates;
 
     /** Initializes the renderer. */
@@ -38,7 +39,8 @@ public class RoomAvailabilityCalendarRenderer extends CalendarRenderer {
                 table, value, isSelected, hasFocus, row, column);
         int date = Calendar.toDate(row, column);
 
-        if (availableDates != null && !availableDates.contains(date) && date <= 31) {
+        if (availableDates != null && !availableDates.contains(date)
+                && date <= 31) {
             super.setForeground(Color.WHITE);
             super.setBackground(ColorCollection.INVALID);
         }

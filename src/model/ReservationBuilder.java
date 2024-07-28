@@ -1,5 +1,8 @@
 package src.model;
 
+/**
+ * Represents a builder class for generation instances of {@link Reservation}.
+ */
 public class ReservationBuilder {
     /** The index of the {@link Hotel} set. */
     private int hotelIndex;
@@ -66,9 +69,9 @@ public class ReservationBuilder {
      * the new checkIn or checkOut is different from the old one. * The checkIn
      * date is within day 1-30. * The checkOut date is within 2-31.
      * 
-     * @param checkIn
-     * @param checkOut
-     * @return
+     * @param checkIn  The check-in date to set
+     * @param checkOut The check-out date to set
+     * @return {@code true} if the pair is valid, {@code false} otherwise
      */
     public boolean validateDates(int checkIn, int checkOut) {
         return (this.checkIn != checkIn || this.checkOut != checkOut) &&
@@ -95,7 +98,7 @@ public class ReservationBuilder {
     /**
      * Sets the check-out date.
      * 
-     * @param checkIn The check-out date to set
+     * @param checkOut The check-out date to set
      * @return {@code true} if the date changed as a result of the call,
      *         {@code false} otherwise or if the date inputted was out of
      *         bounds.

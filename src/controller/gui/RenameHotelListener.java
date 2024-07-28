@@ -19,6 +19,13 @@ public class RenameHotelListener implements ActionListener, KeyListener {
     /** The view tied to this listener. */
     private TopView view;
 
+    /**
+     * Initialize this listener.
+     * 
+     * @param reservationSystem the {@link ReservationSystem} to bind to this
+     *                          listener
+     * @param view              the {@link TopView} to bind to this listener
+     */
     public RenameHotelListener(ReservationSystem reservationSystem,
             TopView view) {
         this.reservationSystem = reservationSystem;

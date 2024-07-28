@@ -354,7 +354,6 @@ public class ManageHotelPanel extends StyledPanel {
      *
      * @return {@code true} if the update base price field is under mouse focus,
      *         {@code false} otherwise
-     * @see BasePriceField#isFocusOwner
      */
     public boolean getIsUpdateBasePriceFieldFocused() {
         return this.basePriceField.isFocusOwner();
@@ -385,7 +384,7 @@ public class ManageHotelPanel extends StyledPanel {
     /**
      * Sets the reservation list with the given data.
      *
-     * @param data the array containing string representations of active
+     * @param list the array containing string representations of active
      *             reservations. Usually obtained through
      *             {@link ReservationSystem#getReservationNames(int)}
      * @see ManageReservationsPanel#setReservationList

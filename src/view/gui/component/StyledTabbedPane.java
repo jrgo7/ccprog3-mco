@@ -15,11 +15,11 @@ public class StyledTabbedPane extends JTabbedPane {
     }
 
     /**
-     * Prepend {@code panel} with header {@code text},
-     * and add it as a tab entry to this tabbed pane.
+     * Prepend {@code panel} with header {@code text}, and add it as a tab entry
+     * to this tabbed pane.
      * 
-     * @param text
-     * @param panel
+     * @param text  the name of the tab
+     * @param panel the panel contained within the tab
      */
     public void addTab(String text, StyledPanel panel) {
         super.add(text, GUIFactory.createTabContainer(text, panel));

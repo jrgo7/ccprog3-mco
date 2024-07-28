@@ -11,7 +11,7 @@ import javax.swing.text.html.StyleSheet;
  * https://learn.microsoft.com/en-us/windows/apps/design/style/xaml-theme-resources#the-xaml-type-ramp
  */
 
-/** A styled {@JEditorPane} meant for view-only HTML displays. */
+/** A styled {@link JEditorPane} meant for view-only HTML displays. */
 public class StyledHTMLPane extends JEditorPane {
     /** Instantiate this class. */
     public StyledHTMLPane() {
