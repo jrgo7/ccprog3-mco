@@ -260,6 +260,10 @@ public class Hotel {
             return false;
         else if (date < 1 || date > 31)
             return false;
+        
+        for (Room i : rooms)
+            if (!i.isAvailableOn(date))
+                return false;
 
         this.priceModifiers[date - 1] = modifier;
         return true;

@@ -7,6 +7,7 @@ package src.view.gui.component;
  * range encompassed therein.
  */
 public class BookingCalendar extends RoomAvailabilityCalendar {
+    /** Initializes the calendar. */
     public BookingCalendar() {
         super();
         this.renderer = new BookingCalendarRenderer();

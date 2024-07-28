@@ -301,7 +301,7 @@ public class TopView extends JFrame {
     public void showPriceModifierError() {
         JOptionPane.showMessageDialog(
                 this,
-                "The price modifier must be within 0.50-1.50.",
+                "The price modifier must be within 0.50-1.50 and there must be no reservations for that date.",
                 "Invalid price modifier error",
                 JOptionPane.ERROR_MESSAGE);
     }
@@ -333,7 +333,7 @@ public class TopView extends JFrame {
     public void showCantRemoveRoomError() {
         JOptionPane.showMessageDialog(
                 this,
-                "A hotel must have at least one room.\n",
+                "A room cannot be removed if it has reservations or is the only room in the hotel.\n",
                 "Cannot remove room",
                 JOptionPane.ERROR_MESSAGE);
     }

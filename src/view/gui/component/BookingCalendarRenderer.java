@@ -15,14 +15,17 @@ public class BookingCalendarRenderer extends RoomAvailabilityCalendarRenderer {
     private int checkIn = NONE;
     private int checkOut = NONE;
 
+    /** Initializes the renderer. */
     public BookingCalendarRenderer() {
         super();
     }
 
+    /** Sets the check-out date. */
     public void setCheckOut(int checkOut) {
         this.checkOut = checkOut;
     }
 
+    /** Sets the check-in date. */
     public void setCheckIn(int checkIn) {
         this.checkIn = checkIn;
     }
