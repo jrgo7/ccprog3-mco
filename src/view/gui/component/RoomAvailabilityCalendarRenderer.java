@@ -12,11 +12,9 @@ import javax.swing.JTable;
  * unavailable dates are colored red.
  */
 public class RoomAvailabilityCalendarRenderer extends CalendarRenderer {
-    ArrayList<Integer> availableDates;
+    protected ArrayList<Integer> availableDates;
 
-    /**
-     * Instantiate this class.
-     */
+    /** Initializes the renderer. */
     public RoomAvailabilityCalendarRenderer() {
         super();
     }
@@ -32,9 +30,7 @@ public class RoomAvailabilityCalendarRenderer extends CalendarRenderer {
         this.availableDates = availableDates;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value,
             boolean isSelected, boolean hasFocus, int row, int column) {

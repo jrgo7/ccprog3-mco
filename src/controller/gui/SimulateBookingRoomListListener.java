@@ -2,9 +2,15 @@ package src.controller.gui;
 
 import src.model.ReservationSystem;
 import src.view.gui.TopView;
+import src.view.gui.panel.SimulateBookingPanel;
 
+/**
+ * Extends the functions of {@link RoomListListener} to listen to events from a
+ * {@link SimulateBookingPanel}.
+ */
 public class SimulateBookingRoomListListener extends RoomListListener
         implements ReservationPreviewUpdatable {
+    /* Initializes the listener. */
     public SimulateBookingRoomListListener(ReservationSystem reservationSystem,
             TopView view) {
         super(reservationSystem, view);

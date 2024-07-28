@@ -260,15 +260,17 @@ public class Hotel {
      * 
      * @param date     The date to set a price modifier for
      * @param modifier The new price modifier to set
-     * @return {@code true} if the price modifier for the date was set
-     *         successfully, {@code false} otherwise.
+     * @return {@code SET_PRICE_MODIFIER_SUCCESS} if the price modifier for the
+     *         date was set successfully,
+     *         {@code SET_PRICE_MODIFIER_OUT_OF_BOUNDS} or
+     *         {@code SET_BASE_PRICE_ERROR_RESERVATIONS_EXIST} otherwise.
      */
     public int setPriceModifier(int date, double modifier) {
         if (modifier < 0.5 || modifier > 1.5)
             return SET_PRICE_MODIFIER_OUT_OF_BOUNDS;
         else if (date < 1 || date > 31)
             return SET_PRICE_MODIFIER_OUT_OF_BOUNDS;
-        
+
         for (Room i : rooms)
             if (!i.isAvailableOn(date))
                 return SET_BASE_PRICE_ERROR_RESERVATIONS_EXIST;
@@ -365,8 +367,10 @@ public class Hotel {
      * @param checkIn   The check-in date
      * @param checkOut  The check-out date
      * @param roomIndex The index of the room to book a reservation for
-     * @return {@code true} if a reservation was made successfully,
-     *         {@code false} otherwise
+     * @return {@code RESERVATION_SUCCESS} if a reservation was made
+     *         successfully, {@code RESERVATION_ERROR_UNAVAILABLE_ROOM},
+     *         {@code RESERVATION_ERROR_INVALID_ROOM}, or
+     *         {@code RESERVATION_ERROR_INVALID_DISCOUNT_CODE} otherwise
      * @see Room#isAvailableOn(int)
      */
     public int addReservation(String guestName, int checkIn, int checkOut,
@@ -498,7 +502,7 @@ public class Hotel {
                 this.getEarnings());
     }
 
-    // ?
+    /* TODO: Remove somehow */
     public Room getRoom(int roomIndex) {
         return this.rooms.get(roomIndex);
     }

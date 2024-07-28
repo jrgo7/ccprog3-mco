@@ -7,7 +7,12 @@ import src.model.ReservationSystem;
 import src.view.gui.TopView;
 import src.view.gui.panel.ViewHotelPanel;
 
+/**
+ * Represents an event listener used to refresh the {@link ViewHotelPanel}
+ * inside {@link TopView}.
+ */
 public class TopMenuPaneListener implements ChangeListener {
+    /** The view tied to this listener. */
     private TopView view;
 
     /**

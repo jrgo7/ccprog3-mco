@@ -11,8 +11,13 @@ import javax.swing.JTable;
  * range encompassed therein are highlighted with a selection background.
  */
 public class BookingCalendarRenderer extends RoomAvailabilityCalendarRenderer {
+    /** Represents an empty selection. */
     public static final int NONE = -1;
+
+    /** The selected check-in date. */
     private int checkIn = NONE;
+
+    /** The selected check-out date. */
     private int checkOut = NONE;
 
     /** Initializes the renderer. */

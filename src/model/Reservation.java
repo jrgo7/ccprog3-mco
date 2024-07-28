@@ -46,6 +46,11 @@ public class Reservation {
         this.discountCode = "";
     }
 
+    /**
+     * Sets the {@link Hotel} tied to this object.
+     * 
+     * @param hotel The hotel to set
+     */
     public void setHotel(Hotel hotel) {
         this.hotel = hotel;
     }
@@ -55,6 +60,11 @@ public class Reservation {
         return this.guestName;
     }
 
+    /**
+     * Sets the guest's name.
+     * 
+     * @param guestName The name to set
+     */
     public void setGuestName(String guestName) {
         this.guestName = guestName;
     }
@@ -64,6 +74,11 @@ public class Reservation {
         return this.checkIn;
     }
 
+    /**
+     * Sets the check-in date.
+     * 
+     * @param checkIn The date to set
+     */
     public void setCheckIn(int checkIn) {
         this.checkIn = checkIn;
     }
@@ -73,10 +88,20 @@ public class Reservation {
         return this.checkOut;
     }
 
+    /**
+     * Sets the check-out date.
+     * 
+     * @param checkOut The date to set
+     */
     public void setCheckOut(int checkOut) {
         this.checkOut = checkOut;
     }
 
+    /**
+     * Sets the {@link Room} tied to the reservation
+     * 
+     * @param room The room to set
+     */
     public void setRoom(Room room) {
         this.room = room;
     }

@@ -7,7 +7,6 @@ import javax.swing.JScrollPane;
 
 /** A styled {@link JScrollPane}. */
 public class StyledScrollPane extends JScrollPane {
-
     /**
      * Instantiate this class.
      * 

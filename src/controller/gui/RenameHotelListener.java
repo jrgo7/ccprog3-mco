@@ -8,8 +8,15 @@ import java.awt.event.KeyListener;
 import src.model.ReservationSystem;
 import src.view.gui.TopView;
 
+/**
+ * Represents an event listener that handles actions in the rename hotel
+ * feature.
+ */
 public class RenameHotelListener implements ActionListener, KeyListener {
+    /** The reservation system tied to this listener. */
     private ReservationSystem reservationSystem;
+
+    /** The view tied to this listener. */
     private TopView view;
 
     public RenameHotelListener(ReservationSystem reservationSystem,
@@ -33,7 +40,7 @@ public class RenameHotelListener implements ActionListener, KeyListener {
         String newName = view.getManageHotelDelegate()
                 .getRenameHotelFieldText();
         if (!view.confirmAction(
-                "rename this hotel to " + newName,  "Rename hotel")) {
+                "rename this hotel to " + newName, "Rename hotel")) {
             return;
         }
 

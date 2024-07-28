@@ -44,7 +44,8 @@ public class ViewHotelPanel extends StyledPanel {
         this.subpanels = new StyledTabbedPane();
 
         this.viewAvailabilitySubpanel = new ViewAvailabilityPanel();
-        this.subpanels.addTab("Check availability", this.viewAvailabilitySubpanel);
+        this.subpanels.addTab("Check availability",
+                this.viewAvailabilitySubpanel);
 
         this.viewRoomSubPanel = new ViewRoomPanel();
         this.subpanels.addTab("Check rooms", viewRoomSubPanel);
@@ -55,6 +56,11 @@ public class ViewHotelPanel extends StyledPanel {
         this.add(subpanels, BorderLayout.CENTER);
     }
 
+    /**
+     * Sets a listener for the room list.
+     * 
+     * @param roomListListener the listener to set.
+     */
     public void setRoomListListener(RoomListListener roomListListener) {
         this.viewRoomSubPanel.setRoomListListener(roomListListener);
     }

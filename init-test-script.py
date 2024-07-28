@@ -41,7 +41,7 @@ def deal_with(file_path: str):
     
 def main():
     # wb = Workbook()
-    folder_path: str = "src"
+    folder_path: str = "out"
     method_count = 0
     out = ""
     for path, folders, files in os.walk(folder_path):

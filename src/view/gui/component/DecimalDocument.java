@@ -4,7 +4,12 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 
+/**
+ * Extends the functionality of {@link PlainDocument} to allow for decimal real
+ * number input.
+ */
 public class DecimalDocument extends PlainDocument {
+    /** Initializes the document. */
     public DecimalDocument() {
         super();
     }

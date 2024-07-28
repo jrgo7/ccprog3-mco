@@ -5,15 +5,13 @@ import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 
 /**
- * This class extends {@link JEditorPane} by providing it with styled CSS
- * based on Microsoft's typography guidelines accessed via the following link:
+ * This class extends {@link JEditorPane} by providing it with styled CSS based
+ * on Microsoft's typography guidelines accessed via the following link:
  * 
  * https://learn.microsoft.com/en-us/windows/apps/design/style/xaml-theme-resources#the-xaml-type-ramp
  */
 
-/**
- * A styled {@JEditorPane} meant for view-only HTML displays.
- */
+/** A styled {@JEditorPane} meant for view-only HTML displays. */
 public class StyledHTMLPane extends JEditorPane {
     /** Instantiate this class. */
     public StyledHTMLPane() {

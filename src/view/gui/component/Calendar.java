@@ -44,8 +44,8 @@ public class Calendar extends JTable {
      * A static method to return the date represented by a {@code (row, col)}
      * pair in a default {@link Calendar} object.
      * 
-     * @param row
-     * @param col
+     * @param row the selected row
+     * @param col the selected column
      * @return aforementioned date
      */
     public static int toDate(int row, int col) {
@@ -58,7 +58,7 @@ public class Calendar extends JTable {
     /**
      * Get the row in a object that contains the specified date.
      * 
-     * @param date
+     * @param date the selected date
      * @return aforementioned row index
      */
     public int getRowFromDate(int date) {
@@ -68,7 +68,7 @@ public class Calendar extends JTable {
     /**
      * Get the column in this object that contains the specified date.
      * 
-     * @param date
+     * @param date the selected date
      * @return aforementioned column index
      */
     public int getColFromDate(int date) {
@@ -79,8 +79,8 @@ public class Calendar extends JTable {
      * Place text on a cell corresponding to a certain date in this object. This
      * wraps {@link #setCalendarText(row, col, text)}.
      * 
-     * @param date
-     * @param text
+     * @param date the selected date
+     * @param text the text to set
      */
     public void setCalendarText(int date, String text) {
         this.setCalendarText(getRowFromDate(date), getColFromDate(date), text);
@@ -89,9 +89,9 @@ public class Calendar extends JTable {
     /**
      * Place text on a cell in the specified location.
      * 
-     * @param row
-     * @param col
-     * @param text
+     * @param row  the selected row
+     * @param col  the selected column
+     * @param text the text to set
      */
     public void setCalendarText(int row, int col, String text) {
         this.getModel().setValueAt(text, row, col);
@@ -100,8 +100,8 @@ public class Calendar extends JTable {
     /**
      * This method has been overridden to prevent any cells from being editable.
      * 
-     * @param row
-     * @param column
+     * @param row    the selected row
+     * @param column the selected column
      * @return false
      */
     @Override
@@ -112,7 +112,7 @@ public class Calendar extends JTable {
     /**
      * Select a specified date in this object.
      * 
-     * @param date
+     * @param date the selected date
      */
     public void selectDate(int date) {
         int row = getRowFromDate(date);
@@ -122,9 +122,7 @@ public class Calendar extends JTable {
         this.requestFocus();
     }
 
-    /**
-     * Remove any selections made in this object.
-     */
+    /** Remove any selections made in this object. */
     public void resetSelection() {
         this.removeRowSelectionInterval(Calendar.MAX_ROWS - 1, 0);
         this.removeColumnSelectionInterval(Calendar.MAX_COLS - 1, 0);

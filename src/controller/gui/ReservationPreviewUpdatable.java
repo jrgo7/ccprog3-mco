@@ -4,6 +4,7 @@ import src.model.ReservationBuilder;
 import src.model.ReservationSystem;
 import src.view.gui.TopView;
 
+/** Represents a method for updating the preview in the Simulate Booking tab. */
 public interface ReservationPreviewUpdatable {
     /**
      * Update the reservation preview.

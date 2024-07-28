@@ -17,8 +17,13 @@ import src.view.gui.component.Calendar;
  */
 public class SimulateBookingCalendarListener extends CalendarListener
         implements ActionListener, ReservationPreviewUpdatable {
+    /** Represents setting a check-in date. */
     static final private int CHECK_IN = 0;
+
+    /** Represents setting a check-out date. */
     static final private int CHECK_OUT = 1;
+
+    /* The mode currently set. */
     private int mode = CHECK_IN;
 
     /** Initialize this listener. */

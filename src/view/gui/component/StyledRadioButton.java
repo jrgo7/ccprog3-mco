@@ -5,9 +5,7 @@ import java.awt.Color;
 import javax.swing.BorderFactory;
 import javax.swing.JRadioButton;
 
-/**
- * A styled {@link JRadioButton}.
- */
+/** A styled {@link JRadioButton}. */
 public class StyledRadioButton extends JRadioButton {
     /**
      * Instantiate a {@link StyledRadioButton} with text.

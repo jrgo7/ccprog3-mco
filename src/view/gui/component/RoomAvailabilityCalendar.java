@@ -8,9 +8,7 @@ import java.util.ArrayList;
  * available dates; dates not in this list will be highlighted red.
  */
 public class RoomAvailabilityCalendar extends Calendar {
-    /**
-     * Initialize this component with the default renderer.
-     */
+    /** Initialize this component with the default renderer. */
     public RoomAvailabilityCalendar() {
         super();
 
@@ -24,11 +22,13 @@ public class RoomAvailabilityCalendar extends Calendar {
      * @param availableDates
      */
     public void setAvailabilityData(ArrayList<Integer> availableDates) {
-        ((RoomAvailabilityCalendarRenderer) renderer).setAvailableDates(availableDates);
+        ((RoomAvailabilityCalendarRenderer) renderer)
+                .setAvailableDates(availableDates);
         for (int date = 1; date <= 31; date++) {
             this.setCalendarText(
                     date,
-                    (availableDates.contains(date)) ? String.valueOf(date) : "X");
+                    (availableDates.contains(date)) ? String.valueOf(date)
+                            : "X");
         }
     }
 }

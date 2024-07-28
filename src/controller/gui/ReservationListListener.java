@@ -3,6 +3,7 @@ package src.controller.gui;
 import src.model.ReservationSystem;
 import src.view.gui.TopView;
 
+/** Represents an event listener that handles actions on a reservation list. */
 public class ReservationListListener extends ListAddListener {
     /** Initializes the listener and updates the list */
     public ReservationListListener(ReservationSystem reservationSystem,

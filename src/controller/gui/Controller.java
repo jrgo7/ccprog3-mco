@@ -8,19 +8,37 @@ import src.view.gui.TopView;
  * the view.
  */
 public class Controller {
+    /** The listener for the top menu tabs. */
     private TopMenuPaneListener topMenuPaneListener;
+
+    /** The listener for the hotel list. */
     private HotelListListener hotelListListener;
 
+    /** The listener for the hotel availability calendar. */
     private HotelAvailabilityCalendarListener availabilityCalendarListener;
+
+    /** The listener for the room list in the View Rooms tab. */
     private RoomListListener viewRoomListListener;
+
+    /** The listener for the reservation list in the View Reservations tab. */
     private ReservationListListener viewReservationListListener;
 
+    /** The listener for the hotel renaming feature. */
     private RenameHotelListener renameHotelListener;
+
+    /** The listener for the Manage Prices tab. */
     private ManagePricesListener managePricesListener;
+
+    /** The listener for the room list in the Manage Rooms tab. */
     private ManageRoomListener manageRoomListListener;
+
+    /** The listener for the reservation list in the Manage Reservations tab. */
     private ManageReservationListener manageReservationListener;
 
+    /** The listener for the Simulate Booking tab. */
     private SimulateBookingRoomListListener simulateBookingRoomListListener;
+
+    /** The listener for the booking calendar in the Simulate Booking tab. */
     private SimulateBookingCalendarListener bookingCalendarListener;
 
     /** Initializes the listeners in the view. */
