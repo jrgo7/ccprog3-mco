@@ -3,6 +3,7 @@ package src.view.gui.component;
 import java.awt.Color;
 import java.awt.Component;
 
+import javax.swing.BorderFactory;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -34,6 +35,7 @@ public class CalendarRenderer extends DefaultTableCellRenderer {
         super.setForeground(Color.BLACK);
         if (date > 31) {
             super.setBackground(Color.WHITE);
+            super.setBorder(BorderFactory.createEmptyBorder());
         } else if (isSelected) {
             super.setForeground(table.getSelectionForeground());
             super.setBackground(table.getSelectionBackground());

@@ -95,9 +95,11 @@ public class TopView extends JFrame {
         topMenuPane.setBorder(
                 BorderFactory.createEmptyBorder(
                         28, 28, 28, 28));
-        paddingPanel.add(topMenuPane, BorderLayout.CENTER);
-
+        topMenuPane.setVisible(false);
+        
+        paddingPanel.add(topMenuPane, BorderLayout.CENTER); 
         this.add(paddingPanel, BorderLayout.CENTER);
+        
         this.setVisible(true);
 
         manageHotelDelegate = new ManageHotelDelegate(manageHotelPanel);
