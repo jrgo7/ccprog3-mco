@@ -22,7 +22,7 @@ from openpyxl import Workbook
 FOLDER_PATH: str = "./src" # Change this
 
 """ Retrieved from https://stackoverflow.com/a/77307448"""
-JAVA_METHOD_REGEX: regex.Pattern  = regex.compile(r"""\b(public|private|protected)\s*(<[^>]*>)?\s*(abstract|static|final)?\s*(abstract|static|final)?\s*(abstract|static|final)?\s+[^*](\w+(\.\w+)*)*(\s*<[^>]*>)?(\s*\[[^\]]*\])*(\s+\w+\s*\([^)]*\)(\s+throws\s+\w+(\s*,\s*\w+)*)?)+""")
+JAVA_METHOD_REGEX: regex.Pattern  = regex.compile(r"""\b(public|private|protected)\s*(<[^>]*>)?\s*(static|final)?\s*(static|final)?\s+[^*](\w+(\.\w+)*)*(\s*<[^>]*>)?(\s*\[[^\]]*\])*(\s+\w+\s*\([^)]*\)(\s+throws\s+\w+(\s*,\s*\w+)*)?)+""")
 wb = Workbook()
 wb.remove(wb.active) # Remove default Sheet
 
@@ -54,7 +54,7 @@ def deal_with(file_path: str):
         listing = file.read()
 
     methods_matches = regex.findall(JAVA_METHOD_REGEX, listing)
-    methods = [method[9].strip() for method in methods_matches]
+    methods = [method[8].strip() for method in methods_matches]
     
     for i, method in enumerate(methods, start=1):
         print(method, end=" -> ")

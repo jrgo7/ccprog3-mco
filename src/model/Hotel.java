@@ -84,6 +84,17 @@ public class Hotel {
      */
     public static final int REMOVE_ROOM_RESERVATIONS_EXIST = 2;
 
+    // Room types
+
+    /** Value representing a normal room with no special qualities. */
+    public static final int NORMAL_ROOM = 1;
+    
+    /** Value representing a deluxe room. */
+    public static final int DELUXE_ROOM = 2;
+
+    /** Value representing an executive room. */
+    public static final int EXECUTIVE_ROOM = 3;
+
     /**
      * Initializes a new hotel instance given a name. The created hotel begins
      * with zero reservations, a base price of 1299.00, and one room.
@@ -318,8 +329,8 @@ public class Hotel {
      * still be {@code RM003}).
      * 
      * @param count The number of rooms to add
-     * @param type  The type of the room ({@code 1} for normal, {@code 2} for
-     *              deluxe, {@code 3} for executive).
+     * @param type  The type of the room ({@code NORMAL_ROOM} for normal, {@code DELUXE_ROOM} for
+     *              deluxe, {@code EXECUTIVE_ROOM} for executive).
      */
     public void addRooms(int count, int type) {
         String formatString = "RM%03d";
@@ -330,7 +341,7 @@ public class Hotel {
          */
         switch (type) {
             default:
-            case 1:
+            case NORMAL_ROOM:
                 for (int i = 0; i < count && this.rooms.size() < 50; i++)
                     this.rooms.add(
                             new Room(
@@ -338,7 +349,7 @@ public class Hotel {
                                             1 + this.lastRoomNumber++),
                                     this.basePrice));
                 break;
-            case 2:
+            case DELUXE_ROOM:
                 formatString += "-DX";
                 for (int i = 0; i < count && this.rooms.size() < 50; i++)
                     this.rooms.add(
@@ -347,7 +358,7 @@ public class Hotel {
                                             1 + this.lastRoomNumber++),
                                     this.basePrice));
                 break;
-            case 3:
+            case EXECUTIVE_ROOM:
                 formatString += "-EX";
                 for (int i = 0; i < count && this.rooms.size() < 50; i++)
                     this.rooms.add(

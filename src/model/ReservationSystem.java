@@ -319,8 +319,9 @@ public class ReservationSystem {
      *
      * @param hotelIndex the index of the hotel
      * @param amount     the number of rooms to add
-     * @param roomType   the type of the rooms to add ({@code 1} for normal,
-     *                   {@code 2} for deluxe, {@code 3} for executive).
+     * @param roomType   the type of the rooms to add ({@code NORMAL_ROOM} for
+     *                   normal, {@code DELUXE_ROOM} for deluxe,
+     *                   {@code EXECUTIVE_ROOM} for executive).
      * @see Hotel#addRooms
      */
     public void addRooms(int hotelIndex, int amount, int roomType) {
