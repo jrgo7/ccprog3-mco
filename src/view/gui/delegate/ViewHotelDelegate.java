@@ -72,16 +72,6 @@ public class ViewHotelDelegate {
     }
 
     /**
-     * Sets the selected room index.
-     *
-     * @param index the index of the selected room.
-     * @see ViewHotelPanel#setSelectedRoomIndex
-     */
-    public void setSelectedRoomIndex(int index) {
-        this.viewHotelPanel.setSelectedRoomIndex(index);
-    }
-
-    /**
      * Clears the room list selection.
      *
      * @see ViewHotelPanel#clearRoomListSelection
@@ -131,16 +121,6 @@ public class ViewHotelDelegate {
      */
     public void setReservationData(String data) {
         this.viewHotelPanel.setReservationData(data);
-    }
-
-    /**
-     * Sets the selected reservation index.
-     *
-     * @param index the index of the selected reservation.
-     * @see ViewHotelPanel#setSelectedReservationIndex
-     */
-    public void setSelectedReservationIndex(int index) {
-        this.viewHotelPanel.setSelectedReservationIndex(index);
     }
 
     /**

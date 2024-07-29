@@ -86,11 +86,6 @@ public class ViewHotelPanel extends StyledPanel {
         this.ViewReservationsPanel.setListener(listener);
     }
 
-    /** {@return the index of the selected subpanel} */
-    public int getSelectedSubpanelIndex() {
-        return this.subpanels.getSelectedIndex();
-    }
-
     /**
      * Updates the {@link StyledHTMLPane} containing the hotel data.
      * 
@@ -166,15 +161,6 @@ public class ViewHotelPanel extends StyledPanel {
     }
 
     /**
-     * {@return the index of the selected room}
-     * 
-     * @see ViewRoomPanel#getSelectedRoomIndex
-     */
-    public int getSelectedRoomIndex() {
-        return this.ViewRoomPanel.getSelectedRoomIndex();
-    }
-
-    /**
      * Clears the room list selection.
      *
      * @see ViewRoomPanel#clearRoomListSelection
@@ -215,15 +201,6 @@ public class ViewHotelPanel extends StyledPanel {
      */
     public void setReservationList(ArrayList<String> data) {
         this.ViewReservationsPanel.setReservationList(data);
-    }
-
-    /**
-     * {@return the index of the selected reservation}
-     * 
-     * @see ViewReservationsPanel#getSelectedIndex
-     */
-    public int getSelectedReservationIndex() {
-        return this.ViewReservationsPanel.getSelectedIndex();
     }
 
     /**

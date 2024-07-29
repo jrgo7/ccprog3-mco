@@ -260,15 +260,6 @@ public class TopView extends JFrame {
     }
 
     /**
-     * Sets the selected tab index.
-     *
-     * @param index the index to set
-     */
-    public void setTabIndex(int index) {
-        topMenuPane.setSelectedIndex(index);
-    }
-
-    /**
      * Sets the hotel list with the given data.
      *
      * @param data the list of hotel names to set
@@ -297,16 +288,6 @@ public class TopView extends JFrame {
     public void clearSelectedIndex() {
         this.hotelListPanel.clearSelection();
         this.topMenuPane.setVisible(false);
-    }
-
-    /**
-     * Sets the visibility of the tab panel.
-     *
-     * @param enable {@code true} to display the tab panel, {@code false}
-     *               otherwise
-     */
-    public void setTopMenuPaneVisible(boolean enable) {
-        this.topMenuPane.setVisible(enable);
     }
 
     /**
