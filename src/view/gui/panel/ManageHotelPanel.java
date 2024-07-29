@@ -69,7 +69,7 @@ public class ManageHotelPanel extends StyledPanel {
 
         removeHotelPanel.setLayout(new BorderLayout());
         removeHotelButton = GUIFactory.createDestructiveButton(
-            "Remove hotel");
+                "Remove hotel");
         removeHotelPanel.add(removeHotelButton, BorderLayout.WEST);
 
         this.add(removeHotelPanel, BorderLayout.SOUTH);
@@ -83,7 +83,8 @@ public class ManageHotelPanel extends StyledPanel {
         subpanels.addTab("Manage rooms", this.manageRoomsSubpanel);
 
         this.manageReservationsSubpanel = new ManageReservationsPanel();
-        subpanels.addTab("Manage reservations", this.manageReservationsSubpanel);
+        subpanels.addTab("Manage reservations",
+                this.manageReservationsSubpanel);
 
         this.managePricesSubpanel = new ManagePricesPanel();
         subpanels.addTab("Manage prices", this.managePricesSubpanel);
@@ -420,5 +421,14 @@ public class ManageHotelPanel extends StyledPanel {
      */
     public void setReservationDataVisible(boolean visible) {
         this.manageReservationsSubpanel.setWrapperVisible(visible);
+    }
+
+    /**
+     * Clears the reservation list selection.
+     * 
+     * @see ManageReservationsPanel#clearSelectedIndex
+     */
+    public void clearReservationListSelection() {
+        this.manageReservationsSubpanel.clearSelectedIndex();
     }
 }

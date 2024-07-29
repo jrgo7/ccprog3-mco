@@ -96,4 +96,9 @@ public class ViewReservationsPanel extends StyledPanel {
     public void setSelectedIndex(int index) {
         this.reservationListPanel.setSelectedIndex(index);
     }
+
+    /** Clears the reservation list selection */
+    public void clearSelectedIndex() {
+        this.reservationListPanel.clearSelection();
+    }
 }

@@ -155,6 +155,11 @@ public class ManageHotelDelegate {
         this.manageHotelPanel.setReservationDataVisible(visible);
     }
 
+    /** Clears the reservation list selection. */
+    public void clearReservationListSelection() {
+        this.manageHotelPanel.clearReservationListSelection();
+    }
+
     /* Manage prices subpanel */
 
     /**

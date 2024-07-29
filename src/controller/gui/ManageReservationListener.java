@@ -44,7 +44,32 @@ public class ManageReservationListener extends ReservationListListener
 
         this.reservationSystem.removeReservation(hotelIndex, reservationIndex);
         this.updateList();
-        this.view.getManageHotelDelegate().clearSelectedRoomIndex();
-        this.view.getManageHotelDelegate().setManageRoomVisible(false);
+        this.view.getManageHotelDelegate().clearReservationListSelection();
+        this.view.getManageHotelDelegate().setReservationDataVisible(false);
+
+        this.view.getViewHotelDelegate().clearReservationListSelection();
+        this.view.getViewHotelDelegate().setReservationDataVisible(false);
+    }
+
+    /**
+     * {@inheritDoc} Displays a string representation of the reservation data.
+     * 
+     * @see ReservationSystem#getReservationString(int, int)
+     */
+    @Override
+    protected void updateDataPanel(int selectedIndex) {
+        /* Exit and hide the panel if there is no selection */
+        if (selectedIndex < 0) {
+            this.view.getManageHotelDelegate().setReservationDataVisible(false);
+            return;
+        }
+
+        /* Show the panel */
+        this.view.getManageHotelDelegate().setReservationDataVisible(true);
+
+        int hotelIndex = view.getSelectedIndex();
+        this.view.getManageHotelDelegate().setManageReservationData(
+                reservationSystem.getReservationString(
+                        hotelIndex, selectedIndex));
     }
 }

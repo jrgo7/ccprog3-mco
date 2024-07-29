@@ -65,10 +65,10 @@ public class ReservationListListener extends ListAddListener {
         }
 
         /* Show the panel */
-        this.view.getManageHotelDelegate().setReservationDataVisible(true);
+        this.view.getViewHotelDelegate().setReservationDataVisible(true);
 
         int hotelIndex = view.getSelectedIndex();
-        this.view.getManageHotelDelegate().setManageReservationData(
+        this.view.getViewHotelDelegate().setReservationData(
                 reservationSystem.getReservationString(
                         hotelIndex, selectedIndex));
     }

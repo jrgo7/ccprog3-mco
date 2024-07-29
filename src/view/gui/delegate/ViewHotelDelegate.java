@@ -152,4 +152,9 @@ public class ViewHotelDelegate {
     public void setReservationDataVisible(boolean visible) {
         this.viewHotelPanel.setReservationDataVisible(visible);
     }
+
+    /** Clears the reservation list selection. */
+    public void clearReservationListSelection() {
+        this.viewHotelPanel.clearReservationListSelection();
+    }
 }
