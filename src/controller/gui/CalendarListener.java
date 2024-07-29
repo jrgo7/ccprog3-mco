@@ -40,18 +40,18 @@ public abstract class CalendarListener
     }
 
     /**
-     * Set the row to handle for a certain event related to this object.
+     * Stores the last selected calendar row.
      * 
-     * @param row The index of the row to handle
+     * @param row The index of the row
      */
     protected void setRow(int row) {
         this.row = row;
     }
 
     /**
-     * Set the column to handle for a certain event related to this object.
+     * Stores the last selected calendar column.
      * 
-     * @param col The index of the column to handle
+     * @param col The index of the column
      */
     protected void setCol(int col) {
         this.col = col;
