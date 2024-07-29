@@ -111,27 +111,6 @@ public class Room {
     }
 
     /**
-     * {@return a string representation of available dates formatted as a
-     * calendar} Unavailable dates are marked with {@code --} instead of the
-     * date number.
-     */
-    public String getAvailableDatesAsCalendarString() {
-        int date;
-        String result = "Room is available on:";
-
-        for (date = 1; date <= 31; date++) {
-            if (date % 7 == 1)
-                result += "\n";
-            if (!this.isAvailableOn(date))
-                result += "--   ";
-            else
-                result += String.format("%-5d", date);
-        }
-
-        return result;
-    }
-
-    /**
      * {@inheritDoc} Includes its name and base price. A calendar containing the
      * dates on which the room is available is also shown separately in the View
      * rooms screen.
