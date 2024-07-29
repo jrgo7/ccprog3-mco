@@ -88,7 +88,7 @@ public class Hotel {
 
     /** Value representing a normal room with no special qualities. */
     public static final int NORMAL_ROOM = 1;
-    
+
     /** Value representing a deluxe room. */
     public static final int DELUXE_ROOM = 2;
 
@@ -326,11 +326,13 @@ public class Hotel {
      * always increment the number by 1, so the next room would be
      * {@code RM002}. This occurs even if the room had previously been removed
      * (i.e., even if {@code RM002} were to be removed, the next room would
-     * still be {@code RM003}).
+     * still be {@code RM003}). Further, deluxe and executive rooms are appended
+     * with the -DX and -EX suffixes respectively.
      * 
      * @param count The number of rooms to add
-     * @param type  The type of the room ({@code NORMAL_ROOM} for normal, {@code DELUXE_ROOM} for
-     *              deluxe, {@code EXECUTIVE_ROOM} for executive).
+     * @param type  The type of the room ({@code NORMAL_ROOM} for normal,
+     *              {@code DELUXE_ROOM} for deluxe, {@code EXECUTIVE_ROOM} for
+     *              executive).
      */
     public void addRooms(int count, int type) {
         String formatString = "RM%03d";
