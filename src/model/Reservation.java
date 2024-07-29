@@ -254,7 +254,7 @@ public class Reservation {
                     this.hotel.getPriceModifier(date),
                     this.getDiscountCodeModifier(date),
                     this.getPriceForNight(date));
-
+        breakdown += "</table>";
         return breakdown;
     }
 
