@@ -19,16 +19,6 @@ public class ReservationSystem {
     }
 
     /**
-     * Checks if the system contains at least one hotel.
-     * 
-     * @return {@code true} if at least one hotel exists in the system,
-     *         {@code false} otherwise
-     */
-    public boolean hasHotels() {
-        return this.hotels.size() > 0;
-    }
-
-    /**
      * Returns the {@link Hotel} at a given index.
      * 
      * @param index The index of the hotel to be retrieved from the system
@@ -118,25 +108,6 @@ public class ReservationSystem {
 
         getHotel(index).setName(name);
         return true;
-    }
-
-    /**
-     * Returns a primitive string array containing the names of all
-     * {@link Hotel} instances in the system in the same order they appear in
-     * the system's list.
-     * 
-     * @return An array containing the names of all hotels in the system
-     * @see Hotel#getName()
-     */
-    public String[] getHotelNames() {
-        int count = this.hotels.size();
-        /* Returned array must be of the same length as the list of hotels */
-        String[] names = new String[count];
-
-        for (int i = 0; i < count; i++)
-            names[i] = this.hotels.get(i).getName();
-
-        return names;
     }
 
     /**

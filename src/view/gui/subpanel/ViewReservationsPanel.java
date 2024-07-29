@@ -88,15 +88,6 @@ public class ViewReservationsPanel extends StyledPanel {
         this.outer.setVisible(visible);
     }
 
-    /**
-     * Sets the reservation list selection
-     * 
-     * @param index the index to set
-     */
-    public void setSelectedIndex(int index) {
-        this.reservationListPanel.setSelectedIndex(index);
-    }
-
     /** Clears the reservation list selection */
     public void clearSelectedIndex() {
         this.reservationListPanel.clearSelection();

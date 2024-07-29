@@ -2,9 +2,7 @@ package src.view.gui.delegate;
 
 import java.awt.Point;
 import java.util.ArrayList;
-import java.util.Arrays;
 
-import src.model.ReservationSystem;
 import src.model.Room;
 import src.view.gui.TopView;
 import src.view.gui.panel.ManageHotelPanel;
@@ -110,19 +108,6 @@ public class ManageHotelDelegate {
     }
 
     /* Manage reservations subpanel */
-
-    /**
-     * Sets the reservation list with the given data.
-     *
-     * @param data the array containing string representations of active
-     *             reservations. Usually obtained through
-     *             {@link ReservationSystem#getReservationNames(int)}
-     * @see ManageHotelPanel#setReservationList
-     */
-    public void setReservationList(String[] data) {
-        ArrayList<String> dataAsList = new ArrayList<>(Arrays.asList(data));
-        this.manageHotelPanel.setReservationList(dataAsList);
-    }
 
     /**
      * {@return the index of the selected reservation}

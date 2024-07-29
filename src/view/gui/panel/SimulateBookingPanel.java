@@ -15,7 +15,6 @@ import src.controller.gui.SimulateBookingRoomListListener;
 import src.model.Room;
 import src.view.gui.component.BookingCalendar;
 import src.view.gui.component.BookingCalendarRenderer;
-import src.view.gui.component.Calendar;
 import src.view.gui.component.GUIFactory;
 import src.view.gui.component.RoomListPanel;
 import src.view.gui.component.StyledButton;
@@ -207,13 +206,6 @@ public class SimulateBookingPanel extends StyledPanel {
      */
     public boolean getIsCalendarFocused() {
         return this.bookingCalendar.isFocusOwner();
-    }
-
-    /** {@return the selected day in the booking calendar} */
-    public int getBookingCalendarDay() {
-        return Calendar.toDate(
-                this.bookingCalendar.getSelectedRow(),
-                this.bookingCalendar.getSelectedColumn());
     }
 
     /** {@return the selected room index} */

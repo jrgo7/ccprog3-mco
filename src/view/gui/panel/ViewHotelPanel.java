@@ -170,16 +170,6 @@ public class ViewHotelPanel extends StyledPanel {
     }
 
     /**
-     * Sets the selected room index.
-     *
-     * @param index the index of the selected room
-     * @see ViewRoomPanel#setSelectedIndex
-     */
-    public void setSelectedRoomIndex(int index) {
-        this.ViewRoomPanel.setSelectedIndex(index);
-    }
-
-    /**
      * Sets the visibility of the room data panel.
      *
      * @param visible {@code true} to display the panel, {@code false} otherwise
@@ -221,16 +211,6 @@ public class ViewHotelPanel extends StyledPanel {
      */
     public void setReservationDataVisible(boolean visible) {
         this.ViewReservationsPanel.setWrapperVisible(visible);
-    }
-
-    /**
-     * Sets the selected reservation index.
-     *
-     * @param index the index of the selected reservation
-     * @see ViewReservationsPanel#setSelectedIndex
-     */
-    public void setSelectedReservationIndex(int index) {
-        this.ViewReservationsPanel.setSelectedIndex(index);
     }
 
     /** Clears the reservation list selection. */

@@ -79,7 +79,7 @@ public class ManagePricesListener extends CalendarListener
     }
 
     /** Accepts the enter key as a confirmation input. */
-    private void handlePressEnterKey(int row, int col) {
+    private void handlePressEnterKey() {
         /* The price modifer was changed */
         if (view.getManageHotelDelegate()
                 .getIsUpdatePriceModifierFieldFocused()) {
@@ -128,7 +128,7 @@ public class ManagePricesListener extends CalendarListener
         if (view.getManageHotelDelegate().getIsManagePricesCalendarFocused()) {
             super.keyPressed(e);
         } else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-            handlePressEnterKey(this.getRow(), this.getCol());
+            handlePressEnterKey();
         }
     }
 
