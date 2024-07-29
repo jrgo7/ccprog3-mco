@@ -435,7 +435,7 @@ public class Hotel {
         }
 
         Reservation reservation = new Reservation(
-                this, guestName, checkIn, checkOut, room);
+                this, guestName, checkIn, checkOut, room.getName());
 
         if (discountCode != null && !reservation.setDiscountCode(discountCode))
             return RESERVATION_ERROR_INVALID_DISCOUNT_CODE;
@@ -460,10 +460,25 @@ public class Hotel {
 
         Reservation reservation = this.reservations.get(index);
         /* Also remove the reservation from the room it is tied to */
-        reservation.removeFromRoom();
+
+        Room room = this.getRoomByName(reservation.getRoomName());
+
+        if (room == null)
+            return false;
+
+        room.removeReservation(reservation);
         this.reservations.remove(index);
 
         return true;
+    }
+
+    /**
+     * {@return the name of the room at a given index}
+     * 
+     * @param index the index of the room
+     */
+    public String getRoomName(int index) {
+        return this.rooms.get(index).getName();
     }
 
     /**
@@ -496,8 +511,7 @@ public class Hotel {
 
         for (i = 0; i < count; i++) {
             reservation = this.reservations.get(i);
-            retval[i] = reservation.getRoomName() + ": "
-                    + reservation.getGuestName();
+            retval[i] = reservation.toStringMinimal();
         }
 
         return retval;
@@ -545,13 +559,45 @@ public class Hotel {
                 this.getEarnings());
     }
 
-    /* TODO: Remove somehow */
     /**
-     * {@return a room at a given index}
+     * {@return the base price for a room with a given name} Returns
+     * {@code -1.0} if not found.
      * 
-     * @param roomIndex the index of the room to get
+     * @param roomName The name of the room
      */
-    public Room getRoom(int roomIndex) {
-        return this.rooms.get(roomIndex);
+    public double getRoomBasePrice(String roomName) {
+        Room room = this.getRoomByName(roomName);
+
+        if (room != null)
+            return room.getBasePrice();
+        return -1.0;
+    }
+
+    /**
+     * {@return the minimal string representation for a room with a given name}
+     * Returns {@code null} if not found.
+     * 
+     * @param roomName The name of the room
+     * @see Room#toStringMinimal()
+     */
+    public String getRoomMinimalString(String roomName) {
+        Room room = this.getRoomByName(roomName);
+
+        if (room != null)
+            return room.toStringMinimal();
+        return null;
+    }
+
+    /**
+     * {@return a room in the hotel given its name}
+     * 
+     * @param roomName The name of the room
+     * @return The room instance with the given name
+     */
+    private Room getRoomByName(String roomName) {
+        for (Room i : this.rooms)
+            if (i.getName().equals(roomName))
+                return i;
+        return null;
     }
 }

@@ -369,14 +369,13 @@ public class ReservationSystem {
      * @see ReservationBuilder#toString()
      */
     public String getReservationBuilderString() {
+        Hotel hotel = this.getHotel(reservationBuilder.getHotelIndex());
         Reservation reservation = new Reservation(
-                this.getHotel(reservationBuilder.getHotelIndex()),
+                hotel,
                 reservationBuilder.getGuestName(),
                 reservationBuilder.getCheckIn(),
                 reservationBuilder.getCheckOut(),
-                this.getHotel(
-                        reservationBuilder.getHotelIndex())
-                        .getRoom(reservationBuilder.getRoomIndex()));
+                hotel.getRoomName(reservationBuilder.getRoomIndex()));
         reservation.setDiscountCode(reservationBuilder.getDiscountCode());
         return reservation.toString();
     }

@@ -18,12 +18,15 @@ public class Reservation {
     /** The check-out date of the reservation. */
     private int checkOut;
 
-    /** The {@link Room} tied to the reservation. */
-    private Room room;
+    /**
+     * The index of the {@link Room} tied to the reservation within its
+     * {@link Hotel}.
+     */
+    private String roomName;
 
     /**
-     * The discount code used for this reservation. Left {@code NULL} if no code
-     * is used.
+     * The discount code used for this reservation. Left empty if no code is
+     * used.
      */
     private String discountCode;
 
@@ -34,17 +37,22 @@ public class Reservation {
      * @param guestName The name of the guest
      * @param checkIn   The check-in date
      * @param checkOut  The check-out date
-     * @param room      The room instance to book a reservation for
+     * @param roomName  The index of the room to book a reservation for
      * @see Hotel#addReservation(String, int, int, int, String)
      */
     public Reservation(Hotel hotel, String guestName, int checkIn, int checkOut,
-            Room room) {
+            String roomName) {
         this.hotel = hotel;
         this.guestName = guestName;
         this.checkIn = checkIn;
         this.checkOut = checkOut;
-        this.room = room;
+        this.roomName = roomName;
         this.discountCode = "";
+    }
+
+    /** {@return the name of the room} */
+    public String getRoomName() {
+        return this.roomName;
     }
 
     /**
@@ -99,15 +107,6 @@ public class Reservation {
     }
 
     /**
-     * Sets the {@link Room} tied to the reservation
-     * 
-     * @param room The room to set
-     */
-    public void setRoom(Room room) {
-        this.room = room;
-    }
-
-    /**
      * {@return the number of nights the reservation is good for} Calculated as
      * {@code check-out date - check-in date}
      */
@@ -150,7 +149,7 @@ public class Reservation {
      * @see #getDiscountCodeModifier(int)
      */
     private double getPriceForNight(int night) {
-        return this.room.getBasePrice()
+        return this.hotel.getRoomBasePrice(this.roomName)
                 * this.hotel.getPriceModifier(night)
                 * getDiscountCodeModifier(night);
     }
@@ -251,33 +250,12 @@ public class Reservation {
                             </tr>""",
                     date,
                     date + 1,
-                    this.room.getBasePrice(),
+                    this.hotel.getRoomBasePrice(this.roomName),
                     this.hotel.getPriceModifier(date),
                     this.getDiscountCodeModifier(date),
                     this.getPriceForNight(date));
 
         return breakdown;
-    }
-
-    /**
-     * Returns the name of the {@link Room} tied to this reservation.
-     * 
-     * @return the name of the room tied to this reservation
-     */
-    public String getRoomName() {
-        return room.getName();
-    }
-
-    /**
-     * Removes this reservation from the list of reservations in its associated
-     * {@link Room}.
-     * 
-     * @return {@code true} if the reservation was successfully removed,
-     *         {@code false} otherwise
-     * @see Room#removeReservation(Reservation)
-     */
-    public boolean removeFromRoom() {
-        return room.removeReservation(this);
     }
 
     /**
@@ -299,11 +277,21 @@ public class Reservation {
                 </ul>
                 %s""",
                 this.getGuestName(),
-                this.room.toStringMinimal(),
+                this.hotel.getRoomMinimalString(this.roomName),
                 this.getCheckIn(),
                 this.getCheckOut(),
                 this.getTotalPrice(),
                 this.discountCode,
                 this.getPriceBreakdown());
+    }
+
+    /**
+     * {@return a minimal string representation of the reservation} The string
+     * is formatted as {@code RMXXX: Guest Name CheckIn-CheckOut}
+     */
+    public String toStringMinimal() {
+        return String.format("%s: %s %d-%d",
+                this.getRoomName(), this.getGuestName(),
+                this.getCheckIn(), this.getCheckOut());
     }
 }
