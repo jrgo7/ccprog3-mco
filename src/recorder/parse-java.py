@@ -2,7 +2,12 @@
 import os
 import re
 
-os.system("javap -private *.class > listing.txt")
+# All classes
+# os.system("javap -private src/controller/gui/*.class src/model/*.class src/view/gui/component/*.class src/view/gui/delegate/*.class src/view/gui/panel/*.class src/view/gui/subpanel/*.class src/view/gui/*.class > listing.txt")
+
+# Model only
+os.system("javap -private src/model/*.class > listing.txt")
+
 with open("listing.txt", "r") as file:
     lines = file.readlines()
     for line in lines:
@@ -13,7 +18,7 @@ with open("listing.txt", "r") as file:
             access = line.split()[0]
             linesplit = re.split(r'(?<!\,)\s+', line)
             name = linesplit[-2]
-            name = name.replace("java.lang.", "").replace("java.util.", "")
+            name = name.replace("java.lang.", "").replace("java.util.", "").replace("src.model.", "")
             if access == "public":
                 print("+ ", end="")
             elif access == "private":
@@ -22,9 +27,9 @@ with open("listing.txt", "r") as file:
             if len(linesplit) > 4:
                 print(": ", end="")
                 return_type = linesplit[2]
-                return_type = return_type.replace("java.lang.", "").replace("java.util.", "")
+                return_type = return_type.replace("java.lang.", "").replace("java.util.", "").replace("src.model.", "")
                 if return_type == "static":
-                    return_type = line.split()[2].replace("java.lang.", "").replace("java.util.", "")
+                    return_type = line.split()[2].replace("java.lang.", "").replace("java.util.", "").replace("src.model.", "")
                     # God - lowest
                 print(return_type)
             else:
