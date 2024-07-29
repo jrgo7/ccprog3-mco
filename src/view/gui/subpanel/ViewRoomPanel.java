@@ -120,12 +120,4 @@ public class ViewRoomPanel extends StyledPanel {
         this.outer.setVisible(visible);
     }
 
-    /**
-     * Sets the room list selection
-     * 
-     * @param index the index to set
-     */
-    public void setSelectedIndex(int index) {
-        this.roomListPanel.setSelectedIndex(index);
-    }
 }
