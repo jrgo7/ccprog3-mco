@@ -98,7 +98,6 @@ public class HotelListListener extends ListAddListener
         if (selectedIndex < 0)
             return;
 
-        System.out.println("Index " + selectedIndex);
         /* Prompts the user to enter a hotel name */
         String name = this.view.promptAddHotel();
 
