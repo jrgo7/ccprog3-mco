@@ -501,7 +501,8 @@ public class Hotel {
     /**
      * Returns a primitive string array containing the names of all
      * {@link Reservation}s in the hotel in the same order they appear in the
-     * hotel's list. This name is formatted as {@code RMXXX: Guest}.
+     * hotel's list. This name is formatted as
+     * {@code RMXXX: Guest Name CheckIn-CheckOut}.
      * 
      * @return An array containing the names of all reservations in the hotel
      */

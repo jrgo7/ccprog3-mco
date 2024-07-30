@@ -8,13 +8,14 @@ import java.util.ArrayList;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
-import javax.swing.JTextField;
+import src.view.gui.component.StyledTextField;
 
 import src.controller.gui.SimulateBookingCalendarListener;
 import src.controller.gui.SimulateBookingRoomListListener;
 import src.model.Room;
 import src.view.gui.component.BookingCalendar;
 import src.view.gui.component.BookingCalendarRenderer;
+import src.view.gui.component.FontCollection;
 import src.view.gui.component.GUIFactory;
 import src.view.gui.component.RoomListPanel;
 import src.view.gui.component.StyledButton;
@@ -26,10 +27,10 @@ import src.view.gui.component.StyledRadioButton;
 /** Represents the Simulate Booking panel. */
 public class SimulateBookingPanel extends StyledPanel {
     /** Field for inputting the guest name. */
-    private JTextField guestNameField;
+    private StyledTextField guestNameField;
 
     /** Field for inputting the discount code. */
-    private JTextField discountCodeField;
+    private StyledTextField discountCodeField;
 
     /** The panel containing the list of rooms. */
     private RoomListPanel roomListPanel;
@@ -79,15 +80,14 @@ public class SimulateBookingPanel extends StyledPanel {
         StyledLabel guestNameLabel = new StyledLabel("Guest name:");
         textFieldPanel.add(guestNameLabel);
 
-        guestNameField = new JTextField();
+        guestNameField = new StyledTextField();
         textFieldPanel.add(guestNameField);
 
         StyledLabel discountCodeLabel = new StyledLabel("Discount code:");
         textFieldPanel.add(discountCodeLabel);
 
-        discountCodeField = new JTextField();
+        discountCodeField = new StyledTextField();
         textFieldPanel.add(discountCodeField);
-        textFieldPanel.setSize(WIDTH, HEIGHT);
         detailsPanel.add(textFieldPanel);
 
         StyledPanel checkInOutPanel = new StyledPanel();

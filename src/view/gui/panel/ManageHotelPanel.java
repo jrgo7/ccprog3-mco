@@ -6,7 +6,7 @@ import java.awt.Point;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import javax.swing.JTextField;
+import src.view.gui.component.StyledTextField;
 
 import src.controller.gui.HotelListListener;
 import src.controller.gui.ManagePricesListener;
@@ -41,10 +41,10 @@ public class ManageHotelPanel extends StyledPanel {
     private ManagePricesPanel managePricesSubpanel;
 
     /** Text field for renaming the hotel. */
-    private JTextField renameHotelField;
+    private StyledTextField renameHotelField;
 
     /** Text field for updating the base price. */
-    private JTextField basePriceField;
+    private StyledTextField basePriceField;
 
     /** Button for renaming the hotel. */
     private StyledButton renameHotelButton;
@@ -100,7 +100,7 @@ public class ManageHotelPanel extends StyledPanel {
         StyledLabel renameLabel = new StyledLabel("Rename hotel:");
         editInfoPanel.add(renameLabel);
 
-        this.renameHotelField = new JTextField();
+        this.renameHotelField = new StyledTextField();
         editInfoPanel.add(this.renameHotelField);
 
         this.renameHotelButton = GUIFactory
@@ -111,7 +111,7 @@ public class ManageHotelPanel extends StyledPanel {
         editInfoPanel.add(basePriceLabel);
 
         /* TODO: Maybe abandon DecimalDocument for JSpinner */
-        this.basePriceField = new JTextField();
+        this.basePriceField = new StyledTextField();
         this.basePriceField.setDocument(new DecimalDocument());
 
         editInfoPanel.add(this.basePriceField);

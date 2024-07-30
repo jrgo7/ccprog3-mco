@@ -4,7 +4,7 @@ import java.awt.GridLayout;
 import java.awt.Point;
 
 import javax.swing.BoxLayout;
-import javax.swing.JTextField;
+import src.view.gui.component.StyledTextField;
 
 import src.controller.gui.ManagePricesListener;
 import src.view.gui.component.Calendar;
@@ -22,7 +22,7 @@ public class ManagePricesPanel extends StyledPanel {
     private Calendar calendarComponent;
 
     /** The price modifier input field. */
-    private JTextField priceModifierField;
+    private StyledTextField priceModifierField;
 
     /** A panel for displaying the modified price data. */
     private StyledHTMLPane modifiedPriceData;
@@ -44,7 +44,7 @@ public class ManagePricesPanel extends StyledPanel {
                 "Update price modifier:");
         fieldPanel.add(priceModifierLabel);
 
-        priceModifierField = new JTextField();
+        priceModifierField = new StyledTextField();
         priceModifierField.setDocument(new DecimalDocument());
         fieldPanel.add(priceModifierField);
 

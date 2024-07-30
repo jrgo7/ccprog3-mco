@@ -48,16 +48,19 @@ def deal_with(file_path: str):
     ws.merge_cells(start_row=1, end_row=1, start_column=1, end_column=7)
     ws.append(["Method", "#", "Test Description", "Sample Input Data", "Expected Output", "Actual Output", "P/F"])
         
-    os.system("javap %s > \"%s\"" % (file_path, os.path.join(folder_path, class_name + "-charlotte.txt")))
+    os.system("javap -p %s > \"%s\"" % (file_path, os.path.join(folder_path, class_name + "-charlotte.txt")))
     
     with open(os.path.join(folder_path, class_name + "-charlotte.txt"), "r") as file:
         listing = file.read()
 
     methods_matches = regex.findall(JAVA_METHOD_REGEX, listing)
+    access = [method[0].strip() for method in methods_matches]
     methods = [method[8].strip() for method in methods_matches]
     
     for i, method in enumerate(methods, start=1):
-        print(method, end=" -> ")
+        if access[i-1] == "private":
+            print("PRIVATE METHOD!!!\n\t")
+        print(access[i-1] + "\t" + method, end=" -> ")
         if "." in method:
             method_name = method.split(".")[0].split("(")[0] + "("
             if "ArrayList" not in method:
@@ -75,8 +78,6 @@ def deal_with(file_path: str):
     os.remove(os.path.join(folder_path, class_name + "-charlotte.txt"))
     
 def main():
-    method_count = 0
-    out = ""
     for path, folders, files in os.walk(FOLDER_PATH):
         for folder in folders:
             for file in os.listdir(os.path.join(path, folder)):
