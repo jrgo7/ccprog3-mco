@@ -270,35 +270,18 @@ public class ReservationSystem {
     }
 
     /**
-     * Adds a reservation to the given hotel.
-     *
-     * @param hotelIndex   the index of the hotel
-     * @param guestName    the name of the guest
-     * @param checkIn      the check-in date
-     * @param checkOut     the check-out date
-     * @param roomIndex    the index of the room
-     * @param discountCode the discount code, if any
-     * @return an integer value indicating the result of the operation
-     * @see Hotel#addReservation
-     */
-    public int addReservation(int hotelIndex, String guestName, int checkIn,
-            int checkOut, int roomIndex, String discountCode) {
-        return this.getHotel(hotelIndex).addReservation(guestName, checkIn,
-                checkOut, roomIndex, discountCode);
-    }
-
-    /**
      * Adds a reservation using a {@link ReservationBuilder}.
      *
-     * @param builder the {@link ReservationBuilder} containing reservation
-     *                details
      * @return an int indicating the result of the operation
-     * @see #addReservation(int, String, int, int, int, String)
      */
-    public int addReservation(ReservationBuilder builder) {
-        return addReservation(builder.getHotelIndex(), builder.getGuestName(),
-                builder.getCheckIn(), builder.getCheckOut(),
-                builder.getRoomIndex(), builder.getDiscountCode());
+    public int addReservation() {
+        return this.getHotel(this.reservationBuilder.getHotelIndex())
+                .addReservation(
+                        this.reservationBuilder.getGuestName(),
+                        this.reservationBuilder.getCheckIn(),
+                        this.reservationBuilder.getCheckOut(),
+                        this.reservationBuilder.getRoomIndex(),
+                        this.reservationBuilder.getDiscountCode());
     }
 
     /**

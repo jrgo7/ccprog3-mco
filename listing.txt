@@ -1,0 +1,161 @@
+Compiled from "DeluxeRoom.java"
+public class src.model.DeluxeRoom extends src.model.Room {
+  public src.model.DeluxeRoom(java.lang.String, double);
+  public double getBasePrice();
+}
+Compiled from "ExecutiveRoom.java"
+public class src.model.ExecutiveRoom extends src.model.Room {
+  public src.model.ExecutiveRoom(java.lang.String, double);
+  public double getBasePrice();
+}
+Compiled from "Hotel.java"
+public class src.model.Hotel {
+  private java.lang.String name;
+  private java.util.ArrayList<src.model.Room> rooms;
+  private java.util.ArrayList<src.model.Reservation> reservations;
+  private double basePrice;
+  private int lastRoomNumber;
+  private double[] priceModifiers;
+  public static final int RESERVATION_SUCCESS;
+  public static final int RESERVATION_ERROR_INVALID_TIME;
+  public static final int RESERVATION_ERROR_INVALID_ROOM;
+  public static final int RESERVATION_ERROR_UNAVAILABLE_ROOM;
+  public static final int RESERVATION_ERROR_INVALID_DISCOUNT_CODE;
+  public static final int SET_BASE_PRICE_SUCCESS;
+  public static final int SET_BASE_PRICE_ERROR_LESS_THAN_MIN;
+  public static final int SET_BASE_PRICE_ERROR_RESERVATIONS_EXIST;
+  public static final int SET_PRICE_MODIFIER_SUCCESS;
+  public static final int SET_PRICE_MODIFIER_OUT_OF_BOUNDS;
+  public static final int SET_PRICE_MODIFIER_RESERVATIONS_EXIST;
+  public static final int REMOVE_ROOM_SUCCESS;
+  public static final int REMOVE_ROOM_ONLY_ROOM;
+  public static final int REMOVE_ROOM_RESERVATIONS_EXIST;
+  public src.model.Hotel(java.lang.String);
+  public java.lang.String getName();
+  public double getBasePrice();
+  public double getPriceModifier(int);
+  public int getRoomCount();
+  public int getDeluxeRoomCount();
+  public int getExecutiveRoomCount();
+  public double getEarnings();
+  public int getReservationCount();
+  public int getReservationCountOnDate(int, boolean);
+  public java.util.ArrayList<java.lang.Integer> getAvailableDatesForRoom(int);
+  public java.lang.String getRoomString(int);
+  public java.lang.String getReservationString(int);
+  public void setName(java.lang.String);
+  public int setBasePrice(double);
+  public int setPriceModifier(int, double);
+  public void addRooms(int, int);
+  public int removeRoom(int);
+  public int addReservation(java.lang.String, int, int, int, java.lang.String);
+  public boolean removeReservation(int);
+  public java.lang.String getRoomName(int);
+  public java.lang.String[] getRoomNames();
+  public java.lang.String[] getReservationNames();
+  public int getAvailableRoomCount(int);
+  public java.lang.String toString();
+  public double getRoomBasePrice(java.lang.String);
+  public java.lang.String getRoomMinimalString(java.lang.String);
+  private src.model.Room getRoomByName(java.lang.String);
+}
+Compiled from "Reservation.java"
+public class src.model.Reservation {
+  private src.model.Hotel hotel;
+  private java.lang.String guestName;
+  private int checkIn;
+  private int checkOut;
+  private java.lang.String roomName;
+  private java.lang.String discountCode;
+  public src.model.Reservation(src.model.Hotel, java.lang.String, int, int, java.lang.String);
+  public java.lang.String getRoomName();
+  public java.lang.String getGuestName();
+  public int getCheckIn();
+  public int getCheckOut();
+  public int getNightCount();
+  private double getDiscountCodeModifier(int);
+  private double getPriceForNight(int);
+  public double getTotalPrice();
+  public boolean setDiscountCode(java.lang.String);
+  public java.lang.String getPriceBreakdown();
+  public java.lang.String toString();
+  public java.lang.String toStringMinimal();
+}
+Compiled from "ReservationBuilder.java"
+public class src.model.ReservationBuilder {
+  private int hotelIndex;
+  private java.lang.String guestName;
+  private int checkIn;
+  private int checkOut;
+  private int roomIndex;
+  private java.lang.String discountCode;
+  public src.model.ReservationBuilder();
+  public void reset();
+  public void setHotelIndex(int);
+  public void setGuestName(java.lang.String);
+  public boolean validateDates(int, int);
+  public boolean setCheckIn(int);
+  public boolean setCheckOut(int);
+  public void setRoomIndex(int);
+  public void setDiscountCode(java.lang.String);
+  public int getHotelIndex();
+  public java.lang.String getGuestName();
+  public int getCheckIn();
+  public int getCheckOut();
+  public int getRoomIndex();
+  public java.lang.String getDiscountCode();
+}
+Compiled from "ReservationSystem.java"
+public class src.model.ReservationSystem {
+  private java.util.ArrayList<src.model.Hotel> hotels;
+  private src.model.ReservationBuilder reservationBuilder;
+  public src.model.ReservationSystem();
+  private src.model.Hotel getHotel(int);
+  public boolean removeHotel(int);
+  public boolean removeReservation(int, int);
+  private boolean hotelNameExists(java.lang.String);
+  public boolean addHotel(java.lang.String);
+  public boolean renameHotel(int, java.lang.String);
+  public java.util.ArrayList<java.lang.String> getHotelNamesAsList();
+  public int getHotelCount();
+  public int getReservationCountOnDate(int, int, boolean);
+  public int getAvailableRoomCount(int, int);
+  public java.lang.String[] getRoomNames(int);
+  public java.lang.String getHotelString(int);
+  public java.lang.String getHotelName(int);
+  public double getBasePrice(int);
+  public int setBasePrice(int, double);
+  public double getPriceModifier(int, int);
+  public int setPriceModifier(int, int, double);
+  public int getRoomCount(int);
+  public java.lang.String getRoomString(int, int);
+  public int removeRoom(int, int);
+  public int addReservation(int, java.lang.String, int, int, int, java.lang.String);
+  public int addReservation(src.model.ReservationBuilder);
+  public java.util.ArrayList<java.lang.Integer> getAvailableDatesForRoom(int, int);
+  public void addRooms(int, int, int);
+  public src.model.ReservationBuilder getReservationBuilder();
+  public java.lang.String getReservationBuilderString();
+  public void resetReservationBuilder();
+  public java.lang.String[] getReservationNames(int);
+  public java.lang.String getReservationString(int, int);
+  public int getReservationCount(int);
+  public static boolean validateDate(int);
+}
+Compiled from "Room.java"
+public class src.model.Room {
+  private java.lang.String name;
+  private double basePrice;
+  private java.util.ArrayList<src.model.Reservation> reservations;
+  public src.model.Room(java.lang.String, double);
+  public java.lang.String getName();
+  public double getBasePrice();
+  public boolean setBasePrice(double);
+  public void addReservation(src.model.Reservation);
+  public int getReservationCount();
+  public boolean removeReservation(src.model.Reservation);
+  public java.util.ArrayList<java.lang.Integer> getAvailableDates();
+  public boolean isAvailableOn(int);
+  public java.lang.String toString();
+  public java.lang.String toStringMinimal();
+}

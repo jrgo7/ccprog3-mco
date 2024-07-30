@@ -83,8 +83,7 @@ public class SimulateBookingCalendarListener extends CalendarListener
         if (hotelIndex < 0)
             return;
 
-        int result = reservationSystem.addReservation(
-                reservationSystem.getReservationBuilder());
+        int result = reservationSystem.addReservation();
         switch (result) {
             case Hotel.RESERVATION_SUCCESS:
                 view.showReservationSuccess();
