@@ -15,7 +15,6 @@ import src.controller.gui.SimulateBookingRoomListListener;
 import src.model.Room;
 import src.view.gui.component.BookingCalendar;
 import src.view.gui.component.BookingCalendarRenderer;
-import src.view.gui.component.FontCollection;
 import src.view.gui.component.GUIFactory;
 import src.view.gui.component.RoomListPanel;
 import src.view.gui.component.StyledButton;
