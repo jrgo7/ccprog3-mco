@@ -419,7 +419,7 @@ public class TopView extends JFrame {
      */
     public void showPriceModifierReservationsExistError() {
         JOptionPane.showMessageDialog(this,
-                "The base price cannot be updated while reservations exist.",
+                "The price modifier cannot be updated while reservations exist.",
                 "Invalid price modifier update error: out of bounds",
                 JOptionPane.ERROR_MESSAGE);
     }

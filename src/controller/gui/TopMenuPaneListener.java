@@ -36,12 +36,18 @@ public class TopMenuPaneListener implements ChangeListener {
                 view.getViewHotelDelegate()
                         .clearAvailabilityCalendarSelection();
                 view.getViewHotelDelegate().clearRoomSelectedIndex();
+                view.getViewHotelDelegate().clearReservationListSelection();
+                view.getViewHotelDelegate().setHotelAvailability("<p></p>");
                 break;
             case TopView.MANAGE_HOTEL_TAB:
+                view.getManageHotelDelegate()
+                        .clearManagePricesCalendarSelection();
+                view.getManageHotelDelegate().clearSelectedRoomIndex();
+                view.getManageHotelDelegate().clearReservationListSelection();
                 break;
             case TopView.SIMULATE_BOOKING_TAB:
+                view.getSimulateBookingDelegate().resetBookingScreen();
                 break;
         }
     }
-
 }
