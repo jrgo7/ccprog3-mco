@@ -83,7 +83,7 @@ def main():
             for file in os.listdir(os.path.join(path, folder)):
                 if file.endswith(".class"):
                     deal_with(os.path.join(path, folder, file))
-    wb.save("Test Script Template.xlsx")
+    wb.save("docs/Test Script Template.xlsx")
     return
 
 if __name__ == '__main__':
