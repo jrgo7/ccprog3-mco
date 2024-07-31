@@ -1,2 +1,2 @@
 @echo on
-javadoc -private *.java -exclude Test.java -d javadoc  
+javadoc -d javadoc src/controller/gui/*.java src/model/*.java src/view/gui/component/*.java src/view/gui/delegate/*.java src/view/gui/panel/*.java src/view/gui/subpanel/*.java src/view/gui/*.java
